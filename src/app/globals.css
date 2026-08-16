@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ssc-uk-main-highlight-color: #ff5108;
+    --ssc-uk-main-white-color: #ffffff;
+    --ssc-uk-main-black-color: #000000;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.ss-construction-uk-container {
+  width: 100%;
+  margin: 0 auto;
+}
+@media only screen and (max-width: 1199px) {
+  .ss-construction-uk-container {
+    padding: 0 16px;
+  }
+}
+@media (min-width: 1200px) {
+  .ss-construction-uk-container {
+    width: min(calc(100% - 150px), 1540px);
+  }
+}

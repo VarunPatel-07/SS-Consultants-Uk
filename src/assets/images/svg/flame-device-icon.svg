@@ -1,0 +1,7 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>Flame device icon</title>
+  <rect x="15" y="7" width="34" height="43" rx="3.5" stroke="#ff5108" stroke-width="2.2"/>
+  <path d="M32.5 16.5C31.3 19.8 28 20.6 28 24.3C28 27 30 29 32.6 29C35.8 29 38.1 26.5 38.1 23.5C38.1 20.4 36 17.9 33 15.8C33.3 18 32.9 19.4 31.7 20.5C31.9 19 32.2 17.7 32.5 16.5Z" fill="#ff5108"/>
+  <path d="M24 40H40M29 45H35" stroke="#ff5108" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M23 50V53.5M41 50V53.5M20 56H44" stroke="#ff5108" stroke-width="2.2" stroke-linecap="round"/>
+</svg>
