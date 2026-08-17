@@ -1,11 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: var(--ssc-uk-main-white-color);
   --foreground: #171717;
   --ssc-uk-main-highlight-color: #ff5108;
   --ssc-uk-main-white-color: #ffffff;
   --ssc-uk-main-black-color: #000000;
+  --ssc-uk-cta-button-background: var(--ssc-uk-main-highlight-color);
+  --ssc-uk-consultation-section-background-color: #020713;
 }
 
 @theme inline {
@@ -21,9 +23,78 @@ body {
   font-family: var(--font-lora), Georgia, serif;
 }
 
+.ssc-section-title {
+  color: var(--ssc-uk-main-black-color);
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: 50px;
+  font-weight: 700;
+  letter-spacing: -2px;
+  line-height: 1.05;
+}
+
+.ssc-section-title-highlight {
+  color: var(--ssc-uk-main-highlight-color);
+  font-family: var(--font-lora), Georgia, serif;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.ssc-section-description {
+  color: #475569;
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-size: clamp(1rem, 1.4vw, 1.125rem);
+  line-height: 1.75;
+}
+
+.ssc-section-title-on-dark {
+  color: var(--ssc-uk-main-white-color);
+}
+
+.ssc-section-description-on-dark {
+  color: #e2e8f0;
+}
+
+@media only screen and (max-width: 1199px) {
+  .ssc-section-title {
+    font-size: 42px;
+  }
+}
+
+@media only screen and (max-width: 639px) {
+  .ssc-section-title {
+    font-size: 32px;
+  }
+}
+
 .ss-construction-uk-container {
   width: 100%;
   margin: 0 auto;
+}
+
+@keyframes boiler-brands-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.boiler-brands-marquee {
+  width: 100%;
+  overflow: hidden;
+}
+
+.boiler-brands-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: boiler-brands-marquee 100s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boiler-brands-marquee-track {
+    animation-play-state: paused;
+  }
 }
 @media only screen and (max-width: 1199px) {
   .ss-construction-uk-container {
