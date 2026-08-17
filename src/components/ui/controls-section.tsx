@@ -3,7 +3,7 @@ import { Input } from "./input";
 
 export function ControlsSection() {
   return (
-    <section className="w-full max-w-5xl rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-200/50 sm:p-10">
+    <section className="w-full max-w-5xl rounded-3xl border border-slate-200 bg-(--ssc-uk-main-white-color) p-6 shadow-xl shadow-slate-200/50 sm:p-10">
       <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-center">
         <div>
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-indigo-600">
