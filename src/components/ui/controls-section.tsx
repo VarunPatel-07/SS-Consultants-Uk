@@ -3,8 +3,8 @@ import { Input } from "./input";
 
 export function ControlsSection() {
   return (
-    <section className="w-full max-w-5xl rounded-3xl border border-slate-200 bg-(--ssc-uk-main-white-color) p-6 shadow-xl shadow-slate-200/50 sm:p-10">
-      <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-center">
+    <section className="w-full max-w-5xl rounded-lg border border-slate-200 bg-(--ssc-uk-main-white-color) p-6 shadow-xl shadow-slate-200/50 sm:p-10 md:rounded-xl lg:rounded-2xl">
+      <div className="grid gap-10 md:grid-cols-[1fr_1.1fr] md:items-center">
         <div>
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-indigo-600">
             UI components
@@ -17,7 +17,7 @@ export function ControlsSection() {
           </p>
         </div>
 
-        <div className="rounded-2xl bg-slate-50 p-5 sm:p-6">
+        <div className="rounded-lg bg-slate-50 p-5 sm:p-6 md:rounded-xl lg:rounded-2xl">
           <label className="mb-2 block text-sm font-medium text-slate-700" htmlFor="email">
             Work email
           </label>

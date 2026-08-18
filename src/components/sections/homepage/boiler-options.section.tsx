@@ -34,13 +34,13 @@ export function BoilerOptionsSection() {
           }}>
           {BOILER_OPTIONS.map(({ name, image, tagline, description, features, popularChoice }) => (
             <SwiperSlide className="!h-auto" key={name}>
-              <article className="relative flex h-full flex-col rounded-xl border border-slate-200 bg-(--ssc-uk-main-white-color) p-3 shadow-sm">
+              <article className="relative flex h-full flex-col rounded-lg border border-slate-200 bg-(--ssc-uk-main-white-color) p-3 shadow-sm md:rounded-xl lg:rounded-2xl">
                 {popularChoice && (
                   <span className="absolute left-1/2 top-0 z-10 -translate-x-1/2 -translate-y-1/2 rounded-tl-2xl rounded-tr-2xl bg-(--ssc-uk-main-highlight-color) px-8 py-2 text-sm font-semibold text-(--ssc-uk-main-white-color)">
                     Popular choice
                   </span>
                 )}
-                <div className="overflow-hidden rounded-lg bg-slate-100 relative z-20">
+                <div className="relative z-20 overflow-hidden rounded-lg bg-slate-100 md:rounded-xl lg:rounded-2xl">
                   <Image className="h-[220px] w-full object-cover object-center" src={image} alt={`${name} boiler`} />
                 </div>
                 <div className="flex flex-1 flex-col px-1 pb-2 pt-4">
