@@ -1,68 +1,120 @@
-import consultationImage from "@/assets/images/webp/boiler-consultation.webp";
-import { CONSULTATION_FEATURES, CONSULTATION_POINTS } from "@/utils/constants/consultation.constants";
-import { Check } from "lucide-react";
-import Image from "next/image";
+const EMAIL_ADDRESS = "info@sscukltd.com";
+const PHONE_NUMBER = "07590 514937";
 
 export function ConsultationSection() {
   return (
-    <section className="font-jakarta" aria-labelledby="consultation-title">
-      <div
-        className="mx-auto rounded-[2px] px-6 py-10 text-(--ssc-uk-main-white-color) sm:px-12 sm:py-14 lg:px-16 lg:py-16"
-        style={{ backgroundColor: "var(--ssc-uk-consultation-section-background-color)" }}>
-        <div className="ss-construction-uk-container">
-          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-14">
-            <div>
-              <h2
-                id="consultation-title"
-                className="ssc-section-title ssc-section-title-on-dark max-w-[600px]">
-                A new boiler,
-                <br />
-                <em className="ssc-section-title-highlight">without the hard sell.</em>
-              </h2>
-              <p className="ssc-section-description ssc-section-description-on-dark mt-7 max-w-[590px]">
-                Clear advice, honest pricing and professional installation—so you can choose the right heating system
-                for your home without pressure or confusion.
-              </p>
+    <section
+      id="contact"
+      className="bg-(--ssc-uk-gray-background-color) px-4 py-16 font-jakarta sm:px-6 sm:py-24"
+      aria-labelledby="consultation-title">
+      <div className="ss-construction-uk-container">
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 id="consultation-title" className="ssc-section-title">
+            Let&apos;s <em className="ssc-section-title-highlight">Talk</em>
+            <br />
+            About Your <em className="ssc-section-title-highlight">Heating</em>
+          </h2>
+          <p className="ssc-section-description mx-auto mt-6 max-w-2xl">
+            Tell us what you need and our team will get back to you with clear, practical advice.
+          </p>
+        </div>
 
-              <div className="mt-8 grid max-w-[600px] sm:grid-cols-2">
-                {CONSULTATION_POINTS.map((point, index) => (
-                  <div
-                    className={`flex items-center gap-3 border-slate-600 py-4 text-sm text-slate-100 sm:text-base ${index > 1 ? "border-t" : ""} ${index % 2 === 1 ? "sm:border-l sm:pl-7" : "sm:pr-7"}`}
-                    key={point}>
-                    <Check aria-hidden="true" className="h-5 w-5 shrink-0 text-(--ssc-uk-main-highlight-color)" strokeWidth={2.2} />
-                    {point}
-                  </div>
-                ))}
-              </div>
+        <div className="mx-auto mt-12 grid max-w-295 gap-6 md:grid-cols-[1fr_1.06fr] md:items-stretch">
+          <div className="grid gap-6">
+            <div className="rounded-lg px-7 py-9 text-(--ssc-uk-main-white-color) sm:px-14 sm:py-14 bg-(--ssc-uk-consultation-section-background-color) md:rounded-xl lg:rounded-2xl">
+              <p className="text-sm text-slate-300">Email us</p>
+              <a
+                className="mt-2 block break-all text-2xl font-bold tracking-tight transition-colors hover:text-(--ssc-uk-main-highlight-color) hover:underline sm:text-3xl"
+                href={`mailto:${EMAIL_ADDRESS}`}>
+                {EMAIL_ADDRESS}
+              </a>
 
-              <div className="mt-7 max-w-[590px] space-y-4 text-sm leading-6 text-slate-300 sm:text-base">
-                <p>Every recommendation is based on your home, usage and budget.</p>
-                <p>
-                  We assess your current system, explain the available options and recommend only what your home
-                  genuinely needs—giving you confidence before any work begins.
-                </p>
-              </div>
+              <p className="mt-10 text-sm text-slate-300">Call us</p>
+              <a
+                className="mt-2 block text-2xl font-bold tracking-tight transition-colors hover:text-(--ssc-uk-main-highlight-color) hover:underline sm:text-3xl"
+                href="tel:07590514937">
+                {PHONE_NUMBER}
+              </a>
             </div>
 
-            <div className="overflow-hidden rounded-[24px]">
-              <Image
-                className="h-auto w-full object-cover"
-                src={consultationImage}
-                alt="Heating engineer discussing a boiler installation with homeowners"
-              />
+            <div className="rounded-lg border border-slate-300 px-7 py-9 sm:px-14 sm:py-10 bg-(--ssc-uk-main-white-color) md:rounded-xl lg:rounded-2xl">
+              <h3 className="text-2xl font-bold tracking-tight text-slate-950">Our Service Area</h3>
+
+              <div className="mt-7 space-y-6 text-slate-700">
+                <div>
+                  <h4 className="text-lg font-bold text-slate-950">Hatfield &amp; Hertfordshire</h4>
+                  <p className="mt-1 max-w-md leading-7">Local boiler installation, servicing and heating support.</p>
+                </div>
+                <div>
+                  <h4 className="text-lg font-bold text-slate-950">London</h4>
+                  <p className="mt-1 max-w-md leading-7">
+                    Professional heating services across London and surrounding areas.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="mt-12 grid overflow-hidden rounded-2xl border border-[#c9c3b1] sm:grid-cols-2 lg:grid-cols-4">
-            {CONSULTATION_FEATURES.map(({ label, icon: Icon }, index) => (
-              <div
-                className={`flex items-center gap-4 px-5 py-5 text-sm text-slate-100 sm:px-6 ${index > 0 ? "border-t border-[#726d60] lg:border-l lg:border-t-0" : ""}`}
-                key={label}>
-              <Icon aria-hidden="true" className="h-8 w-8 shrink-0 text-(--ssc-uk-main-highlight-color)" strokeWidth={1.7} />
-                <span>{label}</span>
-              </div>
-            ))}
-          </div>
+          <form
+            className="rounded-lg border border-slate-300 px-7 py-9 sm:px-9 sm:py-10 bg-(--ssc-uk-main-white-color) md:rounded-xl lg:rounded-2xl"
+            action={`mailto:${EMAIL_ADDRESS}`}
+            method="post"
+            encType="text/plain">
+            <div className="grid gap-x-10 gap-y-8 md:grid-cols-2">
+              <label className="block text-base text-slate-600">
+                Your Name
+                <input
+                  className="mt-3 block w-full border-0 border-b border-slate-300 bg-transparent px-0 pb-3 outline-none transition-colors focus:border-(--ssc-uk-main-highlight-color)"
+                  type="text"
+                  name="name"
+                  required
+                />
+              </label>
+              <label className="block text-base text-slate-600">
+                Your Email
+                <input
+                  className="mt-3 block w-full border-0 border-b border-slate-300 bg-transparent px-0 pb-3 outline-none transition-colors focus:border-(--ssc-uk-main-highlight-color)"
+                  type="email"
+                  name="email"
+                  required
+                />
+              </label>
+              <label className="block text-base text-slate-600 sm:col-span-2">
+                Your Contact No.
+                <input
+                  className="mt-3 block w-full border-0 border-b border-slate-300 bg-transparent px-0 pb-3 outline-none transition-colors focus:border-(--ssc-uk-main-highlight-color)"
+                  type="tel"
+                  name="phone"
+                />
+              </label>
+              <label className="block text-base text-slate-600 sm:col-span-2">
+                Subject
+                <input
+                  className="mt-3 block w-full border-0 border-b border-slate-300 bg-transparent px-0 pb-3 outline-none transition-colors focus:border-(--ssc-uk-main-highlight-color)"
+                  type="text"
+                  name="subject"
+                  required
+                />
+              </label>
+              <label className="block text-base text-slate-600 sm:col-span-2">
+                Your Message <span className="text-sm text-slate-400">(optional)</span>
+                <textarea
+                  className="mt-3 block w-full border-0 border-b border-slate-300 bg-transparent px-0 pb-3 outline-none transition-colors focus:border-(--ssc-uk-main-highlight-color) resize-none"
+                  name="message"
+                  rows={4}
+                />
+              </label>
+            </div>
+
+            <div className="pt-14 text-center">
+              <button
+                className="w-full rounded-full bg-(--ssc-uk-main-black-color) px-6 py-4 text-base font-bold text-(--ssc-uk-main-white-color) transition-colors hover:bg-(--ssc-uk-main-highlight-color)"
+                type="submit">
+                Send Enquiry
+              </button>
+              <p className="mt-6 text-sm text-slate-500">Your details are only used to respond to your enquiry.</p>
+            </div>
+          </form>
         </div>
       </div>
     </section>

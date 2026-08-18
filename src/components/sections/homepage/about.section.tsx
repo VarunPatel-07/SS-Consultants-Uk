@@ -8,8 +8,8 @@ import Image from "next/image";
 export function AboutSection() {
   return (
     <section id="about" className="bg-(--ssc-uk-main-white-color) py-16 font-jakarta sm:py-20" aria-labelledby="about-title">
-      <div className="ss-construction-uk-container grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16">
-        <div className="relative overflow-hidden rounded-[30px] bg-slate-100">
+      <div className="ss-construction-uk-container grid gap-12 md:grid-cols-[0.95fr_1.05fr] md:items-center md:gap-16">
+        <div className="relative overflow-hidden rounded-lg bg-slate-100 md:rounded-xl lg:rounded-2xl">
           <Image
             className="h-full min-h-[480px] w-full object-cover object-center sm:min-h-[590px]"
             src={aboutImage}
@@ -46,7 +46,7 @@ export function AboutSection() {
             </p>
           </div>
 
-          <div className="mt-8 grid overflow-hidden rounded-2xl border border-slate-200 sm:grid-cols-2">
+          <div className="mt-8 grid overflow-hidden rounded-lg border border-slate-200 md:grid-cols-2 md:rounded-xl lg:rounded-2xl">
             {ABOUT_FEATURES.map(({ title, description, icon: Icon }, index) => (
               <div
                 className={`flex items-center gap-4 px-5 py-5 ${index > 1 ? "border-t" : ""} ${index % 2 === 1 ? "sm:border-l" : ""} border-slate-200`}
@@ -75,7 +75,7 @@ export function AboutSection() {
       </div>
 
       <div className="ss-construction-uk-container mt-14!">
-        <blockquote className="rounded-2xl border border-slate-200 bg-slate-50 px-6 py-6 text-lg text-slate-800 sm:px-10 sm:text-xl">
+        <blockquote className="rounded-lg border border-slate-200 bg-slate-50 px-6 py-6 text-lg text-slate-800 sm:px-10 sm:text-xl md:rounded-xl lg:rounded-2xl">
           <Image className="mr-1 -mt-3 inline-block h-12 w-12 align-top" src={quoteIcon} alt="" aria-hidden="true" />
           Every little count and every job is important for us whether you need a complete central heating system
           upgrade or a simple boiler repair, we’re here to help. Plus, for your peace of mind, all our work is fully

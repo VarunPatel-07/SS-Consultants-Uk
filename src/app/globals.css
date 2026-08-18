@@ -8,6 +8,7 @@
   --ssc-uk-main-black-color: #000000;
   --ssc-uk-cta-button-background: var(--ssc-uk-main-highlight-color);
   --ssc-uk-consultation-section-background-color: #020713;
+  --ssc-uk-gray-background-color: #f5f5f5;
 }
 
 @theme inline {
@@ -23,7 +24,8 @@ body {
   font-family: var(--font-lora), Georgia, serif;
 }
 
-.ssc-section-title {
+.ssc-section-title,
+.ssc-sction-title {
   color: var(--ssc-uk-main-black-color);
   font-family: var(--font-plus-jakarta), sans-serif;
   font-size: 50px;
@@ -55,14 +57,55 @@ body {
 }
 
 @media only screen and (max-width: 1199px) {
-  .ssc-section-title {
+  .ssc-section-title,
+  .ssc-sction-title {
     font-size: 42px;
   }
 }
 
 @media only screen and (max-width: 639px) {
-  .ssc-section-title {
+  .ssc-section-title,
+  .ssc-sction-title {
     font-size: 32px;
+  }
+}
+
+.faq-toggle-icon {
+  position: relative;
+  display: inline-flex;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--ssc-uk-main-highlight-color);
+  border-radius: 9999px;
+}
+
+.faq-toggle-icon-line {
+  position: absolute;
+  background: var(--ssc-uk-main-highlight-color);
+  transition: transform 300ms ease;
+}
+
+.faq-toggle-icon-horizontal {
+  width: 14px;
+  height: 1px;
+}
+
+.faq-toggle-icon-vertical {
+  width: 1px;
+  height: 14px;
+  transform: scaleY(1);
+}
+
+.faq-toggle-icon.is-open .faq-toggle-icon-vertical {
+  transform: scaleY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-toggle-icon-line {
+    transition: none;
   }
 }
 
