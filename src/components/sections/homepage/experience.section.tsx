@@ -1,8 +1,8 @@
 import { BrandSet } from "@/utils/helper/homepage.helper";
 
-export function ExperienceSection() {
+export function ExperienceSection({ flushTop = false }: { flushTop?: boolean }) {
   return (
-    <section className="overflow-hidden bg-(--ssc-uk-main-white-color) py-14 font-jakarta" aria-labelledby="boiler-brands-title">
+    <section className={`overflow-hidden bg-(--ssc-uk-main-white-color) pb-14 font-jakarta ${flushTop ? "pt-0" : "pt-14"}`} aria-labelledby="boiler-brands-title">
       <div className="ss-construction-uk-container">
         <h2
           id="boiler-brands-title"

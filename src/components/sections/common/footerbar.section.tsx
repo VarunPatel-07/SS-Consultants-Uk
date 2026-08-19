@@ -1,21 +1,22 @@
 import logo from "@/assets/images/logo/ss-consultants-logo-black-trasperent.png";
 import { Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const navigationLinks = [
-  { label: "Home", href: "#top" },
-  { label: "Services", href: "#services" },
-  { label: "About", href: "#about" },
-  { label: "Blog", href: "#blog" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/services/boiler-installation" },
+  { label: "About", href: "/about" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const serviceLinks = [
-  "Boiler Installation",
-  "Boiler Servicing",
-  "Underfloor Heating",
-  "Central Heating",
-  "Boiler Repairs",
+  { label: "Boiler Installation", href: "/services/boiler-installation" },
+  { label: "Boiler Servicing", href: "/services/boiler-servicing" },
+  { label: "Underfloor Heating", href: "/services/underfloor-heating" },
+  { label: "Central Heating", href: "/services/central-heating" },
+  { label: "Boiler Repairs", href: "/services/boiler-breakdown-repairs" },
 ];
 
 export function FooterBarSection() {
@@ -26,24 +27,24 @@ export function FooterBarSection() {
       <div className="ss-construction-uk-container">
         <div className="grid gap-12 lg:grid-cols-[1.35fr_0.9fr_1.15fr_1.2fr] lg:gap-14">
           <div>
-            <a className="inline-block" href="#top" aria-label="SS Consultants home">
+            <Link className="inline-block" href="/" aria-label="SS Consultants home">
               <Image className="h-auto w-60 brightness-0 invert sm:w-68" src={logo} alt="SS Consultants UK Limited" />
-            </a>
+            </Link>
             <p className="mt-7 max-w-md text-base leading-7">
               Professional boiler installation, servicing and heating solutions delivered with clear advice, careful workmanship and dependable support.
             </p>
 
             <div className="mt-9 flex gap-12 border-t border-slate-700 pt-8 text-base">
-              <a className="group inline-flex items-center gap-4" href="#" aria-label="Facebook">
+              <span className="group inline-flex items-center gap-4" aria-label="Facebook">
                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-(--ssc-uk-main-highlight-color) text-(--ssc-uk-main-highlight-color) transition-colors group-hover:bg-(--ssc-uk-main-highlight-color) group-hover:text-(--ssc-uk-main-white-color)">
                   <FacebookIcon />
                 </span>
-              </a>
-              <a className="group inline-flex items-center gap-4" href="#" aria-label="Instagram">
+              </span>
+              <span className="group inline-flex items-center gap-4" aria-label="Instagram">
                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-(--ssc-uk-main-highlight-color) text-(--ssc-uk-main-highlight-color) transition-colors group-hover:bg-(--ssc-uk-main-highlight-color) group-hover:text-(--ssc-uk-main-white-color)">
                   <InstagramIcon />
                 </span>
-              </a>
+              </span>
             </div>
           </div>
 
@@ -53,10 +54,10 @@ export function FooterBarSection() {
             <h2 className="text-2xl font-bold text-slate-100">Services</h2>
             <div className="mt-5 h-1 w-12 bg-(--ssc-uk-main-highlight-color)" />
             <ul className="mt-5">
-              {serviceLinks.map((service) => (
-                <li className="border-b border-slate-700 last:border-b-0" key={service}>
-                  <a className="block py-4 text-base transition-colors hover:text-(--ssc-uk-main-highlight-color)" href="#services">
-                    {service}
+              {serviceLinks.map(({ label, href }) => (
+                <li className="border-b border-slate-700 last:border-b-0" key={label}>
+                  <a className="block py-4 text-base transition-colors hover:text-(--ssc-uk-main-highlight-color)" href={href}>
+                    {label}
                   </a>
                 </li>
               ))}
@@ -89,9 +90,10 @@ export function FooterBarSection() {
         <div className="mt-14 flex flex-col gap-6 border-t border-slate-700 py-8 text-sm sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} SS Consultants UK Ltd. All rights reserved.</p>
           <div className="flex flex-wrap gap-x-6 gap-y-3">
-            <a className="transition-colors hover:text-(--ssc-uk-main-highlight-color)" href="#">Privacy Policy</a>
-            <a className="border-l border-slate-600 pl-6 transition-colors hover:text-(--ssc-uk-main-highlight-color)" href="#">Terms &amp; Conditions</a>
-            <a className="border-l border-slate-600 pl-6 transition-colors hover:text-(--ssc-uk-main-highlight-color)" href="#">Cookie Policy</a>
+            <a className="transition-colors hover:text-(--ssc-uk-main-highlight-color)" href="/privacy-policy">Privacy Policy</a>
+            <a className="border-l border-slate-600 pl-6 transition-colors hover:text-(--ssc-uk-main-highlight-color)" href="/terms-and-conditions">Terms &amp; Conditions</a>
+            <a className="border-l border-slate-600 pl-6 transition-colors hover:text-(--ssc-uk-main-highlight-color)" href="/cookie-policy">Cookie Policy</a>
+            <a className="border-l border-slate-600 pl-6 transition-colors hover:text-(--ssc-uk-main-highlight-color)" href="/sitemap">Sitemap</a>
           </div>
         </div>
 
