@@ -6,6 +6,7 @@ import { ChevronDown, Menu, Phone, X } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 const BOILER_SERVICES = [
   { label: "Boiler Servicing", slug: "boiler-servicing" },
@@ -19,6 +20,12 @@ const BOILER_SERVICES = [
 export function NavbarSection() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const pathname = usePathname();
+  const isHomeActive = pathname === "/";
+  const isServicesActive = pathname.startsWith("/services");
+  const isAboutActive = pathname.startsWith("/about");
+  const isGalleryActive = pathname.startsWith("/gallery");
+  const isContactActive = pathname.startsWith("/contact");
 
   useEffect(() => {
     document.body.classList.toggle("overflow-hidden", isMenuOpen);
@@ -34,14 +41,14 @@ export function NavbarSection() {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200 bg-(--ssc-uk-main-white-color) font-lora">
+    <header className="sticky top-0 z-50 border-b border-slate-200 bg-(--ssc-uk-main-white-color) font-jakarta">
       <div className="ss-construction-uk-container flex min-h-[104px] items-center justify-between gap-8">
-        <Link className="shrink-0" href="/#top" aria-label="SS Consultants home">
+        <Link className="shrink-0" href="/" aria-label="SS Consultants home">
           <Image className="h-auto w-65" width={260} height={50} src={logo} alt="SS Consultants UK Limited" priority />
         </Link>
 
         <nav className="hidden items-center gap-9 lg:flex" aria-label="Main navigation">
-          <Link className="text-base font-medium text-(--ssc-uk-main-highlight-color)" href="/#top">
+          <Link className={`text-base font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isHomeActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`} href="/" aria-current={isHomeActive ? "page" : undefined}>
             Home
           </Link>
           <div
@@ -49,7 +56,7 @@ export function NavbarSection() {
             onMouseEnter={() => setIsServicesOpen(true)}
             onMouseLeave={() => setIsServicesOpen(false)}>
             <button
-              className="inline-flex items-center gap-2 text-base font-medium text-slate-950 transition-colors hover:text-(--ssc-uk-main-highlight-color)"
+              className={`inline-flex items-center gap-2 text-base font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isServicesActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`}
               type="button"
               aria-expanded={isServicesOpen}
               aria-haspopup="true"
@@ -60,17 +67,20 @@ export function NavbarSection() {
             <div className={`absolute left-1/2 top-full z-50 w-72 -translate-x-1/2 pt-4 transition-all duration-200 ${isServicesOpen ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"}`}>
               <div className="rounded-lg border border-slate-200 bg-(--ssc-uk-main-white-color) p-3 shadow-xl md:rounded-xl lg:rounded-2xl">
                 {BOILER_SERVICES.map(({ label, slug }) => (
-                  <Link className="block rounded-lg px-4 py-3 text-base text-slate-700 transition-colors hover:bg-slate-100 hover:text-(--ssc-uk-main-highlight-color)" href={`/services/${slug}`} key={slug}>
+                  <Link className={`block rounded-lg px-4 py-3 text-base transition-colors hover:bg-slate-100 hover:text-(--ssc-uk-main-highlight-color) ${pathname === `/services/${slug}` ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-700"}`} href={`/services/${slug}`} key={slug}>
                     {label}
                   </Link>
                 ))}
               </div>
             </div>
           </div>
-          <Link className="text-base font-medium text-slate-950 transition-colors hover:text-(--ssc-uk-main-highlight-color)" href="/#about">
+          <Link className={`text-base font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isAboutActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`} href="/about" aria-current={isAboutActive ? "page" : undefined}>
             About
           </Link>
-          <Link className="text-base font-medium text-slate-950 transition-colors hover:text-(--ssc-uk-main-highlight-color)" href="/#contact">
+          <Link className={`text-base font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isGalleryActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`} href="/gallery" aria-current={isGalleryActive ? "page" : undefined}>
+            Gallery
+          </Link>
+          <Link className={`text-base font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isContactActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`} href="/contact" aria-current={isContactActive ? "page" : undefined}>
             Contact
           </Link>
         </nav>
@@ -105,7 +115,7 @@ export function NavbarSection() {
         className={`fixed inset-y-0 left-0 z-[60] flex h-dvh w-[min(88vw,380px)] flex-col overflow-y-auto bg-(--ssc-uk-main-white-color) px-6 pb-8 shadow-xl transition-transform duration-300 lg:hidden ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
         aria-label="Mobile navigation">
         <div className="flex min-h-[104px] shrink-0 items-center justify-between border-b border-slate-200">
-          <Link href="/#top" aria-label="SS Consultants home" onClick={closeMenu}>
+          <Link href="/" aria-label="SS Consultants home" onClick={closeMenu}>
             <Image className="h-auto w-56" src={logo} alt="SS Consultants UK Limited" />
           </Link>
           <button
@@ -117,12 +127,12 @@ export function NavbarSection() {
           </button>
         </div>
         <div className="flex flex-col gap-1 pt-7">
-          <Link className="border-b border-slate-200 py-4 text-lg font-medium text-slate-950 transition-colors hover:text-(--ssc-uk-main-highlight-color)" href="/#top" onClick={closeMenu}>
+          <Link className={`border-b border-slate-200 py-4 text-lg font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isHomeActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`} href="/" aria-current={isHomeActive ? "page" : undefined} onClick={closeMenu}>
             Home
           </Link>
           <div className="border-b border-slate-200">
             <button
-              className="flex w-full items-center justify-between py-4 text-left text-lg font-medium text-slate-950 transition-colors hover:text-(--ssc-uk-main-highlight-color)"
+              className={`flex w-full items-center justify-between py-4 text-left text-lg font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isServicesActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`}
               type="button"
               aria-expanded={isServicesOpen}
               onClick={() => setIsServicesOpen((open) => !open)}>
@@ -131,16 +141,19 @@ export function NavbarSection() {
             </button>
             <div className={`overflow-hidden transition-[max-height,opacity] duration-300 ${isServicesOpen ? "max-h-96 pb-3 opacity-100" : "max-h-0 opacity-0"}`}>
               {BOILER_SERVICES.map(({ label, slug }) => (
-                <Link className="block py-2 pl-3 text-base text-slate-600 transition-colors hover:text-(--ssc-uk-main-highlight-color)" href={`/services/${slug}`} key={slug} onClick={closeMenu}>
+                <Link className={`block py-2 pl-3 text-base transition-colors hover:text-(--ssc-uk-main-highlight-color) ${pathname === `/services/${slug}` ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-600"}`} href={`/services/${slug}`} key={slug} onClick={closeMenu}>
                   {label}
                 </Link>
               ))}
             </div>
           </div>
-          <Link className="border-b border-slate-200 py-4 text-lg font-medium text-slate-950 transition-colors hover:text-(--ssc-uk-main-highlight-color)" href="/#about" onClick={closeMenu}>
+          <Link className={`border-b border-slate-200 py-4 text-lg font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isAboutActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`} href="/about" aria-current={isAboutActive ? "page" : undefined} onClick={closeMenu}>
             About
           </Link>
-          <Link className="border-b border-slate-200 py-4 text-lg font-medium text-slate-950 transition-colors hover:text-(--ssc-uk-main-highlight-color)" href="/#contact" onClick={closeMenu}>
+          <Link className={`border-b border-slate-200 py-4 text-lg font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isGalleryActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`} href="/gallery" aria-current={isGalleryActive ? "page" : undefined} onClick={closeMenu}>
+            Gallery
+          </Link>
+          <Link className={`border-b border-slate-200 py-4 text-lg font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isContactActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`} href="/contact" aria-current={isContactActive ? "page" : undefined} onClick={closeMenu}>
             Contact
           </Link>
         </div>
