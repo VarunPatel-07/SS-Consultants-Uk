@@ -29,7 +29,7 @@ export default function SitemapPage() {
     <>
       <NavbarSection />
       <main className="bg-(--ssc-uk-main-white-color) font-jakarta">
-        <section className="ss-construction-uk-container py-16 sm:py-24 lg:py-32" aria-labelledby="sitemap-title">
+        <section className="ss-construction-uk-container py-[35px] sm:py-[50px] lg:py-[60px] min-[1200px]:py-20" aria-labelledby="sitemap-title">
           <div className="max-w-3xl">
             <h1 id="sitemap-title" className="text-[42px] font-bold leading-[1.04] tracking-[-0.05em] text-slate-950 sm:text-[58px]">
               Explore every <em className="font-lora font-bold italic text-(--ssc-uk-main-highlight-color)">SS Consultants</em> page
@@ -40,12 +40,12 @@ export default function SitemapPage() {
           </div>
 
           <div className="mt-16 space-y-14 sm:mt-20 sm:space-y-20">
-            <section aria-labelledby="company-pages-title">
+            <section className="py-[35px] sm:py-[50px] lg:py-[60px] min-[1200px]:py-20" aria-labelledby="company-pages-title">
               <h2 id="company-pages-title" className="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">Company Pages</h2>
               <div className="mt-7"><SitemapLinks links={companyPages} /></div>
             </section>
 
-            <section aria-labelledby="services-pages-title">
+            <section className="py-[35px] sm:py-[50px] lg:py-[60px] min-[1200px]:py-20" aria-labelledby="services-pages-title">
               <h2 id="services-pages-title" className="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">Services Pages</h2>
               <div className="mt-7"><SitemapLinks links={SERVICE_CONTENT.map(({ label, slug }) => ({ label, href: `/services/${slug}` }))} /></div>
             </section>

@@ -62,7 +62,7 @@ const HEATING_SUPPORT_CARDS: HeatingSupportCard[] = [
 
 export function HeatingSupportSection() {
   return (
-    <section id="heating-services" className="bg-(--ssc-uk-main-white-color) px-4 py-16 font-jakarta sm:px-6 sm:py-20" aria-labelledby="heating-support-title">
+    <section id="heating-services" className="bg-(--ssc-uk-main-white-color) py-[35px] sm:py-[50px] lg:py-[60px] min-[1200px]:py-20 font-jakarta" aria-labelledby="heating-support-title">
       <div className="ss-construction-uk-container">
         <div className="mx-auto max-w-3xl text-center">
           <h2 id="heating-support-title" className="ssc-section-title">

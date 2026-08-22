@@ -2,7 +2,7 @@ import CTAButton from "@/components/ui/ctaButton";
 
 export function ContactHeroSection() {
   return (
-    <section className="relative overflow-hidden bg-(--ssc-uk-main-white-color) px-4 py-16 font-jakarta sm:px-8 sm:py-24 lg:py-28" aria-labelledby="contact-hero-title">
+    <section className="relative overflow-hidden bg-(--ssc-uk-main-white-color) px-4 py-[35px] font-jakarta sm:px-8 sm:py-[50px] lg:py-[60px] min-[1200px]:py-20" aria-labelledby="contact-hero-title">
       <div className="pointer-events-none absolute inset-0 opacity-[0.035]" aria-hidden="true">
         <div className="absolute -left-20 top-10 h-72 w-72 rounded-full border-[28px] border-(--ssc-uk-main-highlight-color) blur-sm" />
         <div className="absolute -right-24 bottom-0 h-96 w-96 rounded-full border-[38px] border-slate-700 blur-sm" />

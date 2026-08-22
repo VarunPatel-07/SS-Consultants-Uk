@@ -5,7 +5,7 @@ export function ConsultationSection() {
   return (
     <section
       id="contact"
-      className="bg-(--ssc-uk-gray-background-color) px-4 py-16 font-jakarta sm:px-6 sm:py-24"
+      className="bg-(--ssc-uk-gray-background-color) py-[35px] sm:py-[50px] lg:py-[60px] min-[1200px]:py-20 font-jakarta"
       aria-labelledby="consultation-title">
       <div className="ss-construction-uk-container">
         <div className="mx-auto max-w-3xl text-center">

@@ -16,7 +16,6 @@ export default function Home() {
     <main className="min-h-screen bg-(--ssc-uk-main-white-color)">
       <NavbarSection />
       <HeroSection />
-      <ServiceStrip />
       <ExperienceSection />
       <AboutSection />
       <HeatingSupportSection />

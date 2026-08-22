@@ -4,7 +4,7 @@ import { GALLERY_IMAGES } from "@/utils/constants/gallery.constants";
 export function GalleryHeroSection() {
   return (
     <section
-      className="bg-(--ssc-uk-main-white-color) py-12 font-jakarta sm:py-16 lg:py-20"
+      className="bg-(--ssc-uk-main-white-color) py-[35px] sm:py-[50px] lg:py-[60px] min-[1200px]:py-20 font-jakarta"
       aria-labelledby="gallery-title">
       <div className="ss-construction-uk-container">
         <div className="mx-auto mb-10 max-w-2xl text-center sm:mb-14">

@@ -5,8 +5,8 @@ import Image from "next/image";
 
 export function ServiceHeroSection({ service }: { service: ServiceContent }) {
   return (
-    <main className="overflow-hidden bg-(--ssc-uk-gray-background-color) font-jakarta py-10">
-      <section className="relative border-b border-slate-100" aria-labelledby="service-title">
+    <main className="overflow-hidden bg-(--ssc-uk-gray-background-color) font-jakarta">
+      <section className="relative border-b border-slate-100 py-[35px] sm:py-[50px] lg:py-[60px] min-[1200px]:py-20" aria-labelledby="service-title">
         <div className="ss-construction-uk-container grid gap-10 lg:grid-cols-[0.98fr_1.02fr] md:items-center lg:gap-14">
           <div className="flex flex-col justify-center ">
             <div className="inline-flex items-center gap-3 rounded-full border border-slate-400 px-4 py-2 text-xs font-semibold tracking-[0.08em] text-slate-900 sm:text-sm bg-(--ssc-uk-main-white-color) w-fit">

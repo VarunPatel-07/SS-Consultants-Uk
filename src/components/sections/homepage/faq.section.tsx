@@ -48,7 +48,7 @@ export function FaqSection() {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section className="bg-(--ssc-uk-main-white-color) py-16 font-jakarta sm:py-24" aria-labelledby="faq-title">
+    <section className="bg-(--ssc-uk-main-white-color) py-[35px] sm:py-[50px] lg:py-[60px] min-[1200px]:py-20 font-jakarta" aria-labelledby="faq-title">
       <div className="ss-construction-uk-container grid gap-12 md:grid-cols-[0.82fr_1.18fr] md:gap-20">
         <div>
           <h2 id="faq-title" className="ssc-sction-title max-w-[500px]">

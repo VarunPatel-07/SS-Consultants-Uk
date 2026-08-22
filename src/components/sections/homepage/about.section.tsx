@@ -7,8 +7,8 @@ import Image from "next/image";
 
 export function AboutSection() {
   return (
-    <section id="about" className="bg-(--ssc-uk-main-white-color) py-16 font-jakarta sm:py-20" aria-labelledby="about-title">
-      <div className="ss-construction-uk-container grid gap-12 md:grid-cols-[0.95fr_1.05fr] md:items-center md:gap-16">
+    <section id="about" className="bg-(--ssc-uk-main-white-color) py-[35px] sm:py-[50px] lg:py-[60px] min-[1200px]:py-20 font-jakarta" aria-labelledby="about-title">
+      <div className="ss-construction-uk-container grid gap-6 lg:grid-cols-[0.95fr_1.05fr] md:items-center md:gap-8 lg:gap-11 xl:gap-16">
         <div className="relative overflow-hidden rounded-lg bg-slate-100 md:rounded-xl lg:rounded-2xl">
           <Image
             className="h-full min-h-[480px] w-full object-cover object-center sm:min-h-[590px]"
@@ -74,7 +74,7 @@ export function AboutSection() {
         </div>
       </div>
 
-      <div className="ss-construction-uk-container mt-14!">
+      <div className="ss-construction-uk-container mt-10! lg:mt-14!">
         <blockquote className="rounded-lg border border-slate-200 bg-slate-50 px-6 py-6 text-lg text-slate-800 sm:px-10 sm:text-xl md:rounded-xl lg:rounded-2xl">
           <Image className="mr-1 -mt-3 inline-block h-12 w-12 align-top" src={quoteIcon} alt="" aria-hidden="true" />
           Every little count and every job is important for us whether you need a complete central heating system

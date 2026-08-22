@@ -1,6 +1,9 @@
+"use client";
+
+import { BOILER_BRANDS } from "@/utils/constants/homepage.constants";
 import { Check } from "lucide-react";
 import Image from "next/image";
-import { BOILER_BRANDS } from "@/utils/constants/homepage.constants";
+import { useEffect, useState } from "react";
 
 export function CheckItem({ children }: { children: string }) {
   return (
@@ -13,12 +16,28 @@ export function CheckItem({ children }: { children: string }) {
   );
 }
 
+export function getBrandSpacing(viewportWidth: number) {
+  if (viewportWidth >= 1200) return 60;
+  if (viewportWidth >= 768) return 45;
+  return 30;
+}
+
 export function BrandSet({ hidden = false }: { hidden?: boolean }) {
+  const [spacing, setSpacing] = useState(30);
+
+  useEffect(() => {
+    const updateSpacing = () => setSpacing(getBrandSpacing(window.innerWidth));
+
+    updateSpacing();
+    window.addEventListener("resize", updateSpacing);
+    return () => window.removeEventListener("resize", updateSpacing);
+  }, []);
+
   return (
-    <div className="flex shrink-0 items-center gap-8 pr-8 md:gap-12 md:pr-12" aria-hidden={hidden}>
+    <div className="flex shrink-0 items-center gap-5 pr-5 lg:gap-10 lg:pr-10 xl:gap-20 xl:pr-20" aria-hidden={hidden}>
       {BOILER_BRANDS.map(({ name, logo }) => (
         <div className="flex shrink-0 items-center justify-center" key={`${hidden ? "duplicate-" : ""}${name}`}>
-          <Image className="h-15" src={logo} alt={hidden ? "" : `${name} logo`} height={60} />
+          <Image className="h-15" src={logo} alt={hidden ? "" : `${name} logo`} height={spacing} />
         </div>
       ))}
     </div>
@@ -26,5 +45,10 @@ export function BrandSet({ hidden = false }: { hidden?: boolean }) {
 }
 
 export function getServiceBorderClass(index: number) {
-  return index > 0 ? "border-t border-slate-200 sm:border-l lg:border-t-0" : "";
+  if (index === 0) return "";
+  if (index === 1)
+    return "border-t border-slate-200 min-[500px]:border-t-0 min-[500px]:border-l lg:border-t-0";
+  if (index === 3)
+    return "border-t border-slate-200 min-[500px]:border-l lg:border-t-0";
+  return "border-t border-slate-200 lg:border-l lg:border-t-0";
 }

@@ -6,11 +6,11 @@ import Image from "next/image";
 
 export function AboutHeroSection() {
   return (
-    <section className="bg-(--ssc-uk-main-white-color) py-10 font-jakarta sm:py-16 lg:py-20" aria-labelledby="about-hero-title">
+    <section className="bg-(--ssc-uk-main-white-color) py-[35px] sm:py-[50px] lg:py-[60px] min-[1200px]:py-20 font-jakarta" aria-labelledby="about-hero-title">
       <div className="ss-construction-uk-container grid items-center gap-10 lg:grid-cols-[0.98fr_1.02fr] lg:gap-14">
         <div className="relative aspect-square overflow-hidden rounded-lg bg-slate-50 md:rounded-xl lg:rounded-2xl">
           <Image
-            className="h-full w-full object-contain object-center"
+            className="h-full w-full object-cover object-center"
             src={aboutImage}
             alt="Heating engineer working on a boiler system"
             priority
@@ -45,7 +45,9 @@ export function AboutHeroSection() {
 
           <div className="mt-8 grid overflow-hidden rounded-lg border border-slate-200 md:grid-cols-2 md:rounded-xl lg:rounded-2xl">
             {ABOUT_FEATURES.map(({ title, description, icon: Icon }, index) => (
-              <div className={`flex items-center gap-4 px-5 py-5 ${index > 1 ? "border-t" : ""} ${index % 2 === 1 ? "sm:border-l" : ""} border-slate-200`} key={title}>
+              <div
+                className={`flex items-center gap-4 border-slate-200 px-5 py-5 ${index > 0 ? "border-t" : ""} ${index === 1 ? "md:border-t-0 md:border-l" : ""} ${index === 3 ? "md:border-l" : ""}`}
+                key={title}>
                 <Icon aria-hidden="true" className="h-10 w-10 shrink-0 text-(--ssc-uk-main-highlight-color)" strokeWidth={1.7} />
                 <div>
                   <strong className="block text-sm font-bold text-slate-950 sm:text-base">{title}</strong>
