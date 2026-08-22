@@ -42,9 +42,9 @@ export function NavbarSection() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200 bg-(--ssc-uk-main-white-color) font-jakarta">
-      <div className="ss-construction-uk-container flex min-h-[104px] items-center justify-between gap-8">
+      <div className="ss-construction-uk-container flex min-h-[72px] items-center justify-between gap-4 lg:min-h-[104px] lg:gap-8">
         <Link className="shrink-0" href="/" aria-label="SS Consultants home">
-          <Image className="h-auto w-65" width={260} height={50} src={logo} alt="SS Consultants UK Limited" priority />
+          <Image className="h-auto w-52 lg:w-65" width={260} height={50} src={logo} alt="SS Consultants UK Limited" priority />
         </Link>
 
         <nav className="hidden items-center gap-9 lg:flex" aria-label="Main navigation">
@@ -95,13 +95,13 @@ export function NavbarSection() {
         </div>
 
         <button
-          className="inline-flex h-11 w-11 items-center justify-center rounded-sm border border-slate-300 text-slate-950 transition-colors hover:border-(--ssc-uk-main-highlight-color) hover:text-(--ssc-uk-main-highlight-color) lg:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-slate-300 text-slate-950 transition-colors hover:border-(--ssc-uk-main-highlight-color) hover:text-(--ssc-uk-main-highlight-color) lg:hidden"
           type="button"
           aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={isMenuOpen}
           aria-controls="mobile-navigation"
           onClick={() => setIsMenuOpen((open) => !open)}>
-          {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
@@ -114,16 +114,16 @@ export function NavbarSection() {
         id="mobile-navigation"
         className={`fixed inset-y-0 left-0 z-[60] flex h-dvh w-[min(88vw,380px)] flex-col overflow-y-auto bg-(--ssc-uk-main-white-color) px-6 pb-8 shadow-xl transition-transform duration-300 lg:hidden ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
         aria-label="Mobile navigation">
-        <div className="flex min-h-[104px] shrink-0 items-center justify-between border-b border-slate-200">
+        <div className="flex min-h-[72px] shrink-0 items-center justify-between border-b border-slate-200">
           <Link href="/" aria-label="SS Consultants home" onClick={closeMenu}>
-            <Image className="h-auto w-56" src={logo} alt="SS Consultants UK Limited" />
+            <Image className="h-auto w-48" src={logo} alt="SS Consultants UK Limited" />
           </Link>
           <button
-            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-slate-300 text-slate-950 transition-colors hover:border-(--ssc-uk-main-highlight-color) hover:text-(--ssc-uk-main-highlight-color)"
+            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-slate-300 text-slate-950 transition-colors hover:border-(--ssc-uk-main-highlight-color) hover:text-(--ssc-uk-main-highlight-color)"
             type="button"
             aria-label="Close navigation menu"
             onClick={closeMenu}>
-            <X className="h-6 w-6" />
+            <X className="h-5 w-5" />
           </button>
         </div>
         <div className="flex flex-col gap-1 pt-7">

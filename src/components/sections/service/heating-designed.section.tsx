@@ -24,7 +24,7 @@ const SPECIFICATIONS = [
 export function HeatingDesignedSection() {
   return (
     <section
-      className="bg-(--ssc-uk-main-white-color) px-4 py-16 font-jakarta sm:px-6 sm:py-24"
+      className="bg-(--ssc-uk-main-white-color) px-4 py-[35px] font-jakarta sm:px-6 sm:py-[50px] lg:py-[60px] min-[1200px]:py-20"
       aria-labelledby="heating-designed-title">
       <div className="ss-construction-uk-container flex flex-col gap-10">
         <div className="mx-auto flex max-w-3xl flex-col gap-5 text-center">

@@ -9,7 +9,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 export function BoilerOptionsSection() {
   return (
-    <section className="overflow-hidden bg-(--ssc-uk-main-white-color) py-16 font-jakarta sm:py-20" aria-labelledby="boiler-options-title">
+    <section className="overflow-hidden bg-(--ssc-uk-main-white-color) py-[35px] sm:py-[50px] lg:py-[60px] min-[1200px]:py-20 font-jakarta" aria-labelledby="boiler-options-title">
       <div className="ss-construction-uk-container">
         <div className="mx-auto max-w-3xl text-center">
           <h2
@@ -67,7 +67,7 @@ export function BoilerOptionsSection() {
         </Swiper>
 
         <div className="mt-10 text-center">
-          <h3 className="text-2xl font-bold tracking-tight text-slate-950">Not sure which boiler suits your home?</h3>
+          <h3 className="text-lg lg:text-2xl font-bold tracking-tight text-slate-950">Not sure which boiler suits your home?</h3>
           <p className="mt-2 text-sm text-slate-600 sm:text-base">
             We&apos;ll assess your property and recommend the right system without pressure.
           </p>

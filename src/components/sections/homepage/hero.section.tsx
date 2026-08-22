@@ -1,12 +1,13 @@
 import boilerImage from "@/assets/images/webp/installing-boiler.webp";
+import { ServiceStrip } from "@/components/sections/homepage/service-strip.section";
 import CTAButton from "@/components/ui/ctaButton";
 import { CheckItem } from "@/utils/helper/homepage.helper";
 import Image from "next/image";
 
 export function HeroSection() {
   return (
-    <section id="top" className="bg-(--ssc-uk-main-white-color) font-jakarta">
-      <div className="ss-construction-uk-container grid gap-10 lg:grid-cols-[0.98fr_1.02fr] md:items-center md:gap-14 py-10!">
+    <section id="top" className="bg-(--ssc-uk-main-white-color) py-[35px] sm:py-[50px] lg:py-[60px] min-[1200px]:py-20 font-jakarta">
+      <div className="ss-construction-uk-container grid gap-10 lg:grid-cols-[0.98fr_1.02fr] md:items-center md:gap-14">
         <div className="flex flex-col items-start">
           <div className="inline-flex items-center gap-3 rounded-full border border-slate-400 px-4 py-2 text-xs font-semibold tracking-[0.08em] text-slate-900 sm:text-sm">
             <span className="h-3.5 w-3.5 rounded-full bg-(--ssc-uk-main-highlight-color)" />
@@ -29,16 +30,11 @@ export function HeroSection() {
               Call 07590 514937
             </CTAButton>
           </div>
-          <div className="mt-12 flex flex-wrap gap-x-6 gap-y-4 sm:gap-x-7">
-            <CheckItem>Gas Safe engineers</CheckItem>
-            <span className="hidden h-6 w-px bg-slate-300 sm:block" />
-            <CheckItem>Clear, honest pricing</CheckItem>
-            <span className="hidden h-6 w-px bg-slate-300 sm:block" />
-            <CheckItem>Reliable local support</CheckItem>
-          </div>
+          
+          <ServiceStrip />
         </div>
 
-          <div className="relative rounded-lg bg-slate-200 md:rounded-xl lg:rounded-2xl">
+        <div className="relative rounded-lg bg-slate-200 md:rounded-xl lg:rounded-2xl">
           <Image
             className="h-full max-h-100 w-full object-cover object-center lg:max-h-none aspect-square rounded-lg md:rounded-xl lg:rounded-2xl"
             src={boilerImage}

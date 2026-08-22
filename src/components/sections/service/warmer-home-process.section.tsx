@@ -32,7 +32,7 @@ const PROCESS_STEPS = [
 export function WarmerHomeProcessSection() {
   return (
     <section
-      className="bg-(--ssc-uk-gray-background-color) px-4 py-16 font-jakarta sm:px-6 sm:py-24"
+      className="bg-(--ssc-uk-gray-background-color) px-4 py-[35px] font-jakarta sm:px-6 sm:py-[50px] lg:py-[60px] min-[1200px]:py-20"
       aria-labelledby="warmer-home-process-title">
       <div className="ss-construction-uk-container flex flex-col gap-10">
         <div className="mx-auto flex max-w-3xl flex-col gap-5 text-center">
@@ -53,7 +53,7 @@ export function WarmerHomeProcessSection() {
 
             return (
               <article
-                className={`flex min-h-[300px] flex-col gap-6 rounded-lg border p-6 sm:p-7 md:rounded-xl lg:rounded-2xl ${
+                className={`flex flex-col gap-6 rounded-lg border p-6 sm:p-7 md:rounded-xl lg:rounded-2xl ${
                   isFinalStep
                     ? "border-(--ssc-uk-main-highlight-color) text-slate-950"
                     : "border-slate-200 bg-(--ssc-uk-main-white-color)"

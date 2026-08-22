@@ -142,9 +142,28 @@ body {
 @media only screen and (max-width: 1199px) {
   .ss-construction-uk-container {
     padding: 0 16px;
+    margin: auto;
   }
 }
 @media (min-width: 1200px) {
+  .ss-construction-uk-container {
+    width: calc(100% - 60px);
+    margin: auto;
+  }
+}
+@media (min-width: 1300px) {
+  .ss-construction-uk-container {
+    width: calc(100% - 80px);
+    margin: auto;
+  }
+}
+@media (min-width: 1400px) {
+  .ss-construction-uk-container {
+    width: calc(100% - 110px);
+    margin: auto;
+  }
+}
+@media (min-width: 1500px) {
   .ss-construction-uk-container {
     width: min(calc(100% - 150px), 1540px);
   }

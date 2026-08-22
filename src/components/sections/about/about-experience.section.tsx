@@ -45,22 +45,30 @@ const STANDARDS = [
 export function AboutExperienceSection() {
   return (
     <>
-      <section className="bg-(--ssc-uk-main-white-color) px-4 py-16 font-jakarta sm:px-8 sm:py-20 lg:py-24" aria-labelledby="experience-title">
+      <section
+        className="bg-(--ssc-uk-main-white-color) py-[35px] font-jakarta sm:py-[50px] lg:py-[60px] min-[1200px]:py-20"
+        aria-labelledby="experience-title">
         <div className="ss-construction-uk-container">
           <div className="mx-auto max-w-3xl text-center">
-            <h2 id="experience-title" className="text-[35px] font-bold leading-[1.05] tracking-[-0.045em] text-slate-950 sm:text-[46px] lg:text-[56px]">
-              Experience you can <em className="font-lora font-bold italic text-(--ssc-uk-main-highlight-color)">measure.</em>
+            <h2
+              id="experience-title"
+              className="text-[35px] font-bold leading-[1.05] tracking-[-0.045em] text-slate-950 sm:text-[46px] lg:text-[56px]">
+              Experience you can{" "}
+              <em className="font-lora font-bold italic text-(--ssc-uk-main-highlight-color)">measure.</em>
             </h2>
             <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
-              Practical experience, professional protection and trusted local workmanship—supported by numbers that matter.
+              Practical experience, professional protection and trusted local workmanship—supported by numbers that
+              matter.
             </p>
           </div>
 
           <div className="mt-12 grid overflow-hidden rounded-xl border border-slate-200 md:grid-cols-2 lg:grid-cols-3 lg:rounded-2xl">
             {EXPERIENCE_STATS.map(({ value, label, description }, index) => (
-              <article className={`px-6 py-7 sm:px-8 sm:py-8 ${index > 0 ? "border-t border-slate-200 md:border-t" : ""} ${index % 2 === 1 ? "md:border-l" : ""} ${index % 3 !== 0 ? "lg:border-l" : ""} ${index >= 3 ? "lg:border-t" : ""}`} key={label}>
-                <p className="text-4xl font-bold leading-none tracking-tight text-slate-950 sm:text-5xl">{value}</p>
-                <h3 className="mt-5 text-lg font-bold text-slate-950">{label}</h3>
+              <article
+                className={`px-6 py-7 sm:px-8 sm:py-8 ${index > 0 ? "border-t border-slate-200 md:border-t" : ""} ${index % 2 === 1 ? "md:border-l" : ""} ${index % 3 !== 0 ? "lg:border-l" : ""} ${index >= 3 ? "lg:border-t" : ""}`}
+                key={label}>
+                <p className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold leading-none tracking-tight text-slate-950">{value}</p>
+                <h3 className="mt-5 text-base lg:text-lg font-bold text-slate-950">{label}</h3>
                 <p className="mt-3 text-sm leading-6 text-slate-600">{description}</p>
               </article>
             ))}
@@ -68,9 +76,13 @@ export function AboutExperienceSection() {
         </div>
       </section>
 
-      <section className="bg-(--ssc-uk-gray-background-color) px-4 py-14 font-jakarta sm:px-8 sm:py-18" aria-labelledby="standards-title">
+      <section
+        className="bg-(--ssc-uk-gray-background-color) px-4 py-[35px] font-jakarta sm:px-8 sm:py-[50px] lg:py-[60px] min-[1200px]:py-20"
+        aria-labelledby="standards-title">
         <div className="ss-construction-uk-container">
-          <h2 id="standards-title" className="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">Standards behind every job</h2>
+          <h2 id="standards-title" className="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
+            Standards behind every job
+          </h2>
           <div className="mt-8 grid gap-5 md:grid-cols-2">
             {STANDARDS.map(({ title, description }) => (
               <article className="border-t border-slate-300 pt-5" key={title}>

@@ -26,7 +26,7 @@ const PRINCIPLES = [
 
 export function AboutPrinciplesSection() {
   return (
-    <section className="bg-(--ssc-uk-consultation-section-background-color) px-4 py-16 font-jakarta text-(--ssc-uk-main-white-color) sm:px-8 sm:py-20 lg:py-24" aria-labelledby="principles-title">
+    <section className="bg-(--ssc-uk-consultation-section-background-color) px-4 py-[35px] sm:px-8 sm:py-[50px] lg:py-[60px] min-[1200px]:py-20 font-jakarta text-(--ssc-uk-main-white-color)" aria-labelledby="principles-title">
       <div className="ss-construction-uk-container">
         <div className="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
           <div>

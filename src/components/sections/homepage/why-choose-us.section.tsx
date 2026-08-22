@@ -6,7 +6,7 @@ import Image from "next/image";
 export function WhyChooseUsSection() {
   return (
     <section
-      className="bg-(--ssc-uk-consultation-section-background-color) py-16 font-jakarta sm:py-20"
+      className="bg-(--ssc-uk-consultation-section-background-color) py-[35px] sm:py-[50px] lg:py-[60px] min-[1200px]:py-20 font-jakarta"
       aria-labelledby="why-choose-us-title">
       <div className="ss-construction-uk-container grid gap-12 md:grid-cols-[0.98fr_1.02fr] md:items-center md:gap-16">
         <div className="overflow-hidden rounded-lg bg-(--ssc-uk-main-white-color) md:rounded-xl lg:rounded-2xl">

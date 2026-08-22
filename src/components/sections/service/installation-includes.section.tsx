@@ -38,7 +38,7 @@ const INSTALLATION_INCLUDES: InstallationInclude[] = [
 export function InstallationIncludesSection() {
   return (
     <section
-      className="bg-(--ssc-uk-main-white-color) px-4 py-16 font-jakarta sm:px-6 sm:py-24"
+      className="bg-(--ssc-uk-main-white-color) px-4 py-[35px] font-jakarta sm:px-6 sm:py-[50px] lg:py-[60px] min-[1200px]:py-20"
       aria-labelledby="installation-includes-title"
       style={{
         backgroundImage:

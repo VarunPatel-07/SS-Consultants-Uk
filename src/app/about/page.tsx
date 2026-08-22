@@ -14,7 +14,7 @@ export default function AboutPage() {
       <NavbarSection />
       <main>
         <AboutHeroSection />
-        <ExperienceSection flushTop />
+        <ExperienceSection />
         <AboutPrinciplesSection />
         <AboutExperienceSection />
         <HeatingSupportSection />

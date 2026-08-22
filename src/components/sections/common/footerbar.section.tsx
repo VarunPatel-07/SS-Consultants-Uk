@@ -1,5 +1,5 @@
 import logo from "@/assets/images/logo/ss-consultants-logo-black-trasperent.png";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { ChevronDown, Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -31,7 +31,8 @@ export function FooterBarSection() {
               <Image className="h-auto w-60 brightness-0 invert sm:w-68" src={logo} alt="SS Consultants UK Limited" />
             </Link>
             <p className="mt-7 max-w-md text-base leading-7">
-              Professional boiler installation, servicing and heating solutions delivered with clear advice, careful workmanship and dependable support.
+              Professional boiler installation, servicing and heating solutions delivered with clear advice, careful
+              workmanship and dependable support.
             </p>
 
             <div className="mt-9 flex gap-12 border-t border-slate-700 pt-8 text-base">
@@ -50,29 +51,20 @@ export function FooterBarSection() {
 
           <FooterLinkColumn title="Navigation" links={navigationLinks} />
 
-          <div>
-            <h2 className="text-2xl font-bold text-slate-100">Services</h2>
-            <div className="mt-5 h-1 w-12 bg-(--ssc-uk-main-highlight-color)" />
-            <ul className="mt-5">
-              {serviceLinks.map(({ label, href }) => (
-                <li className="border-b border-slate-700 last:border-b-0" key={label}>
-                  <a className="block py-4 text-base transition-colors hover:text-(--ssc-uk-main-highlight-color)" href={href}>
-                    {label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <FooterLinkColumn title="Services" links={serviceLinks} />
 
           <div>
-            <h2 className="text-2xl font-bold text-slate-100">Contact</h2>
-            <div className="mt-5 h-1 w-12 bg-(--ssc-uk-main-highlight-color)" />
+            <h2 className="text-base font-bold text-slate-100">Contact</h2>
             <div className="mt-6 space-y-7">
-              <a className="flex items-center gap-5 text-base transition-colors hover:text-(--ssc-uk-main-highlight-color)" href="tel:07590514937">
+              <a
+                className="flex items-center gap-5 text-base transition-colors hover:text-(--ssc-uk-main-highlight-color)"
+                href="tel:07590514937">
                 <Phone className="h-6 w-6 shrink-0 text-(--ssc-uk-main-highlight-color)" />
                 07590 514937
               </a>
-              <a className="flex items-center gap-5 text-base transition-colors hover:text-(--ssc-uk-main-highlight-color)" href="mailto:info@sscukltd.com">
+              <a
+                className="flex items-center gap-5 text-base transition-colors hover:text-(--ssc-uk-main-highlight-color)"
+                href="mailto:info@sscukltd.com">
                 <Mail className="h-6 w-6 shrink-0 text-(--ssc-uk-main-highlight-color)" />
                 info@sscukltd.com
               </a>
@@ -81,22 +73,33 @@ export function FooterBarSection() {
                 Hatfield, Hertfordshire &amp; London
               </div>
             </div>
-            <p className="mt-9 border-t border-slate-700 pt-7 text-base text-(--ssc-uk-main-highlight-color)">
-              Need urgent heating help? Call us directly.
-            </p>
+            
           </div>
         </div>
 
         <div className="mt-14 flex flex-col gap-6 border-t border-slate-700 py-8 text-sm sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} SS Consultants UK Ltd. All rights reserved.</p>
           <div className="flex flex-wrap gap-x-6 gap-y-3">
-            <a className="transition-colors hover:text-(--ssc-uk-main-highlight-color)" href="/privacy-policy">Privacy Policy</a>
-            <a className="border-l border-slate-600 pl-6 transition-colors hover:text-(--ssc-uk-main-highlight-color)" href="/terms-and-conditions">Terms &amp; Conditions</a>
-            <a className="border-l border-slate-600 pl-6 transition-colors hover:text-(--ssc-uk-main-highlight-color)" href="/cookie-policy">Cookie Policy</a>
-            <a className="border-l border-slate-600 pl-6 transition-colors hover:text-(--ssc-uk-main-highlight-color)" href="/sitemap">Sitemap</a>
+            <a className="transition-colors hover:text-(--ssc-uk-main-highlight-color)" href="/privacy-policy">
+              Privacy Policy
+            </a>
+            <a
+              className="border-l border-slate-600 pl-6 transition-colors hover:text-(--ssc-uk-main-highlight-color)"
+              href="/terms-and-conditions">
+              Terms &amp; Conditions
+            </a>
+            <a
+              className="border-l border-slate-600 pl-6 transition-colors hover:text-(--ssc-uk-main-highlight-color)"
+              href="/cookie-policy">
+              Cookie Policy
+            </a>
+            <a
+              className="border-l border-slate-600 pl-6 transition-colors hover:text-(--ssc-uk-main-highlight-color)"
+              href="/sitemap">
+              Sitemap
+            </a>
           </div>
         </div>
-
       </div>
     </footer>
   );
@@ -123,17 +126,40 @@ function InstagramIcon() {
 function FooterLinkColumn({ title, links }: { title: string; links: Array<{ label: string; href: string }> }) {
   return (
     <div>
-      <h2 className="text-2xl font-bold text-slate-100">{title}</h2>
-      <div className="mt-5 h-1 w-12 bg-(--ssc-uk-main-highlight-color)" />
-      <ul className="mt-5">
-        {links.map(({ label, href }) => (
-          <li className="border-b border-slate-700 last:border-b-0" key={label}>
-            <a className="block py-4 text-base transition-colors hover:text-(--ssc-uk-main-highlight-color)" href={href}>
-              {label}
-            </a>
-          </li>
-        ))}
-      </ul>
+      <details className="group lg:hidden">
+        <summary className="flex cursor-pointer list-none items-center justify-between text-base font-bold text-slate-100 [&::-webkit-details-marker]:hidden">
+          {title}
+          <ChevronDown aria-hidden="true" className="h-5 w-5 transition-transform group-open:rotate-180" />
+        </summary>
+
+        <ul className="mt-5">
+          {links.map(({ label, href }) => (
+            <li className="border-b border-slate-700 last:border-b-0" key={label}>
+              <a
+                className="block py-4 text-base transition-colors hover:text-(--ssc-uk-main-highlight-color)"
+                href={href}>
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </details>
+
+      <div className="hidden lg:block">
+        <h2 className="text-base font-bold text-slate-100">{title}</h2>
+
+        <ul className="mt-5">
+          {links.map(({ label, href }) => (
+            <li className="w-fit" key={label}>
+              <a
+                className="block py-2.5 text-base transition-colors hover:text-(--ssc-uk-main-highlight-color)"
+                href={href}>
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
