@@ -1,14 +1,37 @@
+"use client";
 import CTAButton from "@/components/ui/ctaButton";
+import { gsap } from "@/lib/gsap";
+import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
+import { COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
 import type { ServiceContent } from "@/utils/constants/service.constants";
+import { useGSAP } from "@gsap/react";
 import { CheckCircle2 } from "lucide-react";
 import Image from "next/image";
+import { useRef } from "react";
+import { twMerge } from "tailwind-merge";
 
 export function ServiceHeroSection({ service }: { service: ServiceContent }) {
+  const sectionRef = useRef<HTMLElement>(null);
+  useGSAP(
+    () => {
+      if (!sectionRef.current) return;
+      const animation = COMMON_SCROLL_TRIGGER_ANIMATION({ trigger: sectionRef.current, start: "top 90%" });
+      gsap.fromTo(gsap.utils.toArray(".service-hero-reveal", sectionRef.current), animation.FROM, animation.TO);
+    },
+    { scope: sectionRef },
+  );
+
   return (
-    <main className="overflow-hidden bg-(--ssc-uk-gray-background-color) font-jakarta">
-      <section className="relative border-b border-slate-100 py-[35px] sm:py-[50px] lg:py-[60px] min-[1200px]:py-20" aria-labelledby="service-title">
+    <section
+      ref={sectionRef}
+      className={twMerge(
+        "relative border-b border-slate-100 bg-(--ssc-uk-gray-background-color) font-jakarta overflow-hidden",
+        COMMON_SECTION_PADDING_TOP_BOTTOM,
+      )}
+      aria-labelledby="service-title">
+      <div className="w-full pt-12">
         <div className="ss-construction-uk-container grid gap-10 lg:grid-cols-[0.98fr_1.02fr] md:items-center lg:gap-14">
-          <div className="flex flex-col justify-center ">
+          <div className="service-hero-reveal flex flex-col justify-center ">
             <div className="inline-flex items-center gap-3 rounded-full border border-slate-400 px-4 py-2 text-xs font-semibold tracking-[0.08em] text-slate-900 sm:text-sm bg-(--ssc-uk-main-white-color) w-fit">
               <span className="h-3.5 w-3.5 rounded-full bg-(--ssc-uk-main-highlight-color)" />
               {service.eyebrow}
@@ -43,7 +66,7 @@ export function ServiceHeroSection({ service }: { service: ServiceContent }) {
             </div>
           </div>
 
-          <div className="relative min-w-0 xl:w-full xl:justify-self-end">
+          <div className="service-hero-reveal relative min-w-0 xl:w-full xl:justify-self-end">
             <Image
               className="h-full max-h-100 w-full object-cover object-center lg:max-h-none aspect-square rounded-lg md:rounded-xl lg:rounded-2xl"
               src={service?.heroImage}
@@ -68,7 +91,7 @@ export function ServiceHeroSection({ service }: { service: ServiceContent }) {
             </div>
           </div>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
   );
 }

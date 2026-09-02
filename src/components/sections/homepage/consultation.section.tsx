@@ -1,14 +1,39 @@
+"use client";
+
+import { gsap } from "@/lib/gsap";
+import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
+import { COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
+import { useGSAP } from "@gsap/react";
+import { useRef } from "react";
+import { twMerge } from "tailwind-merge";
+
 const EMAIL_ADDRESS = "info@sscukltd.com";
 const PHONE_NUMBER = "07590 514937";
 
 export function ConsultationSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      if (!sectionRef.current) return;
+      const elements = gsap.utils.toArray(".contact-reveal", sectionRef.current);
+      const animation = COMMON_SCROLL_TRIGGER_ANIMATION({
+        trigger: sectionRef.current,
+        start: "top 85%",
+      });
+      gsap.fromTo(elements, animation.FROM, animation.TO);
+    },
+    { scope: sectionRef },
+  );
+
   return (
     <section
+      ref={sectionRef}
       id="contact"
-      className="bg-(--ssc-uk-gray-background-color) py-[35px] sm:py-[50px] lg:py-[60px] min-[1200px]:py-20 font-jakarta"
+      className={twMerge("bg-(--ssc-uk-gray-background-color) font-jakarta", COMMON_SECTION_PADDING_TOP_BOTTOM)}
       aria-labelledby="consultation-title">
       <div className="ss-construction-uk-container">
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="contact-reveal mx-auto max-w-3xl text-center">
           <h2 id="consultation-title" className="ssc-section-title">
             Let&apos;s <em className="ssc-section-title-highlight">Talk</em>
             <br />
@@ -21,7 +46,7 @@ export function ConsultationSection() {
 
         <div className="mx-auto mt-12 grid max-w-295 gap-6 md:grid-cols-[1fr_1.06fr] md:items-stretch">
           <div className="grid gap-6">
-            <div className="rounded-lg px-7 py-9 text-(--ssc-uk-main-white-color) sm:px-14 sm:py-14 bg-(--ssc-uk-consultation-section-background-color) md:rounded-xl lg:rounded-2xl">
+            <div className="contact-reveal rounded-lg px-7 py-9 text-(--ssc-uk-main-white-color) sm:px-14 sm:py-14 bg-(--ssc-uk-consultation-section-background-color) md:rounded-xl lg:rounded-2xl">
               <p className="text-sm text-slate-300">Email us</p>
               <a
                 className="mt-2 block break-all text-2xl font-bold tracking-tight transition-colors hover:text-(--ssc-uk-main-highlight-color) hover:underline sm:text-3xl"
@@ -37,7 +62,7 @@ export function ConsultationSection() {
               </a>
             </div>
 
-            <div className="rounded-lg border border-slate-300 px-7 py-9 sm:px-14 sm:py-10 bg-(--ssc-uk-main-white-color) md:rounded-xl lg:rounded-2xl">
+            <div className="contact-reveal rounded-lg border border-slate-300 px-7 py-9 sm:px-14 sm:py-10 bg-(--ssc-uk-main-white-color) md:rounded-xl lg:rounded-2xl">
               <h3 className="text-2xl font-bold tracking-tight text-slate-950">Our Service Area</h3>
 
               <div className="mt-7 space-y-6 text-slate-700">
@@ -56,7 +81,7 @@ export function ConsultationSection() {
           </div>
 
           <form
-            className="rounded-lg border border-slate-300 px-7 py-9 sm:px-9 sm:py-10 bg-(--ssc-uk-main-white-color) md:rounded-xl lg:rounded-2xl"
+            className="contact-reveal rounded-lg border border-slate-300 px-7 py-9 sm:px-9 sm:py-10 bg-(--ssc-uk-main-white-color) md:rounded-xl lg:rounded-2xl"
             action={`mailto:${EMAIL_ADDRESS}`}
             method="post"
             encType="text/plain">

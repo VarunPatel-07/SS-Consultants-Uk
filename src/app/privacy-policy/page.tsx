@@ -1,7 +1,14 @@
-import { FooterBarSection } from "@/components/sections/common/footerbar.section";
+import { LEGAL_PAGE_DATA } from "@/app/content/pageContent/pageData/legal.data";
 import { LegalPageSection } from "@/components/sections/common/legal-page.section";
-import { NavbarSection } from "@/components/sections/common/navbar.section";
+import { ConsultationSection } from "@/components/sections/homepage/consultation.section";
 
 export default function PrivacyPolicyPage() {
-  return <><NavbarSection /><main><LegalPageSection title="Privacy Policy" description="We respect your privacy and only use information shared with us to respond to enquiries and provide our services." /></main><FooterBarSection /></>;
+  const pageData = LEGAL_PAGE_DATA["/privacy-policy"];
+
+  return (
+    <>
+      <LegalPageSection title={pageData.title} description={pageData.description} />
+      <ConsultationSection />
+    </>
+  );
 }

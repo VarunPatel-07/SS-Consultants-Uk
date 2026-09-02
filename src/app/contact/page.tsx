@@ -1,17 +1,14 @@
-import { NavbarSection } from "@/components/sections/common/navbar.section";
-import { FooterBarSection } from "@/components/sections/common/footerbar.section";
 import { ContactHeroSection } from "@/components/sections/contact/contact-hero.section";
 import { ConsultationSection } from "@/components/sections/homepage/consultation.section";
 
 export default function ContactPage() {
+  const sections = CONTACT_PAGE_DATA.sections ?? [];
+
   return (
     <>
-      <NavbarSection />
-      <main>
-        <ContactHeroSection />
-        <ConsultationSection />
-      </main>
-      <FooterBarSection />
+      {sections.includes("hero") && <ContactHeroSection />}
+      {sections.includes("consultation") && <ConsultationSection />}
     </>
   );
 }
+import { CONTACT_PAGE_DATA } from "@/app/content/pageContent/pageData/contact.data";

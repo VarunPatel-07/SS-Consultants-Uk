@@ -1,28 +1,13 @@
+import { FOOTER_SERVICE_LINKS, NAVIGATION_LINKS } from "@/app/content/pageContent/common.data";
 import logo from "@/assets/images/logo/ss-consultants-logo-black-trasperent.png";
 import { ChevronDown, Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-const navigationLinks = [
-  { label: "Home", href: "/" },
-  { label: "Services", href: "/services/boiler-installation" },
-  { label: "About", href: "/about" },
-  { label: "Gallery", href: "/gallery" },
-  { label: "Contact", href: "/contact" },
-];
-
-const serviceLinks = [
-  { label: "Boiler Installation", href: "/services/boiler-installation" },
-  { label: "Boiler Servicing", href: "/services/boiler-servicing" },
-  { label: "Underfloor Heating", href: "/services/underfloor-heating" },
-  { label: "Central Heating", href: "/services/central-heating" },
-  { label: "Boiler Repairs", href: "/services/boiler-breakdown-repairs" },
-];
-
 export function FooterBarSection() {
   return (
     <footer
-      className="overflow-hidden px-4 pt-14 font-jakarta text-slate-300 sm:px-8 sm:pt-20"
+      className="w-full overflow-hidden px-4 pt-14 font-jakarta text-slate-300 sm:px-8 sm:pt-20"
       style={{ backgroundColor: "var(--ssc-uk-consultation-section-background-color)" }}>
       <div className="ss-construction-uk-container">
         <div className="grid gap-12 lg:grid-cols-[1.35fr_0.9fr_1.15fr_1.2fr] lg:gap-14">
@@ -49,9 +34,9 @@ export function FooterBarSection() {
             </div>
           </div>
 
-          <FooterLinkColumn title="Navigation" links={navigationLinks} />
+          <FooterLinkColumn title="Navigation" links={NAVIGATION_LINKS} />
 
-          <FooterLinkColumn title="Services" links={serviceLinks} />
+          <FooterLinkColumn title="Services" links={FOOTER_SERVICE_LINKS} />
 
           <div>
             <h2 className="text-base font-bold text-slate-100">Contact</h2>
@@ -123,7 +108,7 @@ function InstagramIcon() {
   );
 }
 
-function FooterLinkColumn({ title, links }: { title: string; links: Array<{ label: string; href: string }> }) {
+function FooterLinkColumn({ title, links }: { title: string; links: ReadonlyArray<{ label: string; href: string }> }) {
   return (
     <div>
       <details className="group lg:hidden">

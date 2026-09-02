@@ -1,59 +1,48 @@
-const PROCESS_STEPS = [
-  {
-    number: "01",
-    title: "Home assessment",
-    description:
-      "We review your existing heating system, property size, insulation, hot-water demand and heating requirements.",
-    tags: "PROPERTY · REQUIREMENTS · EXISTING SYSTEM",
-  },
-  {
-    number: "02",
-    title: "System recommendation",
-    description:
-      "We recommend the appropriate boiler, radiators, pipework and controls, followed by a clearly explained quotation.",
-    tags: "SYSTEM DESIGN · EQUIPMENT · QUOTATION",
-  },
-  {
-    number: "03",
-    title: "Professional installation",
-    description:
-      "Qualified engineers complete the work carefully, protect the surrounding space and keep disruption to a minimum.",
-    tags: "INSTALLATION · WORKMANSHIP · CLEANLINESS",
-  },
-  {
-    number: "04",
-    title: "Testing and handover",
-    description:
-      "The system is tested, balanced and registered. We then explain the controls and leave your home clean and tidy.",
-    tags: "TESTING · REGISTRATION · GUIDANCE",
-  },
-];
+"use client";
+import { OUR_PROCESS_DATA } from "@/app/content/pageContent/ourProcess.data";
+import { gsap } from "@/lib/gsap";
+import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
+import { COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
+import { twMerge } from "tailwind-merge";
+import { useGSAP } from "@gsap/react";
+import { useRef } from "react";
 
 export function WarmerHomeProcessSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  useGSAP(() => {
+    if (!sectionRef.current) return;
+    const animation = COMMON_SCROLL_TRIGGER_ANIMATION({ trigger: sectionRef.current });
+    gsap.fromTo(gsap.utils.toArray(".process-reveal", sectionRef.current), animation.FROM, animation.TO);
+  }, { scope: sectionRef });
+
   return (
     <section
-      className="bg-(--ssc-uk-gray-background-color) px-4 py-[35px] font-jakarta sm:px-6 sm:py-[50px] lg:py-[60px] min-[1200px]:py-20"
+      ref={sectionRef}
+      className={twMerge(
+        "bg-(--ssc-uk-gray-background-color) px-4 font-jakarta sm:px-6",
+        COMMON_SECTION_PADDING_TOP_BOTTOM,
+      )}
       aria-labelledby="warmer-home-process-title">
       <div className="ss-construction-uk-container flex flex-col gap-10">
         <div className="mx-auto flex max-w-3xl flex-col gap-5 text-center">
-          <h2 id="warmer-home-process-title" className="ssc-section-title">
+          <h2 id="warmer-home-process-title" className="process-reveal ssc-section-title">
             From assessment
             <br />
             <em className="ssc-section-title-highlight">to a warmer home.</em>
           </h2>
-          <p className="ssc-section-description">
+          <p className="process-reveal ssc-section-description">
             A clear four-step process explains what happens after you contact SS Consultants and keeps every stage
             straightforward.
           </p>
         </div>
 
         <div className="grid gap-4 md:grid-cols-4">
-          {PROCESS_STEPS.map(({ number, title, description, tags }, index) => {
-            const isFinalStep = index === PROCESS_STEPS.length - 1;
+          {OUR_PROCESS_DATA.map(({ number, title, description, tags }, index) => {
+            const isFinalStep = index === OUR_PROCESS_DATA.length - 1;
 
             return (
               <article
-                className={`flex flex-col gap-6 rounded-lg border p-6 sm:p-7 md:rounded-xl lg:rounded-2xl ${
+                className={`process-reveal flex flex-col gap-6 rounded-lg border p-6 sm:p-7 md:rounded-xl lg:rounded-2xl ${
                   isFinalStep
                     ? "border-(--ssc-uk-main-highlight-color) text-slate-950"
                     : "border-slate-200 bg-(--ssc-uk-main-white-color)"

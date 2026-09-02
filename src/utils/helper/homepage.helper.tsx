@@ -36,7 +36,9 @@ export function BrandSet({ hidden = false }: { hidden?: boolean }) {
   return (
     <div className="flex shrink-0 items-center gap-5 pr-5 lg:gap-10 lg:pr-10 xl:gap-20 xl:pr-20" aria-hidden={hidden}>
       {BOILER_BRANDS.map(({ name, logo }) => (
-        <div className="flex shrink-0 items-center justify-center" key={`${hidden ? "duplicate-" : ""}${name}`}>
+        <div
+          className="flex shrink-0 items-center justify-center reveal-animation"
+          key={`${hidden ? "duplicate-" : ""}${name}`}>
           <Image className="h-15" src={logo} alt={hidden ? "" : `${name} logo`} height={spacing} />
         </div>
       ))}
@@ -46,9 +48,7 @@ export function BrandSet({ hidden = false }: { hidden?: boolean }) {
 
 export function getServiceBorderClass(index: number) {
   if (index === 0) return "";
-  if (index === 1)
-    return "border-t border-slate-200 min-[500px]:border-t-0 min-[500px]:border-l lg:border-t-0";
-  if (index === 3)
-    return "border-t border-slate-200 min-[500px]:border-l lg:border-t-0";
+  if (index === 1) return "border-t border-slate-200 min-[500px]:border-t-0 min-[500px]:border-l lg:border-t-0";
+  if (index === 3) return "border-t border-slate-200 min-[500px]:border-l lg:border-t-0";
   return "border-t border-slate-200 lg:border-l lg:border-t-0";
 }

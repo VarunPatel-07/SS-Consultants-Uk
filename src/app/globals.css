@@ -9,6 +9,7 @@
   --ssc-uk-cta-button-background: var(--ssc-uk-main-highlight-color);
   --ssc-uk-consultation-section-background-color: #020713;
   --ssc-uk-gray-background-color: #f5f5f5;
+  --ssc-uk-service-card-hover-background-color: #ff520810;
 }
 
 @theme inline {
@@ -28,7 +29,7 @@ body {
 .ssc-sction-title {
   color: var(--ssc-uk-main-black-color);
   font-family: var(--font-plus-jakarta), sans-serif;
-  font-size: 50px;
+  font-size: 48px;
   font-weight: 700;
   letter-spacing: -2px;
   line-height: 1.05;
@@ -141,7 +142,7 @@ body {
 }
 @media only screen and (max-width: 1199px) {
   .ss-construction-uk-container {
-    padding: 0 16px;
+    padding: 0 16px !important;
     margin: auto;
   }
 }
@@ -167,4 +168,13 @@ body {
   .ss-construction-uk-container {
     width: min(calc(100% - 150px), 1540px);
   }
+}
+
+.check-box-hero-section-image {
+  background-image: url("/images/check-box-background-img.webp");
+  background-repeat: repeat;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  background-size: contain;
 }

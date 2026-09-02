@@ -11,15 +11,20 @@ export const GET_BUTTON_STYLE = (btnStyle: "CTA_PRIMARY" | "CTA_SECONDARY", them
     case "CTA_SECONDARY":
       return {
         parentWrapper: twMerge(
-          "px-6 pr-10 min-w-[210px] py-2.5 min-h-[45px] font-instrument-sans text-sm sm:text-base rounded-full border-0 outline-0 font-semibold group/btn overflow-hidden relative cursor-pointer ring-[1px] ring-(--ssc-uk-main-black-color) flex items-center justify-between gap-6",
+          "box-border px-6 pr-10 min-w-[210px] py-2.5 min-h-[45px] font-instrument-sans text-sm sm:text-base rounded-full border border-(--ssc-uk-main-black-color) outline-0 font-semibold group/btn overflow-hidden relative cursor-pointer flex items-center justify-between gap-6",
           theme === "DARK"
-            ? "bg-(--ssc-uk-main-black-color) text-(--ssc-uk-main-white-color) ring-(--ssc-uk-main-black-color)"
+            ? "bg-(--ssc-uk-main-black-color) text-(--ssc-uk-main-white-color)"
             : "bg-(--ssc-uk-main-white-color) text-(--ssc-uk-main-black-color)",
         ),
         childrenWrapper: twMerge(
           "relative z-10  transition-all duration-300 w-fit-content",
-          theme === "DARK" ? "group-hover/btn:text-(--ssc-uk-main-black-color)" : "group-hover/btn:text-(--ssc-uk-main-white-color)",
+          theme === "DARK"
+            ? "group-hover/btn:text-(--ssc-uk-main-black-color)"
+            : "group-hover/btn:text-(--ssc-uk-main-white-color)",
         ),
       };
   }
 };
+
+export const COMMON_SECTION_PADDING_TOP_BOTTOM = "py-8.75! sm:py-10! md:py-12.5! lg:py-15! xl:py-25!";
+export const COMMON_BORDER_RADIUS = "rounded-lg md:rounded-xl lg:rounded-2xl";
