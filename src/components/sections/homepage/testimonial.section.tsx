@@ -1,40 +1,84 @@
 "use client";
 
-import { TESTIMONIALS } from "@/utils/constants/testimonial.constants";
+import type { TestimonialSection } from "@/app/utils/interface/data.interface";
+import { RichText } from "@/components/common/RichText";
+import { gsap } from "@/lib/gsap";
+import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
+import { COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
+import { useGSAP } from "@gsap/react";
 import { ArrowLeft, ArrowRight, Star } from "lucide-react";
+import { useRef, useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { twMerge } from "tailwind-merge";
 
-export function TestimonialSection() {
+export function TestimonialSection({ data }: { data: TestimonialSection }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
+
+  const updateNavigationState = (swiper: { isBeginning: boolean; isEnd: boolean }) => {
+    setIsBeginning(swiper.isBeginning);
+    setIsEnd(swiper.isEnd);
+  };
+
+  useGSAP(
+    () => {
+      if (!containerRef.current) return;
+      const titleSec = gsap.utils.toArray(".reveal-text-animation");
+      const getTitleAnimations = COMMON_SCROLL_TRIGGER_ANIMATION({
+        trigger: containerRef.current,
+        start: "top 70%",
+        end: "bottom top",
+      });
+      gsap.fromTo(titleSec, getTitleAnimations.FROM, getTitleAnimations.TO);
+
+      // //  Now We will Write the GSAP Code for the Card Reveal Animations.
+      const cards = gsap.utils.toArray(".reveal-animation");
+      const getCardAnimations = COMMON_SCROLL_TRIGGER_ANIMATION({
+        trigger: containerRef.current,
+        start: "top 45%",
+        end: "bottom top",
+        // markers: true,
+      });
+      gsap.fromTo(cards, getCardAnimations.FROM, getCardAnimations.TO);
+    },
+    { scope: containerRef },
+  );
   return (
     <section
-      className="overflow-hidden bg-(--ssc-uk-main-white-color) py-[35px] sm:py-[50px] lg:py-[60px] min-[1200px]:py-20 font-jakarta"
+      ref={containerRef}
+      className={twMerge(
+        "overflow-hidden bg-(--ssc-uk-main-white-color) font-jakarta",
+        COMMON_SECTION_PADDING_TOP_BOTTOM,
+      )}
       aria-labelledby="testimonial-title">
       <div className="ss-construction-uk-container">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-3xl">
             <h2 id="testimonial-title" className="ssc-section-title">
-              Trusted in homes
-              <br />
-              <em className="ssc-section-title-highlight">across the community.</em>
+              <RichText content={data.header.title} commonChunkClassNames="reveal-text-animation" />
             </h2>
             <p className="ssc-section-description mt-6 max-w-2xl">
-              Homeowners choose SS Consultants for clear advice, careful workmanship and reliable support from the first
-              visit to the final check.
+              {data.header.description && (
+                <RichText content={data.header.description} commonChunkClassNames="reveal-text-animation" />
+              )}
             </p>
           </div>
           <div className="flex shrink-0 gap-3">
             <button
-              className="testimonials-prev inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-slate-300 text-slate-950 transition-colors hover:border-(--ssc-uk-main-highlight-color) hover:bg-(--ssc-uk-main-highlight-color) disabled:bg-transparent disabled:border-slate-300 hover:text-(--ssc-uk-main-white-color) disabled:text-slate-950 disabled:opacity-50"
+              className="testimonials-prev inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-slate-300 text-slate-950 transition-colors hover:border-(--ssc-uk-main-highlight-color) hover:bg-(--ssc-uk-main-highlight-color) hover:text-(--ssc-uk-main-white-color) disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-100 disabled:text-slate-300 disabled:opacity-70 reveal-text-animation"
               type="button"
+              disabled={isBeginning}
               aria-label="Previous testimonial">
               <ArrowLeft aria-hidden="true" className="h-5 w-5" />
             </button>
             <button
-              className="testimonials-prev inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-slate-300 text-slate-950 transition-colors hover:border-(--ssc-uk-main-highlight-color) hover:bg-(--ssc-uk-main-highlight-color) disabled:bg-transparent disabled:border-slate-300 hover:text-(--ssc-uk-main-white-color) disabled:text-slate-950 disabled:opacity-50"
+              className="testimonials-next inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-slate-300 text-slate-950 transition-colors hover:border-(--ssc-uk-main-highlight-color) hover:bg-(--ssc-uk-main-highlight-color) hover:text-(--ssc-uk-main-white-color) disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-100 disabled:text-slate-300 disabled:opacity-70 reveal-text-animation"
               type="button"
+              disabled={isEnd}
               aria-label="Next testimonial">
               <ArrowRight aria-hidden="true" className="h-5 w-5" />
             </button>
@@ -45,11 +89,13 @@ export function TestimonialSection() {
           className="mt-10 !overflow-visible"
           modules={[Navigation]}
           navigation={{ prevEl: ".testimonials-prev", nextEl: ".testimonials-next" }}
+          onSwiper={updateNavigationState}
+          onSlideChange={updateNavigationState}
           spaceBetween={20}
           slidesPerView={1.08}
           breakpoints={{ 640: { slidesPerView: 2, spaceBetween: 24 }, 1024: { slidesPerView: 3, spaceBetween: 24 } }}>
-          {TESTIMONIALS.map(({ quote, name, location, service }) => (
-            <SwiperSlide className="!h-auto" key={name}>
+          {data.items.map(({ quote, name, location, service }) => (
+            <SwiperSlide className="!h-auto reveal-animation" key={name}>
               <article className="flex h-full  flex-col rounded-lg border border-slate-200 bg-(--ssc-uk-main-white-color) p-6 shadow-sm sm:p-7 md:rounded-xl lg:rounded-2xl">
                 <div className="w-full h-full flex flex-col items-start justify-between gap-5">
                   <div className="w-full">

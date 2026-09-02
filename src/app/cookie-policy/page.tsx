@@ -1,7 +1,14 @@
-import { FooterBarSection } from "@/components/sections/common/footerbar.section";
+import { LEGAL_PAGE_DATA } from "@/app/content/pageContent/pageData/legal.data";
 import { LegalPageSection } from "@/components/sections/common/legal-page.section";
-import { NavbarSection } from "@/components/sections/common/navbar.section";
+import { ConsultationSection } from "@/components/sections/homepage/consultation.section";
 
 export default function CookiePolicyPage() {
-  return <><NavbarSection /><main><LegalPageSection title="Cookie Policy" description="This page explains how cookies may be used to help the website work effectively and improve your browsing experience." /></main><FooterBarSection /></>;
+  const pageData = LEGAL_PAGE_DATA["/cookie-policy"];
+
+  return (
+    <>
+      <LegalPageSection title={pageData.title} description={pageData.description} />
+      <ConsultationSection />
+    </>
+  );
 }

@@ -1,7 +1,15 @@
-import { FooterBarSection } from "@/components/sections/common/footerbar.section";
+import { LEGAL_PAGE_DATA } from "@/app/content/pageContent/pageData/legal.data";
 import { LegalPageSection } from "@/components/sections/common/legal-page.section";
-import { NavbarSection } from "@/components/sections/common/navbar.section";
+import { ConsultationSection } from "@/components/sections/homepage/consultation.section";
 
 export default function TermsAndConditionsPage() {
-  return <><NavbarSection /><main><LegalPageSection title="Terms & Conditions" description="Our services are provided with clear communication, professional workmanship and agreed terms for each project." /></main><FooterBarSection /></>;
+  const pageData = LEGAL_PAGE_DATA["/terms-and-conditions"];
+
+  return (
+    <>
+      <LegalPageSection title={pageData.title} description={pageData.description} />
+
+      <ConsultationSection />
+    </>
+  );
 }

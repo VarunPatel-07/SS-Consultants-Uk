@@ -1,3 +1,11 @@
+"use client";
+import { gsap } from "@/lib/gsap";
+import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
+import { COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
+import { twMerge } from "tailwind-merge";
+import { useGSAP } from "@gsap/react";
+import { useRef } from "react";
+
 const SPECIFICATIONS = [
   {
     title: "Correct boiler sizing",
@@ -22,18 +30,29 @@ const SPECIFICATIONS = [
 ];
 
 export function HeatingDesignedSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  useGSAP(() => {
+    if (!sectionRef.current) return;
+    const animation = COMMON_SCROLL_TRIGGER_ANIMATION({ trigger: sectionRef.current });
+    gsap.fromTo(gsap.utils.toArray(".heating-designed-reveal", sectionRef.current), animation.FROM, animation.TO);
+  }, { scope: sectionRef });
+
   return (
     <section
-      className="bg-(--ssc-uk-main-white-color) px-4 py-[35px] font-jakarta sm:px-6 sm:py-[50px] lg:py-[60px] min-[1200px]:py-20"
+      ref={sectionRef}
+      className={twMerge(
+        "bg-(--ssc-uk-main-white-color) px-4 font-jakarta sm:px-6",
+        COMMON_SECTION_PADDING_TOP_BOTTOM,
+      )}
       aria-labelledby="heating-designed-title">
       <div className="ss-construction-uk-container flex flex-col gap-10">
         <div className="mx-auto flex max-w-3xl flex-col gap-5 text-center">
-          <h2 id="heating-designed-title" className="ssc-section-title">
+          <h2 id="heating-designed-title" className="heating-designed-reveal ssc-section-title">
             Heating designed
             <br />
             <em className="ssc-section-title-highlight">around your home.</em>
           </h2>
-          <p className="ssc-section-description">
+          <p className="heating-designed-reveal ssc-section-description">
             A central-heating system performs best when every component works together. We assess your property, heating
             requirements and existing system before recommending the right solution.
           </p>
@@ -42,7 +61,7 @@ export function HeatingDesignedSection() {
         <div className="grid gap-7 md:grid-cols-2">
           {SPECIFICATIONS.map(({ title, description }) => (
             <article
-              className="flex h-full flex-col rounded-lg border border-slate-200 bg-(--ssc-uk-main-white-color) p-6 shadow-sm sm:p-7 gap-3 md:rounded-xl lg:rounded-2xl"
+              className="heating-designed-reveal flex h-full flex-col rounded-lg border border-slate-200 bg-(--ssc-uk-main-white-color) p-6 shadow-sm sm:p-7 gap-3 md:rounded-xl lg:rounded-2xl"
               key={title}>
               <h3 className="text-lg md:text-xl font-semibold leading-tight text-slate-950">{title}</h3>
               <p className="text-sm md:text-base leading-6 text-slate-600">{description}</p>

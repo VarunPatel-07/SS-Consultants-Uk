@@ -1,20 +1,52 @@
+"use client";
+import { ExperienceSectionData } from "@/app/utils/interface/data.interface";
+import CommonSectionHeader from "@/components/sections/common/common-section-header";
+import { gsap } from "@/lib/gsap";
+import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
+import { COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
 import { BrandSet } from "@/utils/helper/homepage.helper";
+import { useGSAP } from "@gsap/react";
+import { useRef } from "react";
+import { twMerge } from "tailwind-merge";
 
-export function ExperienceSection() {
+export function ExperienceSection({ data }: { data: ExperienceSectionData }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      if (!containerRef.current) return;
+      const titleSec = gsap.utils.toArray(".reveal-text-animation");
+      const getTitleAnimations = COMMON_SCROLL_TRIGGER_ANIMATION({
+        trigger: containerRef.current,
+        start: "top 85%",
+        end: "bottom top",
+      });
+      gsap.fromTo(titleSec, getTitleAnimations.FROM, getTitleAnimations.TO);
+
+      // //  Now We will Write the GSAP Code for the Card Reveal Animations.
+      const cards = gsap.utils.toArray(".reveal-animation");
+      const getCardAnimations = COMMON_SCROLL_TRIGGER_ANIMATION({
+        trigger: containerRef.current,
+        start: "top 100%",
+        end: "bottom top",
+      });
+      gsap.fromTo(cards, getCardAnimations.FROM, getCardAnimations.TO);
+    },
+    { scope: containerRef },
+  );
   return (
-    <section className="overflow-hidden bg-(--ssc-uk-main-white-color) py-[35px] sm:py-[50px] lg:py-[60px] min-[1200px]:py-20 font-jakarta" aria-labelledby="boiler-brands-title">
+    <section
+      ref={containerRef}
+      className={twMerge("overflow-hidden bg-(--ssc-uk-main-white-color)", COMMON_SECTION_PADDING_TOP_BOTTOM)}
+      aria-labelledby="boiler-brands-title">
       <div className="ss-construction-uk-container">
-        <h2
-          id="boiler-brands-title"
-          className="text-center text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
-          Experience with leading boiler systems
-        </h2>
-        <p className="mx-auto mt-4 max-w-2xl text-center text-base leading-7 text-slate-600">
-          Trusted to install and service heating systems from the UK&apos;s leading boiler manufacturers.
-        </p>
+        <CommonSectionHeader data={data?.header} />
       </div>
 
-      <div className="boiler-brands-marquee mt-10" role="region" aria-label="Boiler manufacturers">
+      <div
+        className="boiler-brands-marquee"
+        role="region"
+        aria-label="Boiler manufacturers">
         <div className="boiler-brands-marquee-track">
           <BrandSet />
           <BrandSet hidden />

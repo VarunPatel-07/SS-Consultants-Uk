@@ -24,7 +24,7 @@ function CTAButton({ children, btnStyle, className, href, target, rel, theme = "
             theme === "DARK" ? "bg-(--ssc-uk-main-white-color)" : "bg-(--ssc-uk-main-black-color)",
           )}></span>
       )}
-      <span className={childrenWrapper}>{children}</span>
+      <span className={twMerge(childrenWrapper, "font-jakarta")}>{children}</span>
       {btnStyle === "CTA_PRIMARY" ? (
         <span className="w-8 h-8 min-w-8 min-h-8 rounded-full bg-(--ssc-uk-main-white-color) text-(--ssc-uk-cta-button-background) flex items-center justify-center absolute top-1/2 right-1.5 -translate-y-1/2 group-hover/btn:translate-x-[130%] transition-all duration-300">
           <ArrowUpRight className="font-semibold" />
