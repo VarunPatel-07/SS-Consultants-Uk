@@ -1,7 +1,7 @@
 "use client";
 import { AboutSectionDataInterface } from "@/app/utils/interface/data.interface";
-import aboutImage from "@/assets/images/webp/ss-consultant-about-us-section.webp";
 import aboutUsImage1500X400 from "@/assets/images/webp/ss-consultant-about-us-section-img-1500-400.webp";
+import aboutImage from "@/assets/images/webp/ss-consultant-about-us-section.webp";
 import { RichText } from "@/components/common/RichText";
 import CTAButton from "@/components/ui/ctaButton";
 import { gsap } from "@/lib/gsap";
@@ -24,7 +24,7 @@ export function AboutSection({ data }: { data: AboutSectionDataInterface }) {
       const titleSec = gsap.utils.toArray(".reveal-text-animation");
       const getTitleAnimations = COMMON_SCROLL_TRIGGER_ANIMATION({
         trigger: containerRef.current,
-        start: "top 70%",
+        start: "top 90%",
         end: "bottom top",
       });
       gsap.fromTo(titleSec, getTitleAnimations.FROM, getTitleAnimations.TO);
@@ -63,7 +63,7 @@ export function AboutSection({ data }: { data: AboutSectionDataInterface }) {
             alt="Heating engineer working on a boiler system"
           />
           <div className="absolute bottom-0 right-0 min-w-47.5 rounded-tl-[34px] bg-(--ssc-uk-main-white-color) px-8 py-7 text-left sm:min-w-57.5 sm:px-11 sm:py-9">
-            <strong className="block text-5xl font-bold leading-none tracking-tight text-slate-950 sm:text-6xl font-jakarta">
+            <strong className="block text-4xl font-bold leading-none tracking-tight text-slate-950 sm:text-6xl font-jakarta">
               22+
             </strong>
             <span className="mt-3 block text-base leading-6 text-slate-700 font-jakarta">

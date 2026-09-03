@@ -5,7 +5,7 @@ import aboutImage from "@/assets/images/webp/ss-consultant-about-us-section.webp
 import { RichText } from "@/components/common/RichText";
 import CTAButton from "@/components/ui/ctaButton";
 import { gsap } from "@/lib/gsap";
-import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
+import { COMMON_REVEL_ANIMATION } from "@/utils/constants/animation.constant";
 import { COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
 import { useGSAP } from "@gsap/react";
 import { CalendarDays, MapPin, ShieldCheck, Umbrella } from "lucide-react";
@@ -16,33 +16,17 @@ import { twMerge } from "tailwind-merge";
 const ABOUT_FEATURE_ICONS = { shield: ShieldCheck, umbrella: Umbrella, calendar: CalendarDays, map: MapPin };
 
 export function AboutHeroSection({ data }: { data: AboutSectionDataInterface }) {
-  const containerRef = useRef<HTMLDivElement>(null);
-
+  const animationContainer = useRef(null);
   useGSAP(
     () => {
-      if (!containerRef.current) return;
-      const titleSec = gsap.utils.toArray(".reveal-text-animation");
-      const getTitleAnimations = COMMON_SCROLL_TRIGGER_ANIMATION({
-        trigger: containerRef.current,
-        start: "top 70%",
-        end: "bottom top",
-      });
-      gsap.fromTo(titleSec, getTitleAnimations.FROM, getTitleAnimations.TO);
-
-      // //  Now We will Write the GSAP Code for the Card Reveal Animations.
-      // const cards = gsap.utils.toArray(".reveal-animation");
-      // const getCardAnimations = COMMON_SCROLL_TRIGGER_ANIMATION({
-      //   trigger: containerRef.current,
-      //   start: "top 100%",
-      //   end: "bottom top",
-      // });
-      // gsap.fromTo(cards, getCardAnimations.FROM, getCardAnimations.TO);
+      const elements = gsap.utils.toArray(".reveal-text-animation");
+      gsap.fromTo(elements, COMMON_REVEL_ANIMATION.FROM, COMMON_REVEL_ANIMATION.TO);
     },
-    { scope: containerRef },
+    { scope: animationContainer },
   );
   return (
     <section
-      ref={containerRef}
+      ref={animationContainer}
       id="about"
       className={twMerge("bg-(--ssc-uk-main-white-color)", COMMON_SECTION_PADDING_TOP_BOTTOM)}
       aria-labelledby="about-title">
@@ -63,7 +47,7 @@ export function AboutHeroSection({ data }: { data: AboutSectionDataInterface }) 
             alt="Heating engineer working on a boiler system"
           />
           <div className="absolute bottom-0 right-0 min-w-47.5 rounded-tl-[34px] bg-(--ssc-uk-main-white-color) px-8 py-7 text-left sm:min-w-57.5 sm:px-11 sm:py-9">
-            <strong className="block text-5xl font-bold leading-none tracking-tight text-slate-950 sm:text-6xl font-jakarta">
+            <strong className="block text-4xl font-bold leading-none tracking-tight text-slate-950 sm:text-6xl font-jakarta">
               22+
             </strong>
             <span className="mt-3 block text-base leading-6 text-slate-700 font-jakarta">

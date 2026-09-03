@@ -35,11 +35,11 @@ export function BrandSet({ hidden = false }: { hidden?: boolean }) {
 
   return (
     <div className="flex shrink-0 items-center gap-5 pr-5 lg:gap-10 lg:pr-10 xl:gap-20 xl:pr-20" aria-hidden={hidden}>
-      {BOILER_BRANDS.map(({ name, logo }) => (
+      {BOILER_BRANDS.map(({ name, logo, alt }) => (
         <div
           className="flex shrink-0 items-center justify-center reveal-animation"
           key={`${hidden ? "duplicate-" : ""}${name}`}>
-          <Image className="h-15" src={logo} alt={hidden ? "" : `${name} logo`} height={spacing} />
+          <Image className="h-15" src={logo} alt={alt} height={spacing} />
         </div>
       ))}
     </div>

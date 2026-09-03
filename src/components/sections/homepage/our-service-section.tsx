@@ -5,7 +5,6 @@ import { gsap } from "@/lib/gsap";
 import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
 import { COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
 import { useGSAP } from "@gsap/react";
-import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { useRef } from "react";
 import { twMerge } from "tailwind-merge";
@@ -19,7 +18,7 @@ export function OurServiceSection({ data }: { data: OurServicesSectionInterface 
       const titleSec = gsap.utils.toArray(".reveal-text-animation");
       const getTitleAnimations = COMMON_SCROLL_TRIGGER_ANIMATION({
         trigger: containerRef.current,
-        start: "top 70%",
+        start: "top 90%",
         end: "bottom top",
       });
       gsap.fromTo(titleSec, getTitleAnimations.FROM, getTitleAnimations.TO);
@@ -28,7 +27,7 @@ export function OurServiceSection({ data }: { data: OurServicesSectionInterface 
       const cards = gsap.utils.toArray(".reveal-animation");
       const getCardAnimations = COMMON_SCROLL_TRIGGER_ANIMATION({
         trigger: containerRef.current,
-        start: "top 40%",
+        start: "top 60%",
         end: "bottom top",
         markers: false,
         stagger: 0.2,
@@ -47,7 +46,7 @@ export function OurServiceSection({ data }: { data: OurServicesSectionInterface 
         <CommonSectionHeader data={data?.header} />
 
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {data?.items.map(({ slug, title, description, image }) => (
+          {data?.items.map(({ slug, title, description, image, imageAlt }) => (
             <div key={title} className="reveal-animation">
               <a
                 className="block overflow-hidden rounded-lg border border-slate-200 bg-(--ssc-uk-main-white-color) transition-shadow hover:shadow-md md:rounded-xl lg:rounded-2xl transition-all hover:bg-(--ssc-uk-service-card-hover-background-color)"
@@ -56,21 +55,16 @@ export function OurServiceSection({ data }: { data: OurServicesSectionInterface 
                   <Image
                     className="h-49.5 w-full object-cover transition-transform duration-500 hover:scale-105"
                     src={image}
-                    alt={title}
+                    alt={imageAlt}
                   />
                 </div>
-                <div className="flex flex-row items-center justify-center gap-3 px-2.5 pb-5 pt-3 sm:gap-4 sm:px-4">
+                <div className="flex flex-row items-center justify-center px-2.5 pb-5 pt-3 sm:px-4">
                   <div>
                     <h3 className="text-lg xl:text-xl font-bold leading-tight tracking-tight text-slate-950 font-jakarta">
                       {title}
                     </h3>
                     <p className="mt-2 text-sm md:text-base leading-7 text-slate-600 font-jakarta">{description}</p>
                   </div>
-                  <span
-                    className="mt-9 text-(--ssc-uk-main-highlight-color) transition-transform hover:translate-x-1"
-                    aria-hidden="true">
-                    <ArrowRight className="h-5 w-5" />
-                  </span>
                 </div>
               </a>
             </div>

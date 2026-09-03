@@ -1,4 +1,3 @@
-import { HOME_PAGE_DATA } from "@/app/content/pageContent/pageData/home.data";
 import CallToActionSection from "@/components/sections/common/call-to-action-section";
 import { AboutSection } from "@/components/sections/homepage/about.section";
 import { BoilerOptionsSection } from "@/components/sections/homepage/boiler-options.section";
@@ -9,9 +8,9 @@ import { HeroSection } from "@/components/sections/homepage/hero.section";
 import { OurServiceSection } from "@/components/sections/homepage/our-service-section";
 import { TestimonialSection } from "@/components/sections/homepage/testimonial.section";
 import { WhyChooseUsSection } from "@/components/sections/homepage/why-choose-us.section";
+import { HOME_PAGE_DATA } from "@/content/pageContent/pageData/home.data";
 
 export default function Home() {
-
   return (
     <main className="min-h-screen bg-(--ssc-uk-main-white-color)">
       {HOME_PAGE_DATA.hero && <HeroSection data={HOME_PAGE_DATA.hero} />}

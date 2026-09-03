@@ -1,6 +1,6 @@
 import { ConsultationSection } from "@/components/sections/homepage/consultation.section";
 import { COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
-import { SERVICE_CONTENT } from "@/utils/constants/service.constants";
+import { SERVICE_PAGE_DATA } from "@/content/pageContent/pageData/service";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 
@@ -67,7 +67,7 @@ export default function SitemapPage() {
                 </h2>
                 <div className="mt-7">
                   <SitemapLinks
-                    links={SERVICE_CONTENT.map(({ label, slug }) => ({ label, href: `/services/${slug}` }))}
+                    links={SERVICE_PAGE_DATA.flatMap(({ serviceHeroSection }) => serviceHeroSection ? [{ label: serviceHeroSection.label, slug: serviceHeroSection.slug }] : []).map(({ label, slug }) => ({ label, href: `/services/${slug}` }))}
                   />
                 </div>
               </div>

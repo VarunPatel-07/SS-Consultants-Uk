@@ -1,4 +1,4 @@
-import { SERVICE_CONTENT } from "@/utils/constants/service.constants";
+import { SERVICE_PAGE_DATA } from "@/content/pageContent/pageData/service";
 import type { MetadataRoute } from "next";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
@@ -11,7 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/contact`, changeFrequency: "monthly", priority: 0.8 },
   ];
 
-  const servicePages: MetadataRoute.Sitemap = SERVICE_CONTENT.map(({ slug }) => ({
+  const servicePages: MetadataRoute.Sitemap = SERVICE_PAGE_DATA.flatMap(({ serviceHeroSection }) => serviceHeroSection ? [{ slug: serviceHeroSection.slug }] : []).map(({ slug }) => ({
     url: `${SITE_URL}/services/${slug}`,
     changeFrequency: "monthly",
     priority: 0.7,

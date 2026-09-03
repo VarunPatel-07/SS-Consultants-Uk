@@ -1,5 +1,5 @@
-import { FOOTER_SERVICE_LINKS, NAVIGATION_LINKS } from "@/app/content/pageContent/common.data";
 import logo from "@/assets/images/logo/ss-consultants-logo-black-trasperent.png";
+import { FOOTER_SERVICE_LINKS, NAVIGATION_LINKS } from "@/content/pageContent/common.data";
 import { ChevronDown, Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,7 +7,7 @@ import Link from "next/link";
 export function FooterBarSection() {
   return (
     <footer
-      className="w-full overflow-hidden px-4 pt-14 font-jakarta text-slate-300 sm:px-8 sm:pt-20"
+      className="w-full overflow-hidden  pt-14 font-jakarta text-slate-300 sm:px-8 sm:pt-20"
       style={{ backgroundColor: "var(--ssc-uk-consultation-section-background-color)" }}>
       <div className="ss-construction-uk-container">
         <div className="grid gap-12 lg:grid-cols-[1.35fr_0.9fr_1.15fr_1.2fr] lg:gap-14">
@@ -58,28 +58,27 @@ export function FooterBarSection() {
                 Hatfield, Hertfordshire &amp; London
               </div>
             </div>
-            
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-6 border-t border-slate-700 py-8 text-sm sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} SS Consultants UK Ltd. All rights reserved.</p>
-          <div className="flex flex-wrap gap-x-6 gap-y-3">
+        <div className="mt-14 flex flex-col items-center gap-6 border-t border-slate-700 py-8 text-sm lg:flex-row lg:items-center lg:justify-between">
+          <p className="text-center">© {new Date().getFullYear()} SS Consultants UK Ltd. All rights reserved.</p>
+          <div className="grid w-full max-w-sm grid-cols-2 items-center gap-x-6 gap-y-3 text-center sm:flex sm:w-auto sm:max-w-none sm:flex-wrap sm:justify-center sm:gap-x-6 sm:gap-y-3">
             <a className="transition-colors hover:text-(--ssc-uk-main-highlight-color)" href="/privacy-policy">
               Privacy Policy
             </a>
             <a
-              className="border-l border-slate-600 pl-6 transition-colors hover:text-(--ssc-uk-main-highlight-color)"
+              className="sm:border-l sm:border-slate-600 sm:pl-6 transition-colors hover:text-(--ssc-uk-main-highlight-color)"
               href="/terms-and-conditions">
               Terms &amp; Conditions
             </a>
             <a
-              className="border-l border-slate-600 pl-6 transition-colors hover:text-(--ssc-uk-main-highlight-color)"
+              className="sm:border-l sm:border-slate-600 sm:pl-6 transition-colors hover:text-(--ssc-uk-main-highlight-color)"
               href="/cookie-policy">
               Cookie Policy
             </a>
             <a
-              className="border-l border-slate-600 pl-6 transition-colors hover:text-(--ssc-uk-main-highlight-color)"
+              className="sm:border-l sm:border-slate-600 sm:pl-6 transition-colors hover:text-(--ssc-uk-main-highlight-color)"
               href="/sitemap">
               Sitemap
             </a>

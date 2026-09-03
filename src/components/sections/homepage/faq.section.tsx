@@ -20,28 +20,40 @@ function FaqIcon({ isOpen }: { isOpen: boolean }) {
 
 export function FaqSection({ data }: { data: FAQSection }) {
   const [openIndex, setOpenIndex] = useState(0);
-  const sectionRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-      if (!sectionRef.current) return;
-      const elements = gsap.utils.toArray(".faq-reveal", sectionRef.current);
-      const animation = COMMON_SCROLL_TRIGGER_ANIMATION({
-        trigger: sectionRef.current,
-        start: "top 80%",
+      if (!containerRef.current) return;
+      const titleSec = gsap.utils.toArray(".reveal-text-animation");
+      const getTitleAnimations = COMMON_SCROLL_TRIGGER_ANIMATION({
+        trigger: containerRef.current,
+        start: "top 90%",
+        end: "bottom top",
       });
-      gsap.fromTo(elements, animation.FROM, animation.TO);
+      gsap.fromTo(titleSec, getTitleAnimations.FROM, getTitleAnimations.TO);
+
+      // //  Now We will Write the GSAP Code for the Card Reveal Animations.
+      const cards = gsap.utils.toArray(".reveal-animation");
+      const getCardAnimations = COMMON_SCROLL_TRIGGER_ANIMATION({
+        trigger: containerRef.current,
+        start: "top 90%",
+        end: "bottom top",
+        markers: false,
+        stagger: 0.2,
+      });
+      gsap.fromTo(cards, getCardAnimations.FROM, getCardAnimations.TO);
     },
-    { scope: sectionRef },
+    { scope: containerRef },
   );
 
   return (
     <section
-      ref={sectionRef}
+      ref={containerRef}
       className={twMerge("bg-(--ssc-uk-main-white-color) font-jakarta", COMMON_SECTION_PADDING_TOP_BOTTOM)}
       aria-labelledby="faq-title">
-      <div className="ss-construction-uk-container grid gap-12 md:grid-cols-[0.82fr_1.18fr] md:gap-20">
-        <div className="faq-reveal self-start md:sticky md:top-28">
+      <div className="ss-construction-uk-container grid gap-10 lg:gap-18 lg:grid-cols-[0.82fr_1.18fr]">
+        <div className="self-start md:self-center lg:sticky lg:top-28">
           <h2 id="faq-title" className="ssc-section-title max-w-[500px]">
             <RichText content={data.header.title} />
           </h2>
@@ -57,7 +69,7 @@ export function FaqSection({ data }: { data: FAQSection }) {
 
             return (
               <div
-                className={`faq-reveal overflow-hidden rounded-lg border bg-(--ssc-uk-gray-background-color) transition-colors duration-300 md:rounded-xl lg:rounded-2xl ${
+                className={`reveal-animation overflow-hidden rounded-lg border bg-(--ssc-uk-gray-background-color) transition-colors duration-300 md:rounded-xl lg:rounded-2xl ${
                   isOpen ? "border-(--ssc-uk-main-highlight-color)" : "border-slate-200"
                 }`}
                 key={question}>

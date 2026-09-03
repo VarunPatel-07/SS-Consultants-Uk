@@ -1,8 +1,8 @@
 "use client";
 
-import { BOILER_SERVICES } from "@/app/content/pageContent/common.data";
 import logo from "@/assets/images/logo/ss-consultants-logo-black-trasperent.png";
 import CTAButton from "@/components/ui/ctaButton";
+import { BOILER_SERVICES } from "@/content/pageContent/common.data";
 import { gsap } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import { ChevronDown, Menu, Phone, X } from "lucide-react";
@@ -83,102 +83,102 @@ export function NavbarSection() {
   return (
     <>
       <nav
-      ref={navBarContainer}
+        ref={navBarContainer}
         className="fixed left-1/2 top-0 z-50 w-full max-w-full -translate-x-1/2 border-b border-slate-200 bg-transparent font-jakarta backdrop-blur">
-      <div className="ss-construction-uk-container min-[1200px]:px-0! relative z-10">
-        <div className="navbar-inner-wrapper flex items-center justify-between gap-4 px-0 py-7 lg:gap-8">
-          <Link className="shrink-0" href="/" aria-label="SS Consultants home">
-            <Image
-              className="h-auto w-52 lg:w-65"
-              width={260}
-              height={50}
-              src={logo}
-              alt="SS Consultants UK Limited"
-              priority
-            />
-          </Link>
-
-          <div className="hidden items-center gap-9 lg:flex" aria-label="Main navigation">
-            <Link
-              className={`text-base font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isHomeActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`}
-              href="/"
-              aria-current={isHomeActive ? "page" : undefined}>
-              Home
+        <div className="ss-construction-uk-container min-[1200px]:px-0! relative z-10">
+          <div className="navbar-inner-wrapper flex items-center justify-between gap-4 px-0 py-7 lg:gap-8">
+            <Link className="shrink-0" href="/" aria-label="SS Consultants home">
+              <Image
+                className="h-auto w-52 lg:w-65"
+                width={260}
+                height={50}
+                src={logo}
+                alt="SS Consultants UK Limited"
+                priority
+              />
             </Link>
-            <div
-              className="relative"
-              onMouseEnter={() => setIsServicesOpen(true)}
-              onMouseLeave={() => setIsServicesOpen(false)}>
-              <button
-                className={`inline-flex items-center gap-2 text-base font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isServicesActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`}
-                type="button"
-                aria-expanded={isServicesOpen}
-                aria-haspopup="true"
-                onClick={() => setIsServicesOpen((open) => !open)}>
-                Services
-                <ChevronDown
-                  aria-hidden="true"
-                  className={`h-4 w-4 transition-transform ${isServicesOpen ? "rotate-180" : ""}`}
-                  strokeWidth={1.8}
-                />
-              </button>
+
+            <div className="hidden items-center gap-9 lg:flex" aria-label="Main navigation">
+              <Link
+                className={`text-base font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isHomeActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`}
+                href="/"
+                aria-current={isHomeActive ? "page" : undefined}>
+                Home
+              </Link>
               <div
-                className={`absolute left-1/2 top-full z-50 w-72 -translate-x-1/2 pt-4 transition-all duration-200 ${isServicesOpen ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"}`}>
-                <div className="rounded-lg border border-slate-200 bg-(--ssc-uk-main-white-color) p-3 shadow-xl md:rounded-xl lg:rounded-2xl">
-                  {BOILER_SERVICES.map(({ label, slug }) => (
-                    <Link
-                      className={`block rounded-lg px-4 py-3 text-base transition-colors hover:bg-slate-100 hover:text-(--ssc-uk-main-highlight-color) ${pathname === `/services/${slug}` ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-700"}`}
-                      href={`/services/${slug}`}
-                      key={slug}>
-                      {label}
-                    </Link>
-                  ))}
+                className="relative"
+                onMouseEnter={() => setIsServicesOpen(true)}
+                onMouseLeave={() => setIsServicesOpen(false)}>
+                <button
+                  className={`inline-flex items-center gap-2 text-base font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isServicesActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`}
+                  type="button"
+                  aria-expanded={isServicesOpen}
+                  aria-haspopup="true"
+                  onClick={() => setIsServicesOpen((open) => !open)}>
+                  Services
+                  <ChevronDown
+                    aria-hidden="true"
+                    className={`h-4 w-4 transition-transform ${isServicesOpen ? "rotate-180" : ""}`}
+                    strokeWidth={1.8}
+                  />
+                </button>
+                <div
+                  className={`absolute left-1/2 top-full z-50 w-72 -translate-x-1/2 pt-4 transition-all duration-200 ${isServicesOpen ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"}`}>
+                  <div className="rounded-lg border border-slate-200 bg-(--ssc-uk-main-white-color) p-3 shadow-xl md:rounded-xl lg:rounded-2xl">
+                    {BOILER_SERVICES.map(({ label, slug }) => (
+                      <Link
+                        className={`block rounded-lg px-4 py-3 text-base transition-colors hover:bg-slate-100 hover:text-(--ssc-uk-main-highlight-color) ${pathname === `/services/${slug}` ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-700"}`}
+                        href={`/services/${slug}`}
+                        key={slug}>
+                        {label}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               </div>
+              <Link
+                className={`text-base font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isAboutActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`}
+                href="/about"
+                aria-current={isAboutActive ? "page" : undefined}>
+                About
+              </Link>
+              <Link
+                className={`text-base font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isGalleryActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`}
+                href="/gallery"
+                aria-current={isGalleryActive ? "page" : undefined}>
+                Gallery
+              </Link>
+              <Link
+                className={`text-base font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isContactActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`}
+                href="/contact"
+                aria-current={isContactActive ? "page" : undefined}>
+                Contact
+              </Link>
             </div>
-            <Link
-              className={`text-base font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isAboutActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`}
-              href="/about"
-              aria-current={isAboutActive ? "page" : undefined}>
-              About
-            </Link>
-            <Link
-              className={`text-base font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isGalleryActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`}
-              href="/gallery"
-              aria-current={isGalleryActive ? "page" : undefined}>
-              Gallery
-            </Link>
-            <Link
-              className={`text-base font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isContactActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`}
-              href="/contact"
-              aria-current={isContactActive ? "page" : undefined}>
-              Contact
-            </Link>
-          </div>
 
-          <div className="hidden items-center gap-6 xl:flex">
-            <CTAButton btnStyle="CTA_SECONDARY" theme="LIGHT" href="tel:07590514937">
-              <span className="flex items-center gap-3">
-                <Phone aria-hidden="true" className="h-4 w-4" strokeWidth={2.4} />
-                <span>07590 514937</span>
-              </span>
-            </CTAButton>
-          </div>
+            <div className="hidden items-center gap-6 lg:flex">
+              <CTAButton btnStyle="CTA_SECONDARY" theme="LIGHT" href="tel:07590514937">
+                <span className="flex items-center gap-3">
+                  <Phone aria-hidden="true" className="h-4 w-4" strokeWidth={2.4} />
+                  <span>07590 514937</span>
+                </span>
+              </CTAButton>
+            </div>
 
-          <button
-            className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-slate-300 text-slate-950 transition-colors hover:border-(--ssc-uk-main-highlight-color) hover:text-(--ssc-uk-main-highlight-color) lg:hidden"
-            type="button"
-            aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-            aria-expanded={isMenuOpen}
-            aria-controls="mobile-navigation"
-            onClick={() => setIsMenuOpen((open) => !open)}>
-            {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
+            <button
+              className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-slate-300 text-slate-950 transition-colors hover:border-(--ssc-uk-main-highlight-color) hover:text-(--ssc-uk-main-highlight-color) lg:hidden"
+              type="button"
+              aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-navigation"
+              onClick={() => setIsMenuOpen((open) => !open)}>
+              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
         </div>
-      </div>
 
-      <span className="bg-animation-element pointer-events-none absolute inset-0 z-0 h-full w-full bg-(--ssc-uk-main-white-color) opacity-20 blur-2xl" />
-    </nav>
+        <span className="bg-animation-element pointer-events-none absolute inset-0 z-0 h-full w-full bg-(--ssc-uk-main-white-color) opacity-20 blur-2xl" />
+      </nav>
 
       <div
         className={`fixed inset-0 z-55 h-full w-full bg-black/50 transition-opacity duration-300 lg:hidden ${isMenuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`}
@@ -187,7 +187,7 @@ export function NavbarSection() {
       />
       <div
         id="mobile-navigation"
-        className={`fixed inset-y-0 left-0 z-[60] flex h-dvh w-[min(88vw,380px)] flex-col overflow-y-auto bg-(--ssc-uk-main-white-color) px-6 pb-8 shadow-xl transition-transform duration-300 lg:hidden ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
+        className={`fixed inset-y-0 left-0 z-[60] flex h-dvh w-[min(88vw,380px)] flex-col overflow-y-auto bg-(--ssc-uk-main-white-color) px-6 pb-8 font-jakarta shadow-xl transition-transform duration-300 lg:hidden ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
         aria-label="Mobile navigation">
         <div className="flex min-h-[72px] shrink-0 items-center justify-between border-b border-slate-200">
           <Link href="/" aria-label="SS Consultants home" onClick={closeMenu}>

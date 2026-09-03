@@ -1,70 +1,55 @@
 "use client";
+import { heatingSolutionDesignForYouDataInterface } from "@/app/utils/interface/data.interface";
+import CommonSectionHeader from "@/components/sections/common/common-section-header";
 import { gsap } from "@/lib/gsap";
 import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
 import { COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
-import { twMerge } from "tailwind-merge";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
+import { twMerge } from "tailwind-merge";
 
-const SPECIFICATIONS = [
-  {
-    title: "Correct boiler sizing",
-    description:
-      "A boiler selected around your property size, insulation levels, number of rooms and expected hot-water demand. This helps avoid an underpowered system or unnecessary energy use.",
-  },
-  {
-    title: "Suitable pipework",
-    description:
-      "Correct pipe sizes and thoughtful routing help maintain reliable water flow throughout the system. We consider the layout of your home so each part works smoothly together.",
-  },
-  {
-    title: "Balanced radiator output",
-    description:
-      "Radiators are sized and positioned to distribute warmth effectively across each room. The result is more even comfort, fewer cold spots and better control over everyday heating.",
-  },
-  {
-    title: "Efficient system flow",
-    description:
-      "The system is configured to help your boiler operate efficiently and maintain consistent temperatures. Controls, valves and circulation are considered as one coordinated system.",
-  },
-];
+export function HeatingDesignedSection({ data }: { data: heatingSolutionDesignForYouDataInterface }) {
+  const containerRef = useRef<HTMLDivElement>(null);
 
-export function HeatingDesignedSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  useGSAP(() => {
-    if (!sectionRef.current) return;
-    const animation = COMMON_SCROLL_TRIGGER_ANIMATION({ trigger: sectionRef.current });
-    gsap.fromTo(gsap.utils.toArray(".heating-designed-reveal", sectionRef.current), animation.FROM, animation.TO);
-  }, { scope: sectionRef });
+  useGSAP(
+    () => {
+      if (!containerRef.current) return;
+      const titleSec = gsap.utils.toArray(".reveal-text-animation");
+      const getTitleAnimations = COMMON_SCROLL_TRIGGER_ANIMATION({
+        trigger: containerRef.current,
+        start: "top 90%",
+        end: "bottom top",
+      });
+      gsap.fromTo(titleSec, getTitleAnimations.FROM, getTitleAnimations.TO);
+
+      // //  Now We will Write the GSAP Code for the Card Reveal Animations.
+      const cards = gsap.utils.toArray(".reveal-animation");
+      const getCardAnimations = COMMON_SCROLL_TRIGGER_ANIMATION({
+        trigger: containerRef.current,
+        start: "top 50%",
+        end: "bottom top",
+        stagger: 0.2,
+      });
+      gsap.fromTo(cards, getCardAnimations.FROM, getCardAnimations.TO);
+    },
+    { scope: containerRef },
+  );
 
   return (
     <section
-      ref={sectionRef}
-      className={twMerge(
-        "bg-(--ssc-uk-main-white-color) px-4 font-jakarta sm:px-6",
-        COMMON_SECTION_PADDING_TOP_BOTTOM,
-      )}
+      ref={containerRef}
+      className={twMerge("bg-(--ssc-uk-main-white-color) font-jakarta ", COMMON_SECTION_PADDING_TOP_BOTTOM)}
       aria-labelledby="heating-designed-title">
-      <div className="ss-construction-uk-container flex flex-col gap-10">
-        <div className="mx-auto flex max-w-3xl flex-col gap-5 text-center">
-          <h2 id="heating-designed-title" className="heating-designed-reveal ssc-section-title">
-            Heating designed
-            <br />
-            <em className="ssc-section-title-highlight">around your home.</em>
-          </h2>
-          <p className="heating-designed-reveal ssc-section-description">
-            A central-heating system performs best when every component works together. We assess your property, heating
-            requirements and existing system before recommending the right solution.
-          </p>
-        </div>
+      <div className="ss-construction-uk-container flex flex-col">
+        <CommonSectionHeader data={data?.header} />
 
         <div className="grid gap-7 md:grid-cols-2">
-          {SPECIFICATIONS.map(({ title, description }) => (
+          {data?.specifications?.map(({ title, description }) => (
             <article
-              className="heating-designed-reveal flex h-full flex-col rounded-lg border border-slate-200 bg-(--ssc-uk-main-white-color) p-6 shadow-sm sm:p-7 gap-3 md:rounded-xl lg:rounded-2xl"
+              className="reveal-animation flex h-full flex-col rounded-lg border border-slate-200 bg-(--ssc-uk-main-white-color) p-6 shadow-sm sm:p-7 gap-3 md:rounded-xl lg:rounded-2xl"
               key={title}>
-              <h3 className="text-lg md:text-xl font-semibold leading-tight text-slate-950">{title}</h3>
-              <p className="text-sm md:text-base leading-6 text-slate-600">{description}</p>
+              <h3 className="text-lg md:text-xl xl:text-2xl font-semibold leading-tight text-slate-950">{title}</h3>
+              <p className="text-sm md:text-base leading-6 text-slate-600 text-pretty">{description}</p>
             </article>
           ))}
         </div>
