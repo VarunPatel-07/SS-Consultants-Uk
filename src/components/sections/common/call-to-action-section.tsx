@@ -15,7 +15,7 @@ function CallToActionSection({ data }: { data: callToActionSectionInterface }) {
   useGSAP(
     () => {
       if (animationContainer.current) {
-        const elements = gsap.utils.toArray(".reveal-text-animation");
+        const elements = gsap.utils.toArray(".reveal-text-animation, .reveal-animation");
         const { FROM, TO } = COMMON_SCROLL_TRIGGER_ANIMATION({ trigger: animationContainer.current });
         gsap.fromTo(elements, FROM, TO);
       }
@@ -50,12 +50,15 @@ function CallToActionSection({ data }: { data: callToActionSectionInterface }) {
               )}
             </div>
 
-            <div className="w-full flex items-center justify-center gap-6 mx-auto pt-10">
+            <div className="w-full flex flex-col items-stretch justify-center gap-4 mx-auto pt-10 sm:flex-row sm:items-center sm:gap-6">
               {data?.ctas?.map((button) => (
                 <CTAButton
                   key={button.label}
                   {...button}
-                  classNames={twMerge(button?.classNames, "reveal-animation max-w-fit")}
+                  classNames={twMerge(
+                    button?.classNames,
+                    "reveal-animation w-full min-w-0 max-w-full sm:w-auto sm:max-w-fit",
+                  )}
                 />
               ))}
             </div>

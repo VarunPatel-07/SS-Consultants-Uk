@@ -30,7 +30,7 @@ export function TestimonialSection({ data }: { data: TestimonialSection }) {
       const titleSec = gsap.utils.toArray(".reveal-text-animation");
       const getTitleAnimations = COMMON_SCROLL_TRIGGER_ANIMATION({
         trigger: containerRef.current,
-        start: "top 70%",
+        start: "top 90%",
         end: "bottom top",
       });
       gsap.fromTo(titleSec, getTitleAnimations.FROM, getTitleAnimations.TO);
@@ -39,7 +39,7 @@ export function TestimonialSection({ data }: { data: TestimonialSection }) {
       const cards = gsap.utils.toArray(".reveal-animation");
       const getCardAnimations = COMMON_SCROLL_TRIGGER_ANIMATION({
         trigger: containerRef.current,
-        start: "top 45%",
+        start: "top 60%",
         end: "bottom top",
         // markers: true,
       });
@@ -93,7 +93,11 @@ export function TestimonialSection({ data }: { data: TestimonialSection }) {
           onSlideChange={updateNavigationState}
           spaceBetween={20}
           slidesPerView={1.08}
-          breakpoints={{ 640: { slidesPerView: 2, spaceBetween: 24 }, 1024: { slidesPerView: 3, spaceBetween: 24 } }}>
+          breakpoints={{
+            640: { slidesPerView: 2, spaceBetween: 24 },
+            1024: { slidesPerView: 2.05, spaceBetween: 24 },
+            1200: { slidesPerView: 2.5, spaceBetween: 24 },
+          }}>
           {data.items.map(({ quote, name, location, service }) => (
             <SwiperSlide className="!h-auto reveal-animation" key={name}>
               <article className="flex h-full  flex-col rounded-lg border border-slate-200 bg-(--ssc-uk-main-white-color) p-6 shadow-sm sm:p-7 md:rounded-xl lg:rounded-2xl">

@@ -18,7 +18,7 @@ export function ExperienceSection({ data }: { data: ExperienceSectionData }) {
       const titleSec = gsap.utils.toArray(".reveal-text-animation");
       const getTitleAnimations = COMMON_SCROLL_TRIGGER_ANIMATION({
         trigger: containerRef.current,
-        start: "top 85%",
+        start: "top 90%",
         end: "bottom top",
       });
       gsap.fromTo(titleSec, getTitleAnimations.FROM, getTitleAnimations.TO);
@@ -43,10 +43,7 @@ export function ExperienceSection({ data }: { data: ExperienceSectionData }) {
         <CommonSectionHeader data={data?.header} />
       </div>
 
-      <div
-        className="boiler-brands-marquee"
-        role="region"
-        aria-label="Boiler manufacturers">
+      <div className="boiler-brands-marquee" role="region" aria-label="Boiler manufacturers">
         <div className="boiler-brands-marquee-track">
           <BrandSet />
           <BrandSet hidden />

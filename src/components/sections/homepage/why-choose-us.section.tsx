@@ -24,7 +24,7 @@ export function WhyChooseUsSection({ data }: { data: WhyChooseUsSectionData }) {
       const elements = gsap.utils.toArray(".why-choose-us-reveal", containerRef.current);
       const animation = COMMON_SCROLL_TRIGGER_ANIMATION({
         trigger: containerRef.current,
-        start: "top 85%",
+        start: "top 90%",
       });
       gsap.fromTo(elements, animation.FROM, animation.TO);
     },
@@ -46,7 +46,7 @@ export function WhyChooseUsSection({ data }: { data: WhyChooseUsSectionData }) {
             />
           </div>
           <div className="why-choose-us-reveal absolute -bottom-5 left-4 w-48 rounded-2xl border border-slate-200 bg-(--ssc-uk-main-white-color) px-7 py-6 shadow-sm sm:-left-5 sm:w-52 sm:px-8 sm:py-7">
-            <strong className="block text-5xl font-bold leading-none tracking-tight text-(--ssc-uk-main-highlight-color) sm:text-6xl">
+            <strong className="block text-4xl font-bold leading-none tracking-tight text-(--ssc-uk-main-highlight-color) sm:text-6xl">
               22+
             </strong>
             <span className="mt-3 block text-base leading-6 text-slate-700">

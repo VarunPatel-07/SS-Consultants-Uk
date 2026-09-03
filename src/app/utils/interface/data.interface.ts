@@ -1,8 +1,9 @@
 import { AboutFeature } from "@/utils/interface/about.interface";
 import { BoilerOption } from "@/utils/interface/boiler.interface";
-import { HeatingSupportCard } from "@/utils/interface/common.interface";
+import { HeatingSupportCard, InstallationInclude } from "@/utils/interface/common.interface";
 import { BoilerBrand } from "@/utils/interface/homepage.interface";
 import { WhyChooseUsPoint } from "@/utils/interface/why-choose-us.interface";
+import { Metadata } from "next";
 import type { StaticImageData } from "next/image";
 import type {
   CTA,
@@ -69,6 +70,13 @@ export interface AboutSectionDataInterface {
   cards?: AboutFeature[];
 }
 
+export interface AboutPrinciplesSectionData {
+  header: SectionHeader;
+  image: { src: StaticImageData; alt: string };
+  badge: { title: string; description: string };
+  principles: { number: string; title: string; description: string }[];
+}
+
 export interface ExperienceSectionData {
   header: SectionHeader;
   brands: BoilerBrand[];
@@ -89,11 +97,35 @@ export interface WhyChooseUsSectionData {
   items: WhyChooseUsPoint[];
 }
 
+export interface ServiceHeroSectionInterface {
+  header: SectionHeader;
+  slug: string;
+  label: string;
+  cta: string;
+  heroImage: StaticImageData;
+  eyebrow: string;
+  options: Array<{ name: string; price: string }>;
+  note: string;
+  reassurance: string[];
+}
+
+export interface WhatOurServiceInclude {
+  header: SectionHeader;
+  installationSteps: InstallationInclude[];
+}
+
+export interface heatingSolutionDesignForYouDataInterface {
+  header: SectionHeader;
+  specifications: { title: string; description: string }[];
+}
+
 export interface CommonPageDataInterface {
-  metadata?: { title: string; description: string };
+  metadata?: Metadata;
   hero?: HeroSection;
+  service?: ServiceHeroSectionInterface;
   experience?: ExperienceSectionData;
   about?: AboutSectionDataInterface;
+  aboutPrinciples?: AboutPrinciplesSectionData;
   services?: OurServicesSectionInterface;
   boilersOptions?: BoilerOptionsSectionData;
   callToActionSection?: callToActionSectionInterface;
@@ -101,9 +133,12 @@ export interface CommonPageDataInterface {
   process?: ProcessSection;
   testimonials?: TestimonialSection;
   faq?: FAQSection;
-  gallery?: { items: ImageItem[] };
+  gallery?: { header: SectionHeader; items: ImageItem[] };
   consultation?: { email: string; phone: string };
   sections?: string[];
+  serviceHeroSection?: ServiceHeroSectionInterface;
+  whatOurServiceInclude?: WhatOurServiceInclude;
+  heatingSolutionDesignForYou?: heatingSolutionDesignForYouDataInterface;
   [key: string]: unknown;
 }
 

@@ -8,4 +8,13 @@ export interface HeatingSupportCard {
   title: string;
   description: string;
   image: StaticImageData;
+  imageAlt: string;
+}
+
+export interface InstallationInclude {
+  number: string;
+  title: string;
+  description: string;
+  tags: string;
+  image: StaticImageData;
 }

@@ -31,7 +31,7 @@ export function BoilerOptionsSection({ data }: { data: BoilerOptionsSectionData 
       const titleSec = gsap.utils.toArray(".reveal-text-animation");
       const getTitleAnimations = COMMON_SCROLL_TRIGGER_ANIMATION({
         trigger: containerRef.current,
-        start: "top 85%",
+        start: "top 90%",
         end: "bottom top",
       });
       gsap.fromTo(titleSec, getTitleAnimations.FROM, getTitleAnimations.TO);
@@ -40,7 +40,7 @@ export function BoilerOptionsSection({ data }: { data: BoilerOptionsSectionData 
       const cards = gsap.utils.toArray(".reveal-animation");
       const getCardAnimations = COMMON_SCROLL_TRIGGER_ANIMATION({
         trigger: containerRef.current,
-        start: "top 25%",
+        start: "top 60%",
         end: "bottom top",
         // markers: true,
       });
@@ -92,7 +92,7 @@ export function BoilerOptionsSection({ data }: { data: BoilerOptionsSectionData 
             <SwiperSlide className="!h-auto reveal-animation" key={name}>
               <article className="relative flex h-full flex-col rounded-lg border border-slate-200 bg-(--ssc-uk-main-white-color) p-3 shadow-sm md:rounded-xl lg:rounded-2xl">
                 {popularChoice && (
-                  <span className="absolute left-1/2 top-0 z-10 -translate-x-1/2 -translate-y-1/2 rounded-tl-2xl rounded-tr-2xl bg-(--ssc-uk-main-highlight-color) px-8 py-2 text-sm font-semibold text-(--ssc-uk-main-white-color)">
+                  <span className="absolute left-1/2 top-0 z-10 w-max max-w-[calc(100%-1.5rem)] -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-tl-2xl rounded-tr-2xl bg-(--ssc-uk-main-highlight-color) px-5 py-2 text-xs font-semibold text-(--ssc-uk-main-white-color) sm:px-8 sm:text-sm">
                     Popular choice
                   </span>
                 )}

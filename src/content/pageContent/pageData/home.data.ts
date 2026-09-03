@@ -1,3 +1,5 @@
+import type { CommonPageDataInterface } from "@/app/utils/interface/page.interface";
+import installingBoilerImage from "@/assets/images/webp/installing-boiler.webp";
 import {
   ABOUT_FEATURES,
   BOILER_BRANDS,
@@ -6,16 +8,14 @@ import {
   HEATING_SUPPORT_CARDS,
   TESTIMONIALS,
   WHY_CHOOSE_US_POINTS,
-} from "@/app/content/pageContent/common.data";
-import { HOME_PAGE_FAQ_DATA } from "@/app/content/pageContent/faq.data";
-import type { CommonPageDataInterface } from "@/app/utils/interface/page.interface";
-import installingBoilerImage from "@/assets/images/webp/installing-boiler.webp";
+} from "@/content/pageContent/common.data";
+import { HOME_PAGE_FAQ_DATA } from "@/content/pageContent/faq.data";
 
 export const HOME_PAGE_DATA: CommonPageDataInterface = {
   metadata: {
-    title: "SS Consultants | Heating Engineers",
+    title: "Gas Safe Boiler Engineers Hatfield | SS Consultants UK",
     description:
-      "Professional boiler installation, servicing and heating support across Hatfield, Hertfordshire and London.",
+      "Gas Safe registered engineers with 22+ years' experience. Boiler installation, servicing and repairs across Hatfield, Hertfordshire and London. Get a free quote.",
   },
   hero: {
     eyebrow: "TRUSTED HEATING ENGINEERS ACROSS THE UK",
@@ -33,7 +33,7 @@ export const HOME_PAGE_DATA: CommonPageDataInterface = {
       description: [
         [
           {
-            text: "22 years of Gas Safe registered engineering experience, delivering professional boiler installation, servicing and heating repairs across Hatfield, Hertfordshire and London, backed by honest advice and dependable workmanship.",
+            text: "SS Consultants UK Ltd have a 22 years of Gas Safe registered engineering experience, delivering professional boiler installation, servicing and heating repairs across Hatfield, Hertfordshire and London, backed by honest advice and dependable workmanship.",
           },
         ],
       ],
@@ -47,7 +47,12 @@ export const HOME_PAGE_DATA: CommonPageDataInterface = {
       slug: name.toLowerCase().replaceAll(" ", "-"),
       icon,
     })),
-    image: { src: installingBoilerImage, alt: "Heating engineer installing a boiler", width: 1100, height: 400 },
+    image: {
+      src: installingBoilerImage,
+      alt: "Gas Safe registered engineer installing a boiler in a UK home",
+      width: 1100,
+      height: 400,
+    },
   },
   experience: {
     header: {
@@ -86,12 +91,12 @@ export const HOME_PAGE_DATA: CommonPageDataInterface = {
       description: [
         [
           {
-            text: "With 22 years of Gas Safe registered experience, SS Consultants delivers dependable boiler, plumbing and central-heating services to homes across Hatfield, Hertfordshire and London, backed by honest advice, careful workmanship and dependable support.",
+            text: "SS Consultants UK Ltd is a Gas Safe registered heating company based in Hatfield, serving homes across Hertfordshire and London. With 22 years of experience, our engineers install, service and repair boilers of every make and size.",
           },
         ],
         [
           {
-            text: "SS Consultants brings 22 years of Gas Safe registered experience to homes across Hatfield, Hertfordshire and London, handling everything from routine servicing and repairs to full installations with honest advice and careful, dependable workmanship.",
+            text: "Every job is carried out with honest, upfront advice and careful, dependable workmanship, backed by £5m public liability insurance and a 24-month guarantee on every installation, service and repair we complete.",
           },
         ],
       ],
@@ -138,7 +143,7 @@ export const HOME_PAGE_DATA: CommonPageDataInterface = {
       description: [
         [
           {
-            text: "We supply and install Vaillant's leading range of boilers, matched carefully to your home's size, hot-water demand and budget, so you get a reliable, efficient system built to last, backed by honest advice and dependable, ongoing support.",
+            text: "From compact combis to premium connected systems, our Gas Safe registered engineers help you choose and install the right Vaillant boiler for your home, hot-water needs and budget, with honest advice and careful, dependable workmanship throughout.",
           },
         ],
       ],
@@ -176,7 +181,7 @@ export const HOME_PAGE_DATA: CommonPageDataInterface = {
       description: [
         [
           {
-            text: "Homeowners choose SS Consultants for clear advice, careful workmanship and reliable support from the first visit to the final check.",
+            text: "Homeowners across Hatfield, Hertfordshire and London choose SS Consultants for clear advice, careful workmanship and heating they can rely on.",
           },
         ],
       ],
@@ -187,7 +192,11 @@ export const HOME_PAGE_DATA: CommonPageDataInterface = {
     header: {
       title: [[{ text: "Why homeowners choose" }], [{ text: "SS Consultants.", variant: "brand" }]],
       description: [
-        [{ text: "Qualified engineers, honest advice and careful workmanship—from the first visit to the final check." }],
+        [
+          {
+            text: "Qualified engineers, honest advice and careful workmanship—from the first visit to the final check.",
+          },
+        ],
       ],
     },
     items: WHY_CHOOSE_US_POINTS,
@@ -195,8 +204,15 @@ export const HOME_PAGE_DATA: CommonPageDataInterface = {
   faq: {
     header: {
       title: [[{ text: "Questions about" }], [{ text: "your heating?", variant: "brand" }]],
-      description: [[{ text: "Clear answers to the questions homeowners ask us most about boiler installation, servicing and repairs." }]],
+      description: [
+        [
+          {
+            text: "Clear answers to the questions homeowners ask us most about boiler installation, servicing and repairs.",
+          },
+        ],
+      ],
     },
     faqsItems: HOME_PAGE_FAQ_DATA,
   },
+  consultation: { email: "info@sscukltd.com", phone: "07590 514937" },
 };

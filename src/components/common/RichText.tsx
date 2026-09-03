@@ -21,12 +21,12 @@ export function RichText({
   parentWrapper?: string;
 }) {
   return (
-    <span className={twMerge("flex flex-col items-start justify-start gap-3 md:items-start md:justify-start md:gap-4" , parentWrapper)}>
-      {content.map((line, lineIndex) => (
+    <span className={twMerge("flex min-w-0 max-w-full flex-col items-start justify-start gap-3 md:items-start md:justify-start md:gap-4", parentWrapper)}>
+      {content?.map((line, lineIndex) => (
         <span
-          className={`flex flex-wrap items-center justify-center gap-2 md:items-center md:justify-center md:gap-3 ${className}`}
+          className={`flex min-w-0 max-w-full flex-wrap items-center justify-center gap-2 md:items-center md:justify-center md:gap-3 ${className}`}
           key={`line-${lineIndex}`}>
-          {line.map((chunk, chunkIndex) => (
+          {line?.map((chunk, chunkIndex) => (
             <span
               className={twMerge(
                 `${chunk.variant ? variantClasses[chunk.variant] : ""} ${chunk.classNames ?? ""}`,

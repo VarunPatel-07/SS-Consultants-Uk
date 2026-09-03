@@ -1,11 +1,11 @@
 import { HeatingSupportCard } from "@/utils/interface/common.interface";
 
+export { SERVICE_PAGE_DATA as SERVICE_CONTENT } from "@/content/pageContent/pageData/service";
 export { ABOUT_FEATURES } from "@/utils/constants/about.constants";
 export { BOILER_OPTIONS } from "@/utils/constants/boiler.constants";
 export { CONSULTATION_FEATURES, CONSULTATION_POINTS } from "@/utils/constants/consultation.constants";
 export { GALLERY_IMAGES } from "@/utils/constants/gallery.constants";
 export { BOILER_BRANDS, HEATING_SERVICES } from "@/utils/constants/homepage.constants";
-export { SERVICE_CONTENT } from "@/utils/constants/service.constants";
 export { TESTIMONIALS } from "@/utils/constants/testimonial.constants";
 export { WHY_CHOOSE_US_POINTS } from "@/utils/constants/why-choose-us.constants";
 
@@ -50,6 +50,7 @@ export const HEATING_SUPPORT_CARDS: HeatingSupportCard[] = [
     title: "Boiler Servicing",
     description: "Annual boiler servicing that keeps your system safe, efficient and reliably running all year round.",
     image: boilerServicingImage,
+    imageAlt: "Engineer carrying out an annual boiler service",
   },
   {
     slug: "boiler-breakdown-repairs",
@@ -57,6 +58,7 @@ export const HEATING_SUPPORT_CARDS: HeatingSupportCard[] = [
     title: "Boiler Breakdown Repairs",
     description: "Fast, same-day fault-finding and dependable boiler repairs when your heating breaks down.",
     image: boilerBreakdownRepairsImage,
+    imageAlt: "Engineer repairing a boiler during a breakdown callout",
   },
   {
     slug: "boiler-installation",
@@ -64,6 +66,7 @@ export const HEATING_SUPPORT_CARDS: HeatingSupportCard[] = [
     title: "Boiler Installation",
     description: "Professional boiler installation, matching an efficient system to your home and budget.",
     image: boilerInstallationImage,
+    imageAlt: "Engineer installing a new boiler system",
   },
   {
     slug: "underfloor-heating",
@@ -71,6 +74,7 @@ export const HEATING_SUPPORT_CARDS: HeatingSupportCard[] = [
     title: "Underfloor Heating",
     description: "Underfloor heating design and installation for even, comfortable warmth throughout your home.",
     image: underfloorHeatingImage,
+    imageAlt: "Engineer installing underfloor heating pipework",
   },
   {
     slug: "powerflushing",
@@ -78,6 +82,7 @@ export const HEATING_SUPPORT_CARDS: HeatingSupportCard[] = [
     title: "Powerflushing",
     description: "Professional powerflushing to clear sludge and blockages and restore heating performance.",
     image: powerFlushingImage,
+    imageAlt: "Engineer powerflushing a central heating system",
   },
   {
     slug: "central-heating",
@@ -85,5 +90,6 @@ export const HEATING_SUPPORT_CARDS: HeatingSupportCard[] = [
     title: "Central Heating",
     description: "Central heating installation, upgrades and repairs for dependable comfort all year.",
     image: centralHeatingImage,
+    imageAlt: "Engineer working on a central heating radiator installation",
   },
 ];

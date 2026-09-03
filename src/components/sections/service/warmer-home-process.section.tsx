@@ -1,48 +1,54 @@
 "use client";
-import { OUR_PROCESS_DATA } from "@/app/content/pageContent/ourProcess.data";
+import { ProcessSection } from "@/app/utils/interface/data.interface";
+import CommonSectionHeader from "@/components/sections/common/common-section-header";
 import { gsap } from "@/lib/gsap";
 import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
 import { COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
-import { twMerge } from "tailwind-merge";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
+import { twMerge } from "tailwind-merge";
 
-export function WarmerHomeProcessSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  useGSAP(() => {
-    if (!sectionRef.current) return;
-    const animation = COMMON_SCROLL_TRIGGER_ANIMATION({ trigger: sectionRef.current });
-    gsap.fromTo(gsap.utils.toArray(".process-reveal", sectionRef.current), animation.FROM, animation.TO);
-  }, { scope: sectionRef });
+export function WarmerHomeProcessSection({ data }: { data: ProcessSection }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      if (!containerRef.current) return;
+      const titleSec = gsap.utils.toArray(".reveal-text-animation");
+      const getTitleAnimations = COMMON_SCROLL_TRIGGER_ANIMATION({
+        trigger: containerRef.current,
+        start: "top 90%",
+        end: "bottom top",
+      });
+      gsap.fromTo(titleSec, getTitleAnimations.FROM, getTitleAnimations.TO);
+
+      // //  Now We will Write the GSAP Code for the Card Reveal Animations.
+      const cards = gsap.utils.toArray(".reveal-animation");
+      const getCardAnimations = COMMON_SCROLL_TRIGGER_ANIMATION({
+        trigger: containerRef.current,
+        start: "top 50%",
+        end: "bottom top",
+        stagger: 0.2,
+      });
+      gsap.fromTo(cards, getCardAnimations.FROM, getCardAnimations.TO);
+    },
+    { scope: containerRef },
+  );
 
   return (
     <section
-      ref={sectionRef}
-      className={twMerge(
-        "bg-(--ssc-uk-gray-background-color) px-4 font-jakarta sm:px-6",
-        COMMON_SECTION_PADDING_TOP_BOTTOM,
-      )}
+      ref={containerRef}
+      className={twMerge("bg-(--ssc-uk-gray-background-color) font-jakarta ", COMMON_SECTION_PADDING_TOP_BOTTOM)}
       aria-labelledby="warmer-home-process-title">
-      <div className="ss-construction-uk-container flex flex-col gap-10">
-        <div className="mx-auto flex max-w-3xl flex-col gap-5 text-center">
-          <h2 id="warmer-home-process-title" className="process-reveal ssc-section-title">
-            From assessment
-            <br />
-            <em className="ssc-section-title-highlight">to a warmer home.</em>
-          </h2>
-          <p className="process-reveal ssc-section-description">
-            A clear four-step process explains what happens after you contact SS Consultants and keeps every stage
-            straightforward.
-          </p>
-        </div>
-
-        <div className="grid gap-4 md:grid-cols-4">
-          {OUR_PROCESS_DATA.map(({ number, title, description, tags }, index) => {
-            const isFinalStep = index === OUR_PROCESS_DATA.length - 1;
+      <div className="ss-construction-uk-container flex flex-col">
+        <CommonSectionHeader data={data?.header} />
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {data?.steps.map(({ number, title, description }, index) => {
+            const isFinalStep = index === data?.steps.length - 1;
 
             return (
               <article
-                className={`process-reveal flex flex-col gap-6 rounded-lg border p-6 sm:p-7 md:rounded-xl lg:rounded-2xl ${
+                className={`reveal-animation flex flex-col gap-6 rounded-lg border p-6 sm:p-7 md:rounded-xl lg:rounded-2xl ${
                   isFinalStep
                     ? "border-(--ssc-uk-main-highlight-color) text-slate-950"
                     : "border-slate-200 bg-(--ssc-uk-main-white-color)"
@@ -53,17 +59,16 @@ export function WarmerHomeProcessSection() {
                     : undefined
                 }
                 key={number}>
-                <span className="font-lora text-4xl leading-none text-(--ssc-uk-main-highlight-color)">{number}</span>
+                <span className="font-lora text-2xl md:text-4xl leading-none text-(--ssc-uk-main-highlight-color)">
+                  {number}
+                </span>
                 <div className="flex flex-col gap-4">
-                  <h3 className="text-lg font-medium leading-tight text-slate-950">{title}</h3>
-                  <p className={`text-sm leading-6 ${isFinalStep ? "text-slate-900" : "text-slate-600"}`}>
+                  <h3 className="text-lg lg:text-xl font-bold leading-tight text-slate-950">{title}</h3>
+                  <p
+                    className={`text-sm lg:text-base leading-6.5 ${isFinalStep ? "text-slate-900" : "text-slate-600"}`}>
                     {description}
                   </p>
                 </div>
-                <p
-                  className={`mt-auto text-xs font-semibold tracking-[0.12em] ${isFinalStep ? "text-slate-800" : "text-slate-500"}`}>
-                  {tags}
-                </p>
               </article>
             );
           })}
