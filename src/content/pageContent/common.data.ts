@@ -51,6 +51,7 @@ export const HEATING_SUPPORT_CARDS: HeatingSupportCard[] = [
     description: "Annual boiler servicing that keeps your system safe, efficient and reliably running all year round.",
     image: boilerServicingImage,
     imageAlt: "Engineer carrying out an annual boiler service",
+    ctaLabel: "Book a Boiler Service",
   },
   {
     slug: "boiler-breakdown-repairs",
@@ -59,6 +60,8 @@ export const HEATING_SUPPORT_CARDS: HeatingSupportCard[] = [
     description: "Fast, same-day fault-finding and dependable boiler repairs when your heating breaks down.",
     image: boilerBreakdownRepairsImage,
     imageAlt: "Engineer repairing a boiler during a breakdown callout",
+    ctaLabel: "Request a Repair",
+    badge: "Same-day available",
   },
   {
     slug: "boiler-installation",
@@ -67,6 +70,7 @@ export const HEATING_SUPPORT_CARDS: HeatingSupportCard[] = [
     description: "Professional boiler installation, matching an efficient system to your home and budget.",
     image: boilerInstallationImage,
     imageAlt: "Engineer installing a new boiler system",
+    ctaLabel: "Get an Installation Quote",
   },
   {
     slug: "underfloor-heating",
@@ -75,6 +79,7 @@ export const HEATING_SUPPORT_CARDS: HeatingSupportCard[] = [
     description: "Underfloor heating design and installation for even, comfortable warmth throughout your home.",
     image: underfloorHeatingImage,
     imageAlt: "Engineer installing underfloor heating pipework",
+    ctaLabel: "Explore Underfloor Heating",
   },
   {
     slug: "powerflushing",
@@ -83,6 +88,7 @@ export const HEATING_SUPPORT_CARDS: HeatingSupportCard[] = [
     description: "Professional powerflushing to clear sludge and blockages and restore heating performance.",
     image: powerFlushingImage,
     imageAlt: "Engineer powerflushing a central heating system",
+    ctaLabel: "Learn About Powerflushing",
   },
   {
     slug: "central-heating",
@@ -91,5 +97,6 @@ export const HEATING_SUPPORT_CARDS: HeatingSupportCard[] = [
     description: "Central heating installation, upgrades and repairs for dependable comfort all year.",
     image: centralHeatingImage,
     imageAlt: "Engineer working on a central heating radiator installation",
+    ctaLabel: "Explore Central Heating",
   },
 ];

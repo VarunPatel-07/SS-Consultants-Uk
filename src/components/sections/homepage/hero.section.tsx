@@ -1,19 +1,29 @@
 "use client";
+
 import type { HeroSection as HeroSectionData } from "@/app/utils/interface/data.interface";
 import { CTAButton } from "@/components/common/CTAButton";
 import { RichText } from "@/components/common/RichText";
+import { CalendarDays, Check, ShieldCheck, Sparkles } from "lucide-react";
 import Image from "next/image";
 
+import installingBoilerImage from "@/assets/images/webp/installing-boiler-1700X900.webp";
 import HeroBgAbstract from "@/components/sections/common/heroBgAbstract";
 import { gsap } from "@/lib/gsap";
 import { COMMON_REVEL_ANIMATION } from "@/utils/constants/animation.constant";
-import { COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
+import { COMMON_BORDER_RADIUS } from "@/utils/constants/common.constants";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import { twMerge } from "tailwind-merge";
+const trustItems = [
+  { title: "Gas Safe Registered", description: "Registration verified", icon: ShieldCheck },
+  { title: "22+ Years’ Experience", description: "Proven heating expertise", icon: Sparkles },
+  { title: "Same-Day Appointments", description: "Subject to availability", icon: CalendarDays },
+  { title: "Fully Insured", description: "Complete peace of mind", icon: Check },
+];
 
 export function HeroSection({ data }: { data: HeroSectionData }) {
-  const animationContainer = useRef(null);
+  const animationContainer = useRef<HTMLDivElement | null>(null);
+
   useGSAP(
     () => {
       const elements = gsap.utils.toArray(".reveal-animation");
@@ -22,60 +32,117 @@ export function HeroSection({ data }: { data: HeroSectionData }) {
     { scope: animationContainer },
   );
 
-return (
+  return (
     <section
       id="top"
-      className={twMerge("bg-(--ssc-uk-main-white-color) relative overflow-hidden", COMMON_SECTION_PADDING_TOP_BOTTOM)}>
-      <HeroBgAbstract />
-      <div ref={animationContainer} className="ss-construction-uk-container pt-23! xl:pt-18!">
-        <div className="w-full relative z-10 flex flex-col items-center text-center gap-9 md:gap-11 lg:gap-14">
-          <div className="inline-flex items-center rounded-full border border-slate-400 px-4 py-2 text-xs font-semibold tracking-[0.08em] text-slate-900 sm:text-sm reveal-animation font-jakarta">
-            {data.eyebrow}
-          </div>
-          <h1 className="max-w-250  font-bold leading-[1.04] tracking-[-0.045em] text-slate-950 text-[35px] sm:text-[38px] md:text-[42px] lg:text-[46px] xl:text-[68px] flex flex-col gap-4 items-center justify-center font-jakarta">
-            <RichText content={data.header.title} parentWrapper="items-center! justify-center!" />
-          </h1>
-          <p className="max-w-190 text-pretty leading-7 text-slate-700 text-base md:text-lg xl:text-xl font-jakarta">
-            {data.header.description && <RichText content={data.header.description} />}
-          </p>
-          <div className="flex flex-col justify-center gap-4 sm:flex-row">
-            {data.ctas?.map((cta) => (
-              <CTAButton key={cta.label} classNames="reveal-animation" {...cta} />
-            ))}
-          </div>
-          <div
-            id="services"
-            className="flex flex-wrap items-center justify-center gap-x-6 md:gap-x-8 gap-y-4 py-4 reveal-animation">
-            {data.services?.map(({ label, icon }) => (
-              <div className="flex items-center gap-4" key={label}>
-                {icon && (
-                  <Image
-                    src={icon}
-                    width={40}
-                    height={40}
-                    className="w-6.5 h-6.5 md:w-8.5 md:h-8.5 lg:h-10 lg:w-10 object-contain"
-                    alt=""
-                  />
-                )}
-                <a
-                  className="transition-colors hover:text-(--ssc-uk-main-highlight-color) font-lora text-base md:text-lg lg:text-xl text-slate-950"
-                  href="#contact">
-                  {label}
-                </a>
+      className="relative overflow-hidden border-b border-slate-200/80 bg-[#FBFAF8] pt-28 pb-10 sm:pt-32 sm:pb-12 lg:pt-36 lg:pb-14">
+      <HeroBgAbstract className="opacity-20" />
+      <div ref={animationContainer} className="ss-construction-uk-container relative z-10 overflow-hidden">
+        <div className="flex items-stretch flex-col min-[921px]:flex-row gap-12 lg:gap-8 xl:gap-14">
+          <div className="w-full min-[921px]:w-1/2 flex min-w-0 flex-col items-start text-left pl-0.5">
+            <div className="w-full lg:h-full flex flex-col items-start justify-start lg:justify-center gap-7 xl:gap-12">
+              <div className="reveal-animation inline-flex items-center rounded-full border border-[#FF5A1F] px-4 py-2 font-jakarta font-semibold tracking-[0.08em] text-[#080D19] ss-construction-uk-hero-eyebrow">
+                {data.eyebrow}
               </div>
-            ))}
+              <h1 className="font-jakarta font-bold leading-[1.02] tracking-[-0.055em] text-[#080D19] ss-construction-uk--hero-title lg:mt-6">
+                <RichText
+                  content={data.header.title}
+                  parentWrapper="items-start! justify-start! md:items-start! md:justify-start! "
+                  className="items-start! justify-start! md:items-start! md:justify-start! "
+                />
+              </h1>
+              <p className="font-jakarta text-base xl:text-lg leading-[1.6] text-[#475467]">
+                {data.header.description && <RichText content={data.header.description} />}
+              </p>
+              <div className="flex w-full flex-row flex-wrap gap-3 sm:w-auto sm:flex-row">
+                {data.ctas?.map((cta) => (
+                  <CTAButton key={cta.label} classNames="reveal-animation" {...cta} />
+                ))}
+              </div>
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-jakarta text-sm text-[#344054] lg:text-base xl:text-lg">
+                <span>No-obligation quotes</span>
+                <span className="text-[#FF5A1F]">•</span>
+                <span>Clear pricing</span>
+                <span className="text-[#FF5A1F]">•</span>
+                <span>Fast response</span>
+              </div>
+            </div>
           </div>
-          <div className="w-full relative aspect-1540/400 reveal-animation">
-            {data.image && (
-              <Image
-                src={data.image.src}
-                width={data.image.width}
-                height={data.image.height}
-                className="aspect-video object-cover object-center max-h-100 rounded-lg bg-slate-100 md:rounded-xl lg:rounded-2xl mx-auto"
-                alt={data.image.alt}
-              />
-            )}
+
+          <div className="relative w-full min-[921px]:w-1/2 mx-auto lg:mx-0 lg:justify-self-end">
+            <div className="pointer-events-none absolute -inset-8 -z-10 rounded-full bg-[radial-gradient(circle,rgba(255,90,31,0.13),transparent_68%)]" />
+            <div
+              className={twMerge(
+                "reveal-animation overflow-hidden  bg-slate-100 shadow-[0_24px_60px_rgba(8,13,25,0.12)]",
+                COMMON_BORDER_RADIUS,
+              )}>
+              {data.image && (
+                <>
+                  <Image
+                    src={data.image.src}
+                    width={540}
+                    height={570}
+                    className="aspect-540/570 w-full object-cover object-center hidden min-[921px]:block"
+                    alt={data.image.alt}
+                    priority
+                  />
+                  <Image
+                    src={installingBoilerImage}
+                    width={1500}
+                    height={600}
+                    className="aspect-1500/600 min-h-75 w-full object-cover object-center block min-[921px]:hidden"
+                    alt={data.image.alt}
+                    priority
+                  />
+                </>
+              )}
+            </div>
+            <div
+              className={twMerge(
+                "reveal-animation absolute right-4 top-2 bg-white px-5 py-4 text-center shadow-[0_14px_35px_rgba(8,13,25,0.14)] sm:right-6 sm:top-6",
+                COMMON_BORDER_RADIUS,
+              )}>
+              <strong className="block font-jakarta text-4xl font-bold leading-none text-[#FF5A1F]">22+</strong>
+              <span className="mt-1 block font-jakarta text-sm font-semibold text-[#080D19]">years</span>
+              <span className="mt-2 block border-t border-slate-200 pt-2 font-jakarta text-xs text-[#475467]">
+                Heating experience
+              </span>
+            </div>
+            <div
+              className={twMerge(
+                "reveal-animation absolute bottom-2 left-4 flex max-w-[calc(100%-2rem)] items-center gap-3  bg-white px-4 py-4 shadow-[0_14px_35px_rgba(8,13,25,0.14)] sm:bottom-6 sm:left-6 sm:px-5",
+                COMMON_BORDER_RADIUS,
+              )}>
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#FF5A1F] text-[#FF5A1F]">
+                <CalendarDays className="h-6 w-6" strokeWidth={1.8} />
+              </span>
+              <span className="font-jakarta">
+                <strong className="block text-sm font-semibold leading-tight text-[#080D19] sm:text-base">
+                  Same-day appointments available
+                </strong>
+                <span className="mt-1 block text-xs text-[#475467] sm:text-sm">Speak directly with an engineer</span>
+              </span>
+            </div>
           </div>
+        </div>
+        <div className={twMerge("mt-8 grid overflow-hidden border border-slate-200 bg-white/80 min-[500px]:grid-cols-2 lg:mt-10 lg:grid-cols-4", COMMON_BORDER_RADIUS)}>
+          {trustItems.map(({ title, description, icon: Icon }, index) => (
+            <div
+              className={twMerge(
+                "flex items-center gap-4 border-slate-200 px-5 py-5 sm:px-6 lg:py-7 reveal-animation",
+                index > 0 && "max-[499px]:border-t",
+                index > 0 && "min-[500px]:border-l",
+                index >= 2 && "min-[500px]:max-lg:border-t",
+                index >= 2 && "lg:border-t-0",
+              )}
+              key={title}>
+              <Icon className="h-9 w-9 shrink-0 text-[#FF5A1F]" strokeWidth={1.8} />
+              <div className="font-jakarta">
+                <strong className="block text-sm font-semibold text-[#080D19] sm:text-base">{title}</strong>
+                <span className="mt-1 block text-xs text-[#475467] sm:text-sm">{description}</span>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

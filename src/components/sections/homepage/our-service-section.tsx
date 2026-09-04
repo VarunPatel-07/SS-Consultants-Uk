@@ -1,9 +1,10 @@
 "use client";
 import { OurServicesSectionInterface } from "@/app/utils/interface/data.interface";
 import CommonSectionHeader from "@/components/sections/common/common-section-header";
+import CtaServiceButton from "@/components/ui/ctaServiceBtn";
 import { gsap } from "@/lib/gsap";
 import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
-import { COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
+import { COMMON_BORDER_RADIUS, COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
 import { useGSAP } from "@gsap/react";
 import Image from "next/image";
 import { useRef } from "react";
@@ -46,27 +47,43 @@ export function OurServiceSection({ data }: { data: OurServicesSectionInterface 
         <CommonSectionHeader data={data?.header} />
 
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {data?.items.map(({ slug, title, description, image, imageAlt }) => (
+          {data?.items.map(({ slug, title, description, image, imageAlt, ctaLabel, badge }) => (
             <div key={title} className="reveal-animation">
-              <a
-                className="block overflow-hidden rounded-lg border border-slate-200 bg-(--ssc-uk-main-white-color) transition-shadow hover:shadow-md md:rounded-xl lg:rounded-2xl transition-all hover:bg-(--ssc-uk-service-card-hover-background-color)"
-                href={`/services/${slug}`}>
-                <div className="m-2.5 overflow-hidden rounded-lg bg-slate-100 md:rounded-xl lg:rounded-2xl">
+              <article
+                className={twMerge(
+                  "overflow-hidden border border-slate-200 bg-(--ssc-uk-main-white-color) transition-shadow hover:shadow-md",
+                  COMMON_BORDER_RADIUS,
+                )}>
+                <div
+                  className={twMerge(
+                    "relative m-2.5 overflow-hidden bg-slate-100",
+                    "rounded-lg md:rounded-xl lg:rounded-2xl",
+                  )}>
                   <Image
                     className="h-49.5 w-full object-cover transition-transform duration-500 hover:scale-105"
                     src={image}
                     alt={imageAlt}
                   />
+                  {badge && (
+                    <span className="absolute left-4 top-4 rounded-full bg-(--ssc-uk-main-highlight-color) px-4 py-2 text-xs font-bold uppercase text-white font-jakarta">
+                      {badge}
+                    </span>
+                  )}
                 </div>
-                <div className="flex flex-row items-center justify-center px-2.5 pb-5 pt-3 sm:px-4">
-                  <div>
+                <div className="flex flex-col px-2.5 pb-5 pt-3 sm:px-4">
+                  <div className="flex flex-1 flex-col">
                     <h3 className="text-lg xl:text-xl font-bold leading-tight tracking-tight text-slate-950 font-jakarta">
                       {title}
                     </h3>
                     <p className="mt-2 text-sm md:text-base leading-7 text-slate-600 font-jakarta">{description}</p>
+                    <CtaServiceButton
+                      label={ctaLabel ?? `View ${title}`}
+                      href={`/services/${slug}`}
+                      className="mt-5 w-fit"
+                    />
                   </div>
                 </div>
-              </a>
+              </article>
             </div>
           ))}
         </div>

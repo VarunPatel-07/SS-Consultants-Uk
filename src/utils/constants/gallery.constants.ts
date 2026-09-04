@@ -1,8 +1,8 @@
+import installingBoilerImage from "@/assets/images/webp/installing-boiler-1700X900.webp";
 import boilerBreakdownImage from "@/assets/images/webp/service/boiler-breakdown-repairs.webp";
-import boilerInstallationImage from "@/assets/images/webp/service/boiler-installation.webp";
 import boilerServicingImage from "@/assets/images/webp/service/boiler-servicing.webp";
 import centralHeatingImage from "@/assets/images/webp/service/central-heating.webp";
-import installingBoilerImage from "@/assets/images/webp/installing-boiler.webp";
+import boilerInstallationImage from "@/assets/images/webp/service/boiler-installation.webp";
 import powerflushingImage from "@/assets/images/webp/service/powerflushing.webp";
 import underfloorHeatingImage from "@/assets/images/webp/service/underfloor-heating.webp";
 import type { GalleryImage } from "@/utils/interface/gallery.interface";

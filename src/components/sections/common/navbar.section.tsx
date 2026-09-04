@@ -45,7 +45,7 @@ export function NavbarSection() {
         borderRadius: "10px",
         duration: 0.6,
         borderBottom: "0px",
-        boxShadow: "0px 10px 30px rgba(0,0,0,0.2)",
+        boxShadow: "0 1px 0 rgba(15, 23, 42, 0.04)",
         ease: "power4.inOut",
         scrollTrigger: {
           trigger: document.body,
@@ -84,12 +84,12 @@ export function NavbarSection() {
     <>
       <nav
         ref={navBarContainer}
-        className="fixed left-1/2 top-0 z-50 w-full max-w-full -translate-x-1/2 border-b border-slate-200 bg-transparent font-jakarta backdrop-blur">
+        className="fixed left-1/2 top-0 z-50 w-full max-w-full -translate-x-1/2 border-b border-slate-200/80 bg-[#FBFAF8]/90 font-jakarta backdrop-blur">
         <div className="ss-construction-uk-container min-[1200px]:px-0! relative z-10">
-          <div className="navbar-inner-wrapper flex items-center justify-between gap-4 px-0 py-7 lg:gap-8">
+          <div className="navbar-inner-wrapper flex items-center justify-between gap-4 px-0 py-3 min-[1025px]:gap-8 min-[1025px]:py-7">
             <Link className="shrink-0" href="/" aria-label="SS Consultants home">
               <Image
-                className="h-auto w-52 lg:w-65"
+                className="h-auto w-32.5 min-[1024px]:w-42 min-[1200px]:w-50 min-[1400px]:w-65"
                 width={260}
                 height={50}
                 src={logo}
@@ -98,7 +98,7 @@ export function NavbarSection() {
               />
             </Link>
 
-            <div className="hidden items-center gap-9 lg:flex" aria-label="Main navigation">
+            <div className="hidden items-center gap-9 min-[1024px]:flex" aria-label="Main navigation">
               <Link
                 className={`text-base font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isHomeActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`}
                 href="/"
@@ -156,24 +156,45 @@ export function NavbarSection() {
               </Link>
             </div>
 
-            <div className="hidden items-center gap-6 lg:flex">
-              <CTAButton btnStyle="CTA_SECONDARY" theme="LIGHT" href="tel:07590514937">
+            <div className="hidden items-center gap-3 min-[1024px]:flex xl:gap-5">
+              <Link
+                className="h-11.25 w-11.25 items-center justify-center rounded-full border border-slate-950 text-slate-950 transition-colors hover:border-(--ssc-uk-main-highlight-color) hover:text-(--ssc-uk-main-highlight-color) hidden min-[1024px]:inline-flex  min-[1200px]:hidden"
+                href="tel:07590514937"
+                aria-label="Call SS Consultants">
+                <Phone aria-hidden="true" className="h-[17px] w-[17px]" strokeWidth={1.8} />
+              </Link>
+              <CTAButton
+                btnStyle="CTA_SECONDARY"
+                theme="LIGHT"
+                href="tel:07590514937"
+                className="hidden min-[1200px]:flex">
                 <span className="flex items-center gap-3">
                   <Phone aria-hidden="true" className="h-4 w-4" strokeWidth={2.4} />
                   <span>07590 514937</span>
                 </span>
               </CTAButton>
+              <CTAButton btnStyle="CTA_PRIMARY" href="#contact" className="">
+                Get a Quote
+              </CTAButton>
             </div>
 
-            <button
-              className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-slate-300 text-slate-950 transition-colors hover:border-(--ssc-uk-main-highlight-color) hover:text-(--ssc-uk-main-highlight-color) lg:hidden"
-              type="button"
-              aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-              aria-expanded={isMenuOpen}
-              aria-controls="mobile-navigation"
-              onClick={() => setIsMenuOpen((open) => !open)}>
-              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </button>
+            <div className="flex items-center gap-2 min-[1024px]:hidden">
+              <Link
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-950 text-slate-950 transition-colors hover:border-(--ssc-uk-main-highlight-color) hover:text-(--ssc-uk-main-highlight-color)"
+                href="tel:07590514937"
+                aria-label="Call SS Consultants">
+                <Phone aria-hidden="true" className="h-[17px] w-[17px]" strokeWidth={1.8} />
+              </Link>
+              <button
+                className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-(--ssc-uk-main-highlight-color) text-white transition-colors hover:bg-orange-600"
+                type="button"
+                aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+                aria-expanded={isMenuOpen}
+                aria-controls="mobile-navigation"
+                onClick={() => setIsMenuOpen((open) => !open)}>
+                {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              </button>
+            </div>
           </div>
         </div>
 
@@ -181,17 +202,17 @@ export function NavbarSection() {
       </nav>
 
       <div
-        className={`fixed inset-0 z-55 h-full w-full bg-black/50 transition-opacity duration-300 lg:hidden ${isMenuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`}
+        className={`fixed inset-0 z-55 hidden h-full w-full bg-black/50 transition-opacity duration-300 max-[1023px]:block ${isMenuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`}
         aria-hidden="true"
         onClick={closeMenu}
       />
       <div
         id="mobile-navigation"
-        className={`fixed inset-y-0 left-0 z-[60] flex h-dvh w-[min(88vw,380px)] flex-col overflow-y-auto bg-(--ssc-uk-main-white-color) px-6 pb-8 font-jakarta shadow-xl transition-transform duration-300 lg:hidden ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
+        className={`fixed inset-y-0 left-0 z-60 hidden h-dvh w-full flex-col overflow-y-auto bg-(--ssc-uk-main-white-color) px-5 pb-8 font-jakarta shadow-xl transition-transform duration-300 max-w-95 max-[1023px]:flex ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
         aria-label="Mobile navigation">
-        <div className="flex min-h-[72px] shrink-0 items-center justify-between border-b border-slate-200">
+        <div className="flex min-h-18 shrink-0 items-center justify-between border-b border-slate-200">
           <Link href="/" aria-label="SS Consultants home" onClick={closeMenu}>
-            <Image className="h-auto w-48" src={logo} alt="SS Consultants UK Limited" />
+            <Image className="h-auto w-[185px]" src={logo} alt="SS Consultants UK Limited" />
           </Link>
           <button
             className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-slate-300 text-slate-950 transition-colors hover:border-(--ssc-uk-main-highlight-color) hover:text-(--ssc-uk-main-highlight-color)"
@@ -201,9 +222,9 @@ export function NavbarSection() {
             <X className="h-5 w-5" />
           </button>
         </div>
-        <div className="flex flex-col gap-1 pt-7">
+        <div className="flex flex-col gap-0 pt-6">
           <Link
-            className={`border-b border-slate-200 py-4 text-lg font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isHomeActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`}
+            className={`border-b border-slate-200 py-5 text-lg font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isHomeActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`}
             href="/"
             aria-current={isHomeActive ? "page" : undefined}
             onClick={closeMenu}>
@@ -211,7 +232,7 @@ export function NavbarSection() {
           </Link>
           <div className="border-b border-slate-200">
             <button
-              className={`flex w-full items-center justify-between py-4 text-left text-lg font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isServicesActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`}
+              className={`flex w-full items-center justify-between py-5 text-left text-lg font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isServicesActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`}
               type="button"
               aria-expanded={isServicesOpen}
               onClick={() => setIsServicesOpen((open) => !open)}>
@@ -232,21 +253,21 @@ export function NavbarSection() {
             </div>
           </div>
           <Link
-            className={`border-b border-slate-200 py-4 text-lg font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isAboutActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`}
+            className={`border-b border-slate-200 py-5 text-lg font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isAboutActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`}
             href="/about"
             aria-current={isAboutActive ? "page" : undefined}
             onClick={closeMenu}>
             About
           </Link>
           <Link
-            className={`border-b border-slate-200 py-4 text-lg font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isGalleryActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`}
+            className={`border-b border-slate-200 py-5 text-lg font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isGalleryActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`}
             href="/gallery"
             aria-current={isGalleryActive ? "page" : undefined}
             onClick={closeMenu}>
             Gallery
           </Link>
           <Link
-            className={`border-b border-slate-200 py-4 text-lg font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isContactActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`}
+            className={`border-b border-slate-200 py-5 text-lg font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isContactActive ? "text-(--ssc-uk-main-highlight-color)" : "text-slate-950"}`}
             href="/contact"
             aria-current={isContactActive ? "page" : undefined}
             onClick={closeMenu}>
@@ -263,6 +284,13 @@ export function NavbarSection() {
             <Phone aria-hidden="true" className="h-4 w-4" strokeWidth={2.4} />
             <span>07590 514937</span>
           </span>
+        </CTAButton>
+        <CTAButton
+          btnStyle="CTA_PRIMARY"
+          className="mt-3 w-full justify-center"
+          href="#contact"
+          onClick={closeMenu}>
+          Get a Quote
         </CTAButton>
       </div>
     </>
