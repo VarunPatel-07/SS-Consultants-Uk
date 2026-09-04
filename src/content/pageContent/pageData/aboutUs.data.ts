@@ -9,6 +9,7 @@ export const ABOUT_PAGE_DATA: CommonPageDataInterface = {
     description: "Heating expertise, clear advice and dependable workmanship.",
   },
   about: {
+    eyebrow: [[{ text: "Why homeowners choose SS Consultants" }]],
     header: {
       title: [
         [{ text: "Heating expertise," }, { text: "built on" }],
@@ -27,6 +28,8 @@ export const ABOUT_PAGE_DATA: CommonPageDataInterface = {
       { label: "Request a Free Quote", href: "#contact", variant: "CTA_PRIMARY" },
       { label: "Call 07590 514937", href: "tel:07590514937", variant: "CTA_SECONDARY", theme: "LIGHT" },
     ],
+    badge: { title: [[{ text: "22+ years" }]], description: [[{ text: "Heating experience" }]] },
+    reassurance: [[{ text: "Gas Safe Registered" }, { text: "•" }, { text: "£5M Public Liability Insurance" }, { text: "•" }, { text: "24-Month Workmanship Guarantee" }]],
   },
   aboutPrinciples: {
     header: {
@@ -43,7 +46,18 @@ export const ABOUT_PAGE_DATA: CommonPageDataInterface = {
     ],
   },
   experience: {
-    header: { title: [[{ text: "Experience with leading boiler brands" }]] },
+    eyebrow: [[{ text: "Multi-brand boiler expertise" }]],
+    header: {
+      title: [[{ text: "Whatever your boiler," }], [{ text: "we know what to look for.", variant: "brand" }]],
+      description: [[{ text: "We repair, service and install heating systems from leading boiler manufacturers across the UK." }]],
+    },
+    callout: {
+      header: {
+        title: [[{ text: "Can’t see your boiler brand?" }]],
+        description: [[{ text: "Send us the make and model and we’ll confirm whether we can help." }]],
+      },
+      cta: { label: "Ask an Engineer", href: "#contact", variant: "CTA_SECONDARY" },
+    },
     brands: BOILER_BRANDS,
   },
   services: {

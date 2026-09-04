@@ -21,10 +21,10 @@ function CtaServiceButton({
       href={href}
       title={label}
       className={twMerge(
-        "w-fit h-fit min-w-57.5 min-h-11.25 max-h-11.25 rounded-full font-bold font-instrument-sans overflow-hidden flex items-start justify-start text-sm md:text-base lg:text-lg hover:scale-x-105 group transition-all duration-300 ring-1 relative",
+        "w-fit h-fit min-w-57.5 min-h-11.25 max-h-11.25 rounded-full font-semibold overflow-hidden flex items-start justify-start text-sm lg:text-base hover:scale-x-105 group transition-all duration-300 ring-1 relative font-jakarta",
         isBlackTheme
-          ? "bg-(---ssc-uk-main-black-color) text-(--ssc-uk-main-white-color) ring-(---ssc-uk-main-black-color) hover:text-(---ssc-uk-main-black-color)"
-          : "bg-(--ssc-uk-main-white-color) text-(---ssc-uk-main-black-color) ring-(--ssc-uk-main-white-color) hover:text-(--ssc-uk-main-white-color)",
+          ? "bg-(--ssc-uk-main-black-color) text-(--ssc-uk-main-white-color) ring-white  hover:text-(--ssc-uk-main-black-color)"
+          : "bg-(--ssc-uk-main-white-color) text-(--ssc-uk-main-black-color) ring-black  hover:text-(--ssc-uk-main-white-color)",
         className,
       )}>
       <span className="flex flex-col gap-2 items-start justify-start group-hover:-translate-y-13.25 transition-all duration-300 relative z-2 w-full">
@@ -41,8 +41,8 @@ function CtaServiceButton({
       </span>
       <span
         className={twMerge(
-          "absolute top-1/2 right-0 -translate-y-1/2 w-0 h-full min-w-0 min-h-0 block rounded-full group-hover:min-w-full group-hover:min-h-full group-hover:right-0 transition-all duration-300 z-0",
-          isBlackTheme ? "bg-(--ssc-uk-main-white-color)" : "bg-(---ssc-uk-main-black-color)",
+          "absolute top-1/2 right-0 -translate-y-1/2 w-0 h-[200%] min-w-0 min-h-0 block rounded-full group-hover:min-w-full group-hover:min-h-full group-hover:right-0 transition-all duration-300 z-0",
+          isBlackTheme ? "bg-(--ssc-uk-main-white-color)" : "bg-(--ssc-uk-main-black-color)",
         )}></span>
     </a>
   );

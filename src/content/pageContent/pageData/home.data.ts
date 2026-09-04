@@ -1,5 +1,5 @@
 import type { CommonPageDataInterface } from "@/app/utils/interface/page.interface";
-import installingBoilerImage from "@/assets/images/webp/installing-boiler.webp";
+import installingBoilerImage from "@/assets/images/webp/installing-boiler-740X790.webp";
 import {
   ABOUT_FEATURES,
   BOILER_BRANDS,
@@ -18,28 +18,33 @@ export const HOME_PAGE_DATA: CommonPageDataInterface = {
       "Gas Safe registered engineers with 22+ years' experience. Boiler installation, servicing and repairs across Hatfield, Hertfordshire and London. Get a free quote.",
   },
   hero: {
-    eyebrow: "TRUSTED HEATING ENGINEERS ACROSS THE UK",
+    eyebrow: "GAS SAFE REGISTERED • HATFIELD, HERTFORDSHIRE & LONDON",
     header: {
       title: [
-        [{ text: "Reliable" }, { text: " heating" }, { text: " solutions,", variant: "brand" }],
         [
-          { text: "built" },
-          { text: " around" },
-          { text: " your" },
-          { text: " home's", variant: "brand" },
-          { text: " needs.", variant: "brand" },
+          { text: "Reliable" },
+          { text: " boiler" },
+          { text: " &" },
+          { text: "heating" },
+          { text: " services," },
+          { text: "when", variant: "brand" },
+          { text: "your", variant: "brand" },
+          { text: "home", variant: "brand" },
+          { text: "needs", variant: "brand" },
+          { text: "them", variant: "brand" },
+          { text: "most.", variant: "brand" },
         ],
       ],
       description: [
         [
           {
-            text: "SS Consultants UK Ltd have a 22 years of Gas Safe registered engineering experience, delivering professional boiler installation, servicing and heating repairs across Hatfield, Hertfordshire and London, backed by honest advice and dependable workmanship.",
+            text: "From same-day repairs and annual servicing to complete boiler installations, our Gas Safe registered engineers deliver honest advice, clear pricing and dependable workmanship across Hatfield, Hertfordshire and London.",
           },
         ],
       ],
     },
     ctas: [
-      { label: "Request a Free Quote", href: "#contact", variant: "CTA_PRIMARY" },
+      { label: "Get a Free Quote", href: "#contact", variant: "CTA_PRIMARY" },
       { label: "Call 07590 514937", href: "tel:07590514937", variant: "CTA_SECONDARY" },
     ],
     services: HEATING_SERVICES.map(({ name, icon }) => ({
@@ -55,28 +60,29 @@ export const HOME_PAGE_DATA: CommonPageDataInterface = {
     },
   },
   experience: {
+    eyebrow: [[{ text: "Multi-brand boiler expertise" }]],
     header: {
-      title: [
-        [
-          { text: "Experience" },
-          { text: "with" },
-          { text: "leading" },
-          { text: "boiler", variant: "brand" },
-          { text: "brands", variant: "brand" },
-        ],
-      ],
+      title: [[{ text: "Whatever your boiler," }], [{ text: "we know what to look for.", variant: "brand" }]],
       description: [
         [
           {
-            text: "With 22 years in the trade, we're trusted to install and service heating systems from the UK's leading boiler manufacturers, including Vaillant",
+            text: "We repair, service and install heating systems from leading boiler manufacturers across the UK.",
           },
         ],
       ],
+    },
+    callout: {
+      header: {
+        title: [[{ text: "Can’t see your boiler brand?" }]],
+        description: [[{ text: "Send us the make and model and we’ll confirm whether we can help." }]],
+      },
+      cta: { label: "Ask an Engineer", href: "#contact", variant: "CTA_SECONDARY" },
     },
     brands: BOILER_BRANDS,
   },
 
   about: {
+    eyebrow: [[{ text: "Why homeowners choose SS Consultants" }]],
     header: {
       title: [
         [{ text: "Heating" }, { text: "expertise," }, { text: "built" }, { text: "on" }],
@@ -105,6 +111,16 @@ export const HOME_PAGE_DATA: CommonPageDataInterface = {
     cta: [
       { label: "Request a Free Quote", href: "#contact", variant: "CTA_PRIMARY" },
       { label: "Call 07590 514937", href: "tel:07590514937", variant: "CTA_SECONDARY", theme: "LIGHT" },
+    ],
+    badge: { title: [[{ text: "22+ years" }]], description: [[{ text: "Heating experience" }]] },
+    reassurance: [
+      [
+        { text: "Gas Safe Registered" },
+        { text: "•" },
+        { text: "£5M Public Liability Insurance" },
+        { text: "•" },
+        { text: "24-Month Workmanship Guarantee" },
+      ],
     ],
   },
   services: {

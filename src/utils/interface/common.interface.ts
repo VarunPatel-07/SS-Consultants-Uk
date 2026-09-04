@@ -9,6 +9,8 @@ export interface HeatingSupportCard {
   description: string;
   image: StaticImageData;
   imageAlt: string;
+  ctaLabel?: string;
+  badge?: string;
 }
 
 export interface InstallationInclude {

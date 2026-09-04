@@ -53,7 +53,7 @@ export function FaqSection({ data }: { data: FAQSection }) {
       className={twMerge("bg-(--ssc-uk-main-white-color) font-jakarta", COMMON_SECTION_PADDING_TOP_BOTTOM)}
       aria-labelledby="faq-title">
       <div className="ss-construction-uk-container grid gap-10 lg:gap-18 lg:grid-cols-[0.82fr_1.18fr]">
-        <div className="self-start md:self-center lg:sticky lg:top-28">
+        <div className="self-start lg:sticky lg:top-28">
           <h2 id="faq-title" className="ssc-section-title max-w-[500px]">
             <RichText content={data.header.title} />
           </h2>

@@ -66,6 +66,9 @@ export interface HeroSection {
 
 export interface AboutSectionDataInterface {
   header: SectionHeader;
+  eyebrow?: TextChunk[][];
+  badge?: { title: TextChunk[][]; description: TextChunk[][] };
+  reassurance?: TextChunk[][];
   cta?: { label: string; href: string; variant: "CTA_PRIMARY" | "CTA_SECONDARY"; theme?: "LIGHT" | "DARK" }[];
   cards?: AboutFeature[];
 }
@@ -79,6 +82,8 @@ export interface AboutPrinciplesSectionData {
 
 export interface ExperienceSectionData {
   header: SectionHeader;
+  eyebrow: TextChunk[][];
+  callout: { header: SectionHeader; cta: CTA };
   brands: BoilerBrand[];
 }
 
