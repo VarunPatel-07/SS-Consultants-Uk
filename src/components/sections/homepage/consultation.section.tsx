@@ -1,6 +1,7 @@
 "use client";
 
 import type { CommonPageDataInterface } from "@/app/utils/interface/page.interface";
+import { BOILER_SERVICES } from "@/content/pageContent/common.data";
 import { gsap } from "@/lib/gsap";
 import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
 import { COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
@@ -8,12 +9,16 @@ import { useGSAP } from "@gsap/react";
 import { useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
-export function ConsultationSection({ data }: { data?: CommonPageDataInterface["consultation"] }) {
+export function ConsultationSection({ data, serviceName }: { data?: CommonPageDataInterface["consultation"]; serviceName?: string }) {
   const [subject, setSubject] = useState("");
+  const [selectedService, setSelectedService] = useState(serviceName ?? "");
   useEffect(() => {
     const selectBoiler = (event: Event) => {
       const name = (event as CustomEvent<unknown>).detail;
-      if (typeof name === "string") setSubject(`Quote for ${name}`);
+      if (typeof name === "string") {
+        setSelectedService(name);
+        setSubject(`Quote for ${name}`);
+      }
     };
     window.addEventListener("boiler-quote-requested", selectBoiler);
     return () => window.removeEventListener("boiler-quote-requested", selectBoiler);
@@ -65,7 +70,7 @@ export function ConsultationSection({ data }: { data?: CommonPageDataInterface["
         </div>
 
         <div className="mx-auto mt-12 grid max-w-295 gap-6 lg:grid-cols-[1fr_1.06fr] md:items-stretch">
-          <div className="grid auto-rows-fr grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:auto-rows-fr lg:grid-cols-1">
             <div className="contact-reveal rounded-lg px-7 py-9 text-black lg:px-14 lg:py-10 border border-(--ssc-uk-border-color) bg-white md:rounded-xl lg:rounded-2xl reveal-animation">
               <div className="w-full h-full flex flex-col items-start justify-center">
                 <div>
@@ -115,50 +120,78 @@ export function ConsultationSection({ data }: { data?: CommonPageDataInterface["
             encType="text/plain">
             <div className="grid gap-x-10 gap-y-8 md:grid-cols-2">
               <label className="block text-base font-medium text-(--ssc-uk-muted-color)">
-                First Name
                 <input
-                  className="mt-3 block w-full rounded-none border-0 border-b border-(--ssc-uk-border-color) bg-transparent px-0 py-3 text-foreground outline-none transition-colors focus:border-(--ssc-uk-main-highlight-color) focus:shadow-[0_1px_0_var(--ssc-uk-main-highlight-color)]"
+                  className="block w-full rounded-none border-0 border-b border-(--ssc-uk-border-color) bg-transparent px-0 py-3 text-foreground outline-none transition-colors placeholder:text-(--ssc-uk-muted-color) focus:border-(--ssc-uk-main-highlight-color) focus:shadow-[0_1px_0_var(--ssc-uk-main-highlight-color)]"
                   type="text"
                   name="name"
+                  placeholder="First Name"
+                  aria-label="First Name"
                   required
                 />
               </label>
               <label className="block text-base font-medium text-(--ssc-uk-muted-color)">
-                Last Name
                 <input
-                  className="mt-3 block w-full rounded-none border-0 border-b border-(--ssc-uk-border-color) bg-transparent px-0 py-3 text-foreground outline-none transition-colors focus:border-(--ssc-uk-main-highlight-color) focus:shadow-[0_1px_0_var(--ssc-uk-main-highlight-color)]"
+                  className="block w-full rounded-none border-0 border-b border-(--ssc-uk-border-color) bg-transparent px-0 py-3 text-foreground outline-none transition-colors placeholder:text-(--ssc-uk-muted-color) focus:border-(--ssc-uk-main-highlight-color) focus:shadow-[0_1px_0_var(--ssc-uk-main-highlight-color)]"
                   type="text"
                   name="name"
+                  placeholder="Last Name"
+                  aria-label="Last Name"
                   required
                 />
               </label>
               <label className="block text-base font-medium text-(--ssc-uk-muted-color) md:col-span-2">
-                Your Email
                 <input
-                  className="mt-3 block w-full rounded-none border-0 border-b border-(--ssc-uk-border-color) bg-transparent px-0 py-3 text-foreground outline-none transition-colors focus:border-(--ssc-uk-main-highlight-color) focus:shadow-[0_1px_0_var(--ssc-uk-main-highlight-color)]"
+                  className="block w-full rounded-none border-0 border-b border-(--ssc-uk-border-color) bg-transparent px-0 py-3 text-foreground outline-none transition-colors placeholder:text-(--ssc-uk-muted-color) focus:border-(--ssc-uk-main-highlight-color) focus:shadow-[0_1px_0_var(--ssc-uk-main-highlight-color)]"
                   type="email"
                   name="email"
+                  placeholder="Email Address"
+                  aria-label="Email Address"
                   required
                 />
               </label>
               <label className="block text-base font-medium text-(--ssc-uk-muted-color) md:col-span-2">
-                Your Contact No.
                 <input
-                  className="mt-3 block w-full rounded-none border-0 border-b border-(--ssc-uk-border-color) bg-transparent px-0 py-3 text-foreground outline-none transition-colors focus:border-(--ssc-uk-main-highlight-color) focus:shadow-[0_1px_0_var(--ssc-uk-main-highlight-color)]"
+                  className="block w-full rounded-none border-0 border-b border-(--ssc-uk-border-color) bg-transparent px-0 py-3 text-foreground outline-none transition-colors placeholder:text-(--ssc-uk-muted-color) focus:border-(--ssc-uk-main-highlight-color) focus:shadow-[0_1px_0_var(--ssc-uk-main-highlight-color)]"
                   type="tel"
                   name="phone"
+                  placeholder="Contact Number"
+                  aria-label="Contact Number"
                 />
               </label>
 
               <label className="block text-base font-medium text-(--ssc-uk-muted-color) md:col-span-2">
-                Your Message <span className="text-sm text-(--ssc-uk-muted-color)">(optional)</span>
+                <select
+                  className="block w-full appearance-none rounded-none border-0 border-b border-(--ssc-uk-border-color) bg-transparent px-0 py-3 text-foreground outline-none transition-colors focus:border-(--ssc-uk-main-highlight-color)"
+                  name="service"
+                  aria-label="Service required"
+                  value={selectedService}
+                  onChange={(event) => {
+                    const value = event.target.value;
+                    setSelectedService(value);
+                    setSubject(value ? `Enquiry about ${value}` : "");
+                  }}
+                  required>
+                  <option value="" disabled>
+                    Select a service
+                  </option>
+                  {BOILER_SERVICES.map(({ label }) => (
+                    <option value={label} key={label}>
+                      {label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="block text-base font-medium text-(--ssc-uk-muted-color) md:col-span-2">
                 <textarea
-                  className="mt-3 block w-full rounded-none border-0 border-b border-(--ssc-uk-border-color) bg-transparent px-0 py-3 text-foreground outline-none transition-colors focus:border-(--ssc-uk-main-highlight-color) focus:shadow-[0_1px_0_var(--ssc-uk-main-highlight-color)] resize-none"
+                  className="block w-full rounded-none border-0 border-b border-(--ssc-uk-border-color) bg-transparent px-0 py-3 text-foreground outline-none transition-colors placeholder:text-(--ssc-uk-muted-color) focus:border-(--ssc-uk-main-highlight-color) focus:shadow-[0_1px_0_var(--ssc-uk-main-highlight-color)] resize-none"
                   name="message"
                   rows={4}
+                  placeholder="Type your message here (optional)"
+                  aria-label="Your Message (optional)"
                 />
               </label>
             </div>
+            <input type="hidden" name="subject" value={subject} />
 
             <div className="pt-8 text-center">
               <button

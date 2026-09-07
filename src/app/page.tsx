@@ -9,6 +9,9 @@ import { OurServiceSection } from "@/components/sections/homepage/our-service-se
 import { TestimonialSection } from "@/components/sections/homepage/testimonial.section";
 import { WhyChooseUsSection } from "@/components/sections/homepage/why-choose-us.section";
 import { HOME_PAGE_DATA } from "@/content/pageContent/pageData/home.data";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = { ...HOME_PAGE_DATA.metadata, alternates: { canonical: "/" } };
 
 export default function Home() {
   return (

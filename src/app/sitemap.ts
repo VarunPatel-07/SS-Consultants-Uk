@@ -1,7 +1,7 @@
 import { SERVICE_PAGE_DATA } from "@/content/pageContent/pageData/service";
 import type { MetadataRoute } from "next";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ssc-uk.netlify.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
@@ -9,6 +9,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/about`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITE_URL}/gallery`, changeFrequency: "weekly", priority: 0.8 },
     { url: `${SITE_URL}/contact`, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE_URL}/sitemap`, changeFrequency: "monthly", priority: 0.4 },
+    { url: `${SITE_URL}/privacy-policy`, changeFrequency: "yearly", priority: 0.2 },
+    { url: `${SITE_URL}/terms-and-conditions`, changeFrequency: "yearly", priority: 0.2 },
+    { url: `${SITE_URL}/cookie-policy`, changeFrequency: "yearly", priority: 0.2 },
   ];
 
   const servicePages: MetadataRoute.Sitemap = SERVICE_PAGE_DATA.flatMap(({ serviceHeroSection }) => serviceHeroSection ? [{ slug: serviceHeroSection.slug }] : []).map(({ slug }) => ({

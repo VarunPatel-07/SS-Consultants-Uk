@@ -5,6 +5,9 @@ import { ExperienceSection } from "@/components/sections/homepage/experience.sec
 import { FaqSection } from "@/components/sections/homepage/faq.section";
 import { OurServiceSection } from "@/components/sections/homepage/our-service-section";
 import { ABOUT_PAGE_DATA } from "@/content/pageContent/pageData/aboutUs.data";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = { ...ABOUT_PAGE_DATA.metadata, alternates: { canonical: "/about" } };
 
 export default function AboutPage() {
   return (

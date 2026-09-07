@@ -10,7 +10,13 @@ import { getServicePageData, SERVICE_PAGE_DATA } from "@/content/pageContent/pag
 import { SERVICE_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
 import { notFound } from "next/navigation";
 import { twMerge } from "tailwind-merge";
+import type { Metadata } from "next";
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const page = getServicePageData(slug);
+  return { ...(page?.metadata ?? {}), alternates: { canonical: `/services/${slug}` } };
+}
 export function generateStaticParams() {
   return SERVICE_PAGE_DATA.flatMap(({ serviceHeroSection }) =>
     serviceHeroSection ? [{ slug: serviceHeroSection.slug }] : [],
@@ -36,7 +42,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         </div>
       )}
       {pageData?.faq && <FaqSection data={pageData.faq} />}
-      <ConsultationSection />
+      <ConsultationSection serviceName={pageData.serviceHeroSection?.label} />
     </>
   );
 }
