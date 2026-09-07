@@ -33,7 +33,7 @@ export const CENTRAL_HEATING_PAGE_DATA: CommonPageDataInterface = {
     },
     slug: "central-heating",
     label: "Central Heating",
-    cta: "Request a Free Quote",
+    cta: "Get a Heating Quote",
     heroImage: centralHeatingHero,
     eyebrow: "Central heating installations across Hatfield, Hertfordshire & London",
     options: [
@@ -107,23 +107,19 @@ export const CENTRAL_HEATING_PAGE_DATA: CommonPageDataInterface = {
     specifications: [
       {
         title: "Correctly sized boiler",
-        description:
-          "Your boiler is matched to your home's size, insulation and hot-water demand, avoiding an underpowered system that struggles or an oversized one that wastes energy and money.",
+        description: "We match your boiler to your home’s size, insulation and hot-water demand.",
       },
       {
         title: "Balanced radiators throughout",
-        description:
-          "Radiators are sized and positioned room by room, then balanced properly so heat is distributed evenly across your home rather than concentrated in just a few rooms.",
+        description: "Radiators are sized and balanced room by room for even heat distribution.",
       },
       {
         title: "Zoned heating controls",
-        description:
-          "Modern thermostats and zone controls let you heat different parts of your home independently, improving comfort and helping reduce unnecessary energy use and waste.",
+        description: "Thermostats and zone controls let you heat different areas independently.",
       },
       {
         title: "Efficient pipework layout",
-        description:
-          "Pipework is planned and routed thoughtfully throughout your home, supporting reliable flow and consistent temperatures to every radiator on the system, year-round.",
+        description: "Carefully routed pipework supports reliable flow and consistent temperatures.",
       },
     ],
   },
@@ -188,6 +184,17 @@ export const CENTRAL_HEATING_PAGE_DATA: CommonPageDataInterface = {
       ],
     },
     items: TESTIMONIALS,
+  },
+  callToActionSection: {
+    header: {
+      title: [[{ text: "Planning a heating upgrade?" }], [{ text: "Make every room more comfortable.", variant: "brand" }]],
+      description: [[{ text: "Talk to our local engineers about radiators, pipework and controls tailored to your home." }]],
+    },
+    ctas: [
+      { label: "Get a Heating Quote", href: "#contact", variant: "CTA_PRIMARY" },
+      { label: "Call 07590 514937", href: "tel:07590514937", variant: "CTA_SECONDARY" },
+    ],
+    reassurance: "Home assessment • Clear quotations • Local heating engineers",
   },
   faq: {
     header: {

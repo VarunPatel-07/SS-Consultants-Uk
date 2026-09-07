@@ -33,15 +33,15 @@ export function LegalPageSection({
       <div className="w-full pt-25! xl:pt-17! pb-12">
         <h1
           id="legal-page-title"
-          className="reveal-animation text-[35px] sm:text-[38px] md:text-[42px] lg:text-[46px] xl:text-[68px] font-bold tracking-tight text-slate-950">
+          className="reveal-animation text-[35px] sm:text-[38px] md:text-[42px] lg:text-[46px] xl:text-[68px] font-bold tracking-tight text-foreground">
           {title}
         </h1>
-        <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 reveal-animation">{description}</p>
+        <p className="mt-6 max-w-2xl text-lg leading-8 text-(--ssc-uk-muted-color) reveal-animation">{description}</p>
         {content && (
-          <div className="mt-12 max-w-4xl space-y-10 text-base leading-8 text-slate-700 reveal-animation">
+          <div className="mt-12 max-w-4xl space-y-10 text-base leading-8 text-(--ssc-uk-muted-color) reveal-animation">
             {content.map(({ heading, body, bullets, note }) => (
               <article className="legal-reveal" key={heading}>
-                <h2 className="text-2xl font-bold leading-tight text-slate-950 sm:text-3xl">{heading}</h2>
+                <h2 className="text-2xl font-bold leading-tight text-foreground sm:text-3xl">{heading}</h2>
                 {body && <p className="mt-4">{body}</p>}
                 {bullets && (
                   <ul className="mt-4 list-disc space-y-2 pl-6">
@@ -51,7 +51,7 @@ export function LegalPageSection({
                   </ul>
                 )}
                 {note && (
-                  <p className="mt-4 rounded-lg border-l-4 border-(--ssc-uk-main-highlight-color) bg-orange-50 px-4 py-3 text-sm italic leading-6 text-slate-700">
+                  <p className="mt-4 rounded-lg border-l-4 border-(--ssc-uk-main-highlight-color) bg-(--ssc-uk-service-card-hover-background-color) px-4 py-3 text-sm italic leading-6 text-(--ssc-uk-muted-color)">
                     {note}
                   </p>
                 )}

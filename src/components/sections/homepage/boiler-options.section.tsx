@@ -2,6 +2,7 @@
 
 import { BoilerOptionsSectionData } from "@/app/utils/interface/data.interface";
 import CommonSectionHeader from "@/components/sections/common/common-section-header";
+import CtaServiceButton from "@/components/ui/ctaServiceBtn";
 import { gsap } from "@/lib/gsap";
 import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
 import { COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
@@ -51,24 +52,21 @@ export function BoilerOptionsSection({ data }: { data: BoilerOptionsSectionData 
   return (
     <section
       ref={containerRef}
-      className={twMerge(
-        "overflow-hidden bg-(--ssc-uk-main-white-color) font-jakarta",
-        COMMON_SECTION_PADDING_TOP_BOTTOM,
-      )}
+      className={twMerge("overflow-hidden bg-background font-jakarta", COMMON_SECTION_PADDING_TOP_BOTTOM)}
       aria-labelledby="boiler-options-title">
       <div className="ss-construction-uk-container">
         <CommonSectionHeader data={data?.header} />
 
         <div className="mb-5 flex justify-end gap-3 lg:hidden">
           <button
-            className="boiler-options-prev inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-slate-300 text-slate-950 transition-colors hover:border-(--ssc-uk-main-highlight-color) hover:bg-(--ssc-uk-main-highlight-color) hover:text-(--ssc-uk-main-white-color) disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-100 disabled:text-slate-300 disabled:opacity-70"
+            className="boiler-options-prev inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border bg-(--ssc-uk-main-white-color) border-(--ssc-uk-main-white-color) text-(--ssc-uk-main-black-color) transition-colors hover:border-(--ssc-uk-main-highlight-color) hover:bg-(--ssc-uk-cta-button-background) hover:text-(--ssc-uk-main-white-color) disabled:cursor-not-allowed disabled:border-(--ssc-uk-border-color) disabled:bg-(--ssc-uk-surface-color) disabled:text-(--ssc-uk-muted-color) disabled:opacity-70 reveal-text-animation"
             type="button"
             disabled={isBeginning}
             aria-label="Previous boiler option">
             <ArrowLeft aria-hidden="true" className="h-5 w-5" />
           </button>
           <button
-            className="boiler-options-next inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-slate-300 text-slate-950 transition-colors hover:border-(--ssc-uk-main-highlight-color) hover:bg-(--ssc-uk-main-highlight-color) hover:text-(--ssc-uk-main-white-color) disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-100 disabled:text-slate-300 disabled:opacity-70"
+            className="boiler-options-next inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border bg-(--ssc-uk-main-white-color) border-(--ssc-uk-main-white-color) text-(--ssc-uk-main-black-color) transition-colors hover:border-(--ssc-uk-main-highlight-color) hover:bg-(--ssc-uk-cta-button-background) hover:text-(--ssc-uk-main-white-color) disabled:cursor-not-allowed disabled:border-(--ssc-uk-border-color) disabled:bg-(--ssc-uk-surface-color) disabled:text-(--ssc-uk-muted-color) disabled:opacity-70 reveal-text-animation"
             type="button"
             disabled={isEnd}
             aria-label="Next boiler option">
@@ -88,25 +86,30 @@ export function BoilerOptionsSection({ data }: { data: BoilerOptionsSectionData 
             640: { slidesPerView: 2, spaceBetween: 20 },
             1024: { slidesPerView: 3, spaceBetween: 24 },
           }}>
-          {data.brands.map(({ name, image, tagline, description, features, popularChoice }) => (
+          {data.brands.map(({ name, image, tagline, description, features, popularChoice, bestFor }) => (
             <SwiperSlide className="!h-auto reveal-animation" key={name}>
-              <article className="relative flex h-full flex-col rounded-lg border border-slate-200 bg-(--ssc-uk-main-white-color) p-3 shadow-sm md:rounded-xl lg:rounded-2xl">
+              <article className="relative flex h-full flex-col rounded-lg border border-(--ssc-uk-border-color) bg-background p-3 shadow-sm md:rounded-xl lg:rounded-2xl">
                 {popularChoice && (
-                  <span className="absolute left-1/2 top-0 z-10 w-max max-w-[calc(100%-1.5rem)] -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-tl-2xl rounded-tr-2xl bg-(--ssc-uk-main-highlight-color) px-5 py-2 text-xs font-semibold text-(--ssc-uk-main-white-color) sm:px-8 sm:text-sm">
+                  <span className="absolute left-1/2 top-0 w-max max-w-[calc(100%-1.5rem)] -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-tl-2xl rounded-tr-2xl bg-(--ssc-uk-main-white-color) px-5 py-2 text-xs font-bold text-black shadow-lg sm:px-8 sm:text-sm">
                     Popular choice
                   </span>
                 )}
-                <div className="relative z-20 overflow-hidden rounded-lg bg-slate-100 md:rounded-xl lg:rounded-2xl">
+                <div className="relative z-20 overflow-hidden rounded-lg bg-(--ssc-uk-surface-color) md:rounded-xl lg:rounded-2xl">
                   <Image className="h-[220px] w-full object-cover object-center" src={image} alt={`${name} boiler`} />
                 </div>
                 <div className="flex flex-1 flex-col px-1 pb-2 pt-4">
-                  <span className="mb-3 block h-1 w-7 rounded-full bg-(--ssc-uk-main-highlight-color)" />
-                  <h3 className="text-xl md:text-2xl font-bold tracking-tight text-slate-950">{name}</h3>
+                  <span className="mb-3 block h-1 w-7 rounded-full bg-(--ssc-uk-cta-button-background)" />
+                  <h3 className="text-xl md:text-2xl font-bold tracking-tight text-foreground">{name}</h3>
                   <p className="mt-1 font-lora text-lg md:text-xl italic text-(--ssc-uk-main-highlight-color)">
                     {tagline}
                   </p>
-                  <p className="mt-3 text-base md:text-lg leading-6 text-slate-600">{description}</p>
-                  <ul className="mt-4 space-y-2 border-t border-slate-200 pt-4 text-sm md:text-base text-slate-700">
+                  <p className="mt-3 text-base md:text-lg leading-6 text-(--ssc-uk-muted-color)">{description}</p>
+                  {bestFor && (
+                    <p className="mt-4 rounded-lg bg-(--ssc-uk-surface-color) px-3 py-2 text-sm text-foreground">
+                      <strong>Best for:</strong> {bestFor}
+                    </p>
+                  )}
+                  <ul className="mt-4 space-y-2 border-t border-(--ssc-uk-border-color) pt-4 text-sm md:text-base text-(--ssc-uk-muted-color)">
                     {features.map((feature) => (
                       <li className="flex items-start gap-2" key={feature}>
                         <CheckCircle2
@@ -118,6 +121,12 @@ export function BoilerOptionsSection({ data }: { data: BoilerOptionsSectionData 
                       </li>
                     ))}
                   </ul>
+                  <CtaServiceButton
+                    label="Get a Quote for This Boiler"
+                    showArrow={false}
+                    className="w-full mt-6"
+                    href="#contact"
+                  />
                 </div>
               </article>
             </SwiperSlide>

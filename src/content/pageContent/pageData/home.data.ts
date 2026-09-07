@@ -7,7 +7,6 @@ import {
   HEATING_SERVICES,
   HEATING_SUPPORT_CARDS,
   TESTIMONIALS,
-  WHY_CHOOSE_US_POINTS,
 } from "@/content/pageContent/common.data";
 import { HOME_PAGE_FAQ_DATA } from "@/content/pageContent/faq.data";
 
@@ -38,14 +37,14 @@ export const HOME_PAGE_DATA: CommonPageDataInterface = {
       description: [
         [
           {
-            text: "From same-day repairs and annual servicing to complete boiler installations, our Gas Safe registered engineers deliver honest advice, clear pricing and dependable workmanship across Hatfield, Hertfordshire and London.",
+            text: "Boiler repairs, servicing and installations across Hatfield, Hertfordshire and London. Get honest advice, a clear quote and dependable workmanship from local Gas Safe engineers.",
           },
         ],
       ],
     },
     ctas: [
       { label: "Get a Free Quote", href: "#contact", variant: "CTA_PRIMARY" },
-      { label: "Call 07590 514937", href: "tel:07590514937", variant: "CTA_SECONDARY" },
+      { label: "Call 07590 514937", href: "tel:07590514937", variant: "CTA_SECONDARY", theme: "LIGHT" },
     ],
     services: HEATING_SERVICES.map(({ name, icon }) => ({
       label: name,
@@ -73,8 +72,8 @@ export const HOME_PAGE_DATA: CommonPageDataInterface = {
     },
     callout: {
       header: {
-        title: [[{ text: "Can’t see your boiler brand?" }]],
-        description: [[{ text: "Send us the make and model and we’ll confirm whether we can help." }]],
+        title: [[{ text: "Need help with another boiler brand?" }]],
+        description: [[{ text: "We service most major boiler systems." }]],
       },
       cta: { label: "Ask an Engineer", href: "#contact", variant: "CTA_SECONDARY" },
     },
@@ -87,8 +86,7 @@ export const HOME_PAGE_DATA: CommonPageDataInterface = {
       title: [
         [{ text: "Heating" }, { text: "expertise," }, { text: "built" }, { text: "on" }],
         [
-          { text: "22", variant: "brand" },
-          { text: "years", variant: "brand" },
+          { text: "care", variant: "brand" },
           { text: "you", variant: "brand" },
           { text: "can", variant: "brand" },
           { text: "trust.", variant: "brand" },
@@ -97,7 +95,7 @@ export const HOME_PAGE_DATA: CommonPageDataInterface = {
       description: [
         [
           {
-            text: "SS Consultants UK Ltd is a Gas Safe registered heating company based in Hatfield, serving homes across Hertfordshire and London. With 22 years of experience, our engineers install, service and repair boilers of every make and size.",
+            text: "SS Consultants UK Ltd is a Gas Safe registered heating company based in Hatfield, serving homes across Hertfordshire and London. Our engineers install, service and repair boilers of every make and size.",
           },
         ],
         [
@@ -167,11 +165,12 @@ export const HOME_PAGE_DATA: CommonPageDataInterface = {
     brands: BOILER_OPTIONS,
   },
   callToActionSection: {
+    reassurance: "Free advice • No obligation • Local Gas Safe engineers",
     header: {
       title: [
         [{ text: "Not sure which" }],
         [
-          { text: "boiler suits " },
+          { text: "boiler is right for " },
           {
             text: "your home?",
             variant: "brand",
@@ -181,13 +180,13 @@ export const HOME_PAGE_DATA: CommonPageDataInterface = {
       description: [
         [
           {
-            text: `We'll take a look at your property and recommend the right boiler for your home, hot-water needs and budget, backed by clear, honest advice and absolutely no pressure to buy anything, ever.`,
+            text: `Get a clear recommendation based on your property, hot-water needs and budget—without any pressure to buy.`,
           },
         ],
       ],
     },
     ctas: [
-      { label: "Request a Free Assessment", href: "#contact", variant: "CTA_PRIMARY", classNames: "min-w-[300px]" },
+      { label: "Help Me Choose a Boiler", href: "#contact", variant: "CTA_PRIMARY", classNames: "min-w-[300px]" },
       { label: "Call 07590 514937", href: "tel:07590514937", variant: "CTA_SECONDARY" },
     ],
   },
@@ -215,7 +214,26 @@ export const HOME_PAGE_DATA: CommonPageDataInterface = {
         ],
       ],
     },
-    items: WHY_CHOOSE_US_POINTS,
+    items: [
+      {
+        title: "Gas Safe No. 527000",
+        description: "Registered engineers for your boiler installation, service and repair.",
+      },
+      {
+        title: "Clear, upfront quotations",
+        description: "An explained price before work begins, with no unnecessary upselling.",
+      },
+      {
+        title: "Experienced engineers",
+        description: "Practical heating expertise, from fault-finding to full installations.",
+      },
+      {
+        title: "Manufacturer-backed warranties",
+        description: "Warranty options depend on your boiler and installation. We explain the cover in your quote.",
+      },
+      { title: "24-month workmanship guarantee", description: "Workmanship protection on every installation." },
+      { title: "Local coverage", description: "Based in Hatfield, serving Hertfordshire and London." },
+    ],
   },
   faq: {
     header: {

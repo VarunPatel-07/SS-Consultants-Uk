@@ -47,6 +47,7 @@ export interface FAQSection {
 }
 
 export interface TestimonialSection {
+  reviewSummary?: { rating: number; count: number; url: string };
   header: SectionHeader;
   items: TestimonialItem[];
 }
@@ -59,7 +60,7 @@ export interface ProcessSection {
 export interface HeroSection {
   header: SectionHeader;
   eyebrow?: string;
-  ctas?: Array<{ label: string; href: string; variant: "CTA_PRIMARY" | "CTA_SECONDARY" }>;
+  ctas?: Array<{ label: string; href: string; variant: "CTA_PRIMARY" | "CTA_SECONDARY"; theme?: "LIGHT" | "DARK" }>;
   services?: ServiceItem[];
   image?: { src: StaticImageData; alt: string; width: number; height: number };
 }
@@ -93,6 +94,7 @@ export interface BoilerOptionsSectionData {
 }
 
 export interface callToActionSectionInterface {
+  reassurance?: string;
   header: SectionHeader;
   ctas: CTA[];
 }

@@ -7,27 +7,27 @@ import Link from "next/link";
 export function FooterBarSection() {
   return (
     <footer
-      className="w-full overflow-hidden  pt-14 font-jakarta text-slate-300 sm:px-8 sm:pt-20"
+      className="w-full bg-(--ssc-uk-main-black-color)! overflow-hidden  pt-10 font-jakarta text-foreground/85 sm:px-8 sm:pt-12"
       style={{ backgroundColor: "var(--ssc-uk-consultation-section-background-color)" }}>
       <div className="ss-construction-uk-container">
-        <div className="grid gap-12 lg:grid-cols-[1.35fr_0.9fr_1.15fr_1.2fr] lg:gap-14">
+        <div className="grid gap-8 lg:grid-cols-[1.35fr_0.9fr_1.15fr_1.2fr] lg:gap-8">
           <div>
             <Link className="inline-block" href="/" aria-label="SS Consultants home">
-              <Image className="h-auto w-60 brightness-0 invert sm:w-68" src={logo} alt="SS Consultants UK Limited" />
+              <Image className="h-auto w-68 max-w-full brightness-0 invert sm:w-76" src={logo} alt="SS Consultants UK Limited" />
             </Link>
-            <p className="mt-7 max-w-md text-base leading-7">
+            <p className="mt-5 max-w-md text-[17px] leading-7">
               Professional boiler installation, servicing and heating solutions delivered with clear advice, careful
               workmanship and dependable support.
             </p>
 
-            <div className="mt-9 flex gap-12 border-t border-slate-700 pt-8 text-base">
+            <div className="mt-5 flex gap-6 border-t border-(--ssc-uk-border-color) pt-5 text-base">
               <span className="group inline-flex items-center gap-4" aria-label="Facebook">
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-(--ssc-uk-main-highlight-color) text-(--ssc-uk-main-highlight-color) transition-colors group-hover:bg-(--ssc-uk-main-highlight-color) group-hover:text-(--ssc-uk-main-white-color)">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-(--ssc-uk-main-highlight-color) text-(--ssc-uk-main-highlight-color) transition-colors group-hover:bg-(--ssc-uk-cta-button-background) group-hover:text-(--ssc-uk-main-white-color)">
                   <FacebookIcon />
                 </span>
               </span>
               <span className="group inline-flex items-center gap-4" aria-label="Instagram">
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-(--ssc-uk-main-highlight-color) text-(--ssc-uk-main-highlight-color) transition-colors group-hover:bg-(--ssc-uk-main-highlight-color) group-hover:text-(--ssc-uk-main-white-color)">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-(--ssc-uk-main-highlight-color) text-(--ssc-uk-main-highlight-color) transition-colors group-hover:bg-(--ssc-uk-cta-button-background) group-hover:text-(--ssc-uk-main-white-color)">
                   <InstagramIcon />
                 </span>
               </span>
@@ -39,21 +39,21 @@ export function FooterBarSection() {
           <FooterLinkColumn title="Services" links={FOOTER_SERVICE_LINKS} />
 
           <div>
-            <h2 className="text-base font-bold text-slate-100">Contact</h2>
-            <div className="mt-6 space-y-7">
+            <h2 className="text-lg font-bold text-foreground">Contact</h2>
+            <div className="mt-4 space-y-5">
               <a
-                className="flex items-center gap-5 text-base transition-colors hover:text-(--ssc-uk-main-highlight-color)"
+                className="flex items-center gap-3 text-[17px] transition-colors hover:text-(--ssc-uk-main-highlight-color)"
                 href="tel:07590514937">
                 <Phone className="h-6 w-6 shrink-0 text-(--ssc-uk-main-highlight-color)" />
                 07590 514937
               </a>
               <a
-                className="flex items-center gap-5 text-base transition-colors hover:text-(--ssc-uk-main-highlight-color)"
+                className="flex items-center gap-3 text-[17px] transition-colors hover:text-(--ssc-uk-main-highlight-color)"
                 href="mailto:info@sscukltd.com">
                 <Mail className="h-6 w-6 shrink-0 text-(--ssc-uk-main-highlight-color)" />
                 info@sscukltd.com
               </a>
-              <div className="flex items-center gap-5 text-base">
+              <div className="flex items-center gap-3 text-[17px]">
                 <MapPin className="h-6 w-6 shrink-0 text-(--ssc-uk-main-highlight-color)" />
                 Hatfield, Hertfordshire &amp; London
               </div>
@@ -61,24 +61,24 @@ export function FooterBarSection() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-center gap-6 border-t border-slate-700 py-8 text-sm lg:flex-row lg:items-center lg:justify-between">
+        <div className="mt-8 flex flex-col items-center gap-6 border-t border-(--ssc-uk-border-color) py-6 text-base lg:flex-row lg:items-center lg:justify-between">
           <p className="text-center">© {new Date().getFullYear()} SS Consultants UK Ltd. All rights reserved.</p>
           <div className="grid w-full max-w-sm grid-cols-2 items-center gap-x-6 gap-y-3 text-center sm:flex sm:w-auto sm:max-w-none sm:flex-wrap sm:justify-center sm:gap-x-6 sm:gap-y-3">
             <a className="transition-colors hover:text-(--ssc-uk-main-highlight-color)" href="/privacy-policy">
               Privacy Policy
             </a>
             <a
-              className="sm:border-l sm:border-slate-600 sm:pl-6 transition-colors hover:text-(--ssc-uk-main-highlight-color)"
+              className="sm:border-l sm:border-(--ssc-uk-border-color) sm:pl-6 transition-colors hover:text-(--ssc-uk-main-highlight-color)"
               href="/terms-and-conditions">
               Terms &amp; Conditions
             </a>
             <a
-              className="sm:border-l sm:border-slate-600 sm:pl-6 transition-colors hover:text-(--ssc-uk-main-highlight-color)"
+              className="sm:border-l sm:border-(--ssc-uk-border-color) sm:pl-6 transition-colors hover:text-(--ssc-uk-main-highlight-color)"
               href="/cookie-policy">
               Cookie Policy
             </a>
             <a
-              className="sm:border-l sm:border-slate-600 sm:pl-6 transition-colors hover:text-(--ssc-uk-main-highlight-color)"
+              className="sm:border-l sm:border-(--ssc-uk-border-color) sm:pl-6 transition-colors hover:text-(--ssc-uk-main-highlight-color)"
               href="/sitemap">
               Sitemap
             </a>
@@ -111,16 +111,16 @@ function FooterLinkColumn({ title, links }: { title: string; links: ReadonlyArra
   return (
     <div>
       <details className="group lg:hidden">
-        <summary className="flex cursor-pointer list-none items-center justify-between text-base font-bold text-slate-100 [&::-webkit-details-marker]:hidden">
+        <summary className="flex cursor-pointer list-none items-center justify-between text-lg font-bold text-foreground [&::-webkit-details-marker]:hidden">
           {title}
           <ChevronDown aria-hidden="true" className="h-5 w-5 transition-transform group-open:rotate-180" />
         </summary>
 
         <ul className="mt-5">
           {links.map(({ label, href }) => (
-            <li className="border-b border-slate-700 last:border-b-0" key={label}>
+            <li className="border-b border-(--ssc-uk-border-color) last:border-b-0" key={label}>
               <a
-                className="block py-4 text-base transition-colors hover:text-(--ssc-uk-main-highlight-color)"
+                className="block py-3 text-[17px] transition-colors hover:text-(--ssc-uk-main-highlight-color)"
                 href={href}>
                 {label}
               </a>
@@ -130,13 +130,13 @@ function FooterLinkColumn({ title, links }: { title: string; links: ReadonlyArra
       </details>
 
       <div className="hidden lg:block">
-        <h2 className="text-base font-bold text-slate-100">{title}</h2>
+        <h2 className="text-lg font-bold text-foreground">{title}</h2>
 
         <ul className="mt-5">
           {links.map(({ label, href }) => (
             <li className="w-fit" key={label}>
               <a
-                className="block py-2.5 text-base transition-colors hover:text-(--ssc-uk-main-highlight-color)"
+                className="block py-2 text-[17px] transition-colors hover:text-(--ssc-uk-main-highlight-color)"
                 href={href}>
                 {label}
               </a>

@@ -6,9 +6,8 @@ import { HeatingDesignedSection } from "@/components/sections/service/heating-de
 import { InstallationIncludesSection } from "@/components/sections/service/installation-includes.section";
 import { ServiceHeroSection } from "@/components/sections/service/service-hero.section";
 import { WarmerHomeProcessSection } from "@/components/sections/service/warmer-home-process.section";
-import { HOME_PAGE_DATA } from "@/content/pageContent/pageData/home.data";
 import { getServicePageData, SERVICE_PAGE_DATA } from "@/content/pageContent/pageData/service";
-import { COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
+import { SERVICE_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
 import { notFound } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 
@@ -31,9 +30,9 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       {pageData?.heatingSolutionDesignForYou && <HeatingDesignedSection data={pageData?.heatingSolutionDesignForYou} />}
       {pageData?.process && <WarmerHomeProcessSection data={pageData?.process} />}
       {pageData.testimonials && <TestimonialSection data={pageData.testimonials} />}
-      {(pageData.callToActionSection ?? HOME_PAGE_DATA.callToActionSection) && (
-        <div className={twMerge("w-full", COMMON_SECTION_PADDING_TOP_BOTTOM)}>
-          <CallToActionSection data={pageData.callToActionSection ?? HOME_PAGE_DATA.callToActionSection!} />
+      {pageData.callToActionSection && (
+        <div className={twMerge("w-full", SERVICE_SECTION_PADDING_TOP_BOTTOM)}>
+          <CallToActionSection data={pageData.callToActionSection} />
         </div>
       )}
       {pageData?.faq && <FaqSection data={pageData.faq} />}

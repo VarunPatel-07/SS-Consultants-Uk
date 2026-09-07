@@ -31,7 +31,7 @@ const lora = Lora({
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${plusJakarta.variable} ${lora.variable} h-full antialiased`}>
-      <body>
+      <body className="bg-(--ssc-uk-main-black-color)!">
         {" "}
         <SmoothScrollProvider>
           <NavbarSection />

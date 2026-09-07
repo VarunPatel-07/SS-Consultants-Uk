@@ -50,10 +50,7 @@ export function TestimonialSection({ data }: { data: TestimonialSection }) {
   return (
     <section
       ref={containerRef}
-      className={twMerge(
-        "overflow-hidden bg-(--ssc-uk-main-white-color) font-jakarta",
-        COMMON_SECTION_PADDING_TOP_BOTTOM,
-      )}
+      className={twMerge("overflow-hidden bg-background font-jakarta", COMMON_SECTION_PADDING_TOP_BOTTOM)}
       aria-labelledby="testimonial-title">
       <div className="ss-construction-uk-container">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
@@ -67,16 +64,16 @@ export function TestimonialSection({ data }: { data: TestimonialSection }) {
               )}
             </p>
           </div>
-          <div className="flex shrink-0 gap-3">
+          <div className="flex shrink-0 justify-end gap-3 self-end">
             <button
-              className="testimonials-prev inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-slate-300 text-slate-950 transition-colors hover:border-(--ssc-uk-main-highlight-color) hover:bg-(--ssc-uk-main-highlight-color) hover:text-(--ssc-uk-main-white-color) disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-100 disabled:text-slate-300 disabled:opacity-70 reveal-text-animation"
+              className="testimonials-prev inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border bg-(--ssc-uk-main-white-color) border-(--ssc-uk-main-white-color) text-(--ssc-uk-main-black-color) transition-colors hover:border-(--ssc-uk-main-highlight-color) hover:bg-(--ssc-uk-cta-button-background) hover:text-(--ssc-uk-main-white-color) disabled:cursor-not-allowed disabled:border-(--ssc-uk-border-color) disabled:bg-(--ssc-uk-surface-color) disabled:text-(--ssc-uk-muted-color) disabled:opacity-70 reveal-text-animation"
               type="button"
               disabled={isBeginning}
               aria-label="Previous testimonial">
               <ArrowLeft aria-hidden="true" className="h-5 w-5" />
             </button>
             <button
-              className="testimonials-next inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-slate-300 text-slate-950 transition-colors hover:border-(--ssc-uk-main-highlight-color) hover:bg-(--ssc-uk-main-highlight-color) hover:text-(--ssc-uk-main-white-color) disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-100 disabled:text-slate-300 disabled:opacity-70 reveal-text-animation"
+              className="testimonials-next inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border bg-(--ssc-uk-main-white-color) border-(--ssc-uk-main-white-color) text-(--ssc-uk-main-black-color) transition-colors hover:border-(--ssc-uk-main-highlight-color) hover:bg-(--ssc-uk-cta-button-background) hover:text-(--ssc-uk-main-white-color) disabled:cursor-not-allowed disabled:border-(--ssc-uk-border-color) disabled:bg-(--ssc-uk-surface-color) disabled:text-(--ssc-uk-muted-color) disabled:opacity-70 reveal-text-animation"
               type="button"
               disabled={isEnd}
               aria-label="Next testimonial">
@@ -85,6 +82,21 @@ export function TestimonialSection({ data }: { data: TestimonialSection }) {
           </div>
         </div>
 
+        {data.reviewSummary && (
+          <div className="mt-8 rounded-xl border border-(--ssc-uk-main-highlight-color) bg-(--ssc-uk-surface-color) p-6">
+            <p className="text-xl font-bold text-foreground">Rated {data.reviewSummary.rating}/5 by local homeowners</p>
+            <p className="mt-2 text-sm text-(--ssc-uk-muted-color)">
+              Google rating • {data.reviewSummary.count} reviews •{" "}
+              <a
+                href={data.reviewSummary.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-(--ssc-uk-main-highlight-color) underline underline-offset-4">
+                Read all reviews
+              </a>
+            </p>
+          </div>
+        )}
         <Swiper
           className="mt-10 !overflow-visible"
           modules={[Navigation]}
@@ -94,13 +106,13 @@ export function TestimonialSection({ data }: { data: TestimonialSection }) {
           spaceBetween={20}
           slidesPerView={1.08}
           breakpoints={{
-            640: { slidesPerView: 2, spaceBetween: 24 },
-            1024: { slidesPerView: 2.05, spaceBetween: 24 },
+            640: { slidesPerView: 1.25, spaceBetween: 24 },
+            1024: { slidesPerView: 2, spaceBetween: 24 },
             1200: { slidesPerView: 2.5, spaceBetween: 24 },
           }}>
-          {data.items.map(({ quote, name, location, service }) => (
+          {data.items.map(({ quote, name, location, service, date }) => (
             <SwiperSlide className="!h-auto reveal-animation" key={name}>
-              <article className="flex h-full  flex-col rounded-lg border border-slate-200 bg-(--ssc-uk-main-white-color) p-6 shadow-sm sm:p-7 md:rounded-xl lg:rounded-2xl">
+              <article className="flex h-full flex-col rounded-2xl border border-(--ssc-uk-border-color) bg-background p-6 shadow-[0_2px_4px_rgba(255,255,255,0.06)] sm:p-7">
                 <div className="w-full h-full flex flex-col items-start justify-between gap-5">
                   <div className="w-full">
                     <div className="flex gap-1 text-(--ssc-uk-main-highlight-color)" aria-label="5 out of 5 stars">
@@ -108,13 +120,19 @@ export function TestimonialSection({ data }: { data: TestimonialSection }) {
                         <Star aria-hidden="true" className="h-5 w-5 fill-current" key={index} />
                       ))}
                     </div>
-                    <p className="mt-7 text-left text-base md:text-lg leading-6 md:leading-8 text-slate-900">{quote}</p>
+                    <p className="mt-7 text-left text-lg lg:text-xl leading-8 text-foreground">{quote}</p>
                   </div>
-                  <div className="w-full flex items-center gap-4 border-t border-slate-200 pt-5">
+                  <div className="w-full flex items-center gap-4 border-t border-(--ssc-uk-border-color) pt-5">
                     <div className="text-left">
-                      <strong className="block text-base font-bold text-slate-950">{name}</strong>
-                      <span className="mt-1 block text-sm text-slate-600">
+                      <strong className="block text-base font-bold text-foreground">{name}</strong>
+                      <span className="mt-1 block text-sm text-(--ssc-uk-muted-color)">
                         {location} · {service}
+                        {date && (
+                          <>
+                            {" "}
+                            · <time dateTime={date}>{date}</time>
+                          </>
+                        )}
                       </span>
                     </div>
                   </div>

@@ -30,7 +30,17 @@ export const FAQ_DATA: FAQItem[] = [
   },
 ];
 
-export const HOME_PAGE_FAQ_DATA = FAQ_DATA;
+export const HOME_PAGE_FAQ_DATA: FAQItem[] = [
+  ...FAQ_DATA,
+  {
+    question: "How quickly can you provide a quotation?",
+    answer: "Call 07590 514937 or send an enquiry with your postcode and a description of the job. We’ll confirm the next steps and quotation timescale; installation quotes may need a home survey.",
+  },
+  {
+    question: "Do you offer emergency boiler repairs?",
+    answer: "For an urgent boiler breakdown, call 07590 514937 to check our earliest availability. We aim to offer same-day callouts where possible and will confirm a time window before attending.",
+  },
+];
 
 export const BOILER_SERVICE_FAQ_DATA = [
   {

@@ -50,7 +50,7 @@ export function FaqSection({ data }: { data: FAQSection }) {
   return (
     <section
       ref={containerRef}
-      className={twMerge("bg-(--ssc-uk-main-white-color) font-jakarta", COMMON_SECTION_PADDING_TOP_BOTTOM)}
+      className={twMerge("bg-background font-jakarta", COMMON_SECTION_PADDING_TOP_BOTTOM)}
       aria-labelledby="faq-title">
       <div className="ss-construction-uk-container grid gap-10 lg:gap-18 lg:grid-cols-[0.82fr_1.18fr]">
         <div className="self-start lg:sticky lg:top-28">
@@ -70,16 +70,16 @@ export function FaqSection({ data }: { data: FAQSection }) {
             return (
               <div
                 className={`reveal-animation overflow-hidden rounded-lg border bg-(--ssc-uk-gray-background-color) transition-colors duration-300 md:rounded-xl lg:rounded-2xl ${
-                  isOpen ? "border-(--ssc-uk-main-highlight-color)" : "border-slate-200"
+                  isOpen ? "border-(--ssc-uk-main-highlight-color)" : "border-(--ssc-uk-border-color)"
                 }`}
                 key={question}>
                 <button
                   type="button"
-                  className="flex w-full cursor-pointer items-center justify-between gap-6 px-6 py-5 text-left sm:px-7"
+                  className="flex w-full cursor-pointer items-center justify-between gap-6 px-6 py-6 text-left sm:px-7"
                   aria-expanded={isOpen}
                   aria-controls={answerId}
                   onClick={() => setOpenIndex(isOpen ? -1 : index)}>
-                  <span className="text-lg font-medium leading-tight tracking-[-0.02em] text-slate-950 sm:text-xl">
+                  <span className="text-xl font-semibold leading-snug tracking-[-0.02em] text-foreground sm:text-[22px]">
                     {question}
                   </span>
                   <FaqIcon isOpen={isOpen} />
@@ -89,7 +89,7 @@ export function FaqSection({ data }: { data: FAQSection }) {
                   className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
                   aria-hidden={!isOpen}>
                   <div className="min-h-0 overflow-hidden">
-                    <p className="border-t border-dashed border-slate-300 px-6 pb-6 pt-5 text-base leading-8 text-slate-700 sm:px-7">
+                    <p className="border-t border-dashed border-(--ssc-uk-border-color) px-6 pb-6 pt-5 text-base leading-8 text-(--ssc-uk-muted-color) sm:px-7">
                       {answer}
                     </p>
                   </div>

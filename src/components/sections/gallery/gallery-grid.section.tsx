@@ -1,9 +1,11 @@
 "use client";
 
+import { COMMON_BORDER_RADIUS } from "@/utils/constants/common.constants";
 import type { GalleryImage } from "@/utils/interface/gallery.interface";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
+import { twMerge } from "tailwind-merge";
 
 // The gallery is intentionally capped at three columns on larger screens.
 const getColumnCount = (width: number) => (width >= 640 ? 3 : 1);
@@ -29,18 +31,24 @@ function GalleryColumn({ images, columnIndex }: { images: GalleryImage[]; column
   });
 
   return (
-    <div className="relative" style={{ height: virtualizer.getTotalSize() }}>
+    <div className="relative min-w-0" style={{ height: virtualizer.getTotalSize() }}>
       {virtualizer.getVirtualItems().map((virtualItem) => {
         const item = images[virtualItem.index];
         return (
           <article
-            className="absolute left-0 w-full overflow-hidden rounded-xl border border-slate-200 bg-(--ssc-uk-main-white-color) shadow-sm transition-shadow hover:shadow-lg md:rounded-2xl"
+            className={twMerge("absolute left-0 top-0 w-full aspect-16/11 overflow-hidden", COMMON_BORDER_RADIUS)}
             data-index={virtualItem.index}
             key={`${columnIndex}-${item.id}`}
             ref={virtualizer.measureElement}
             style={{ transform: `translateY(${virtualItem.start - scrollMargin}px)` }}>
-            <div className="relative aspect-[16/11] w-full">
-              <Image className="object-cover" fill src={item.image} alt={item.alt} sizes="(max-width: 639px) 100vw, 33vw" />
+            <div className="relative aspect-16/11 w-full">
+              <Image
+                className="object-cover"
+                fill
+                src={item.image}
+                alt={item.alt}
+                sizes="(max-width: 639px) 100vw, 33vw"
+              />
             </div>
           </article>
         );

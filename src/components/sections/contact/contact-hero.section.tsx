@@ -25,7 +25,7 @@ export function ContactHeroSection({ data }: { data: HeroSectionData }) {
     <section
       ref={animationContainer}
       className={twMerge(
-        "relative overflow-hidden bg-(--ssc-uk-main-white-color) px-4 font-jakarta sm:px-8",
+        "relative overflow-hidden bg-background px-4 font-jakarta sm:px-8",
         COMMON_SECTION_PADDING_TOP_BOTTOM,
       )}
       aria-labelledby="contact-hero-title">
@@ -34,7 +34,7 @@ export function ContactHeroSection({ data }: { data: HeroSectionData }) {
         <div className="ss-construction-uk-container text-center">
           <h1
             id="contact-hero-title"
-            className=" text-[35px] font-bold leading-[1.04] tracking-[-0.045em] text-slate-950 sm:text-[38px] md:text-[42px] lg:text-[46px] xl:text-[68px] font-jakarta">
+            className=" text-[35px] font-bold leading-[1.04] tracking-[-0.045em] text-foreground sm:text-[38px] md:text-[42px] lg:text-[46px] xl:text-[68px] font-jakarta">
             <RichText
               content={data.header.title}
               parentWrapper="items-center! justify-center!"
@@ -42,7 +42,7 @@ export function ContactHeroSection({ data }: { data: HeroSectionData }) {
             />
           </h1>
           {data.header.description && (
-            <p className=" mx-auto mt-7 max-w-2xl text-lg leading-7 text-slate-700 sm:text-xl sm:leading-8 font-jakarta">
+            <p className=" mx-auto mt-7 max-w-2xl text-lg leading-7 text-(--ssc-uk-muted-color) sm:text-xl sm:leading-8 font-jakarta">
               <RichText
                 content={data.header.description}
                 parentWrapper="items-center! justify-center!"

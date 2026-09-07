@@ -23,7 +23,7 @@ export function GalleryHeroSection({ data }: { data: NonNullable<CommonPageDataI
     <section
       ref={animationContainer}
       className={twMerge(
-        "bg-(--ssc-uk-main-white-color) font-jakarta",
+        "bg-background font-jakarta",
         COMMON_SECTION_PADDING_TOP_BOTTOM,
         "pb-0!  sm:pb-0! md:pb-0! lg:pb-0! xl:pb-0!",
       )}
@@ -33,7 +33,7 @@ export function GalleryHeroSection({ data }: { data: NonNullable<CommonPageDataI
           <div className="mx-auto mb-10 max-w-2xl text-center sm:mb-14">
             <h1
               id="gallery-title"
-              className="mt-4 text-[35px] font-bold leading-[1.04] tracking-[-0.045em] text-slate-950 sm:text-[38px] md:text-[42px] lg:text-[46px] xl:text-[68px]">
+              className="mt-4 text-[35px] font-bold leading-[1.04] tracking-[-0.045em] text-foreground sm:text-[38px] md:text-[42px] lg:text-[46px] xl:text-[68px]">
               <RichText
                 content={data.header.title}
                 parentWrapper="items-center! justify-center!"
@@ -41,7 +41,7 @@ export function GalleryHeroSection({ data }: { data: NonNullable<CommonPageDataI
               />
             </h1>
             {data.header.description && (
-              <p className="mt-5 text-base leading-7 text-slate-600 sm:text-lg">
+              <p className="mt-5 text-base leading-7 text-(--ssc-uk-muted-color) sm:text-lg">
                 <RichText
                   content={data.header.description}
                   parentWrapper="items-center! justify-center!"
@@ -50,7 +50,7 @@ export function GalleryHeroSection({ data }: { data: NonNullable<CommonPageDataI
               </p>
             )}
           </div>
-          <div className="reveal-animation w-full xl:max-w-[80%] mx-auto">
+          <div className="reveal-animation w-full  mx-auto overflow-hidden">
             <GalleryGrid images={data.items} />
           </div>
         </div>

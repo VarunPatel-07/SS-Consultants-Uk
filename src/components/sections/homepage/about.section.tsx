@@ -43,11 +43,11 @@ export function AboutSection({ data }: { data: AboutSectionDataInterface }) {
     <section
       ref={containerRef}
       id="about"
-      className={twMerge("bg-[#020713]", COMMON_SECTION_PADDING_TOP_BOTTOM, COMMON_BORDER_RADIUS)}
+      className={twMerge("bg-(--ssc-uk-surface-color)", COMMON_SECTION_PADDING_TOP_BOTTOM, COMMON_BORDER_RADIUS)}
       aria-labelledby="about-title">
       <div className="ss-construction-uk-container grid items-stretch gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:gap-14 xl:gap-20">
         <div className="relative overflow-visible">
-          <div className={twMerge("overflow-hidden bg-slate-100", COMMON_BORDER_RADIUS)}>
+          <div className={twMerge("overflow-hidden bg-(--ssc-uk-surface-color)", COMMON_BORDER_RADIUS)}>
             <Image
               className="why-choose-us-reveal aspect-square h-full w-full object-cover object-center reveal-animation"
               src={aboutImage}
@@ -59,13 +59,13 @@ export function AboutSection({ data }: { data: AboutSectionDataInterface }) {
           {data.badge && (
             <div
               className={twMerge(
-                "why-choose-us-reveal absolute bottom-6 left-4 w-52 border border-slate-200 bg-white px-6 py-6 shadow-sm lg:-left-7 reveal-animation",
+                "why-choose-us-reveal absolute bottom-6 left-4 w-52 border border-(--ssc-uk-border-color) bg-(--ssc-uk-surface-color) px-6 py-6 shadow-sm lg:-left-7 reveal-animation",
                 COMMON_BORDER_RADIUS,
               )}>
               <strong className="block text-4xl font-bold leading-none text-(--ssc-uk-main-highlight-color) sm:text-5xl">
                 <RichText content={data.badge.title} commonChunkClassNames="reveal-text-animation" />
               </strong>
-              <span className="mt-3 block text-base text-slate-700">
+              <span className="mt-3 block text-base text-(--ssc-uk-muted-color)">
                 <RichText content={data.badge.description} commonChunkClassNames="reveal-text-animation" />
               </span>
             </div>
@@ -89,7 +89,7 @@ export function AboutSection({ data }: { data: AboutSectionDataInterface }) {
           {data?.cards && (
             <div
               className={twMerge(
-                "grid w-full overflow-hidden border border-slate-500 sm:grid-cols-2",
+                "grid w-full overflow-hidden border border-(--ssc-uk-border-color) sm:grid-cols-2",
                 COMMON_BORDER_RADIUS,
               )}>
               {data?.cards?.map(({ title, description, icon }, index) => {
@@ -97,7 +97,7 @@ export function AboutSection({ data }: { data: AboutSectionDataInterface }) {
 
                 return (
                   <div
-                    className={`flex items-center gap-4 border-slate-500 px-5 py-5 reveal-text-animation ${index > 0 ? "max-sm:border-t" : ""} ${index % 2 === 1 ? "sm:border-l" : ""} ${index >= 2 ? "sm:border-t" : ""}`}
+                    className={`flex items-center gap-4 border-(--ssc-uk-border-color) px-5 py-5 reveal-text-animation ${index > 0 ? "max-sm:border-t" : ""} ${index % 2 === 1 ? "sm:border-l" : ""} ${index >= 2 ? "sm:border-t" : ""}`}
                     key={title}>
                     <Icon
                       aria-hidden="true"
@@ -106,7 +106,7 @@ export function AboutSection({ data }: { data: AboutSectionDataInterface }) {
                     />
                     <div>
                       <strong className="block text-sm font-bold text-white sm:text-base font-jakarta">{title}</strong>
-                      <span className="mt-1 block text-xs text-slate-200 sm:text-sm font-jakarta">{description}</span>
+                      <span className="mt-1 block text-xs text-(--ssc-uk-muted-color) sm:text-sm font-jakarta">{description}</span>
                     </div>
                   </div>
                 );
@@ -128,7 +128,7 @@ export function AboutSection({ data }: { data: AboutSectionDataInterface }) {
               content={data.reassurance}
               commonChunkClassNames="reveal-text-animation"
               parentWrapper="!gap-2"
-              className="text-slate-200 font-jakarta"
+              className="text-(--ssc-uk-muted-color) font-jakarta"
             />
           )}
         </div>

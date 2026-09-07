@@ -6,7 +6,7 @@ const variantClasses: Record<NonNullable<TextChunk["variant"]>, string> = {
   bold: "font-bold",
   italic: "font-lora italic",
   brand: "font-lora font-bold italic text-(--ssc-uk-main-highlight-color)",
-  muted: "text-slate-600",
+  muted: "text-(--ssc-uk-muted-color)",
 };
 
 export function RichText({

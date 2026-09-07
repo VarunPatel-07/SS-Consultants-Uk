@@ -3,7 +3,7 @@ import { WhatOurServiceInclude } from "@/app/utils/interface/data.interface";
 import CommonSectionHeader from "@/components/sections/common/common-section-header";
 import { gsap } from "@/lib/gsap";
 import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
-import { COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
+import { COMMON_BORDER_RADIUS, SERVICE_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
 import { useGSAP } from "@gsap/react";
 import Image from "next/image";
 import { useRef } from "react";
@@ -39,7 +39,7 @@ export function InstallationIncludesSection({ data }: { data: WhatOurServiceIncl
   return (
     <section
       ref={containerRef}
-      className={twMerge("bg-(--ssc-uk-main-white-color) font-jakarta ", COMMON_SECTION_PADDING_TOP_BOTTOM)}
+      className={twMerge("bg-background font-jakarta ", SERVICE_SECTION_PADDING_TOP_BOTTOM)}
       aria-labelledby="installation-includes-title"
       style={{
         backgroundImage:
@@ -50,21 +50,24 @@ export function InstallationIncludesSection({ data }: { data: WhatOurServiceIncl
         <CommonSectionHeader data={data?.header} />
 
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {data?.installationSteps?.map(({ number, title, description, tags, image }) => (
+          {data?.installationSteps?.map(({ number, title, description, image }) => (
             <article
-              className="reveal-animation overflow-hidden rounded-lg border border-slate-200 bg-(--ssc-uk-main-white-color) md:rounded-xl lg:rounded-2xl"
+              className={twMerge(
+                "reveal-animation overflow-hidden border border-(--ssc-uk-border-color) bg-background",
+                COMMON_BORDER_RADIUS,
+              )}
               key={title}>
-              <div className="m-1.5 overflow-hidden rounded-lg md:rounded-xl lg:rounded-2xl">
-                <Image className="h-[150px] md:h-[200px] lg:h-[300px] w-full object-cover" src={image} alt={title} />
+              <div className="m-2 overflow-hidden rounded md:rounded-lg lg:rounded-xl xl:rounded-2xl">
+                <Image className="aspect-video h-auto w-full object-cover" src={image} alt={title} />
               </div>
               <div className="flex flex-col items-start justify-start lg:flex-row gap-5 px-6 pb-7 pt-5">
                 <span className="shrink-0 font-lora text-2xl md:text-4xl leading-none text-(--ssc-uk-main-highlight-color)">
                   {number}
                 </span>
                 <div className="flex min-w-0 flex-1 flex-col gap-4">
-                  <h3 className="text-xl font-bold leading-tight tracking-tight text-slate-950">{title}</h3>
-                  <p className="text-base leading-7 text-slate-600">{description}</p>
-                  {/* <p className="mt-auto text-xs font-semibold tracking-[0.16em] text-slate-500">{tags}</p> */}
+                  <h3 className="text-xl font-bold leading-tight tracking-tight text-foreground">{title}</h3>
+                  <p className="text-base leading-7 text-(--ssc-uk-muted-color)">{description}</p>
+                  {/* <p className="mt-auto text-xs font-semibold tracking-[0.16em] text-(--ssc-uk-muted-color)">{tags}</p> */}
                 </div>
               </div>
             </article>

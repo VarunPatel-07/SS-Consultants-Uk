@@ -12,7 +12,7 @@ import { HOME_PAGE_DATA } from "@/content/pageContent/pageData/home.data";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-(--ssc-uk-main-white-color)">
+    <main className="homepage min-h-screen bg-background">
       {HOME_PAGE_DATA.hero && <HeroSection data={HOME_PAGE_DATA.hero} />}
       {HOME_PAGE_DATA.experience && <ExperienceSection data={HOME_PAGE_DATA.experience} />}
       {HOME_PAGE_DATA.about && <AboutSection data={HOME_PAGE_DATA.about} />}

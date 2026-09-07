@@ -28,7 +28,7 @@ function CallToActionSection({ data }: { data: callToActionSectionInterface }) {
       <div className="ss-construction-uk-container">
         <div
           className={twMerge(
-            "w-full h-auto px-4 py-8 lg:py-13 md:px-8 lg:px-10  relative border border-slate-300 overflow-hidden flex flex-col items-center gap-10",
+            "w-full h-auto px-4 py-8 lg:py-13 md:px-8 lg:px-10  relative border border-(--ssc-uk-border-color) overflow-hidden flex flex-col items-center gap-10",
             COMMON_BORDER_RADIUS,
           )}>
           <HeroBgAbstract heroBackGroundGlow="opacity-70!" />

@@ -22,6 +22,7 @@ export interface CTA {
   classNames?: string;
   target?: "_blank" | "_self" | "_parent" | "_top";
   rel?: string;
+  theme?: "LIGHT" | "DARK";
 }
 
 export interface ServiceItem {
@@ -36,6 +37,7 @@ export interface FAQItem {
 }
 
 export interface TestimonialItem {
+  date?: string;
   quote: string;
   name: string;
   location: string;

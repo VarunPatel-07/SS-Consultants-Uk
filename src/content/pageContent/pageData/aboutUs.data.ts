@@ -61,7 +61,10 @@ export const ABOUT_PAGE_DATA: CommonPageDataInterface = {
     brands: BOILER_BRANDS,
   },
   services: {
-    header: { title: [[{ text: "Heating services for your home" }]] },
+    header: {
+      title: [[{ text: "Heating services for your home" }]],
+      description: [[{ text: "From routine servicing to complete installations, our local engineers help keep your home warm across Hatfield, Hertfordshire and London." }]],
+    },
     items: HEATING_SUPPORT_CARDS,
   },
   faq: {

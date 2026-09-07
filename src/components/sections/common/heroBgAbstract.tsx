@@ -22,8 +22,8 @@ function HeroBgAbstract({ className = "", heroBackGroundGlow }: { className?: st
         )}
         style={{
           background: `
-radial-gradient(circle at center, rgba(255,81,8,0.6) 0%, rgba(255,81,8,0.3) 30%, transparent 60%),
-linear-gradient(to top, #ff5108 0%, white 100%)
+radial-gradient(circle at center, rgba(93,187,174,0.6) 0%, rgba(93,187,174,0.3) 30%, transparent 60%),
+linear-gradient(to top, #5dbbae 0%, #131313 100%)
 `,
         }}
       />

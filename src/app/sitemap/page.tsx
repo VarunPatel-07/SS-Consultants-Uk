@@ -16,7 +16,7 @@ function SitemapLinks({ links }: { links: Array<{ label: string; href: string }>
     <div className="flex flex-wrap gap-3">
       {links.map(({ label, href }) => (
         <Link
-          className="group inline-flex min-h-12 items-center justify-between gap-8 rounded-full border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-900 transition-colors hover:border-(--ssc-uk-main-highlight-color) hover:bg-orange-50"
+          className="group inline-flex min-h-12 items-center justify-between gap-8 rounded-full border border-(--ssc-uk-border-color) px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:border-(--ssc-uk-main-highlight-color) hover:bg-(--ssc-uk-service-card-hover-background-color)"
           href={href}
           key={href}>
           <span>{label}</span>
@@ -32,20 +32,20 @@ function SitemapLinks({ links }: { links: Array<{ label: string; href: string }>
 export default function SitemapPage() {
   return (
     <>
-      <section className={twMerge("bg-(--ssc-uk-main-white-color) font-jakarta", COMMON_SECTION_PADDING_TOP_BOTTOM)}>
+      <section className={twMerge("bg-background font-jakarta", COMMON_SECTION_PADDING_TOP_BOTTOM)}>
         <div className="w-full py-12">
           <div className="ss-construction-uk-container" aria-labelledby="sitemap-title">
             <div className="max-w-3xl">
               <h1
                 id="sitemap-title"
-                className=" font-bold leading-[1.04] tracking-[-0.05em] text-slate-950 text-[35px] sm:text-[38px] md:text-[42px] lg:text-[46px] xl:text-[68px]">
+                className=" font-bold leading-[1.04] tracking-[-0.05em] text-foreground text-[35px] sm:text-[38px] md:text-[42px] lg:text-[46px] xl:text-[68px]">
                 Explore the full
                 <br />
                 <em className="font-lora font-bold italic text-(--ssc-uk-main-highlight-color)">
                   SS Consultants site.
                 </em>
               </h1>
-              <p className="mt-6 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
+              <p className="mt-6 max-w-2xl text-base leading-7 text-(--ssc-uk-muted-color) sm:text-lg">
                 Every page on the SS Consultants site, in one place - company pages, service pages and everything in
                 between, so you can find exactly what you&apos;re looking for.
               </p>
@@ -53,7 +53,7 @@ export default function SitemapPage() {
 
             <div className="mt-16 space-y-14 sm:mt-20 sm:space-y-20">
               <div aria-labelledby="company-pages-title">
-                <h2 id="company-pages-title" className="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
+                <h2 id="company-pages-title" className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
                   Company Pages
                 </h2>
                 <div className="mt-7">
@@ -62,7 +62,7 @@ export default function SitemapPage() {
               </div>
 
               <div aria-labelledby="services-pages-title">
-                <h2 id="services-pages-title" className="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
+                <h2 id="services-pages-title" className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
                   Services Pages
                 </h2>
                 <div className="mt-7">

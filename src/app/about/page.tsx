@@ -10,7 +10,7 @@ export default function AboutPage() {
   return (
     <>
       {ABOUT_PAGE_DATA.about && <AboutHeroSection data={ABOUT_PAGE_DATA.about} />}
-      {ABOUT_PAGE_DATA.experience && <ExperienceSection data={ABOUT_PAGE_DATA.experience} />}
+      {ABOUT_PAGE_DATA.experience && <ExperienceSection data={ABOUT_PAGE_DATA.experience} compact />}
       {ABOUT_PAGE_DATA.aboutPrinciples && <AboutPrinciplesSection data={ABOUT_PAGE_DATA.aboutPrinciples} />}
 
       {ABOUT_PAGE_DATA.services && <OurServiceSection data={ABOUT_PAGE_DATA.services} />}

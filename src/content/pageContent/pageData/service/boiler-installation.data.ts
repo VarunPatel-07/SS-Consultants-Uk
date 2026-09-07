@@ -33,7 +33,7 @@ export const BOILER_INSTALLATION_PAGE_DATA: CommonPageDataInterface = {
     },
     slug: "boiler-installation",
     label: "Boiler Installation",
-    cta: "Request a Free Quote",
+    cta: "Get a Boiler Installation Quote",
     heroImage: boilerInstallationHero,
     eyebrow: "Boiler installation across Hatfield, Hertfordshire & London",
     options: [
@@ -109,23 +109,19 @@ export const BOILER_INSTALLATION_PAGE_DATA: CommonPageDataInterface = {
     specifications: [
       {
         title: "Correct boiler sizing",
-        description:
-          "A boiler selected around your property size, insulation levels, number of rooms and expected hot-water demand. This helps avoid an underpowered system or unnecessary energy use from an oversized unit.",
+        description: "We match boiler output to your property and hot-water needs to avoid unnecessary energy use.",
       },
       {
         title: "Suitable pipework",
-        description:
-          "Correct pipe sizes and thoughtful routing help maintain reliable water flow throughout the system. We consider the layout of your home carefully so each part works smoothly together, room by room, year-round.",
+        description: "Correct pipe sizes and routing support reliable water flow throughout your home.",
       },
       {
         title: "Balanced radiator output",
-        description:
-          "Radiators are sized and positioned to distribute warmth effectively across each room. The result is a more even comfort, fewer cold spots and better control over everyday heating throughout the home.",
+        description: "We size and balance radiators for even warmth and fewer cold spots.",
       },
       {
         title: "Efficient system flow",
-        description:
-          "The system is configured to help your boiler operate efficiently and maintain consistent temperatures. Controls, valves and circulation are all considered as one coordinated system, not separate parts.",
+        description: "Controls, valves and circulation work together for consistent heating performance.",
       },
     ],
   },
@@ -188,27 +184,14 @@ export const BOILER_INSTALLATION_PAGE_DATA: CommonPageDataInterface = {
   },
   callToActionSection: {
     header: {
-      title: [
-        [{ text: "Ready" }, { text: "for a" }, { text: "boiler", variant: "brand" }, { text: "that's" }],
-        [
-          { text: "better",  },
-          { text: "suited", },
-          { text: "to your", variant: "brand" },
-          { text: "home?", variant: "brand" },
-        ],
-      ],
-      description: [
-        [
-          {
-            text: "Book a free home survey and get a clear, fixed-price recommendation for your new boiler, with no hidden costs and no pressure to buy.",
-          },
-        ],
-      ],
+      title: [[{ text: "Not sure which boiler is right for your home?" }], [{ text: "Let’s find the right fit.", variant: "brand" }]],
+      description: [[{ text: "Get a clear recommendation based on your property, hot-water needs and budget—without any pressure to buy." }]],
     },
     ctas: [
-      { label: "Request a Free Quote", href: "#contact", variant: "CTA_PRIMARY" },
+      { label: "Help Me Choose a Boiler", href: "#contact", variant: "CTA_PRIMARY" },
       { label: "Call 07590 514937", href: "tel:07590514937", variant: "CTA_SECONDARY" },
     ],
+    reassurance: "Free advice • No obligation • Local Gas Safe engineers",
   },
   faq: {
     header: {
