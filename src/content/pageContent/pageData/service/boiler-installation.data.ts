@@ -1,10 +1,10 @@
-import type { CommonPageDataInterface } from "@/app/utils/interface/page.interface";
 import boilerInstallationImage from "@/assets/images/webp/service/boiler-installation.webp";
 import centralHeatingImage from "@/assets/images/webp/service/central-heating.webp";
 import boilerInstallationHero from "@/assets/images/webp/service/hero-images/boiler-installation.webp";
 import underfloorHeatingImage from "@/assets/images/webp/service/underfloor-heating.webp";
 import { BOILER_INSTALLATION_FAQ_DATA } from "@/content/pageContent/faq.data";
 import { TESTIMONIALS } from "@/utils/constants/testimonial.constants";
+import type { CommonPageDataInterface } from "@/utils/interfacepage.interface";
 
 export const BOILER_INSTALLATION_PAGE_DATA: CommonPageDataInterface = {
   metadata: {
@@ -184,8 +184,17 @@ export const BOILER_INSTALLATION_PAGE_DATA: CommonPageDataInterface = {
   },
   callToActionSection: {
     header: {
-      title: [[{ text: "Not sure which boiler is right for your home?" }], [{ text: "Let’s find the right fit.", variant: "brand" }]],
-      description: [[{ text: "Get a clear recommendation based on your property, hot-water needs and budget—without any pressure to buy." }]],
+      title: [
+        [{ text: "Not sure which boiler is right for your home?" }],
+        [{ text: "Let’s find the right fit.", variant: "brand" }],
+      ],
+      description: [
+        [
+          {
+            text: "Get a clear recommendation based on your property, hot-water needs and budget—without any pressure to buy.",
+          },
+        ],
+      ],
     },
     ctas: [
       { label: "Help Me Choose a Boiler", href: "#contact", variant: "CTA_PRIMARY" },

@@ -1,10 +1,10 @@
 "use client";
 
-import type { FAQSection } from "@/app/utils/interface/data.interface";
 import { RichText } from "@/components/common/RichText";
 import { gsap } from "@/lib/gsap";
 import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
 import { COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
+import type { FAQSection } from "@/utils/interfacedata.interface";
 import { useGSAP } from "@gsap/react";
 import { useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";

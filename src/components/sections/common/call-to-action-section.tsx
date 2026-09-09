@@ -1,11 +1,11 @@
 "use client";
-import { callToActionSectionInterface } from "@/app/utils/interface/data.interface";
 import { CTAButton } from "@/components/common/CTAButton";
 import { RichText } from "@/components/common/RichText";
 import HeroBgAbstract from "@/components/sections/common/heroBgAbstract";
 import { gsap } from "@/lib/gsap";
 import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
 import { COMMON_BORDER_RADIUS } from "@/utils/constants/common.constants";
+import { callToActionSectionInterface } from "@/utils/interfacedata.interface";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import { twMerge } from "tailwind-merge";

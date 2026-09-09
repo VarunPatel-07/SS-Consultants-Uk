@@ -1,10 +1,10 @@
 "use client";
 
-import type { TestimonialSection } from "@/app/utils/interface/data.interface";
 import { RichText } from "@/components/common/RichText";
 import { gsap } from "@/lib/gsap";
 import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
 import { COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
+import { TestimonialSectionInterface } from "@/utils/interface//data.interface";
 import { useGSAP } from "@gsap/react";
 import { ArrowLeft, ArrowRight, Star } from "lucide-react";
 import { useRef, useState } from "react";
@@ -14,7 +14,7 @@ import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { twMerge } from "tailwind-merge";
 
-export function TestimonialSection({ data }: { data: TestimonialSection }) {
+export function TestimonialSection({ data }: { data: TestimonialSectionInterface }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
@@ -110,14 +110,20 @@ export function TestimonialSection({ data }: { data: TestimonialSection }) {
             1024: { slidesPerView: 2, spaceBetween: 24 },
             1200: { slidesPerView: 2.5, spaceBetween: 24 },
           }}>
-          {data.items.map(({ quote, name, location, service, date }) => (
+          {data.items.map(({ quote, name, location, service, date, rating = 5, designation }) => (
             <SwiperSlide className="!h-auto reveal-animation" key={name}>
               <article className="flex h-full flex-col rounded-2xl border border-(--ssc-uk-border-color) bg-background p-6 shadow-[0_2px_4px_rgba(255,255,255,0.06)] sm:p-7">
                 <div className="w-full h-full flex flex-col items-start justify-between gap-5">
                   <div className="w-full">
-                    <div className="flex gap-1 text-(--ssc-uk-main-highlight-color)" aria-label="5 out of 5 stars">
+                    <div
+                      className="flex gap-1 text-(--ssc-uk-main-highlight-color)"
+                      aria-label={`${rating} out of 5 stars`}>
                       {Array.from({ length: 5 }).map((_, index) => (
-                        <Star aria-hidden="true" className="h-5 w-5 fill-current" key={index} />
+                        <Star
+                          aria-hidden="true"
+                          className={`h-5 w-5 ${index < rating ? "fill-current" : "opacity-30"}`}
+                          key={index}
+                        />
                       ))}
                     </div>
                     <p className="mt-7 text-left text-lg lg:text-xl leading-8 text-foreground">{quote}</p>
@@ -125,15 +131,17 @@ export function TestimonialSection({ data }: { data: TestimonialSection }) {
                   <div className="w-full flex items-center gap-4 border-t border-(--ssc-uk-border-color) pt-5">
                     <div className="text-left">
                       <strong className="block text-base font-bold text-foreground">{name}</strong>
-                      <span className="mt-1 block text-sm text-(--ssc-uk-muted-color)">
-                        {location} · {service}
-                        {date && (
-                          <>
-                            {" "}
-                            · <time dateTime={date}>{date}</time>
-                          </>
-                        )}
-                      </span>
+                      {(designation || location || service || date) && (
+                        <span className="mt-1 block text-sm text-(--ssc-uk-muted-color)">
+                          {designation || [location, service].filter(Boolean).join(" · ")}
+                          {date && (
+                            <>
+                              {" "}
+                              · <time dateTime={date}>{date}</time>
+                            </>
+                          )}
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>

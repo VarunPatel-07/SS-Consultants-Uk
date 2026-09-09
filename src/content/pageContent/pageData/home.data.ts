@@ -1,4 +1,3 @@
-import type { CommonPageDataInterface } from "@/app/utils/interface/page.interface";
 import installingBoilerImage from "@/assets/images/webp/installing-boiler-740X790.webp";
 import {
   ABOUT_FEATURES,
@@ -9,6 +8,7 @@ import {
   TESTIMONIALS,
 } from "@/content/pageContent/common.data";
 import { HOME_PAGE_FAQ_DATA } from "@/content/pageContent/faq.data";
+import type { CommonPageDataInterface } from "@/utils/interface/page.interface";
 
 export const HOME_PAGE_DATA: CommonPageDataInterface = {
   metadata: {

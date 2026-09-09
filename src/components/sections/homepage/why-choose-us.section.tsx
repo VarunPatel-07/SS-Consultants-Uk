@@ -1,12 +1,13 @@
 "use client";
 
-import type { WhyChooseUsSectionData } from "@/app/utils/interface/data.interface";
 import whyChooseUsImage from "@/assets/images/webp/why-choose-us.webp";
 import { RichText } from "@/components/common/RichText";
+import { getPhoneHref, useSiteSettings } from "@/components/providers/site-settings-provider";
 import CTAButton from "@/components/ui/ctaButton";
 import { gsap } from "@/lib/gsap";
 import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
 import { COMMON_BORDER_RADIUS, COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
+import type { WhyChooseUsSectionData } from "@/utils/interfacedata.interface";
 import { useGSAP } from "@gsap/react";
 import { CalendarDays, MapPin, ShieldCheck, UserRound, WalletCards } from "lucide-react";
 import Image from "next/image";
@@ -16,6 +17,7 @@ import { twMerge } from "tailwind-merge";
 const FEATURE_ICONS = [ShieldCheck, WalletCards, UserRound, ShieldCheck, CalendarDays, MapPin];
 
 export function WhyChooseUsSection({ data }: { data: WhyChooseUsSectionData }) {
+  const { phone } = useSiteSettings();
   const containerRef = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -104,8 +106,8 @@ export function WhyChooseUsSection({ data }: { data: WhyChooseUsSectionData }) {
             <CTAButton btnStyle="CTA_PRIMARY" href="#contact">
               Request a Free Quote
             </CTAButton>
-            <CTAButton btnStyle="CTA_SECONDARY" theme="LIGHT" href="tel:07590514937">
-              Call 07590 514937
+            <CTAButton btnStyle="CTA_SECONDARY" theme="LIGHT" href={getPhoneHref(phone)}>
+              Call {phone}
             </CTAButton>
           </div>
         </div>

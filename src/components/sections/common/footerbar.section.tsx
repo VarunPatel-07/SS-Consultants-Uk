@@ -1,10 +1,16 @@
+"use client";
+
 import logo from "@/assets/images/logo/ss-consultants-logo-black-trasperent.png";
-import { FOOTER_SERVICE_LINKS, NAVIGATION_LINKS } from "@/content/pageContent/common.data";
+import { FOOTER_SERVICE_LINKS } from "@/content/pageContent/common.data";
+import { getPhoneHref, useSiteSettings } from "@/components/providers/site-settings-provider";
 import { ChevronDown, Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 export function FooterBarSection() {
+  const { email, navigation, phone } = useSiteSettings();
+  const serviceLinks = navigation.find((item) => item.children?.length)?.children ?? FOOTER_SERVICE_LINKS;
+
   return (
     <footer
       className="w-full bg-(--ssc-uk-main-black-color)! overflow-hidden  pt-10 font-jakarta text-foreground/85 sm:px-8 sm:pt-12"
@@ -34,24 +40,24 @@ export function FooterBarSection() {
             </div>
           </div>
 
-          <FooterLinkColumn title="Navigation" links={NAVIGATION_LINKS} />
+          <FooterLinkColumn title="Navigation" links={navigation} />
 
-          <FooterLinkColumn title="Services" links={FOOTER_SERVICE_LINKS} />
+          <FooterLinkColumn title="Services" links={serviceLinks} />
 
           <div>
             <h2 className="text-lg font-bold text-foreground">Contact</h2>
             <div className="mt-4 space-y-5">
               <a
                 className="flex items-center gap-3 text-[17px] transition-colors hover:text-(--ssc-uk-main-highlight-color)"
-                href="tel:07590514937">
+                href={getPhoneHref(phone)}>
                 <Phone className="h-6 w-6 shrink-0 text-(--ssc-uk-main-highlight-color)" />
-                07590 514937
+                {phone}
               </a>
               <a
                 className="flex items-center gap-3 text-[17px] transition-colors hover:text-(--ssc-uk-main-highlight-color)"
-                href="mailto:info@sscukltd.com">
+                href={`mailto:${email}`}>
                 <Mail className="h-6 w-6 shrink-0 text-(--ssc-uk-main-highlight-color)" />
-                info@sscukltd.com
+                {email}
               </a>
               <div className="flex items-center gap-3 text-[17px]">
                 <MapPin className="h-6 w-6 shrink-0 text-(--ssc-uk-main-highlight-color)" />

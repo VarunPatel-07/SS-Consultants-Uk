@@ -1,6 +1,6 @@
 "use client";
 
-import type { CommonPageDataInterface } from "@/app/utils/interface/page.interface";
+import { getPhoneHref, useSiteSettings } from "@/components/providers/site-settings-provider";
 import { BOILER_SERVICES } from "@/content/pageContent/common.data";
 import { gsap } from "@/lib/gsap";
 import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
@@ -9,7 +9,8 @@ import { useGSAP } from "@gsap/react";
 import { useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
-export function ConsultationSection({ data, serviceName }: { data?: CommonPageDataInterface["consultation"]; serviceName?: string }) {
+export function ConsultationSection({ serviceName }: { serviceName?: string }) {
+  const siteSettings = useSiteSettings();
   const [subject, setSubject] = useState("");
   const [selectedService, setSelectedService] = useState(serviceName ?? "");
   useEffect(() => {
@@ -24,8 +25,8 @@ export function ConsultationSection({ data, serviceName }: { data?: CommonPageDa
     return () => window.removeEventListener("boiler-quote-requested", selectBoiler);
   }, []);
   const containerRef = useRef<HTMLElement>(null);
-  const email = data?.email ?? "info@sscukltd.com";
-  const phone = data?.phone ?? "07590 514937";
+  const email = siteSettings.email;
+  const phone = siteSettings.phone;
 
   useGSAP(
     () => {
@@ -86,7 +87,7 @@ export function ConsultationSection({ data, serviceName }: { data?: CommonPageDa
                   <p className="mt-10 text-sm text-(--ssc-uk-main-black-color)">Call us</p>
                   <a
                     className="mt-2 block text-2xl font-bold tracking-tight text-(--ssc-uk-main-black-color) hover:underline sm:text-3xl transition-all"
-                    href={`tel:${phone.replace(/\s/g, "")}`}>
+                    href={getPhoneHref(phone)}>
                     {phone}
                   </a>
                 </div>

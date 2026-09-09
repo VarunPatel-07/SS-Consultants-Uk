@@ -1,10 +1,10 @@
+import type { CommonPageDataInterface } from "@/utils/interfacepage.interface";
 import { BOILER_BREAKDOWN_REPAIRS_PAGE_DATA } from "./boiler-breakdown-repairs.data";
 import { BOILER_INSTALLATION_PAGE_DATA } from "./boiler-installation.data";
 import { BOILER_SERVICING_PAGE_DATA } from "./boiler-servicing.data";
 import { CENTRAL_HEATING_PAGE_DATA } from "./central-heating.data";
 import { POWERFLUSHING_PAGE_DATA } from "./powerflushing.data";
 import { UNDERFLOOR_HEATING_PAGE_DATA } from "./underfloor-heating.data";
-import type { CommonPageDataInterface } from "@/app/utils/interface/page.interface";
 
 export const SERVICE_PAGE_DATA: CommonPageDataInterface[] = [
   BOILER_SERVICING_PAGE_DATA,

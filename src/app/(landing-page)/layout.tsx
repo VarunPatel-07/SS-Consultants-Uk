@@ -1,9 +1,11 @@
 import { FooterBarSection } from "@/components/sections/common/footerbar.section";
 import { NavbarSection } from "@/components/sections/common/navbar.section";
 import SmoothScrollProvider from "@/components/sections/common/smoothScrollProvider";
+import { SiteSettingsProvider } from "@/components/providers/site-settings-provider";
+import { getWebsiteSettings } from "@/lib/payload/site-settings";
 import type { Metadata } from "next";
 import { Lora, Plus_Jakarta_Sans } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ssc-uk.netlify.app";
 const META_IMAGE = "/images/meta-image.png";
@@ -42,16 +44,22 @@ const lora = Lora({
   display: "swap",
 });
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export const revalidate = 300;
+
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const siteSettings = await getWebsiteSettings();
+
   return (
     <html lang="en" className={`${plusJakarta.variable} ${lora.variable} h-full antialiased`}>
       <body className="bg-(--ssc-uk-main-black-color)!">
         {" "}
-        <SmoothScrollProvider>
-          <NavbarSection />
-          {children}
-          <FooterBarSection />
-        </SmoothScrollProvider>
+        <SiteSettingsProvider settings={siteSettings}>
+          <SmoothScrollProvider>
+            <NavbarSection navigation={siteSettings.navigation} />
+            {children}
+            <FooterBarSection />
+          </SmoothScrollProvider>
+        </SiteSettingsProvider>
       </body>
     </html>
   );

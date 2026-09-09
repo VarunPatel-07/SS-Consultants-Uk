@@ -1,10 +1,12 @@
-import type { CommonPageDataInterface } from "@/app/utils/interface/page.interface";
-import boilerDiagnosisImage from "@/assets/images/webp/service/boiler-servicing.webp";
-import boilerComponentImage from "@/assets/images/webp/service/hero-images/boiler-servicing.webp";
-import boilerServicingHero from "@/assets/images/webp/service/hero-images/boiler-servicing.webp";
 import boilerRepairImage from "@/assets/images/webp/service/boiler-breakdown-repairs.webp";
+import boilerDiagnosisImage from "@/assets/images/webp/service/boiler-servicing.webp";
+import {
+  default as boilerComponentImage,
+  default as boilerServicingHero,
+} from "@/assets/images/webp/service/hero-images/boiler-servicing.webp";
 import { BOILER_SERVICE_FAQ_DATA } from "@/content/pageContent/faq.data";
 import { TESTIMONIALS } from "@/utils/constants/testimonial.constants";
+import type { CommonPageDataInterface } from "@/utils/interfacepage.interface";
 
 export const BOILER_SERVICING_PAGE_DATA: CommonPageDataInterface = {
   metadata: {
@@ -112,7 +114,8 @@ export const BOILER_SERVICING_PAGE_DATA: CommonPageDataInterface = {
       },
       {
         title: "Usage and condition",
-        description: "We assess usage and wear before recommending an essential inspection or full maintenance service.",
+        description:
+          "We assess usage and wear before recommending an essential inspection or full maintenance service.",
       },
       {
         title: "Safety and compliance",
@@ -120,7 +123,8 @@ export const BOILER_SERVICING_PAGE_DATA: CommonPageDataInterface = {
       },
       {
         title: "Ongoing reliability",
-        description: "Regular servicing helps catch faults early and supports your manufacturer’s warranty requirements.",
+        description:
+          "Regular servicing helps catch faults early and supports your manufacturer’s warranty requirements.",
       },
     ],
   },
@@ -185,8 +189,13 @@ export const BOILER_SERVICING_PAGE_DATA: CommonPageDataInterface = {
   },
   callToActionSection: {
     header: {
-      title: [[{ text: "Time for your annual boiler service?" }], [{ text: "Keep your heating running reliably.", variant: "brand" }]],
-      description: [[{ text: "Book a professional boiler inspection and service with a local Gas Safe registered engineer." }]],
+      title: [
+        [{ text: "Time for your annual boiler service?" }],
+        [{ text: "Keep your heating running reliably.", variant: "brand" }],
+      ],
+      description: [
+        [{ text: "Book a professional boiler inspection and service with a local Gas Safe registered engineer." }],
+      ],
     },
     ctas: [
       { label: "Book a Boiler Service", href: "#contact", variant: "CTA_PRIMARY" },

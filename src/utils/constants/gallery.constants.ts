@@ -10,7 +10,7 @@ import galleryImage09 from "@/assets/images/webp/gallery/gallery-09.webp";
 import galleryImage10 from "@/assets/images/webp/gallery/gallery-10.webp";
 import galleryImage11 from "@/assets/images/webp/gallery/gallery-11.webp";
 import galleryImage12 from "@/assets/images/webp/gallery/gallery-12.webp";
-import type { GalleryImage } from "@/utils/interface/gallery.interface";
+import type { GalleryImage } from "@/utils/interface//gallery.interface";
 
 export const GALLERY_IMAGES: GalleryImage[] = [
   { id: "gallery-01", image: galleryImage01, alt: "SS Consultants heating project photo 1" },

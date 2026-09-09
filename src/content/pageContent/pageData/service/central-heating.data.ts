@@ -1,10 +1,10 @@
-import type { CommonPageDataInterface } from "@/app/utils/interface/page.interface";
 import boilerInstallationImage from "@/assets/images/webp/service/boiler-installation.webp";
 import centralHeatingImage from "@/assets/images/webp/service/central-heating.webp";
 import centralHeatingHero from "@/assets/images/webp/service/hero-images/central-heating.webp";
 import underfloorHeatingImage from "@/assets/images/webp/service/underfloor-heating.webp";
 import { CENTRAL_HEATING_FAQ_DATA } from "@/content/pageContent/faq.data";
 import { TESTIMONIALS } from "@/utils/constants/testimonial.constants";
+import type { CommonPageDataInterface } from "@/utils/interfacepage.interface";
 
 export const CENTRAL_HEATING_PAGE_DATA: CommonPageDataInterface = {
   metadata: {
@@ -187,8 +187,13 @@ export const CENTRAL_HEATING_PAGE_DATA: CommonPageDataInterface = {
   },
   callToActionSection: {
     header: {
-      title: [[{ text: "Planning a heating upgrade?" }], [{ text: "Make every room more comfortable.", variant: "brand" }]],
-      description: [[{ text: "Talk to our local engineers about radiators, pipework and controls tailored to your home." }]],
+      title: [
+        [{ text: "Planning a heating upgrade?" }],
+        [{ text: "Make every room more comfortable.", variant: "brand" }],
+      ],
+      description: [
+        [{ text: "Talk to our local engineers about radiators, pipework and controls tailored to your home." }],
+      ],
     },
     ctas: [
       { label: "Get a Heating Quote", href: "#contact", variant: "CTA_PRIMARY" },

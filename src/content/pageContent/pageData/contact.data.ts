@@ -1,11 +1,20 @@
-import type { CommonPageDataInterface } from "@/app/utils/interface/page.interface";
+import type { CommonPageDataInterface } from "@/utils/interfacepage.interface";
 
 export const CONTACT_PAGE_DATA: CommonPageDataInterface = {
-  metadata: { title: "Contact SS Consultants", description: "Tell us what you need and get clear, practical heating advice." },
+  metadata: {
+    title: "Contact SS Consultants",
+    description: "Tell us what you need and get clear, practical heating advice.",
+  },
   hero: {
     header: {
       title: [[{ text: "Let's make your home" }], [{ text: "comfortable.", variant: "brand" }]],
-      description: [[{ text: "Tell us what you need and we'll provide clear advice, careful workmanship and dependable heating support." }]],
+      description: [
+        [
+          {
+            text: "Tell us what you need and we'll provide clear advice, careful workmanship and dependable heating support.",
+          },
+        ],
+      ],
     },
     ctas: [
       { label: "Start a Conversation", href: "#contact", variant: "CTA_PRIMARY" },

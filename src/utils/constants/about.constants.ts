@@ -1,4 +1,4 @@
-import type { AboutFeature } from "@/utils/interface/about.interface";
+import type { AboutFeature } from "@/utils/interface//about.interface";
 
 export const ABOUT_FEATURES: AboutFeature[] = [
   { title: "Gas Safe registered", description: "Qualified heating professionals", icon: "shield" },

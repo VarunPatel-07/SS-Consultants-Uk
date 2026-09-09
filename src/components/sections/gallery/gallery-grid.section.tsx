@@ -1,7 +1,7 @@
 "use client";
 
 import { COMMON_BORDER_RADIUS } from "@/utils/constants/common.constants";
-import type { GalleryImage } from "@/utils/interface/gallery.interface";
+import type { GalleryImage } from "@/utils/interface//gallery.interface";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";

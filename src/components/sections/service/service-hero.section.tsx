@@ -1,10 +1,11 @@
 "use client";
-import type { ServiceHeroSectionInterface } from "@/app/utils/interface/data.interface";
 import { RichText } from "@/components/common/RichText";
+import { getPhoneHref, useSiteSettings } from "@/components/providers/site-settings-provider";
 import CTAButton from "@/components/ui/ctaButton";
 import { gsap } from "@/lib/gsap";
 import { COMMON_REVEL_ANIMATION } from "@/utils/constants/animation.constant";
 import { COMMON_BORDER_RADIUS, COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
+import type { ServiceHeroSectionInterface } from "@/utils/interfacedata.interface";
 import { useGSAP } from "@gsap/react";
 import { CheckCircle2 } from "lucide-react";
 import Image from "next/image";
@@ -12,6 +13,7 @@ import { useRef } from "react";
 import { twMerge } from "tailwind-merge";
 
 export function ServiceHeroSection({ service }: { service: ServiceHeroSectionInterface }) {
+  const { phone } = useSiteSettings();
   const animationContainer = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -51,8 +53,8 @@ export function ServiceHeroSection({ service }: { service: ServiceHeroSectionInt
               <CTAButton btnStyle="CTA_PRIMARY" href="#contact" className="w-fit">
                 {service.cta}
               </CTAButton>
-              <CTAButton btnStyle="CTA_SECONDARY" theme="LIGHT" className="w-fit" href="tel:07590514937">
-                Call 07590 514937
+              <CTAButton btnStyle="CTA_SECONDARY" theme="LIGHT" className="w-fit" href={getPhoneHref(phone)}>
+                Call {phone}
               </CTAButton>
             </div>
 

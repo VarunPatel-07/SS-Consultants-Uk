@@ -1,10 +1,10 @@
 "use client";
-import { OurServicesSectionInterface } from "@/app/utils/interface/data.interface";
 import CommonSectionHeader from "@/components/sections/common/common-section-header";
 import CtaServiceButton from "@/components/ui/ctaServiceBtn";
 import { gsap } from "@/lib/gsap";
 import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
 import { COMMON_BORDER_RADIUS, COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
+import { OurServicesSectionInterface } from "@/utils/interfacedata.interface";
 import { useGSAP } from "@gsap/react";
 import Image from "next/image";
 import { useRef } from "react";

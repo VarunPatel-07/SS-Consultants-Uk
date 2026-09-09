@@ -1,10 +1,5 @@
-import { AboutFeature } from "@/utils/interface/about.interface";
-import { BoilerOption } from "@/utils/interface/boiler.interface";
-import { HeatingSupportCard, InstallationInclude } from "@/utils/interface/common.interface";
-import { BoilerBrand } from "@/utils/interface/homepage.interface";
-import { WhyChooseUsPoint } from "@/utils/interface/why-choose-us.interface";
-import { Metadata } from "next";
-import type { StaticImageData } from "next/image";
+import { AboutFeature } from "@/utils/interface//about.interface";
+import { BoilerOption } from "@/utils/interface//boiler.interface";
 import type {
   CTA,
   FAQItem,
@@ -13,7 +8,12 @@ import type {
   ServiceItem,
   TestimonialItem,
   TextChunk,
-} from "./common.interface";
+} from "@/utils/interface//common.interface";
+import { HeatingSupportCard, InstallationInclude } from "@/utils/interface//common.interface";
+import { BoilerBrand } from "@/utils/interface//homepage.interface";
+import { WhyChooseUsPoint } from "@/utils/interface//why-choose-us.interface";
+import { Metadata } from "next";
+import type { StaticImageData } from "next/image";
 
 export interface ImageItem {
   id: string;
@@ -46,7 +46,7 @@ export interface FAQSection {
   faqsItems: FAQItem[];
 }
 
-export interface TestimonialSection {
+export interface TestimonialSectionInterface {
   reviewSummary?: { rating: number; count: number; url: string };
   header: SectionHeader;
   items: TestimonialItem[];
@@ -60,7 +60,8 @@ export interface ProcessSection {
 export interface HeroSection {
   header: SectionHeader;
   eyebrow?: string;
-  ctas?: Array<{ label: string; href: string; variant: "CTA_PRIMARY" | "CTA_SECONDARY"; theme?: "LIGHT" | "DARK" }>;
+  reassurance?: string;
+  ctas?: CTA[];
   services?: ServiceItem[];
   image?: { src: StaticImageData; alt: string; width: number; height: number };
 }
@@ -70,7 +71,7 @@ export interface AboutSectionDataInterface {
   eyebrow?: TextChunk[][];
   badge?: { title: TextChunk[][]; description: TextChunk[][] };
   reassurance?: TextChunk[][];
-  cta?: { label: string; href: string; variant: "CTA_PRIMARY" | "CTA_SECONDARY"; theme?: "LIGHT" | "DARK" }[];
+  cta?: CTA[];
   cards?: AboutFeature[];
 }
 
@@ -84,7 +85,7 @@ export interface AboutPrinciplesSectionData {
 export interface ExperienceSectionData {
   header: SectionHeader;
   eyebrow: TextChunk[][];
-  callout: { header: SectionHeader; cta: CTA };
+  callout: { header: SectionHeader; cta?: CTA };
   brands: BoilerBrand[];
 }
 
@@ -138,7 +139,7 @@ export interface CommonPageDataInterface {
   callToActionSection?: callToActionSectionInterface;
   whyChooseUs?: WhyChooseUsSectionData;
   process?: ProcessSection;
-  testimonials?: TestimonialSection;
+  testimonials?: TestimonialSectionInterface;
   faq?: FAQSection;
   gallery?: { header: SectionHeader; items: ImageItem[] };
   consultation?: { email: string; phone: string };

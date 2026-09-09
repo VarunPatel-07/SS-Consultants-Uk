@@ -1,10 +1,10 @@
-import type { CommonPageDataInterface } from "@/app/utils/interface/page.interface";
 import boilerInstallationImage from "@/assets/images/webp/service/boiler-installation.webp";
 import centralHeatingImage from "@/assets/images/webp/service/central-heating.webp";
 import powerflushingHero from "@/assets/images/webp/service/hero-images/powerflushing.webp";
 import powerflushingImage from "@/assets/images/webp/service/powerflushing.webp";
 import { POWERFLUSHING_FAQ_DATA } from "@/content/pageContent/faq.data";
 import { TESTIMONIALS } from "@/utils/constants/testimonial.constants";
+import type { CommonPageDataInterface } from "@/utils/interfacepage.interface";
 
 export const POWERFLUSHING_PAGE_DATA: CommonPageDataInterface = {
   metadata: {
@@ -182,8 +182,17 @@ export const POWERFLUSHING_PAGE_DATA: CommonPageDataInterface = {
   },
   callToActionSection: {
     header: {
-      title: [[{ text: "Radiators not warming up properly?" }], [{ text: "Let’s restore your heating performance.", variant: "brand" }]],
-      description: [[{ text: "Tell us about cold spots, noisy pipes or slow heating. We’ll assess whether your system needs a powerflush." }]],
+      title: [
+        [{ text: "Radiators not warming up properly?" }],
+        [{ text: "Let’s restore your heating performance.", variant: "brand" }],
+      ],
+      description: [
+        [
+          {
+            text: "Tell us about cold spots, noisy pipes or slow heating. We’ll assess whether your system needs a powerflush.",
+          },
+        ],
+      ],
     },
     ctas: [
       { label: "Book a Powerflush Assessment", href: "#contact", variant: "CTA_PRIMARY" },

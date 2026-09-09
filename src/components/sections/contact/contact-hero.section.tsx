@@ -1,12 +1,12 @@
 "use client";
 import HeroBgAbstract from "@/components/sections/common/heroBgAbstract";
 
-import type { HeroSection as HeroSectionData } from "@/app/utils/interface/data.interface";
 import { RichText } from "@/components/common/RichText";
 import CTAButton from "@/components/ui/ctaButton";
 import { gsap } from "@/lib/gsap";
 import { COMMON_REVEL_ANIMATION } from "@/utils/constants/animation.constant";
 import { COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
+import type { HeroSection as HeroSectionData } from "@/utils/interfacedata.interface";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import { twMerge } from "tailwind-merge";

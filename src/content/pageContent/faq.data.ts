@@ -1,4 +1,4 @@
-import type { FAQItem } from "@/app/utils/interface/common.interface";
+import type { FAQItem } from "@/utils/interfacecommon.interface";
 
 export const FAQ_DATA: FAQItem[] = [
   {
@@ -34,11 +34,13 @@ export const HOME_PAGE_FAQ_DATA: FAQItem[] = [
   ...FAQ_DATA,
   {
     question: "How quickly can you provide a quotation?",
-    answer: "Call 07590 514937 or send an enquiry with your postcode and a description of the job. We’ll confirm the next steps and quotation timescale; installation quotes may need a home survey.",
+    answer:
+      "Call 07590 514937 or send an enquiry with your postcode and a description of the job. We’ll confirm the next steps and quotation timescale; installation quotes may need a home survey.",
   },
   {
     question: "Do you offer emergency boiler repairs?",
-    answer: "For an urgent boiler breakdown, call 07590 514937 to check our earliest availability. We aim to offer same-day callouts where possible and will confirm a time window before attending.",
+    answer:
+      "For an urgent boiler breakdown, call 07590 514937 to check our earliest availability. We aim to offer same-day callouts where possible and will confirm a time window before attending.",
   },
 ];
 
@@ -76,19 +78,23 @@ export const BOILER_SERVICE_FAQ_DATA = [
 export const BOILER_BREAKDOWN_REPAIRS_FAQ_DATA = [
   {
     question: "Are your engineers Gas Safe registered?",
-    answer: "Yes. Every engineer at SS Consultants is Gas Safe registered, so all repairs are carried out safely and in line with current regulations.",
+    answer:
+      "Yes. Every engineer at SS Consultants is Gas Safe registered, so all repairs are carried out safely and in line with current regulations.",
   },
   {
     question: "How quickly can you get to me?",
-    answer: "We aim to offer same-day callouts wherever possible, and always give you a clear time window before we arrive.",
+    answer:
+      "We aim to offer same-day callouts wherever possible, and always give you a clear time window before we arrive.",
   },
   {
     question: "Do you repair all boiler brands?",
-    answer: "Yes, we repair boilers from all major manufacturers, including Vaillant, Worcester Bosch, Baxi, Ideal and Main.",
+    answer:
+      "Yes, we repair boilers from all major manufacturers, including Vaillant, Worcester Bosch, Baxi, Ideal and Main.",
   },
   {
     question: "How much does a boiler repair cost?",
-    answer: "Cost depends on the fault and any parts required. We always give you a clear, upfront price before starting any work.",
+    answer:
+      "Cost depends on the fault and any parts required. We always give you a clear, upfront price before starting any work.",
   },
   {
     question: "What if my boiler can't be repaired?",
@@ -103,15 +109,18 @@ export const BOILER_BREAKDOWN_REPAIRS_FAQ_DATA = [
 export const BOILER_INSTALLATION_FAQ_DATA = [
   {
     question: "How much does a new boiler installation cost?",
-    answer: "Costs depend on your home, the boiler you choose and the complexity of the job. Every quote is fixed and explained clearly after a free home survey, with no hidden extras.",
+    answer:
+      "Costs depend on your home, the boiler you choose and the complexity of the job. Every quote is fixed and explained clearly after a free home survey, with no hidden extras.",
   },
   {
     question: "How long does an installation take?",
-    answer: "Most straightforward installations are completed within a day, though larger or more complex jobs may take longer. We'll give you a clear timescale before work begins.",
+    answer:
+      "Most straightforward installations are completed within a day, though larger or more complex jobs may take longer. We'll give you a clear timescale before work begins.",
   },
   {
     question: "Do I need a full system replacement or just a new boiler?",
-    answer: "It depends on the condition of your existing pipework, radiators and controls. We'll assess your system and recommend only what's actually needed.",
+    answer:
+      "It depends on the condition of your existing pipework, radiators and controls. We'll assess your system and recommend only what's actually needed.",
   },
   {
     question: "Do your installations include a guarantee?",
@@ -122,7 +131,8 @@ export const BOILER_INSTALLATION_FAQ_DATA = [
 export const UNDERFLOOR_HEATING_FAQ_DATA = [
   {
     question: "Is the fault likely to be under my floor?",
-    answer: "No. In our experience, if your underfloor heating used to work, 99% of the time the problem is above the floor—in the plumbing, wiring or controls—not the pipework itself.",
+    answer:
+      "No. In our experience, if your underfloor heating used to work, 99% of the time the problem is above the floor—in the plumbing, wiring or controls—not the pipework itself.",
   },
   {
     question: "Do you work with Heatmiser thermostats?",
@@ -134,7 +144,8 @@ export const UNDERFLOOR_HEATING_FAQ_DATA = [
   },
   {
     question: "What areas do you cover?",
-    answer: "We cover Hatfield, Welwyn, Welwyn Garden City, Stevenage, Edgware, Borehamwood, Radlett, Mill Hill, Stanmore, Harrow, Wembley, Golders Green, Cricklewood, Kilburn, West Hampstead, Hendon, Swiss Cottage, St John's Wood, Finchley and surrounding areas.",
+    answer:
+      "We cover Hatfield, Welwyn, Welwyn Garden City, Stevenage, Edgware, Borehamwood, Radlett, Mill Hill, Stanmore, Harrow, Wembley, Golders Green, Cricklewood, Kilburn, West Hampstead, Hendon, Swiss Cottage, St John's Wood, Finchley and surrounding areas.",
   },
   {
     question: "Is your work guaranteed?",
@@ -145,19 +156,23 @@ export const UNDERFLOOR_HEATING_FAQ_DATA = [
 export const POWERFLUSHING_FAQ_DATA = [
   {
     question: "What is powerflushing?",
-    answer: "It's a deep clean of your central heating system using high-velocity flow and cleansing chemicals to remove sludge, rust and debris that build up in pipework and radiators over time.",
+    answer:
+      "It's a deep clean of your central heating system using high-velocity flow and cleansing chemicals to remove sludge, rust and debris that build up in pipework and radiators over time.",
   },
   {
     question: "How do I know if I need one?",
-    answer: "Cold spots on radiators, a noisy boiler, slow heat-up times or frequent breakdowns are all common signs your system needs a powerflush.",
+    answer:
+      "Cold spots on radiators, a noisy boiler, slow heat-up times or frequent breakdowns are all common signs your system needs a powerflush.",
   },
   {
     question: "How long does it take?",
-    answer: "Most powerflushes are completed within a day, depending on the size of your system and how many radiators you have.",
+    answer:
+      "Most powerflushes are completed within a day, depending on the size of your system and how many radiators you have.",
   },
   {
     question: "Will it damage my radiators or pipework?",
-    answer: "No, powerflushing is a safe, established process using controlled flow and cleaning chemicals designed specifically for central heating systems.",
+    answer:
+      "No, powerflushing is a safe, established process using controlled flow and cleaning chemicals designed specifically for central heating systems.",
   },
   {
     question: "Do you add inhibitor afterwards?",
@@ -168,19 +183,23 @@ export const POWERFLUSHING_FAQ_DATA = [
 export const CENTRAL_HEATING_FAQ_DATA = [
   {
     question: "Do I need a new boiler for a new central heating system?",
-    answer: "Not always. If your existing boiler has enough capacity and is in good condition, we can often extend from it rather than replace it.",
+    answer:
+      "Not always. If your existing boiler has enough capacity and is in good condition, we can often extend from it rather than replace it.",
   },
   {
     question: "Can you extend my heating to a loft conversion or extension?",
-    answer: "Yes, this is one of our most common jobs—we assess your existing system's capacity before recommending the right approach.",
+    answer:
+      "Yes, this is one of our most common jobs—we assess your existing system's capacity before recommending the right approach.",
   },
   {
     question: "How long does a full installation take?",
-    answer: "This depends on the size of your home and system, but we'll always give you a clear timescale before work begins.",
+    answer:
+      "This depends on the size of your home and system, but we'll always give you a clear timescale before work begins.",
   },
   {
     question: "Will the work disrupt my home?",
-    answer: "We take care to protect your home throughout and keep disruption to a minimum, but a full installation does involve some short-term mess and noise.",
+    answer:
+      "We take care to protect your home throughout and keep disruption to a minimum, but a full installation does involve some short-term mess and noise.",
   },
   {
     question: "Do installations include a guarantee?",

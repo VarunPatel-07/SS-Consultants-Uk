@@ -1,10 +1,10 @@
 "use client";
-import { ExperienceSectionData } from "@/app/utils/interface/data.interface";
 import { RichText } from "@/components/common/RichText";
 import CTAButton from "@/components/ui/ctaButton";
 import { gsap } from "@/lib/gsap";
 import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
 import { COMMON_BORDER_RADIUS, COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
+import { ExperienceSectionData } from "@/utils/interface/data.interface";
 import { useGSAP } from "@gsap/react";
 import { CircleHelp } from "lucide-react";
 import Image from "next/image";
@@ -13,6 +13,7 @@ import { twMerge } from "tailwind-merge";
 
 export function ExperienceSection({ data, compact = false }: { data: ExperienceSectionData; compact?: boolean }) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const calloutCta = data.callout.cta;
 
   useGSAP(
     () => {
@@ -87,12 +88,14 @@ export function ExperienceSection({ data, compact = false }: { data: ExperienceS
                   parentWrapper="!gap-0"
                 />
               </p>
-              <CTAButton
-                btnStyle={data.callout.cta.variant}
-                href={data.callout.cta.href}
-                className="mt-4 w-fit reveal-text-animation">
-                {data.callout.cta.label}
-              </CTAButton>
+              {calloutCta && (
+                <CTAButton
+                  btnStyle={calloutCta.variant}
+                  href={calloutCta.href}
+                  className="mt-4 w-fit reveal-text-animation">
+                  {calloutCta.label}
+                </CTAButton>
+              )}
             </div>
           </div>
         </div>

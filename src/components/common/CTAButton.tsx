@@ -1,5 +1,5 @@
-import type { CTA } from "@/app/utils/interface/common.interface";
 import ExistingCTAButton from "@/components/ui/ctaButton";
+import type { CTA } from "@/utils/interfacecommon.interface";
 
 export function CTAButton({ classNames, external, target, rel, ...cta }: CTA) {
   return (

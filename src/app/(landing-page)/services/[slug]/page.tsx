@@ -7,6 +7,7 @@ import { InstallationIncludesSection } from "@/components/sections/service/insta
 import { ServiceHeroSection } from "@/components/sections/service/service-hero.section";
 import { WarmerHomeProcessSection } from "@/components/sections/service/warmer-home-process.section";
 import { getServicePageData, SERVICE_PAGE_DATA } from "@/content/pageContent/pageData/service";
+import { getTestimonialSection } from "@/lib/payload/testimonials";
 import { SERVICE_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
 import { notFound } from "next/navigation";
 import { twMerge } from "tailwind-merge";
@@ -26,6 +27,7 @@ export function generateStaticParams() {
 export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const pageData = getServicePageData(slug);
+  const testimonials = await getTestimonialSection("service", slug);
 
   if (!pageData) notFound();
 
@@ -35,7 +37,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       {pageData?.whatOurServiceInclude && <InstallationIncludesSection data={pageData.whatOurServiceInclude} />}
       {pageData?.heatingSolutionDesignForYou && <HeatingDesignedSection data={pageData?.heatingSolutionDesignForYou} />}
       {pageData?.process && <WarmerHomeProcessSection data={pageData?.process} />}
-      {pageData.testimonials && <TestimonialSection data={pageData.testimonials} />}
+      <TestimonialSection data={testimonials} />
       {pageData.callToActionSection && (
         <div className={twMerge("w-full", SERVICE_SECTION_PADDING_TOP_BOTTOM)}>
           <CallToActionSection data={pageData.callToActionSection} />

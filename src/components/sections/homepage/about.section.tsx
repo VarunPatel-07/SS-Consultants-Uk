@@ -1,11 +1,11 @@
 "use client";
-import { AboutSectionDataInterface } from "@/app/utils/interface/data.interface";
 import aboutImage from "@/assets/images/webp/ss-consultant-about-us-section.webp";
 import { RichText } from "@/components/common/RichText";
 import CTAButton from "@/components/ui/ctaButton";
 import { gsap } from "@/lib/gsap";
 import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
 import { COMMON_BORDER_RADIUS, COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
+import { AboutSectionDataInterface } from "@/utils/interface/data.interface";
 import { useGSAP } from "@gsap/react";
 import { CalendarDays, MapPin, ShieldCheck, Umbrella } from "lucide-react";
 import Image from "next/image";
@@ -106,7 +106,9 @@ export function AboutSection({ data }: { data: AboutSectionDataInterface }) {
                     />
                     <div>
                       <strong className="block text-sm font-bold text-white sm:text-base font-jakarta">{title}</strong>
-                      <span className="mt-1 block text-xs text-(--ssc-uk-muted-color) sm:text-sm font-jakarta">{description}</span>
+                      <span className="mt-1 block text-xs text-(--ssc-uk-muted-color) sm:text-sm font-jakarta">
+                        {description}
+                      </span>
                     </div>
                   </div>
                 );
@@ -116,8 +118,8 @@ export function AboutSection({ data }: { data: AboutSectionDataInterface }) {
 
           {data?.cta && (
             <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-center">
-              {data?.cta?.map(({ href, label, variant, theme }) => (
-                <CTAButton btnStyle={variant} href={href} key={label} theme={theme} className="reveal-text-animation">
+              {data?.cta?.map(({ label, variant, ...cta }) => (
+                <CTAButton btnStyle={variant} key={label} {...cta} className="reveal-text-animation">
                   {label}
                 </CTAButton>
               ))}

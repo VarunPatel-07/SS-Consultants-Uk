@@ -1,10 +1,10 @@
 "use client";
-import type { CommonPageDataInterface } from "@/app/utils/interface/page.interface";
 import { RichText } from "@/components/common/RichText";
 import { GalleryGrid } from "@/components/sections/gallery/gallery-grid.section";
 import { gsap } from "@/lib/gsap";
 import { COMMON_REVEL_ANIMATION } from "@/utils/constants/animation.constant";
 import { COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
+import type { CommonPageDataInterface } from "@/utils/interface//page.interface";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import { twMerge } from "tailwind-merge";

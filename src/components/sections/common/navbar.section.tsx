@@ -2,29 +2,38 @@
 
 import logo from "@/assets/images/logo/ss-consultants-logo-black-trasperent.png";
 import CTAButton from "@/components/ui/ctaButton";
-import { BOILER_SERVICES } from "@/content/pageContent/common.data";
+import { getPhoneHref, useSiteSettings } from "@/components/providers/site-settings-provider";
 import { gsap } from "@/lib/gsap";
+import type { NavigationLink } from "@/lib/payload/site-settings";
 import { useGSAP } from "@gsap/react";
-import { ChevronDown, Menu, Phone, X } from "lucide-react";
+import { ChevronDown, ChevronRight, Menu, Phone, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
-export function NavbarSection() {
+export function NavbarSection({ navigation }: { navigation: NavigationLink[] }) {
   const navBarContainer = useRef<HTMLDivElement | null>(null);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [openNestedDropdown, setOpenNestedDropdown] = useState<string | null>(null);
   const pathname = usePathname();
+  const { phone } = useSiteSettings();
+  const phoneHref = getPhoneHref(phone);
   const isHomeActive = pathname === "/";
   const normalizedPath = pathname.replace(/\/$/, "") || "/";
   const showContactBar = !["/privacy-policy", "/terms-and-conditions", "/cookie-policy"].includes(normalizedPath);
   const contactBarHref = normalizedPath === "/sitemap" ? "/contact#contact" : "#contact";
-  const isServicesActive = pathname.startsWith("/services");
-  const isAboutActive = pathname.startsWith("/about");
-  const isGalleryActive = pathname.startsWith("/gallery");
-  const isContactActive = pathname.startsWith("/contact");
+
+  const isLinkActive = (item: NavigationLink): boolean => {
+    if (item.children?.some(isLinkActive)) return true;
+    if (item.href === "/") return pathname === "/";
+    if (item.href && item.href !== "#" && pathname.startsWith(item.href)) return true;
+
+    const labelPath = `/${item.label.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-")}`;
+    return pathname === labelPath || pathname.startsWith(`${labelPath}/`);
+  };
 
   useEffect(() => {
     document.body.classList.toggle("overflow-hidden", isMenuOpen);
@@ -36,7 +45,8 @@ export function NavbarSection() {
 
   const closeMenu = () => {
     setIsMenuOpen(false);
-    setIsServicesOpen(false);
+    setOpenDropdown(null);
+    setOpenNestedDropdown(null);
   };
 
   useGSAP(() => {
@@ -104,78 +114,114 @@ export function NavbarSection() {
             <div
               className="hidden items-center gap-5 min-[1400px]:gap-8 min-[1024px]:flex"
               aria-label="Main navigation">
-              <Link
-                className={`text-lg font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isHomeActive ? "text-(--ssc-uk-main-highlight-color)" : "text-foreground"}`}
-                href="/"
-                aria-current={isHomeActive ? "page" : undefined}>
-                Home
-              </Link>
-              <div
-                className="relative"
-                onMouseEnter={() => setIsServicesOpen(true)}
-                onMouseLeave={() => setIsServicesOpen(false)}>
-                <button
-                  className={`inline-flex items-center gap-2 text-lg font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isServicesActive ? "text-(--ssc-uk-main-highlight-color)" : "text-foreground"}`}
-                  type="button"
-                  aria-expanded={isServicesOpen}
-                  aria-haspopup="true"
-                  onClick={() => setIsServicesOpen((open) => !open)}>
-                  Services
-                  <ChevronDown
-                    aria-hidden="true"
-                    className={`h-4 w-4 transition-transform ${isServicesOpen ? "rotate-180" : ""}`}
-                    strokeWidth={1.8}
-                  />
-                </button>
-                <div
-                  className={`absolute left-1/2 top-full z-50 w-72 -translate-x-1/2 pt-4 transition-all duration-200 ${isServicesOpen ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"}`}>
-                  <div className="rounded-lg border border-(--ssc-uk-border-color) bg-background p-3 shadow-xl md:rounded-xl lg:rounded-2xl">
-                    {BOILER_SERVICES.map(({ label, slug }) => (
-                      <Link
-                        className={`block rounded-lg px-4 py-3 text-base transition-colors hover:bg-(--ssc-uk-surface-color) hover:text-(--ssc-uk-main-highlight-color) ${pathname === `/services/${slug}` ? "text-(--ssc-uk-main-highlight-color)" : "text-(--ssc-uk-muted-color)"}`}
-                        href={`/services/${slug}`}
-                        key={slug}>
-                        {label}
-                      </Link>
-                    ))}
+              {navigation.map((item, index) => {
+                const itemKey = `${item.label}-${item.href}-${index}`;
+                const hasChildren = Boolean(item.children?.length);
+                const isActive = isLinkActive(item);
+                const isOpen = openDropdown === itemKey;
+
+                if (!hasChildren) {
+                  return (
+                    <Link
+                      className={`text-lg font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isActive ? "text-(--ssc-uk-main-highlight-color)" : "text-foreground"}`}
+                      href={item.href}
+                      target={item.openInNewTab ? "_blank" : undefined}
+                      rel={item.openInNewTab ? "noopener noreferrer" : undefined}
+                      aria-current={isActive ? "page" : undefined}
+                      key={itemKey}>
+                      {item.label}
+                    </Link>
+                  );
+                }
+
+                return (
+                  <div
+                    className="relative"
+                    key={itemKey}
+                    onMouseEnter={() => setOpenDropdown(itemKey)}
+                    onMouseLeave={() => setOpenDropdown(null)}
+                    onFocus={() => setOpenDropdown(itemKey)}
+                    onBlur={(event) => {
+                      if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setOpenDropdown(null);
+                    }}>
+                    <button
+                      className={`inline-flex items-center gap-2 text-lg font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isActive ? "text-(--ssc-uk-main-highlight-color)" : "text-foreground"}`}
+                      type="button"
+                      aria-expanded={isOpen}
+                      aria-haspopup="menu"
+                      onClick={() => setOpenDropdown(isOpen ? null : itemKey)}>
+                      {item.label}
+                      <ChevronDown
+                        aria-hidden="true"
+                        className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+                        strokeWidth={1.8}
+                      />
+                    </button>
+                    <div
+                      className={`absolute left-1/2 top-full z-50 w-72 -translate-x-1/2 pt-4 transition-all duration-200 ${isOpen ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"}`}>
+                      <div className="rounded-lg border border-(--ssc-uk-border-color) bg-background p-3 shadow-xl md:rounded-xl lg:rounded-2xl" role="menu">
+                        {item.children?.map((child, childIndex) => {
+                          const childActive = pathname === child.href || (child.href !== "/" && pathname.startsWith(child.href));
+                          const hasNestedChildren = Boolean(child.children?.length);
+
+                          return (
+                            <div className="group/nested relative" key={`${child.label}-${child.href}-${childIndex}`}>
+                              <Link
+                                className={`flex items-center justify-between gap-3 rounded-lg px-4 py-3 text-base transition-colors hover:bg-(--ssc-uk-surface-color) hover:text-(--ssc-uk-main-highlight-color) ${childActive ? "text-(--ssc-uk-main-highlight-color)" : "text-(--ssc-uk-muted-color)"}`}
+                                href={child.href}
+                                target={child.openInNewTab ? "_blank" : undefined}
+                                rel={child.openInNewTab ? "noopener noreferrer" : undefined}
+                                role="menuitem"
+                                aria-haspopup={hasNestedChildren ? "menu" : undefined}>
+                                {child.label}
+                                {hasNestedChildren && <ChevronRight aria-hidden="true" className="h-4 w-4 shrink-0" />}
+                              </Link>
+                              {hasNestedChildren && (
+                                <div className="invisible absolute left-full top-0 z-60 w-72 -translate-x-2 pl-2 opacity-0 transition-all duration-200 group-hover/nested:visible group-hover/nested:translate-x-0 group-hover/nested:opacity-100 group-focus-within/nested:visible group-focus-within/nested:translate-x-0 group-focus-within/nested:opacity-100">
+                                  <div className="rounded-lg border border-(--ssc-uk-border-color) bg-background p-3 shadow-xl md:rounded-xl lg:rounded-2xl" role="menu">
+                                    {child.children?.map((nestedChild, nestedIndex) => {
+                                      const nestedActive = pathname === nestedChild.href;
+
+                                      return (
+                                        <Link
+                                          className={`block rounded-lg px-4 py-3 text-base transition-colors hover:bg-(--ssc-uk-surface-color) hover:text-(--ssc-uk-main-highlight-color) ${nestedActive ? "text-(--ssc-uk-main-highlight-color)" : "text-(--ssc-uk-muted-color)"}`}
+                                          href={nestedChild.href}
+                                          target={nestedChild.openInNewTab ? "_blank" : undefined}
+                                          rel={nestedChild.openInNewTab ? "noopener noreferrer" : undefined}
+                                          role="menuitem"
+                                          key={`${nestedChild.label}-${nestedChild.href}-${nestedIndex}`}>
+                                          {nestedChild.label}
+                                        </Link>
+                                      );
+                                    })}
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <Link
-                className={`text-lg font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isAboutActive ? "text-(--ssc-uk-main-highlight-color)" : "text-foreground"}`}
-                href="/about"
-                aria-current={isAboutActive ? "page" : undefined}>
-                About
-              </Link>
-              <Link
-                className={`text-lg font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isGalleryActive ? "text-(--ssc-uk-main-highlight-color)" : "text-foreground"}`}
-                href="/gallery"
-                aria-current={isGalleryActive ? "page" : undefined}>
-                Gallery
-              </Link>
-              <Link
-                className={`text-lg font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isContactActive ? "text-(--ssc-uk-main-highlight-color)" : "text-foreground"}`}
-                href="/contact"
-                aria-current={isContactActive ? "page" : undefined}>
-                Contact
-              </Link>
+                );
+              })}
             </div>
 
             <div className="hidden items-center gap-3 min-[1024px]:flex xl:gap-5">
               <Link
                 className="h-11.25 w-11.25 items-center justify-center rounded-full border border-(--ssc-uk-border-color) text-foreground transition-colors hover:border-(--ssc-uk-main-highlight-color) hover:text-(--ssc-uk-main-highlight-color) hidden min-[1024px]:inline-flex  min-[1200px]:hidden"
-                href="tel:07590514937"
+                href={phoneHref}
                 aria-label="Call SS Consultants">
                 <Phone aria-hidden="true" className="h-[17px] w-[17px]" strokeWidth={1.8} />
               </Link>
               <CTAButton
                 btnStyle="CTA_SECONDARY"
                 theme="LIGHT"
-                href="tel:07590514937"
+                href={phoneHref}
                 className="hidden min-[1200px]:flex">
                 <span className="flex items-center gap-3">
                   <Phone aria-hidden="true" className="h-4 w-4" strokeWidth={2.4} />
-                  <span>07590 514937</span>
+                  <span>{phone}</span>
                 </span>
               </CTAButton>
               <CTAButton btnStyle="CTA_PRIMARY" href={isHomeActive ? "#contact" : "/contact"} className="">
@@ -186,7 +232,7 @@ export function NavbarSection() {
             <div className="flex items-center gap-2 min-[1024px]:hidden">
               <Link
                 className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-(--ssc-uk-border-color) text-foreground transition-colors hover:border-(--ssc-uk-main-highlight-color) hover:text-(--ssc-uk-main-highlight-color)"
-                href="tel:07590514937"
+                href={phoneHref}
                 aria-label="Call SS Consultants">
                 <Phone aria-hidden="true" className="h-[17px] w-[17px]" strokeWidth={1.8} />
               </Link>
@@ -212,7 +258,7 @@ export function NavbarSection() {
           data-contact-bar
           className="fixed inset-x-0 bottom-0 z-50 hidden min-[381px]:grid grid-cols-2 gap-3 border-t border-(--ssc-uk-border-color) bg-background px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] font-jakarta min-[1024px]:hidden">
           <a
-            href="tel:07590514937"
+            href={phoneHref}
             className="flex min-h-10 items-center justify-center gap-2 rounded-full border border-(--ssc-uk-main-highlight-color) text-sm font-bold text-foreground">
             <Phone aria-hidden="true" className="h-4 w-4" />
             Call Now
@@ -246,66 +292,98 @@ export function NavbarSection() {
           </button>
         </div>
         <div className="flex flex-col gap-0 pt-6">
-          <Link
-            className={`border-b border-(--ssc-uk-border-color) py-5 text-lg font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isHomeActive ? "text-(--ssc-uk-main-highlight-color)" : "text-foreground"}`}
-            href="/"
-            aria-current={isHomeActive ? "page" : undefined}
-            onClick={closeMenu}>
-            Home
-          </Link>
-          <div className="border-b border-(--ssc-uk-border-color)">
-            <button
-              className={`flex w-full items-center justify-between py-5 text-left text-lg font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isServicesActive ? "text-(--ssc-uk-main-highlight-color)" : "text-foreground"}`}
-              type="button"
-              aria-expanded={isServicesOpen}
-              onClick={() => setIsServicesOpen((open) => !open)}>
-              Services
-              <ChevronDown className={`h-5 w-5 transition-transform ${isServicesOpen ? "rotate-180" : ""}`} />
-            </button>
-            <div
-              className={`overflow-hidden transition-[max-height,opacity] duration-300 ${isServicesOpen ? "max-h-96 pb-3 opacity-100" : "max-h-0 opacity-0"}`}>
-              {BOILER_SERVICES.map(({ label, slug }) => (
+          {navigation.map((item, index) => {
+            const itemKey = `${item.label}-${item.href}-${index}`;
+            const hasChildren = Boolean(item.children?.length);
+            const isActive = isLinkActive(item);
+            const isOpen = openDropdown === itemKey;
+
+            if (!hasChildren) {
+              return (
                 <Link
-                  className={`block py-2 pl-3 text-base transition-colors hover:text-(--ssc-uk-main-highlight-color) ${pathname === `/services/${slug}` ? "text-(--ssc-uk-main-highlight-color)" : "text-(--ssc-uk-muted-color)"}`}
-                  href={`/services/${slug}`}
-                  key={slug}
+                  className={`border-b border-(--ssc-uk-border-color) py-5 text-lg font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isActive ? "text-(--ssc-uk-main-highlight-color)" : "text-foreground"}`}
+                  href={item.href}
+                  target={item.openInNewTab ? "_blank" : undefined}
+                  rel={item.openInNewTab ? "noopener noreferrer" : undefined}
+                  aria-current={isActive ? "page" : undefined}
+                  key={itemKey}
                   onClick={closeMenu}>
-                  {label}
+                  {item.label}
                 </Link>
-              ))}
-            </div>
-          </div>
-          <Link
-            className={`border-b border-(--ssc-uk-border-color) py-5 text-lg font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isAboutActive ? "text-(--ssc-uk-main-highlight-color)" : "text-foreground"}`}
-            href="/about"
-            aria-current={isAboutActive ? "page" : undefined}
-            onClick={closeMenu}>
-            About
-          </Link>
-          <Link
-            className={`border-b border-(--ssc-uk-border-color) py-5 text-lg font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isGalleryActive ? "text-(--ssc-uk-main-highlight-color)" : "text-foreground"}`}
-            href="/gallery"
-            aria-current={isGalleryActive ? "page" : undefined}
-            onClick={closeMenu}>
-            Gallery
-          </Link>
-          <Link
-            className={`border-b border-(--ssc-uk-border-color) py-5 text-lg font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isContactActive ? "text-(--ssc-uk-main-highlight-color)" : "text-foreground"}`}
-            href="/contact"
-            aria-current={isContactActive ? "page" : undefined}
-            onClick={closeMenu}>
-            Contact
-          </Link>
+              );
+            }
+
+            return (
+              <div className="border-b border-(--ssc-uk-border-color)" key={itemKey}>
+                <button
+                  className={`flex w-full items-center justify-between py-5 text-left text-lg font-medium transition-colors hover:text-(--ssc-uk-main-highlight-color) ${isActive ? "text-(--ssc-uk-main-highlight-color)" : "text-foreground"}`}
+                  type="button"
+                  aria-expanded={isOpen}
+                  onClick={() => setOpenDropdown(isOpen ? null : itemKey)}>
+                  {item.label}
+                  <ChevronDown className={`h-5 w-5 transition-transform ${isOpen ? "rotate-180" : ""}`} />
+                </button>
+                <div
+                  className={`overflow-hidden transition-[max-height,opacity] duration-300 ${isOpen ? "max-h-96 pb-3 opacity-100" : "max-h-0 opacity-0"}`}>
+                  {item.children?.map((child, childIndex) => {
+                    const childActive = pathname === child.href || (child.href !== "/" && pathname.startsWith(child.href));
+                    const childKey = `${itemKey}-${child.label}-${child.href}-${childIndex}`;
+                    const hasNestedChildren = Boolean(child.children?.length);
+                    const isNestedOpen = openNestedDropdown === childKey;
+
+                    return (
+                      <div key={childKey}>
+                        {hasNestedChildren ? (
+                          <button
+                            className={`flex w-full items-center justify-between py-2 pl-3 text-left text-base transition-colors hover:text-(--ssc-uk-main-highlight-color) ${childActive ? "text-(--ssc-uk-main-highlight-color)" : "text-(--ssc-uk-muted-color)"}`}
+                            type="button"
+                            aria-expanded={isNestedOpen}
+                            onClick={() => setOpenNestedDropdown(isNestedOpen ? null : childKey)}>
+                            {child.label}
+                            <ChevronDown className={`h-4 w-4 transition-transform ${isNestedOpen ? "rotate-180" : ""}`} />
+                          </button>
+                        ) : (
+                          <Link
+                            className={`block py-2 pl-3 text-base transition-colors hover:text-(--ssc-uk-main-highlight-color) ${childActive ? "text-(--ssc-uk-main-highlight-color)" : "text-(--ssc-uk-muted-color)"}`}
+                            href={child.href}
+                            target={child.openInNewTab ? "_blank" : undefined}
+                            rel={child.openInNewTab ? "noopener noreferrer" : undefined}
+                            onClick={closeMenu}>
+                            {child.label}
+                          </Link>
+                        )}
+                        {hasNestedChildren && (
+                          <div className={`overflow-hidden pl-4 transition-[max-height,opacity] duration-300 ${isNestedOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
+                            {child.children?.map((nestedChild, nestedIndex) => (
+                              <Link
+                                className={`block py-2 pl-3 text-sm transition-colors hover:text-(--ssc-uk-main-highlight-color) ${pathname === nestedChild.href ? "text-(--ssc-uk-main-highlight-color)" : "text-(--ssc-uk-muted-color)"}`}
+                                href={nestedChild.href}
+                                target={nestedChild.openInNewTab ? "_blank" : undefined}
+                                rel={nestedChild.openInNewTab ? "noopener noreferrer" : undefined}
+                                key={`${nestedChild.label}-${nestedChild.href}-${nestedIndex}`}
+                                onClick={closeMenu}>
+                                {nestedChild.label}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
         </div>
         <CTAButton
           btnStyle="CTA_SECONDARY"
           theme="LIGHT"
           className="mt-7 w-full justify-center"
-          href="tel:07590514937"
+          href={phoneHref}
           onClick={closeMenu}>
           <span className="flex items-center gap-3">
             <Phone aria-hidden="true" className="h-4 w-4" strokeWidth={2.4} />
-            <span>07590 514937</span>
+            <span>{phone}</span>
           </span>
         </CTAButton>
         <CTAButton

@@ -1,9 +1,9 @@
 "use client";
-import { WhatOurServiceInclude } from "@/app/utils/interface/data.interface";
 import CommonSectionHeader from "@/components/sections/common/common-section-header";
 import { gsap } from "@/lib/gsap";
 import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
 import { COMMON_BORDER_RADIUS, SERVICE_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
+import { WhatOurServiceInclude } from "@/utils/interfacedata.interface";
 import { useGSAP } from "@gsap/react";
 import Image from "next/image";
 import { useRef } from "react";

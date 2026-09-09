@@ -1,10 +1,10 @@
-import type { CommonPageDataInterface } from "@/app/utils/interface/page.interface";
-import boilerDiagnosisImage from "@/assets/images/webp/service/boiler-servicing.webp";
-import boilerComponentImage from "@/assets/images/webp/service/hero-images/boiler-servicing.webp";
-import boilerBreakdownRepairsHero from "@/assets/images/webp/service/hero-images/boiler-breakdown-repairs.webp";
 import boilerRepairImage from "@/assets/images/webp/service/boiler-breakdown-repairs.webp";
+import boilerDiagnosisImage from "@/assets/images/webp/service/boiler-servicing.webp";
+import boilerBreakdownRepairsHero from "@/assets/images/webp/service/hero-images/boiler-breakdown-repairs.webp";
+import boilerComponentImage from "@/assets/images/webp/service/hero-images/boiler-servicing.webp";
 import { BOILER_BREAKDOWN_REPAIRS_FAQ_DATA } from "@/content/pageContent/faq.data";
 import { TESTIMONIALS } from "@/utils/constants/testimonial.constants";
+import type { CommonPageDataInterface } from "@/utils/interfacepage.interface";
 
 export const BOILER_BREAKDOWN_REPAIRS_PAGE_DATA: CommonPageDataInterface = {
   metadata: {
@@ -125,7 +125,7 @@ export const BOILER_BREAKDOWN_REPAIRS_PAGE_DATA: CommonPageDataInterface = {
   },
   process: {
     header: {
-     title: [
+      title: [
         [
           { text: "Our" },
           { text: "simple" },

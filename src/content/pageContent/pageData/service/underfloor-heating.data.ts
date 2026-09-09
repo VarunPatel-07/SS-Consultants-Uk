@@ -1,10 +1,10 @@
-import type { CommonPageDataInterface } from "@/app/utils/interface/page.interface";
 import boilerInstallationImage from "@/assets/images/webp/service/boiler-installation.webp";
 import centralHeatingImage from "@/assets/images/webp/service/central-heating.webp";
 import underfloorHeatingHero from "@/assets/images/webp/service/hero-images/underfloor-heating.webp";
 import underfloorHeatingImage from "@/assets/images/webp/service/underfloor-heating.webp";
 import { UNDERFLOOR_HEATING_FAQ_DATA } from "@/content/pageContent/faq.data";
 import { TESTIMONIALS } from "@/utils/constants/testimonial.constants";
+import type { CommonPageDataInterface } from "@/utils/interfacepage.interface";
 
 export const UNDERFLOOR_HEATING_PAGE_DATA: CommonPageDataInterface = {
   metadata: {
@@ -113,7 +113,8 @@ export const UNDERFLOOR_HEATING_PAGE_DATA: CommonPageDataInterface = {
       },
       {
         title: "Proven track record",
-        description: "Experienced fault-finding for underfloor heating problems, including previously unresolved issues.",
+        description:
+          "Experienced fault-finding for underfloor heating problems, including previously unresolved issues.",
       },
       {
         title: "Fully insured and guaranteed",
@@ -186,7 +187,9 @@ export const UNDERFLOOR_HEATING_PAGE_DATA: CommonPageDataInterface = {
   callToActionSection: {
     header: {
       title: [[{ text: "Underfloor heating not working?" }], [{ text: "Let’s find the fault.", variant: "brand" }]],
-      description: [[{ text: "Get specialist help with underfloor heating controls, cold spots and uneven temperatures." }]],
+      description: [
+        [{ text: "Get specialist help with underfloor heating controls, cold spots and uneven temperatures." }],
+      ],
     },
     ctas: [
       { label: "Book Underfloor Heating Repairs", href: "#contact", variant: "CTA_PRIMARY" },

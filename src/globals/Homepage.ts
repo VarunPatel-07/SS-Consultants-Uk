@@ -1,0 +1,138 @@
+import type { GlobalConfig } from "payload";
+
+import { authenticated, anyone } from "@/payload/access";
+import { ctasField, sectionHeader, simpleCardsField, testimonialSectionField } from "@/payload/fields/content";
+import { seoFields } from "@/payload/fields/seo";
+
+export const Homepage: GlobalConfig = {
+  slug: "homepage",
+  label: "Homepage",
+  admin: { group: "Pages" },
+  access: { read: anyone, update: authenticated },
+  versions: { drafts: true },
+  fields: [
+    ...seoFields,
+    {
+      name: "hero",
+      type: "group",
+      fields: [
+        sectionHeader(),
+        ctasField(),
+        { name: "reassurance", type: "text" },
+        {
+          name: "image",
+          type: "relationship",
+          relationTo: "media",
+          admin: { description: "Optional hero image. The existing website image is used when this is empty." },
+        },
+        {
+          name: "statsCard",
+          type: "group",
+          label: "Statistics card",
+          fields: [
+            { name: "enabled", type: "checkbox", defaultValue: true, label: "Show statistics card" },
+            { name: "value", type: "text", defaultValue: "22+" },
+            { name: "label", type: "text", defaultValue: "years" },
+            { name: "description", type: "text", defaultValue: "Heating experience" },
+          ],
+        },
+        {
+          name: "iconCard",
+          type: "group",
+          label: "Icon information card",
+          fields: [
+            { name: "enabled", type: "checkbox", defaultValue: true, label: "Show icon card" },
+            { name: "title", type: "text", defaultValue: "Same-day appointments available" },
+            { name: "description", type: "text", defaultValue: "Speak directly with an engineer" },
+            {
+              name: "icon",
+              type: "select",
+              defaultValue: "calendar",
+              options: [
+                { label: "Shield", value: "shield" },
+                { label: "Sparkles", value: "sparkles" },
+                { label: "Calendar", value: "calendar" },
+                { label: "Check mark", value: "check" },
+                { label: "Map pin", value: "map-pin" },
+                { label: "Clock", value: "clock" },
+                { label: "Phone", value: "phone" },
+                { label: "Wrench", value: "wrench" },
+              ],
+            },
+          ],
+        },
+        {
+          name: "infoItems",
+          type: "array",
+          label: "Information items",
+          maxRows: 4,
+          admin: { description: "Information cards displayed below the homepage hero. Choose an icon by name." },
+          fields: [
+            { name: "title", type: "text", required: true },
+            { name: "description", type: "text", required: true },
+            {
+              name: "icon",
+              type: "select",
+              required: true,
+              defaultValue: "check",
+              options: [
+                { label: "Shield", value: "shield" },
+                { label: "Sparkles", value: "sparkles" },
+                { label: "Calendar", value: "calendar" },
+                { label: "Check mark", value: "check" },
+                { label: "Map pin", value: "map-pin" },
+                { label: "Clock", value: "clock" },
+                { label: "Phone", value: "phone" },
+                { label: "Wrench", value: "wrench" },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: "experience",
+      type: "group",
+      fields: [
+        sectionHeader(),
+        { name: "brandNames", type: "array", fields: [{ name: "name", type: "text", required: true }] },
+        { name: "calloutTitle", type: "text" },
+        { name: "calloutDescription", type: "textarea" },
+      ],
+    },
+    {
+      name: "about",
+      type: "group",
+      fields: [
+        sectionHeader(),
+        simpleCardsField("features", "Features"),
+        { name: "badgeTitle", type: "text" },
+        { name: "badgeDescription", type: "text" },
+        { name: "reassurance", type: "text" },
+        ctasField(),
+      ],
+    },
+    {
+      name: "servicesSection",
+      type: "group",
+      fields: [sectionHeader(), { name: "services", type: "relationship", relationTo: "services", hasMany: true }],
+    },
+    {
+      name: "boilerOptions",
+      type: "group",
+      fields: [sectionHeader(), simpleCardsField("items", "Boiler options")],
+    },
+    {
+      name: "callToAction",
+      type: "group",
+      fields: [sectionHeader(), { name: "reassurance", type: "text" }, ctasField()],
+    },
+    testimonialSectionField(),
+    { name: "whyChooseUs", type: "group", fields: [sectionHeader(), simpleCardsField("items", "Reasons")] },
+    {
+      name: "faqSection",
+      type: "group",
+      fields: [sectionHeader(), { name: "faqs", type: "relationship", relationTo: "faqs", hasMany: true }],
+    },
+  ],
+};
