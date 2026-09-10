@@ -1,4 +1,4 @@
-import type { WhyChooseUsPoint } from "@/utils/interface//why-choose-us.interface";
+import type { WhyChooseUsPoint } from "@/utils/interface/why-choose-us.interface";
 
 export const WHY_CHOOSE_US_POINTS: WhyChooseUsPoint[] = [
   { title: "Gas Safe registered", description: "Qualified professionals working to current safety standards." },

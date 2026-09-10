@@ -4,7 +4,7 @@ import { TestimonialSection } from "@/components/sections/homepage/testimonial.s
 import { GALLERY_PAGE_DATA } from "@/content/pageContent/pageData/gallery.data";
 import { getGalleryPage, isPopulatedMedia, normalizePayloadMediaURL } from "@/lib/payload/gallery";
 import { getTestimonialSection } from "@/lib/payload/testimonials";
-import type { GalleryImage } from "@/utils/interface//gallery.interface";
+import type { GalleryImage } from "@/utils/interface/gallery.interface";
 import type { Metadata } from "next";
 
 export const revalidate = 300;

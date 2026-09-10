@@ -4,7 +4,7 @@ import centralHeatingHero from "@/assets/images/webp/service/hero-images/central
 import underfloorHeatingImage from "@/assets/images/webp/service/underfloor-heating.webp";
 import { CENTRAL_HEATING_FAQ_DATA } from "@/content/pageContent/faq.data";
 import { TESTIMONIALS } from "@/utils/constants/testimonial.constants";
-import type { CommonPageDataInterface } from "@/utils/interfacepage.interface";
+import type { CommonPageDataInterface } from "@/utils/interface/data.interface";
 
 export const CENTRAL_HEATING_PAGE_DATA: CommonPageDataInterface = {
   metadata: {

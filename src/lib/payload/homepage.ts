@@ -2,7 +2,7 @@ import config from "@payload-config";
 import { getPayload } from "payload";
 import { cache } from "react";
 
-import { BOILER_BRANDS, BOILER_OPTIONS, HEATING_SUPPORT_CARDS } from "@/content/pageContent/common.data";
+import { BOILER_OPTIONS } from "@/content/pageContent/common.data";
 import type { Faq, Homepage, Media, Service } from "@/payload-types";
 import type { CTA, SectionHeader, TextChunk } from "@/utils/interface/common.interface";
 import type { CommonPageDataInterface } from "@/utils/interface/data.interface";
@@ -24,7 +24,8 @@ export type HomepageContent = Pick<
   "hero" | "experience" | "about" | "services" | "boilersOptions" | "callToActionSection" | "whyChooseUs" | "faq"
 > & { heroInfoItems?: HeroInfoItem[]; heroVisual?: HomepageHeroVisual };
 
-const isMedia = (value: number | Media | null | undefined): value is Media => typeof value === "object" && value !== null;
+const isMedia = (value: number | Media | null | undefined): value is Media =>
+  typeof value === "object" && value !== null;
 const isService = (value: number | Service): value is Service => typeof value === "object" && value !== null;
 const isFaq = (value: number | Faq): value is Faq => typeof value === "object" && value !== null;
 
@@ -42,6 +43,23 @@ const normalizeMediaURL = (url: string) => {
 const text = (value?: string | null, variant?: TextChunk["variant"]): TextChunk[][] =>
   value ? [[{ text: value, ...(variant ? { variant } : {}) }]] : [];
 
+type LexicalNode = { children?: LexicalNode[]; text?: string; type?: string };
+
+const lexicalNodeText = (node: LexicalNode): string => {
+  if (typeof node.text === "string") return node.text;
+  if (node.type === "linebreak") return "\n";
+  return node.children?.map(lexicalNodeText).join("") ?? "";
+};
+
+const lexicalText = (value: unknown): TextChunk[][] => {
+  if (!value || typeof value !== "object" || !("root" in value)) return [];
+  const root = (value as { root?: LexicalNode }).root;
+  return (root?.children ?? []).flatMap((node) => {
+    const paragraph = lexicalNodeText(node).trim();
+    return paragraph ? [[{ text: paragraph }]] : [];
+  });
+};
+
 const toSectionHeader = (header: Homepage["hero"]["header"]): SectionHeader => ({
   title: [...text(header.title), ...text(header.highlight, "brand")],
   description: text(header.description),
@@ -58,7 +76,8 @@ const toCtas = (ctas: Homepage["hero"]["ctas"]): CTA[] =>
   }));
 
 const toHeroVisual = (hero: Homepage["hero"]): HomepageHeroVisual => ({
-  image: isMedia(hero.image) && hero.image.url ? { src: normalizeMediaURL(hero.image.url), alt: hero.image.alt } : undefined,
+  image:
+    isMedia(hero.image) && hero.image.url ? { src: normalizeMediaURL(hero.image.url), alt: hero.image.alt } : undefined,
   statsCard:
     hero.statsCard?.enabled === false || !hero.statsCard?.value || !hero.statsCard.label || !hero.statsCard.description
       ? null
@@ -72,7 +91,8 @@ const toHeroVisual = (hero: Homepage["hero"]): HomepageHeroVisual => ({
 export const getHomepage = cache(async (): Promise<Homepage | null> => {
   try {
     const payload = await getPayload({ config });
-    return await payload.findGlobal({ slug: "homepage", depth: 1 });
+    // Depth 2 expands homepage service relationships and their nested media uploads.
+    return await payload.findGlobal({ slug: "homepage", depth: 2 });
   } catch (error) {
     console.error("Unable to load Homepage from Payload.", error);
     return null;
@@ -102,16 +122,42 @@ export const getHomepageContent = cache(async (): Promise<HomepageContent | null
       eyebrow: text(homepage.experience.header.eyebrow),
       header: toSectionHeader(homepage.experience.header),
       callout: {
-        header: { title: text(homepage.experience.calloutTitle), description: text(homepage.experience.calloutDescription) },
+        header: {
+          title: text(homepage.experience.calloutTitle),
+          description: text(homepage.experience.calloutDescription),
+        },
       },
-      brands: (homepage.experience.brandNames ?? []).flatMap(({ name }) => {
-        const brand = BOILER_BRANDS.find((item) => item.name.toLowerCase() === name.toLowerCase());
-        return brand ? [brand] : [];
-      }),
+      brands: homepage.experience.brandLogos?.length
+        ? homepage.experience.brandLogos.flatMap((brand) =>
+            isMedia(brand) && brand.url
+              ? [
+                  {
+                    name: brand.alt || brand.filename || String(brand.id),
+                    logo: normalizeMediaURL(brand.url),
+                    alt: brand.alt,
+                    width: brand.width || undefined,
+                    height: brand.height || undefined,
+                  },
+                ]
+              : [],
+          )
+        : [],
     },
     about: {
       eyebrow: text(homepage.about.header.eyebrow),
-      header: toSectionHeader(homepage.about.header),
+      header: {
+        title: [...text(homepage.about.header.title), ...text(homepage.about.header.highlight, "brand")],
+        description: lexicalText(homepage.about.header.description),
+      },
+      image:
+        isMedia(homepage.about.image) && homepage.about.image.url
+          ? {
+              src: normalizeMediaURL(homepage.about.image.url),
+              alt: homepage.about.image.alt,
+              width: homepage.about.image.width || undefined,
+              height: homepage.about.image.height || undefined,
+            }
+          : undefined,
       cards: (homepage.about.features ?? []).map((item, index) => ({
         title: item.title,
         description: item.description,
@@ -127,8 +173,19 @@ export const getHomepageContent = cache(async (): Promise<HomepageContent | null
     services: {
       header: toSectionHeader(homepage.servicesSection.header),
       items: services.flatMap((service) => {
-        const visual = HEATING_SUPPORT_CARDS.find((item) => item.slug === service.slug);
-        return visual ? [{ ...visual, title: service.title, description: service.description, ctaLabel: service.ctaLabel || visual.ctaLabel }] : [];
+        const image = service.homepageCard?.image;
+        return [
+          {
+            slug: service.slug,
+            number: "",
+            title: service.homepageCard?.title || service.title,
+            description: service.homepageCard?.description || "",
+            image: isMedia(image) && image.url ? normalizeMediaURL(image.url) : undefined,
+            imageAlt: isMedia(image) ? image.alt : "",
+            ctaLabel: service.homepageCard?.ctaLabel || "View service",
+            badge: service.homepageCard?.badge || undefined,
+          },
+        ];
       }),
     },
     boilersOptions: {

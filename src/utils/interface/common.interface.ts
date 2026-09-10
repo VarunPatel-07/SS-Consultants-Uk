@@ -7,7 +7,7 @@ export interface HeatingSupportCard {
   number: string;
   title: string;
   description: string;
-  image: StaticImageData;
+  image?: StaticImageData | string;
   imageAlt: string;
   ctaLabel?: string;
   badge?: string;
@@ -18,7 +18,7 @@ export interface InstallationInclude {
   title: string;
   description: string;
   tags: string;
-  image: StaticImageData;
+  image?: StaticImageData | string;
 }
 
 import type { LucideIcon } from "lucide-react";

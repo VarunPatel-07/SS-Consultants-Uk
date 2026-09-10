@@ -1,5 +1,5 @@
-import { AboutFeature } from "@/utils/interface//about.interface";
-import { BoilerOption } from "@/utils/interface//boiler.interface";
+import { AboutFeature } from "@/utils/interface/about.interface";
+import { BoilerOption } from "@/utils/interface/boiler.interface";
 import type {
   CTA,
   FAQItem,
@@ -8,10 +8,10 @@ import type {
   ServiceItem,
   TestimonialItem,
   TextChunk,
-} from "@/utils/interface//common.interface";
-import { HeatingSupportCard, InstallationInclude } from "@/utils/interface//common.interface";
-import { BoilerBrand } from "@/utils/interface//homepage.interface";
-import { WhyChooseUsPoint } from "@/utils/interface//why-choose-us.interface";
+} from "@/utils/interface/common.interface";
+import { HeatingSupportCard, InstallationInclude } from "@/utils/interface/common.interface";
+import { BoilerBrand } from "@/utils/interface/homepage.interface";
+import { WhyChooseUsPoint } from "@/utils/interface/why-choose-us.interface";
 import { Metadata } from "next";
 import type { StaticImageData } from "next/image";
 
@@ -29,7 +29,7 @@ export interface ServicePageData {
   ending: string;
   description: string;
   cta: string;
-  heroImage: StaticImageData;
+  heroImage?: StaticImageData | string;
   eyebrow: string;
   options: Array<{ name: string; price: string }>;
   note: string;
@@ -68,6 +68,7 @@ export interface HeroSection {
 
 export interface AboutSectionDataInterface {
   header: SectionHeader;
+  image?: { src: StaticImageData | string; alt: string; width?: number; height?: number };
   eyebrow?: TextChunk[][];
   badge?: { title: TextChunk[][]; description: TextChunk[][] };
   reassurance?: TextChunk[][];
@@ -110,7 +111,7 @@ export interface ServiceHeroSectionInterface {
   slug: string;
   label: string;
   cta: string;
-  heroImage: StaticImageData;
+  heroImage?: StaticImageData | string;
   eyebrow: string;
   options: Array<{ name: string; price: string }>;
   note: string;

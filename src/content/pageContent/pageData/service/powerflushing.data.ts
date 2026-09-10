@@ -4,7 +4,7 @@ import powerflushingHero from "@/assets/images/webp/service/hero-images/powerflu
 import powerflushingImage from "@/assets/images/webp/service/powerflushing.webp";
 import { POWERFLUSHING_FAQ_DATA } from "@/content/pageContent/faq.data";
 import { TESTIMONIALS } from "@/utils/constants/testimonial.constants";
-import type { CommonPageDataInterface } from "@/utils/interfacepage.interface";
+import type { CommonPageDataInterface } from "@/utils/interface/data.interface";
 
 export const POWERFLUSHING_PAGE_DATA: CommonPageDataInterface = {
   metadata: {

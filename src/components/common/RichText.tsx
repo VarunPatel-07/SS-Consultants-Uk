@@ -1,4 +1,4 @@
-import type { TextChunk } from "@/utils/interfacecommon.interface";
+import type { TextChunk } from "@/utils/interface/common.interface";
 import { twMerge } from "tailwind-merge";
 
 const variantClasses: Record<NonNullable<TextChunk["variant"]>, string> = {
@@ -28,7 +28,10 @@ export function RichText({
       )}>
       {content?.map((line, lineIndex) => (
         <span
-          className={`flex min-w-0 max-w-full flex-wrap items-center justify-center gap-2 md:items-center md:justify-center md:gap-3 ${className}`}
+          className={twMerge(
+            `flex min-w-0 max-w-full flex-wrap items-center justify-center gap-2 md:items-center md:justify-center md:gap-3`,
+            className,
+          )}
           key={`line-${lineIndex}`}>
           {line?.map((chunk, chunkIndex) => (
             <span

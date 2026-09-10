@@ -5,7 +5,7 @@ import CtaServiceButton from "@/components/ui/ctaServiceBtn";
 import { gsap } from "@/lib/gsap";
 import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
 import { COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
-import { BoilerOptionsSectionData } from "@/utils/interfacedata.interface";
+import { BoilerOptionsSectionData } from "@/utils/interface/data.interface";
 import { useGSAP } from "@gsap/react";
 import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
 import Image from "next/image";

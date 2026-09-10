@@ -1,5 +1,5 @@
 import { GALLERY_IMAGES } from "@/content/pageContent/common.data";
-import type { CommonPageDataInterface } from "@/utils/interfacepage.interface";
+import type { CommonPageDataInterface } from "@/utils/interface/data.interface";
 
 export const GALLERY_PAGE_DATA: CommonPageDataInterface = {
   metadata: {

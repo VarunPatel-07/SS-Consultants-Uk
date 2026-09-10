@@ -1,7 +1,7 @@
 import boilerImageOne from "@/assets/images/webp/boiler-image-1.webp";
 import boilerImageTwo from "@/assets/images/webp/boiler-image-2.webp";
 import boilerImageThree from "@/assets/images/webp/boiler-image-3.webp";
-import type { BoilerOption } from "@/utils/interface//boiler.interface";
+import type { BoilerOption } from "@/utils/interface/boiler.interface";
 
 export const BOILER_OPTIONS: BoilerOption[] = [
   {

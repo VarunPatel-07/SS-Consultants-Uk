@@ -9,6 +9,9 @@ import { useGSAP } from "@gsap/react";
 import { CircleHelp } from "lucide-react";
 import Image from "next/image";
 import { useRef } from "react";
+import "swiper/css";
+import { Autoplay } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { twMerge } from "tailwind-merge";
 
 export function ExperienceSection({ data, compact = false }: { data: ExperienceSectionData; compact?: boolean }) {
@@ -100,21 +103,46 @@ export function ExperienceSection({ data, compact = false }: { data: ExperienceS
           </div>
         </div>
 
-        <div
-          className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6"
-          role="region"
-          aria-label="Boiler manufacturers">
-          {data.brands.slice(0, 6).map(({ name, logo, alt }) => (
-            <div
-              className={twMerge(
-                "flex h-24 min-w-0 items-center justify-center border border-(--ssc-uk-border-color) bg-white px-4 py-5 reveal-animation",
-                COMMON_BORDER_RADIUS,
-              )}
-              key={name}>
-              <Image className="h-14 w-full object-contain object-center" src={logo} alt={alt} height={60} />
-            </div>
-          ))}
-        </div>
+        {data?.brands?.length !== 0 && (
+          <Swiper
+            className="mt-7"
+            role="region"
+            aria-label="Boiler manufacturers"
+            modules={[Autoplay]}
+            autoplay={{ delay: 1800, disableOnInteraction: false, pauseOnMouseEnter: false }}
+            loop
+            allowTouchMove={false}
+            simulateTouch={false}
+            speed={700}
+            spaceBetween={12}
+            slidesPerView={1.5}
+            breakpoints={{
+              480: { slidesPerView: 2.25 },
+              640: { slidesPerView: 3 },
+              768: { slidesPerView: 4 },
+              1024: { slidesPerView: 5 },
+              1280: { slidesPerView: 6 },
+            }}>
+            {data.brands.map(({ name, logo, alt, width, height }) => (
+              <SwiperSlide className="reveal-animation" key={name}>
+                <div
+                  className={twMerge(
+                    "flex h-24 min-w-0 items-center justify-center border border-(--ssc-uk-border-color) bg-white px-4 py-5",
+                    COMMON_BORDER_RADIUS,
+                  )}>
+                  <Image
+                    className="h-15 w-full object-contain object-center"
+                    src={logo}
+                    alt={alt}
+                    width={width || 240}
+                    height={height || 60}
+                    unoptimized={typeof logo === "string" && /\.svg(?:\?|$)/i.test(logo)}
+                  />
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
       </div>
     </section>
   );

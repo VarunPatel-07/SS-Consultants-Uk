@@ -1,5 +1,5 @@
 import { CreateScrollTrigger } from "@/utils/helper/helper";
-import { ANIMATION_DIRECTION } from "@/utils/interface//common.interface";
+import { ANIMATION_DIRECTION } from "@/utils/interface/common.interface";
 
 export const COMMON_REVEL_ANIMATION: { FROM: gsap.TweenVars; TO: gsap.TweenVars } = {
   FROM: {

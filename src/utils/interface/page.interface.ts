@@ -1,4 +1,4 @@
-export type { CTA, SectionHeader, TextChunk } from "@/utils/interface//common.interface";
+export type { CTA, SectionHeader, TextChunk } from "@/utils/interface/common.interface";
 export type {
   AboutSectionDataInterface,
   CommonPageDataInterface,
@@ -7,4 +7,4 @@ export type {
   OurServicesSectionInterface,
   ProcessSection,
   TestimonialSectionInterface,
-} from "@/utils/interface//data.interface";
+} from "@/utils/interface/data.interface";

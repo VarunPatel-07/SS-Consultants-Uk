@@ -3,9 +3,8 @@ import CommonSectionHeader from "@/components/sections/common/common-section-hea
 import { gsap } from "@/lib/gsap";
 import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
 import { COMMON_BORDER_RADIUS, SERVICE_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
-import { heatingSolutionDesignForYouDataInterface } from "@/utils/interfacedata.interface";
+import { heatingSolutionDesignForYouDataInterface } from "@/utils/interface/data.interface";
 import { useGSAP } from "@gsap/react";
-import { CheckCircle2 } from "lucide-react";
 import { useRef } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -52,7 +51,6 @@ export function HeatingDesignedSection({ data }: { data: heatingSolutionDesignFo
                 COMMON_BORDER_RADIUS,
               )}
               key={title}>
-              <CheckCircle2 aria-hidden="true" className="h-7 w-7 text-(--ssc-uk-main-highlight-color)" />
               <h3 className="text-lg md:text-xl xl:text-2xl font-semibold leading-tight text-foreground">{title}</h3>
               <p className="text-sm md:text-base leading-6 text-(--ssc-uk-muted-color) text-pretty">{description}</p>
             </article>

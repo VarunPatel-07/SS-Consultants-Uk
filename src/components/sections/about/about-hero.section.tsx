@@ -5,7 +5,7 @@ import CTAButton from "@/components/ui/ctaButton";
 import { gsap } from "@/lib/gsap";
 import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
 import { COMMON_BORDER_RADIUS, COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
-import { AboutSectionDataInterface } from "@/utils/interfacedata.interface";
+import { AboutSectionDataInterface } from "@/utils/interface/data.interface";
 import { useGSAP } from "@gsap/react";
 import { CalendarDays, MapPin, ShieldCheck, Umbrella } from "lucide-react";
 import Image from "next/image";

@@ -4,7 +4,7 @@ import boilerBreakdownRepairsHero from "@/assets/images/webp/service/hero-images
 import boilerComponentImage from "@/assets/images/webp/service/hero-images/boiler-servicing.webp";
 import { BOILER_BREAKDOWN_REPAIRS_FAQ_DATA } from "@/content/pageContent/faq.data";
 import { TESTIMONIALS } from "@/utils/constants/testimonial.constants";
-import type { CommonPageDataInterface } from "@/utils/interfacepage.interface";
+import type { CommonPageDataInterface } from "@/utils/interface/data.interface";
 
 export const BOILER_BREAKDOWN_REPAIRS_PAGE_DATA: CommonPageDataInterface = {
   metadata: {

@@ -1,4 +1,4 @@
-import type { CommonPageDataInterface } from "@/utils/interfacepage.interface";
+import type { CommonPageDataInterface } from "@/utils/interface/data.interface";
 
 export interface LegalPageData extends CommonPageDataInterface {
   title: string;

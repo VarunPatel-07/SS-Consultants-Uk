@@ -1,5 +1,5 @@
 import { RichText } from "@/components/common/RichText";
-import type { SectionHeader as SectionHeaderData } from "@/utils/interfacecommon.interface";
+import type { SectionHeader as SectionHeaderData } from "@/utils/interface/common.interface";
 
 export function SectionHeader({
   data,

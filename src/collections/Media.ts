@@ -20,7 +20,7 @@ export const Media: CollectionConfig = {
       { name: "card", width: 800, height: 600, position: "centre", formatOptions: { format: "webp" } },
       { name: "hero", width: 1600, height: 900, position: "centre", formatOptions: { format: "webp" } },
     ],
-    mimeTypes: ["image/jpeg", "image/png", "image/webp", "image/avif"],
+    mimeTypes: ["image/jpeg", "image/png", "image/webp", "image/avif", "image/svg+xml"],
   },
   fields: [
     {

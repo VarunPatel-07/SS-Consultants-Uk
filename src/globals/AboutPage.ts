@@ -35,7 +35,24 @@ export const AboutPage: GlobalConfig = {
         },
       ],
     },
-    { name: "experience", type: "group", fields: [sectionHeader(), { name: "brandNames", type: "array", fields: [{ name: "name", type: "text", required: true }] }] },
+    {
+      name: "experience",
+      type: "group",
+      fields: [
+        sectionHeader(),
+        {
+          name: "brandLogos",
+          type: "upload",
+          relationTo: "media",
+          hasMany: true,
+          label: "Brand logos",
+          admin: {
+            description:
+              "Choose existing brand logos or upload new images. Use SVG logos where possible for sharper results and better performance.",
+          },
+        },
+      ],
+    },
     { name: "servicesSection", type: "group", fields: [sectionHeader(), { name: "services", type: "relationship", relationTo: "services", hasMany: true }] },
     { name: "faqSection", type: "group", fields: [sectionHeader(), { name: "faqs", type: "relationship", relationTo: "faqs", hasMany: true }] },
   ],

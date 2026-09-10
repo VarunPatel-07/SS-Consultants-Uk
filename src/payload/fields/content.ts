@@ -12,6 +12,22 @@ export const sectionHeader = (name = "header", label = "Section heading"): Field
   ],
 });
 
+export const richTextSectionHeader = (name = "header", label = "Section heading"): Field => ({
+  name,
+  type: "group",
+  label,
+  fields: [
+    { name: "eyebrow", type: "text" },
+    { name: "title", type: "text", required: true },
+    { name: "highlight", type: "text", admin: { description: "Optional words displayed with the brand style." } },
+    {
+      name: "description",
+      type: "richText",
+      admin: { description: "Use separate paragraphs to add spacing between blocks of text." },
+    },
+  ],
+});
+
 export const ctasField = (name = "ctas"): Field => ({
   name,
   type: "array",

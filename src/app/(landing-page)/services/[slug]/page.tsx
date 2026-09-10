@@ -6,7 +6,7 @@ import { HeatingDesignedSection } from "@/components/sections/service/heating-de
 import { InstallationIncludesSection } from "@/components/sections/service/installation-includes.section";
 import { ServiceHeroSection } from "@/components/sections/service/service-hero.section";
 import { WarmerHomeProcessSection } from "@/components/sections/service/warmer-home-process.section";
-import { getServicePageData, SERVICE_PAGE_DATA } from "@/content/pageContent/pageData/service";
+import { getPayloadServicePageData, getPayloadServiceSlugs } from "@/lib/payload/service-pages";
 import { getTestimonialSection } from "@/lib/payload/testimonials";
 import { SERVICE_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
 import { notFound } from "next/navigation";
@@ -15,18 +15,16 @@ import type { Metadata } from "next";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const page = getServicePageData(slug);
+  const page = await getPayloadServicePageData(slug);
   return { ...(page?.metadata ?? {}), alternates: { canonical: `/services/${slug}` } };
 }
-export function generateStaticParams() {
-  return SERVICE_PAGE_DATA.flatMap(({ serviceHeroSection }) =>
-    serviceHeroSection ? [{ slug: serviceHeroSection.slug }] : [],
-  );
+export async function generateStaticParams() {
+  return (await getPayloadServiceSlugs()).map((slug) => ({ slug }));
 }
 
 export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const pageData = getServicePageData(slug);
+  const pageData = await getPayloadServicePageData(slug);
   const testimonials = await getTestimonialSection("service", slug);
 
   if (!pageData) notFound();

@@ -6,7 +6,7 @@ import {
 } from "@/assets/images/webp/service/hero-images/boiler-servicing.webp";
 import { BOILER_SERVICE_FAQ_DATA } from "@/content/pageContent/faq.data";
 import { TESTIMONIALS } from "@/utils/constants/testimonial.constants";
-import type { CommonPageDataInterface } from "@/utils/interfacepage.interface";
+import type { CommonPageDataInterface } from "@/utils/interface/data.interface";
 
 export const BOILER_SERVICING_PAGE_DATA: CommonPageDataInterface = {
   metadata: {

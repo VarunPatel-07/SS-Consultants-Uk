@@ -20,6 +20,10 @@ import { SiteSettings } from "@/globals/SiteSettings";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
+const databaseURL = (process.env.DATABASE_URL ?? "").replace(
+  /([?&])sslmode=(prefer|require|verify-ca)(?=&|$)/,
+  "$1sslmode=verify-full",
+);
 const r2IsConfigured = Boolean(
   process.env.R2_BUCKET_NAME &&
     process.env.R2_BUCKET_ACCESS_KEY_ID &&
@@ -34,7 +38,7 @@ export default buildConfig({
   collections: [Users, Services, Testimonials, FAQs, Media],
   db: postgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URL ?? "",
+      connectionString: databaseURL,
     },
   }),
   editor: lexicalEditor(),

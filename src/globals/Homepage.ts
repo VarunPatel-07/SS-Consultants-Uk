@@ -1,7 +1,13 @@
 import type { GlobalConfig } from "payload";
 
 import { authenticated, anyone } from "@/payload/access";
-import { ctasField, sectionHeader, simpleCardsField, testimonialSectionField } from "@/payload/fields/content";
+import {
+  ctasField,
+  richTextSectionHeader,
+  sectionHeader,
+  simpleCardsField,
+  testimonialSectionField,
+} from "@/payload/fields/content";
 import { seoFields } from "@/payload/fields/seo";
 
 export const Homepage: GlobalConfig = {
@@ -95,7 +101,17 @@ export const Homepage: GlobalConfig = {
       type: "group",
       fields: [
         sectionHeader(),
-        { name: "brandNames", type: "array", fields: [{ name: "name", type: "text", required: true }] },
+        {
+          name: "brandLogos",
+          type: "upload",
+          relationTo: "media",
+          hasMany: true,
+          label: "Brand logos",
+          admin: {
+            description:
+              "Choose existing brand logos or upload new images. Use SVG logos where possible for sharper results and better performance.",
+          },
+        },
         { name: "calloutTitle", type: "text" },
         { name: "calloutDescription", type: "textarea" },
       ],
@@ -104,7 +120,14 @@ export const Homepage: GlobalConfig = {
       name: "about",
       type: "group",
       fields: [
-        sectionHeader(),
+        richTextSectionHeader(),
+        {
+          name: "image",
+          type: "upload",
+          relationTo: "media",
+          label: "About image",
+          admin: { description: "Choose an existing image or upload a new image for the homepage About section." },
+        },
         simpleCardsField("features", "Features"),
         { name: "badgeTitle", type: "text" },
         { name: "badgeDescription", type: "text" },

@@ -1,7 +1,7 @@
 import consultationImage from "@/assets/images/webp/boiler-consultation.webp";
 import { ABOUT_FEATURES, BOILER_BRANDS, HEATING_SUPPORT_CARDS } from "@/content/pageContent/common.data";
 import { HOME_PAGE_FAQ_DATA } from "@/content/pageContent/faq.data";
-import type { CommonPageDataInterface } from "@/utils/interfacepage.interface";
+import type { CommonPageDataInterface } from "@/utils/interface/data.interface";
 
 export const ABOUT_PAGE_DATA: CommonPageDataInterface = {
   metadata: {

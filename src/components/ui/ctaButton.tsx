@@ -1,5 +1,5 @@
 import { GET_BUTTON_STYLE } from "@/utils/constants/common.constants";
-import { ButtonEleInterface } from "@/utils/interface//ui-components.interface";
+import { ButtonEleInterface } from "@/utils/interface/ui-components.interface";
 import { ArrowUpRight } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 

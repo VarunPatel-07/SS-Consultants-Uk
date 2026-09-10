@@ -4,7 +4,7 @@ import boilerInstallationHero from "@/assets/images/webp/service/hero-images/boi
 import underfloorHeatingImage from "@/assets/images/webp/service/underfloor-heating.webp";
 import { BOILER_INSTALLATION_FAQ_DATA } from "@/content/pageContent/faq.data";
 import { TESTIMONIALS } from "@/utils/constants/testimonial.constants";
-import type { CommonPageDataInterface } from "@/utils/interfacepage.interface";
+import type { CommonPageDataInterface } from "@/utils/interface/data.interface";
 
 export const BOILER_INSTALLATION_PAGE_DATA: CommonPageDataInterface = {
   metadata: {

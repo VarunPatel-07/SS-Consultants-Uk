@@ -3,7 +3,7 @@ import CommonSectionHeader from "@/components/sections/common/common-section-hea
 import { gsap } from "@/lib/gsap";
 import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
 import { COMMON_BORDER_RADIUS, SERVICE_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
-import { WhatOurServiceInclude } from "@/utils/interfacedata.interface";
+import { WhatOurServiceInclude } from "@/utils/interface/data.interface";
 import { useGSAP } from "@gsap/react";
 import Image from "next/image";
 import { useRef } from "react";
@@ -57,9 +57,11 @@ export function InstallationIncludesSection({ data }: { data: WhatOurServiceIncl
                 COMMON_BORDER_RADIUS,
               )}
               key={title}>
-              <div className="m-2 overflow-hidden rounded md:rounded-lg lg:rounded-xl xl:rounded-2xl">
-                <Image className="aspect-video h-auto w-full object-cover" src={image} alt={title} />
-              </div>
+              {image && (
+                <div className="m-2 overflow-hidden rounded md:rounded-lg lg:rounded-xl xl:rounded-2xl">
+                  <Image className="aspect-video h-auto w-full object-cover" src={image} alt={title} width={800} height={450} />
+                </div>
+              )}
               <div className="flex flex-col items-start justify-start lg:flex-row gap-5 px-6 pb-7 pt-5">
                 <span className="shrink-0 font-lora text-2xl md:text-4xl leading-none text-(--ssc-uk-main-highlight-color)">
                   {number}

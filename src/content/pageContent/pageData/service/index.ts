@@ -1,4 +1,4 @@
-import type { CommonPageDataInterface } from "@/utils/interfacepage.interface";
+import type { CommonPageDataInterface } from "@/utils/interface/data.interface";
 import { BOILER_BREAKDOWN_REPAIRS_PAGE_DATA } from "./boiler-breakdown-repairs.data";
 import { BOILER_INSTALLATION_PAGE_DATA } from "./boiler-installation.data";
 import { BOILER_SERVICING_PAGE_DATA } from "./boiler-servicing.data";

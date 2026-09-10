@@ -9,7 +9,7 @@ import flameDeviceIcon from "@/assets/images/svg/boiler-installation-icon.svg";
 import boilerServicingIcon from "@/assets/images/svg/boiler-servicing-icon.svg";
 import centralHeatingIcon from "@/assets/images/svg/central-heating-icon.svg";
 import underfloorHeatingIcon from "@/assets/images/svg/underfloor-heating-icon.svg";
-import type { BoilerBrand, HeatingService } from "@/utils/interface//homepage.interface";
+import type { BoilerBrand, HeatingService } from "@/utils/interface/homepage.interface";
 
 export const BOILER_BRANDS: BoilerBrand[] = [
   { name: "Vaillant", logo: vaillantLogo, alt: "Vaillant boiler brand logo" },

@@ -1,4 +1,4 @@
-import type { FAQItem } from "@/utils/interfacecommon.interface";
+import type { FAQItem } from "@/utils/interface/common.interface";
 
 export const FAQ_DATA: FAQItem[] = [
   {

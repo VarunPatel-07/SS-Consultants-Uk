@@ -3,7 +3,7 @@ import CommonSectionHeader from "@/components/sections/common/common-section-hea
 import { gsap } from "@/lib/gsap";
 import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
 import { COMMON_BORDER_RADIUS, SERVICE_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
-import { ProcessSection } from "@/utils/interfacedata.interface";
+import { ProcessSection } from "@/utils/interface/data.interface";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import { twMerge } from "tailwind-merge";

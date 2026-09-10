@@ -1,5 +1,4 @@
 "use client";
-import aboutImage from "@/assets/images/webp/ss-consultant-about-us-section.webp";
 import { RichText } from "@/components/common/RichText";
 import CTAButton from "@/components/ui/ctaButton";
 import { gsap } from "@/lib/gsap";
@@ -45,32 +44,39 @@ export function AboutSection({ data }: { data: AboutSectionDataInterface }) {
       id="about"
       className={twMerge("bg-(--ssc-uk-surface-color)", COMMON_SECTION_PADDING_TOP_BOTTOM, COMMON_BORDER_RADIUS)}
       aria-labelledby="about-title">
-      <div className="ss-construction-uk-container grid items-stretch gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:gap-14 xl:gap-20">
-        <div className="relative overflow-visible">
-          <div className={twMerge("overflow-hidden bg-(--ssc-uk-surface-color)", COMMON_BORDER_RADIUS)}>
-            <Image
-              className="why-choose-us-reveal aspect-square h-full w-full object-cover object-center reveal-animation"
-              src={aboutImage}
-              width={900}
-              height={900}
-              alt="Heating engineer working on a boiler system"
-            />
-          </div>
-          {data.badge && (
-            <div
-              className={twMerge(
-                "why-choose-us-reveal absolute bottom-6 left-4 w-52 border border-(--ssc-uk-border-color) bg-(--ssc-uk-surface-color) px-6 py-6 shadow-sm lg:-left-7 reveal-animation",
-                COMMON_BORDER_RADIUS,
-              )}>
-              <strong className="block text-4xl font-bold leading-none text-(--ssc-uk-main-highlight-color) sm:text-5xl">
-                <RichText content={data.badge.title} commonChunkClassNames="reveal-text-animation" />
-              </strong>
-              <span className="mt-3 block text-base text-(--ssc-uk-muted-color)">
-                <RichText content={data.badge.description} commonChunkClassNames="reveal-text-animation" />
-              </span>
+      <div
+        className={twMerge(
+          "ss-construction-uk-container grid items-stretch gap-10",
+          data.image && "lg:grid-cols-[1.02fr_0.98fr] lg:gap-14 xl:gap-20",
+        )}>
+        {data.image && (
+          <div className="relative overflow-visible">
+            <div className={twMerge("overflow-hidden bg-(--ssc-uk-surface-color)", COMMON_BORDER_RADIUS)}>
+              <Image
+                className="why-choose-us-reveal aspect-square h-full w-full object-cover object-center reveal-animation"
+                src={data.image.src}
+                width={data.image.width || 900}
+                height={data.image.height || 900}
+                alt={data.image.alt}
+                unoptimized={typeof data.image.src === "string" && /\.svg(?:\?|$)/i.test(data.image.src)}
+              />
             </div>
-          )}
-        </div>
+            {data.badge && (
+              <div
+                className={twMerge(
+                  "why-choose-us-reveal absolute bottom-6 left-4 w-52 border border-(--ssc-uk-border-color) bg-(--ssc-uk-surface-color) px-6 py-6 shadow-sm lg:-left-7 reveal-animation",
+                  COMMON_BORDER_RADIUS,
+                )}>
+                <strong className="block text-4xl font-bold leading-none text-(--ssc-uk-main-highlight-color) sm:text-5xl">
+                  <RichText content={data.badge.title} commonChunkClassNames="reveal-text-animation" />
+                </strong>
+                <span className="mt-3 block text-base text-(--ssc-uk-muted-color)">
+                  <RichText content={data.badge.description} commonChunkClassNames="reveal-text-animation" />
+                </span>
+              </div>
+            )}
+          </div>
+        )}
 
         <div className="h-full flex flex-col items-start justify-center gap-7 lg:gap-9 xl:gap-10">
           <h2 id="about-title" className="mt-4 max-w-3xl ssc-section-title text-white!">
@@ -82,7 +88,11 @@ export function AboutSection({ data }: { data: AboutSectionDataInterface }) {
           </h2>
           {data?.header?.description && (
             <p className="max-w-3xl space-y-3 ssc-section-description text-white!">
-              <RichText content={data.header.description} commonChunkClassNames="reveal-text-animation" />
+              <RichText
+                content={data.header.description}
+                commonChunkClassNames="reveal-text-animation"
+                className="whitespace-pre-line"
+              />
             </p>
           )}
 

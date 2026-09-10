@@ -1,4 +1,4 @@
-import { HeatingSupportCard } from "@/utils/interface//common.interface";
+import { HeatingSupportCard } from "@/utils/interface/common.interface";
 
 export { SERVICE_PAGE_DATA as SERVICE_CONTENT } from "@/content/pageContent/pageData/service";
 export { ABOUT_FEATURES } from "@/utils/constants/about.constants";

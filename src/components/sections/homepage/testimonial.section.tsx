@@ -4,7 +4,7 @@ import { RichText } from "@/components/common/RichText";
 import { gsap } from "@/lib/gsap";
 import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
 import { COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
-import { TestimonialSectionInterface } from "@/utils/interface//data.interface";
+import { TestimonialSectionInterface } from "@/utils/interface/data.interface";
 import { useGSAP } from "@gsap/react";
 import { ArrowLeft, ArrowRight, Star } from "lucide-react";
 import { useRef, useState } from "react";

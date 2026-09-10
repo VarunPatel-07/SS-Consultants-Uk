@@ -2,7 +2,7 @@ import config from "@payload-config";
 import { getPayload } from "payload";
 import { cache } from "react";
 
-import type { TestimonialSectionInterface } from "@/utils/interface//data.interface";
+import type { TestimonialSectionInterface } from "@/utils/interface/data.interface";
 
 type TestimonialPage = "homepage" | "gallery-page" | "service";
 

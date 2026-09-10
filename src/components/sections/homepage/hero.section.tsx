@@ -26,16 +26,9 @@ const INFO_ICONS = {
   wrench: Wrench,
 };
 
-const defaultInfoItems: HeroInfoItem[] = [
-  { title: "Gas Safe Registered", description: "Registration verified", icon: "shield" },
-  { title: "Local Heating Engineers", description: "Hatfield, Hertfordshire & London", icon: "sparkles" },
-  { title: "Same-Day Appointments", description: "Subject to availability", icon: "calendar" },
-  { title: "Fully Insured", description: "Complete peace of mind", icon: "check" },
-];
-
 export function HeroSection({
   data,
-  infoItems = defaultInfoItems,
+  infoItems,
   visual,
 }: {
   data: HeroSectionData;
@@ -44,12 +37,18 @@ export function HeroSection({
 }) {
   const animationContainer = useRef<HTMLDivElement | null>(null);
   const heroImage = visual?.image;
-  const statsCard = visual?.statsCard === undefined
-    ? { value: "22+", label: "years", description: "Heating experience" }
-    : visual.statsCard;
-  const iconCard = visual?.iconCard === undefined
-    ? { title: "Same-day appointments available", description: "Speak directly with an engineer", icon: "calendar" as const }
-    : visual.iconCard;
+  const statsCard =
+    visual?.statsCard === undefined
+      ? { value: "22+", label: "years", description: "Heating experience" }
+      : visual.statsCard;
+  const iconCard =
+    visual?.iconCard === undefined
+      ? {
+          title: "Same-day appointments available",
+          description: "Speak directly with an engineer",
+          icon: "calendar" as const,
+        }
+      : visual.iconCard;
   const IconCardIcon = iconCard ? INFO_ICONS[iconCard.icon] : CalendarDays;
 
   useGSAP(
@@ -72,12 +71,8 @@ export function HeroSection({
               <div className="reveal-animation inline-flex items-center rounded-full border border-(--ssc-uk-main-highlight-color) px-4 py-2 font-jakarta font-semibold tracking-[0.08em] text-foreground ss-construction-uk-hero-eyebrow">
                 {data.eyebrow}
               </div>
-              <h1 className="font-jakarta font-bold leading-[1.02] tracking-[-0.055em] text-foreground ss-construction-uk--hero-title lg:mt-6">
-                <RichText
-                  content={data.header.title}
-                  parentWrapper="items-start! justify-start! md:items-start! md:justify-start! "
-                  className="items-start! justify-start! md:items-start! md:justify-start! "
-                />
+              <h1 className="font-jakarta font-bold leading-[1.02] tracking-[-0.055em] text-foreground ss-construction-uk--hero-title lg:mt-6 inline">
+                <RichText content={data.header.title} parentWrapper="inline!" className="inline!" />
               </h1>
               <p className="font-jakarta text-lg xl:text-xl leading-relaxed text-foreground/90">
                 {data.header.description && <RichText content={data.header.description} />}
@@ -123,65 +118,71 @@ export function HeroSection({
                 </>
               )}
             </div>
-            {statsCard && <div
-              className={twMerge(
-                "reveal-animation absolute right-4 top-2 bg-(--ssc-uk-surface-color) px-5 py-4 text-center shadow-[0_14px_35px_rgba(8,13,25,0.14)] sm:right-6 sm:top-6",
-                COMMON_BORDER_RADIUS,
-              )}>
-              <strong className="block font-jakarta text-4xl font-bold leading-none text-(--ssc-uk-main-highlight-color)">
-                {statsCard.value}
-              </strong>
-              <span className="mt-1 block font-jakarta text-sm font-semibold text-foreground">{statsCard.label}</span>
-              <span className="mt-2 block border-t border-(--ssc-uk-border-color) pt-2 font-jakarta text-xs text-(--ssc-uk-muted-color)">
-                {statsCard.description}
-              </span>
-            </div>}
-            {iconCard && <div
-              className={twMerge(
-                "reveal-animation absolute bottom-2 left-4 flex max-w-[calc(100%-2rem)] items-center gap-3  bg-(--ssc-uk-surface-color) px-4 py-4 shadow-[0_14px_35px_rgba(8,13,25,0.14)] sm:bottom-6 sm:left-6 sm:px-5",
-                COMMON_BORDER_RADIUS,
-              )}>
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-(--ssc-uk-main-highlight-color) text-(--ssc-uk-main-highlight-color)">
-                <IconCardIcon className="h-6 w-6" strokeWidth={1.8} />
-              </span>
-              <span className="font-jakarta">
-                <strong className="block text-sm font-semibold leading-tight text-foreground sm:text-base">
-                  {iconCard.title}
+            {statsCard && (
+              <div
+                className={twMerge(
+                  "reveal-animation absolute right-4 top-2 bg-(--ssc-uk-surface-color) px-5 py-4 text-center shadow-[0_14px_35px_rgba(8,13,25,0.14)] sm:right-6 sm:top-6",
+                  COMMON_BORDER_RADIUS,
+                )}>
+                <strong className="block font-jakarta text-4xl font-bold leading-none text-(--ssc-uk-main-highlight-color)">
+                  {statsCard.value}
                 </strong>
-                <span className="mt-1 block text-xs text-(--ssc-uk-muted-color) sm:text-sm">
-                  {iconCard.description}
+                <span className="mt-1 block font-jakarta text-sm font-semibold text-foreground">{statsCard.label}</span>
+                <span className="mt-2 block border-t border-(--ssc-uk-border-color) pt-2 font-jakarta text-xs text-(--ssc-uk-muted-color)">
+                  {statsCard.description}
                 </span>
-              </span>
-            </div>}
+              </div>
+            )}
+            {iconCard && (
+              <div
+                className={twMerge(
+                  "reveal-animation absolute bottom-2 left-4 flex max-w-[calc(100%-2rem)] items-center gap-3  bg-(--ssc-uk-surface-color) px-4 py-4 shadow-[0_14px_35px_rgba(8,13,25,0.14)] sm:bottom-6 sm:left-6 sm:px-5",
+                  COMMON_BORDER_RADIUS,
+                )}>
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-(--ssc-uk-main-highlight-color) text-(--ssc-uk-main-highlight-color)">
+                  <IconCardIcon className="h-6 w-6" strokeWidth={1.8} />
+                </span>
+                <span className="font-jakarta">
+                  <strong className="block text-sm font-semibold leading-tight text-foreground sm:text-base">
+                    {iconCard.title}
+                  </strong>
+                  <span className="mt-1 block text-xs text-(--ssc-uk-muted-color) sm:text-sm">
+                    {iconCard.description}
+                  </span>
+                </span>
+              </div>
+            )}
           </div>
         </div>
-        <div
-          className={twMerge(
-            "mt-8 grid overflow-hidden border border-(--ssc-uk-border-color) bg-(--ssc-uk-surface-color)/80 min-[500px]:grid-cols-2 lg:mt-10 lg:grid-cols-4",
-            COMMON_BORDER_RADIUS,
-          )}>
-          {infoItems.map(({ title, description, icon }, index) => {
-            const Icon = INFO_ICONS[icon];
+        {infoItems && (
+          <div
+            className={twMerge(
+              "mt-8 grid overflow-hidden border border-(--ssc-uk-border-color) bg-(--ssc-uk-surface-color)/80 min-[500px]:grid-cols-2 lg:mt-10 lg:grid-cols-4",
+              COMMON_BORDER_RADIUS,
+            )}>
+            {infoItems?.map(({ title, description, icon }, index) => {
+              const Icon = INFO_ICONS[icon];
 
-            return (
-            <div
-              className={twMerge(
-                "flex items-center gap-4 border-(--ssc-uk-border-color) px-5 py-5 sm:px-6 lg:py-7 reveal-animation",
-                index > 0 && "max-[499px]:border-t",
-                index > 0 && "min-[500px]:border-l",
-                index >= 2 && "min-[500px]:max-lg:border-t",
-                index >= 2 && "lg:border-t-0",
-              )}
-              key={title}>
-              <Icon className="h-9 w-9 shrink-0 text-(--ssc-uk-main-highlight-color)" strokeWidth={1.8} />
-              <div className="font-jakarta">
-                <strong className="block text-sm font-semibold text-foreground sm:text-base">{title}</strong>
-                <span className="mt-1 block text-xs text-(--ssc-uk-muted-color) sm:text-sm">{description}</span>
-              </div>
-            </div>
-            );
-          })}
-        </div>
+              return (
+                <div
+                  className={twMerge(
+                    "flex items-center gap-4 border-(--ssc-uk-border-color) px-5 py-5 sm:px-6 lg:py-7 reveal-animation",
+                    index > 0 && "max-[499px]:border-t",
+                    index > 0 && "min-[500px]:border-l",
+                    index >= 2 && "min-[500px]:max-lg:border-t",
+                    index >= 2 && "lg:border-t-0",
+                  )}
+                  key={title}>
+                  <Icon className="h-9 w-9 shrink-0 text-(--ssc-uk-main-highlight-color)" strokeWidth={1.8} />
+                  <div className="font-jakarta">
+                    <strong className="block text-sm font-semibold text-foreground sm:text-base">{title}</strong>
+                    <span className="mt-1 block text-xs text-(--ssc-uk-muted-color) sm:text-sm">{description}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </section>
   );

@@ -1,4 +1,4 @@
-import type { Testimonial } from "@/utils/interface//testimonial.interface";
+import type { Testimonial } from "@/utils/interface/testimonial.interface";
 
 export const TESTIMONIALS: Testimonial[] = [
   {

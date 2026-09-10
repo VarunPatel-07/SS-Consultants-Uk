@@ -4,7 +4,7 @@ import CtaServiceButton from "@/components/ui/ctaServiceBtn";
 import { gsap } from "@/lib/gsap";
 import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
 import { COMMON_BORDER_RADIUS, COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
-import { OurServicesSectionInterface } from "@/utils/interfacedata.interface";
+import { OurServicesSectionInterface } from "@/utils/interface/data.interface";
 import { useGSAP } from "@gsap/react";
 import Image from "next/image";
 import { useRef } from "react";
@@ -12,7 +12,6 @@ import { twMerge } from "tailwind-merge";
 
 export function OurServiceSection({ data }: { data: OurServicesSectionInterface }) {
   const containerRef = useRef<HTMLDivElement>(null);
-
   useGSAP(
     () => {
       if (!containerRef.current) return;
@@ -54,22 +53,26 @@ export function OurServiceSection({ data }: { data: OurServicesSectionInterface 
                   "flex h-full flex-col overflow-hidden border border-(--ssc-uk-border-color) bg-background transition-shadow hover:shadow-md",
                   COMMON_BORDER_RADIUS,
                 )}>
-                <div
-                  className={twMerge(
-                    "relative m-2.5 shrink-0 overflow-hidden bg-(--ssc-uk-surface-color)",
-                    "rounded-lg md:rounded-xl lg:rounded-2xl",
-                  )}>
-                  <Image
-                    className="h-49.5 w-full object-cover transition-transform duration-500 hover:scale-105"
-                    src={image}
-                    alt={imageAlt}
-                  />
-                  {badge && (
-                    <span className="absolute left-4 top-4 rounded-full bg-(--ssc-uk-cta-button-background) px-4 py-2 text-xs font-bold uppercase text-white font-jakarta">
-                      {badge}
-                    </span>
-                  )}
-                </div>
+                {image && (
+                  <div
+                    className={twMerge(
+                      "relative m-2.5 shrink-0 overflow-hidden bg-(--ssc-uk-surface-color)",
+                      "rounded-lg md:rounded-xl lg:rounded-2xl",
+                    )}>
+                    <Image
+                      className="h-49.5 w-full object-cover transition-transform duration-500 hover:scale-105"
+                      src={image}
+                      alt={imageAlt}
+                      width={800}
+                      height={600}
+                    />
+                    {badge && (
+                      <span className="absolute left-4 top-4 rounded-full bg-(--ssc-uk-cta-button-background) px-4 py-2 text-xs font-bold uppercase text-white font-jakarta">
+                        {badge}
+                      </span>
+                    )}
+                  </div>
+                )}
                 <div className="flex flex-1 flex-col px-2.5 pb-5 pt-3 sm:px-4">
                   <div className="flex flex-1 flex-col">
                     <h3 className="text-lg xl:text-xl font-bold leading-tight tracking-tight text-foreground font-jakarta">

@@ -167,20 +167,51 @@ export interface User {
   collection: 'users';
 }
 /**
+ * Create the homepage service card and the complete service detail page from one clearly organised form.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "services".
  */
 export interface Service {
   id: number;
+  /**
+   * Example: Boiler Servicing. This is also the record name in the admin panel.
+   */
   title: string;
+  /**
+   * Example: boiler-servicing creates /services/boiler-servicing.
+   */
   slug: string;
+  /**
+   * Short service name used in forms and navigation.
+   */
   label: string;
+  homepageCard: {
+    title: string;
+    description: string;
+    /**
+     * Upload the image shown on this service's homepage card.
+     */
+    image?: (number | null) | Media;
+    ctaLabel?: string | null;
+    /**
+     * Example: Same-day available. Leave empty to hide it.
+     */
+    badge?: string | null;
+  };
   eyebrow?: string | null;
   headline: string;
   highlight?: string | null;
   ending?: string | null;
   description: string;
+  /**
+   * Upload the large image displayed beside the service heading.
+   */
+  heroImage?: (number | null) | Media;
   ctaLabel?: string | null;
+  /**
+   * Optional pricing rows displayed over the hero image.
+   */
   options?:
     | {
         name: string;
@@ -206,8 +237,13 @@ export interface Service {
   };
   includedItems?:
     | {
+        number: string;
         title: string;
         description: string;
+        /**
+         * Upload the image displayed at the top of this card.
+         */
+        image?: (number | null) | Media;
         id?: string | null;
       }[]
     | null;
@@ -244,6 +280,16 @@ export interface Service {
         id?: string | null;
       }[]
     | null;
+  ctaHeader: {
+    eyebrow?: string | null;
+    title: string;
+    /**
+     * Optional words displayed with the brand style.
+     */
+    highlight?: string | null;
+    description?: string | null;
+  };
+  ctaReassurance?: string | null;
   /**
    * Add a button label and destination, then choose its visual style and link behaviour.
    */
@@ -264,6 +310,15 @@ export interface Service {
         id?: string | null;
       }[]
     | null;
+  faqHeader: {
+    eyebrow?: string | null;
+    title: string;
+    /**
+     * Optional words displayed with the brand style.
+     */
+    highlight?: string | null;
+    description?: string | null;
+  };
   faqs?: (number | Faq)[] | null;
   /**
    * Leave the heading empty to use the default from Site settings. Select testimonials to override the default list for this page.
@@ -286,46 +341,6 @@ export interface Service {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "faqs".
- */
-export interface Faq {
-  id: number;
-  question: string;
-  answer: string;
-  page:
-    | 'general'
-    | 'homepage'
-    | 'about'
-    | 'boiler-servicing'
-    | 'boiler-breakdown-repairs'
-    | 'boiler-installation'
-    | 'underfloor-heating'
-    | 'powerflushing'
-    | 'central-heating';
-  sortOrder?: number | null;
-  published?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "testimonials".
- */
-export interface Testimonial {
-  id: number;
-  name: string;
-  quote: string;
-  rating: number;
-  /**
-   * Optional customer role, location or service name.
-   */
-  designation?: string | null;
-  sortOrder?: number | null;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * Upload an image and provide accessible alternative text.
@@ -376,6 +391,46 @@ export interface Media {
       filename?: string | null;
     };
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faqs".
+ */
+export interface Faq {
+  id: number;
+  question: string;
+  answer: string;
+  page:
+    | 'general'
+    | 'homepage'
+    | 'about'
+    | 'boiler-servicing'
+    | 'boiler-breakdown-repairs'
+    | 'boiler-installation'
+    | 'underfloor-heating'
+    | 'powerflushing'
+    | 'central-heating';
+  sortOrder?: number | null;
+  published?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials".
+ */
+export interface Testimonial {
+  id: number;
+  name: string;
+  quote: string;
+  rating: number;
+  /**
+   * Optional customer role, location or service name.
+   */
+  designation?: string | null;
+  sortOrder?: number | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -493,11 +548,21 @@ export interface ServicesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   label?: T;
+  homepageCard?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        ctaLabel?: T;
+        badge?: T;
+      };
   eyebrow?: T;
   headline?: T;
   highlight?: T;
   ending?: T;
   description?: T;
+  heroImage?: T;
   ctaLabel?: T;
   options?:
     | T
@@ -524,8 +589,10 @@ export interface ServicesSelect<T extends boolean = true> {
   includedItems?:
     | T
     | {
+        number?: T;
         title?: T;
         description?: T;
+        image?: T;
         id?: T;
       };
   solutionsHeader?:
@@ -559,6 +626,15 @@ export interface ServicesSelect<T extends boolean = true> {
         description?: T;
         id?: T;
       };
+  ctaHeader?:
+    | T
+    | {
+        eyebrow?: T;
+        title?: T;
+        highlight?: T;
+        description?: T;
+      };
+  ctaReassurance?: T;
   ctas?:
     | T
     | {
@@ -569,6 +645,14 @@ export interface ServicesSelect<T extends boolean = true> {
         rel?: T;
         theme?: T;
         id?: T;
+      };
+  faqHeader?:
+    | T
+    | {
+        eyebrow?: T;
+        title?: T;
+        highlight?: T;
+        description?: T;
       };
   faqs?: T;
   testimonialsSection?:
@@ -790,12 +874,10 @@ export interface Homepage {
       highlight?: string | null;
       description?: string | null;
     };
-    brandNames?:
-      | {
-          name: string;
-          id?: string | null;
-        }[]
-      | null;
+    /**
+     * Choose existing brand logos or upload new images. Use SVG logos where possible for sharper results and better performance.
+     */
+    brandLogos?: (number | Media)[] | null;
     calloutTitle?: string | null;
     calloutDescription?: string | null;
   };
@@ -807,8 +889,29 @@ export interface Homepage {
        * Optional words displayed with the brand style.
        */
       highlight?: string | null;
-      description?: string | null;
+      /**
+       * Use separate paragraphs to add spacing between blocks of text.
+       */
+      description?: {
+        root: {
+          type: string;
+          children: {
+            type: any;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      } | null;
     };
+    /**
+     * Choose an existing image or upload a new image for the homepage About section.
+     */
+    image?: (number | null) | Media;
     features?:
       | {
           title: string;
@@ -1029,12 +1132,10 @@ export interface AboutPage {
       highlight?: string | null;
       description?: string | null;
     };
-    brandNames?:
-      | {
-          name: string;
-          id?: string | null;
-        }[]
-      | null;
+    /**
+     * Choose existing brand logos or upload new images. Use SVG logos where possible for sharper results and better performance.
+     */
+    brandLogos?: (number | Media)[] | null;
   };
   servicesSection: {
     header: {
@@ -1408,12 +1509,7 @@ export interface HomepageSelect<T extends boolean = true> {
               highlight?: T;
               description?: T;
             };
-        brandNames?:
-          | T
-          | {
-              name?: T;
-              id?: T;
-            };
+        brandLogos?: T;
         calloutTitle?: T;
         calloutDescription?: T;
       };
@@ -1428,6 +1524,7 @@ export interface HomepageSelect<T extends boolean = true> {
               highlight?: T;
               description?: T;
             };
+        image?: T;
         features?:
           | T
           | {
@@ -1627,12 +1724,7 @@ export interface AboutPageSelect<T extends boolean = true> {
               highlight?: T;
               description?: T;
             };
-        brandNames?:
-          | T
-          | {
-              name?: T;
-              id?: T;
-            };
+        brandLogos?: T;
       };
   servicesSection?:
     | T

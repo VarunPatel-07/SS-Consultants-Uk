@@ -5,7 +5,7 @@ import CTAButton from "@/components/ui/ctaButton";
 import { gsap } from "@/lib/gsap";
 import { COMMON_REVEL_ANIMATION } from "@/utils/constants/animation.constant";
 import { COMMON_BORDER_RADIUS, COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
-import type { ServiceHeroSectionInterface } from "@/utils/interfacedata.interface";
+import type { ServiceHeroSectionInterface } from "@/utils/interface/data.interface";
 import { useGSAP } from "@gsap/react";
 import { CheckCircle2 } from "lucide-react";
 import Image from "next/image";
@@ -42,12 +42,12 @@ export function ServiceHeroSection({ service }: { service: ServiceHeroSectionInt
             </div>
             <h1
               id="service-title"
-              className="mt-9 max-w-157.5 font-bold leading-[1.04] tracking-[-0.045em] text-foreground text-[35px] sm:text-[38px] md:text-[42px] lg:text-[46px] xl:text-[68px]">
-              <RichText content={service.header.title} className="justify-start!" />
+              className="mt-7 font-jakarta font-bold leading-[1.02] tracking-[-0.055em] text-foreground ss-construction-uk--hero-title lg:mt-6 inline">
+              <RichText content={service.header.title} parentWrapper="inline!" className="inline!" />
             </h1>
-            <div className="ssc-section-description mt-7 max-w-130">
+            <p className="ssc-section-description mt-7 max-w-[90%]">
               <RichText content={service.header.description ?? []} parentWrapper="gap-0!" />
-            </div>
+            </p>
 
             <div className="mt-9 flex gap-4 flex-wrap reveal-animation">
               <CTAButton btnStyle="CTA_PRIMARY" href="#contact" className="w-fit">
@@ -69,17 +69,19 @@ export function ServiceHeroSection({ service }: { service: ServiceHeroSectionInt
           </div>
 
           <div className="relative min-w-0 xl:w-full xl:justify-self-end reveal-animation">
-            <Image
-              className={twMerge(
-                "h-auto max-h-100 w-full object-cover object-center lg:h-full lg:max-h-none aspect-square",
-                COMMON_BORDER_RADIUS,
-              )}
-              src={service?.heroImage}
-              alt={`Engineer carrying out ${service.label.toLowerCase()}`}
-              priority
-              width={650}
-              height={650}
-            />
+            {service.heroImage && (
+              <Image
+                className={twMerge(
+                  "h-auto max-h-100 w-full object-cover object-center lg:h-full lg:max-h-none aspect-square",
+                  COMMON_BORDER_RADIUS,
+                )}
+                src={service.heroImage}
+                alt={`Engineer carrying out ${service.label.toLowerCase()}`}
+                priority
+                width={650}
+                height={650}
+              />
+            )}
             <div
               className={twMerge(
                 "relative mt-4 w-full border border-(--ssc-uk-main-highlight-color)/40 bg-background p-5 shadow-xl sm:p-6 lg:absolute lg:bottom-10 lg:left-10 lg:mt-0 lg:w-[390px] lg:max-w-[calc(100%-2.5rem)] xl:-left-1/4",
