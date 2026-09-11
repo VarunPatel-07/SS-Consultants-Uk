@@ -968,7 +968,33 @@ export interface Homepage {
     items?:
       | {
           title: string;
+          /**
+           * Highlighted italic text displayed directly below the boiler title.
+           */
+          highlight?: string | null;
           description: string;
+          /**
+           * Text displayed after the “Best for:” label.
+           */
+          note?: string | null;
+          /**
+           * Add the features displayed with check marks on this boiler card.
+           */
+          bulletPoints?:
+            | {
+                text: string;
+                id?: string | null;
+              }[]
+            | null;
+          /**
+           * Choose an existing image or upload a new image for this boiler card. The current default image is used when this is empty.
+           */
+          image?: (number | null) | Media;
+          ctaLabel?: string | null;
+          /**
+           * Show the Popular choice badge on this boiler card.
+           */
+          popularChoice?: boolean | null;
           id?: string | null;
         }[]
       | null;
@@ -1073,6 +1099,7 @@ export interface AboutPage {
       highlight?: string | null;
       description?: string | null;
     };
+    image?: (number | null) | Media;
     features?:
       | {
           title: string;
@@ -1080,6 +1107,9 @@ export interface AboutPage {
           id?: string | null;
         }[]
       | null;
+    badgeTitle?: string | null;
+    badgeDescription?: string | null;
+    reassurance?: string | null;
     /**
      * Add a button label and destination, then choose its visual style and link behaviour.
      */
@@ -1111,6 +1141,7 @@ export interface AboutPage {
       highlight?: string | null;
       description?: string | null;
     };
+    image?: (number | null) | Media;
     badgeTitle?: string | null;
     badgeDescription?: string | null;
     items?:
@@ -1121,6 +1152,14 @@ export interface AboutPage {
           id?: string | null;
         }[]
       | null;
+    /**
+     * Heading for the boiler-brand callout.
+     */
+    calloutTitle?: string | null;
+    /**
+     * Description for the boiler-brand callout.
+     */
+    calloutDescription?: string | null;
   };
   experience: {
     header: {
@@ -1575,7 +1614,18 @@ export interface HomepageSelect<T extends boolean = true> {
           | T
           | {
               title?: T;
+              highlight?: T;
               description?: T;
+              note?: T;
+              bulletPoints?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+              image?: T;
+              ctaLabel?: T;
+              popularChoice?: T;
               id?: T;
             };
       };
@@ -1672,6 +1722,7 @@ export interface AboutPageSelect<T extends boolean = true> {
               highlight?: T;
               description?: T;
             };
+        image?: T;
         features?:
           | T
           | {
@@ -1679,6 +1730,9 @@ export interface AboutPageSelect<T extends boolean = true> {
               description?: T;
               id?: T;
             };
+        badgeTitle?: T;
+        badgeDescription?: T;
+        reassurance?: T;
         ctas?:
           | T
           | {
@@ -1702,6 +1756,7 @@ export interface AboutPageSelect<T extends boolean = true> {
               highlight?: T;
               description?: T;
             };
+        image?: T;
         badgeTitle?: T;
         badgeDescription?: T;
         items?:
@@ -1712,6 +1767,8 @@ export interface AboutPageSelect<T extends boolean = true> {
               description?: T;
               id?: T;
             };
+        calloutTitle?: T;
+        calloutDescription?: T;
       };
   experience?:
     | T

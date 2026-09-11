@@ -143,7 +143,60 @@ export const Homepage: GlobalConfig = {
     {
       name: "boilerOptions",
       type: "group",
-      fields: [sectionHeader(), simpleCardsField("items", "Boiler options")],
+      fields: [
+        sectionHeader(),
+        {
+          name: "items",
+          type: "array",
+          label: "Boiler options",
+          fields: [
+            { name: "title", type: "text", required: true },
+            {
+              name: "highlight",
+              type: "text",
+              label: "Highlight / tagline",
+              admin: { description: "Highlighted italic text displayed directly below the boiler title." },
+            },
+            { name: "description", type: "textarea", required: true },
+            {
+              name: "note",
+              type: "text",
+              label: "Best for note",
+              admin: { description: "Text displayed after the “Best for:” label." },
+            },
+            {
+              name: "bulletPoints",
+              type: "array",
+              label: "Bullet points",
+              admin: { description: "Add the features displayed with check marks on this boiler card." },
+              fields: [{ name: "text", type: "text", label: "Bullet point", required: true }],
+            },
+            {
+              name: "image",
+              type: "upload",
+              relationTo: "media",
+              label: "Boiler image",
+              admin: {
+                description:
+                  "Choose an existing image or upload a new image for this boiler card. The current default image is used when this is empty.",
+              },
+            },
+            {
+              name: "ctaLabel",
+              type: "text",
+              label: "CTA button label",
+              defaultValue: "Get a Quote for This Boiler",
+            },
+            {
+              name: "popularChoice",
+              type: "checkbox",
+              label: "Popular choice",
+              defaultValue: false,
+              admin: { description: "Show the Popular choice badge on this boiler card." },
+            },
+          ],
+        },
+      ],
     },
     {
       name: "callToAction",

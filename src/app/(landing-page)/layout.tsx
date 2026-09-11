@@ -44,8 +44,6 @@ const lora = Lora({
   display: "swap",
 });
 
-export const revalidate = 300;
-
 export default async function RootLayout({ children }: LayoutProps<"/">) {
   const siteSettings = await getWebsiteSettings();
 

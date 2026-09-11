@@ -1,5 +1,6 @@
 "use client";
-import type { LegalContentSection } from "@/content/pageContent/pageData/legal.data";
+import { RichText as PayloadRichText } from "@payloadcms/richtext-lexical/react";
+import type { PrivacyPolicy } from "@/payload-types";
 import { gsap } from "@/lib/gsap";
 import { COMMON_REVEL_ANIMATION } from "@/utils/constants/animation.constant";
 import { COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
@@ -14,7 +15,7 @@ export function LegalPageSection({
 }: {
   title: string;
   description: string;
-  content?: LegalContentSection[];
+  content?: PrivacyPolicy["content"];
 }) {
   const animationContainer = useRef(null);
   useGSAP(
@@ -37,28 +38,7 @@ export function LegalPageSection({
           {title}
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-(--ssc-uk-muted-color) reveal-animation">{description}</p>
-        {content && (
-          <div className="mt-12 max-w-4xl space-y-10 text-base leading-8 text-(--ssc-uk-muted-color) reveal-animation">
-            {content.map(({ heading, body, bullets, note }) => (
-              <article className="legal-reveal" key={heading}>
-                <h2 className="text-2xl font-bold leading-tight text-foreground sm:text-3xl">{heading}</h2>
-                {body && <p className="mt-4">{body}</p>}
-                {bullets && (
-                  <ul className="mt-4 list-disc space-y-2 pl-6">
-                    {bullets.map((bullet) => (
-                      <li key={bullet}>{bullet}</li>
-                    ))}
-                  </ul>
-                )}
-                {note && (
-                  <p className="mt-4 rounded-lg border-l-4 border-(--ssc-uk-main-highlight-color) bg-(--ssc-uk-service-card-hover-background-color) px-4 py-3 text-sm italic leading-6 text-(--ssc-uk-muted-color)">
-                    {note}
-                  </p>
-                )}
-              </article>
-            ))}
-          </div>
-        )}
+        {content && <PayloadRichText className="legal-rich-text mt-12 max-w-4xl text-base leading-8 text-(--ssc-uk-muted-color) reveal-animation" data={content} />}
       </div>
     </section>
   );

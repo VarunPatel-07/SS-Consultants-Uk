@@ -78,7 +78,7 @@ export interface AboutSectionDataInterface {
 
 export interface AboutPrinciplesSectionData {
   header: SectionHeader;
-  image: { src: StaticImageData; alt: string };
+  image: { src: StaticImageData | string; alt: string };
   badge: { title: string; description: string };
   principles: { number: string; title: string; description: string }[];
 }

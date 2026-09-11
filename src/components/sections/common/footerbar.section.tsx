@@ -1,22 +1,22 @@
 "use client";
 
 import logo from "@/assets/images/logo/ss-consultants-logo-black-trasperent.png";
-import { FOOTER_SERVICE_LINKS } from "@/content/pageContent/common.data";
 import { getPhoneHref, useSiteSettings } from "@/components/providers/site-settings-provider";
+import type { NavigationLink } from "@/lib/payload/site-settings";
 import { ChevronDown, Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 export function FooterBarSection() {
   const { email, navigation, phone } = useSiteSettings();
-  const serviceLinks = navigation.find((item) => item.children?.length)?.children ?? FOOTER_SERVICE_LINKS;
+  const linkGroups = createFooterLinkGroups(navigation);
 
   return (
     <footer
       className="w-full bg-(--ssc-uk-main-black-color)! overflow-hidden  pt-10 font-jakarta text-foreground/85 sm:px-8 sm:pt-12"
       style={{ backgroundColor: "var(--ssc-uk-consultation-section-background-color)" }}>
       <div className="ss-construction-uk-container">
-        <div className="grid gap-8 lg:grid-cols-[1.35fr_0.9fr_1.15fr_1.2fr] lg:gap-8">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           <div>
             <Link className="inline-block" href="/" aria-label="SS Consultants home">
               <Image className="h-auto w-68 max-w-full brightness-0 invert sm:w-76" src={logo} alt="SS Consultants UK Limited" />
@@ -40,9 +40,9 @@ export function FooterBarSection() {
             </div>
           </div>
 
-          <FooterLinkColumn title="Navigation" links={navigation} />
-
-          <FooterLinkColumn title="Services" links={serviceLinks} />
+          {linkGroups.map((group, index) => (
+            <FooterLinkColumn title={group.title} links={group.links} key={`${group.title}-${index}`} />
+          ))}
 
           <div>
             <h2 className="text-lg font-bold text-foreground">Contact</h2>
@@ -95,6 +95,31 @@ export function FooterBarSection() {
   );
 }
 
+type FooterLinkGroup = {
+  title: string;
+  links: NavigationLink[];
+};
+
+function createFooterLinkGroups(navigation: NavigationLink[]): FooterLinkGroup[] {
+  const groups: FooterLinkGroup[] = [];
+  const topLevelLinks = navigation.filter((item) => !item.children?.length);
+
+  if (topLevelLinks.length) groups.push({ title: "Navigation", links: topLevelLinks });
+
+  const addChildGroups = (items: NavigationLink[]) => {
+    items.forEach((item) => {
+      if (!item.children?.length) return;
+
+      const directLinks = item.children.filter((child) => !child.children?.length);
+      if (directLinks.length) groups.push({ title: item.label, links: directLinks });
+      addChildGroups(item.children);
+    });
+  };
+
+  addChildGroups(navigation);
+  return groups;
+}
+
 function FacebookIcon() {
   return (
     <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -113,7 +138,7 @@ function InstagramIcon() {
   );
 }
 
-function FooterLinkColumn({ title, links }: { title: string; links: ReadonlyArray<{ label: string; href: string }> }) {
+function FooterLinkColumn({ title, links }: { title: string; links: ReadonlyArray<NavigationLink> }) {
   return (
     <div>
       <details className="group lg:hidden">
@@ -123,11 +148,13 @@ function FooterLinkColumn({ title, links }: { title: string; links: ReadonlyArra
         </summary>
 
         <ul className="mt-5">
-          {links.map(({ label, href }) => (
+          {links.map(({ label, href, openInNewTab }) => (
             <li className="border-b border-(--ssc-uk-border-color) last:border-b-0" key={label}>
               <a
                 className="block py-3 text-[17px] transition-colors hover:text-(--ssc-uk-main-highlight-color)"
-                href={href}>
+                href={href}
+                rel={openInNewTab ? "noopener noreferrer" : undefined}
+                target={openInNewTab ? "_blank" : undefined}>
                 {label}
               </a>
             </li>
@@ -139,11 +166,13 @@ function FooterLinkColumn({ title, links }: { title: string; links: ReadonlyArra
         <h2 className="text-lg font-bold text-foreground">{title}</h2>
 
         <ul className="mt-5">
-          {links.map(({ label, href }) => (
+          {links.map(({ label, href, openInNewTab }) => (
             <li className="w-fit" key={label}>
               <a
                 className="block py-2 text-[17px] transition-colors hover:text-(--ssc-uk-main-highlight-color)"
-                href={href}>
+                href={href}
+                rel={openInNewTab ? "noopener noreferrer" : undefined}
+                target={openInNewTab ? "_blank" : undefined}>
                 {label}
               </a>
             </li>

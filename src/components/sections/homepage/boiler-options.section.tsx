@@ -86,51 +86,59 @@ export function BoilerOptionsSection({ data }: { data: BoilerOptionsSectionData 
             640: { slidesPerView: 2, spaceBetween: 20 },
             1024: { slidesPerView: 3, spaceBetween: 24 },
           }}>
-          {data.brands.map(({ name, image, tagline, description, features, popularChoice, bestFor }) => (
-            <SwiperSlide className="!h-auto reveal-animation" key={name}>
-              <article className="relative flex h-full flex-col rounded-lg border border-(--ssc-uk-border-color) bg-background p-3 shadow-sm md:rounded-xl lg:rounded-2xl">
-                {popularChoice && (
-                  <span className="absolute left-1/2 top-0 w-max max-w-[calc(100%-1.5rem)] -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-tl-2xl rounded-tr-2xl bg-(--ssc-uk-main-white-color) px-5 py-2 text-xs font-bold text-black shadow-lg sm:px-8 sm:text-sm">
-                    Popular choice
-                  </span>
-                )}
-                <div className="relative z-20 overflow-hidden rounded-lg bg-(--ssc-uk-surface-color) md:rounded-xl lg:rounded-2xl">
-                  <Image className="h-[220px] w-full object-cover object-center" src={image} alt={`${name} boiler`} />
-                </div>
-                <div className="flex flex-1 flex-col px-1 pb-2 pt-4">
-                  <span className="mb-3 block h-1 w-7 rounded-full bg-(--ssc-uk-cta-button-background)" />
-                  <h3 className="text-xl md:text-2xl font-bold tracking-tight text-foreground">{name}</h3>
-                  <p className="mt-1 font-lora text-lg md:text-xl italic text-(--ssc-uk-main-highlight-color)">
-                    {tagline}
-                  </p>
-                  <p className="mt-3 text-base md:text-lg leading-6 text-(--ssc-uk-muted-color)">{description}</p>
-                  {bestFor && (
-                    <p className="mt-4 rounded-lg bg-(--ssc-uk-surface-color) px-3 py-2 text-sm text-foreground">
-                      <strong>Best for:</strong> {bestFor}
-                    </p>
+          {data.brands.map(
+            ({ name, image, imageAlt, tagline, description, features, popularChoice, bestFor, ctaLabel }) => (
+              <SwiperSlide className="!h-auto reveal-animation" key={name}>
+                <article className="relative flex h-full flex-col rounded-lg border border-(--ssc-uk-border-color) bg-background p-3 shadow-sm md:rounded-xl lg:rounded-2xl">
+                  {popularChoice && (
+                    <span className="absolute left-1/2 top-0 w-max max-w-[calc(100%-1.5rem)] -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-tl-2xl rounded-tr-2xl bg-(--ssc-uk-main-white-color) px-5 py-2 text-xs font-bold text-black shadow-lg sm:px-8 sm:text-sm">
+                      Popular choice
+                    </span>
                   )}
-                  <ul className="mt-4 space-y-2 border-t border-(--ssc-uk-border-color) pt-4 text-sm md:text-base text-(--ssc-uk-muted-color)">
-                    {features.map((feature) => (
-                      <li className="flex items-start gap-2" key={feature}>
-                        <CheckCircle2
-                          aria-hidden="true"
-                          className="mt-0.5 h-4 w-4 shrink-0 text-(--ssc-uk-main-highlight-color)"
-                          strokeWidth={2.4}
-                        />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <CtaServiceButton
-                    label="Get a Quote for This Boiler"
-                    showArrow={false}
-                    className="w-full mt-6"
-                    href="#contact"
-                  />
-                </div>
-              </article>
-            </SwiperSlide>
-          ))}
+                  <div className="relative z-20 overflow-hidden rounded-lg bg-(--ssc-uk-surface-color) md:rounded-xl lg:rounded-2xl">
+                    <Image
+                      className="h-[220px] w-full object-cover object-center"
+                      src={image}
+                      alt={imageAlt || `${name} boiler`}
+                      width={800}
+                      height={440}
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col px-1 pb-2 pt-4">
+                    <span className="mb-3 block h-1 w-7 rounded-full bg-(--ssc-uk-cta-button-background)" />
+                    <h3 className="text-xl md:text-2xl font-bold tracking-tight text-foreground">{name}</h3>
+                    <p className="mt-1 font-lora text-lg md:text-xl italic text-(--ssc-uk-main-highlight-color)">
+                      {tagline}
+                    </p>
+                    <p className="mt-3 text-base md:text-lg leading-6 text-(--ssc-uk-muted-color)">{description}</p>
+                    {bestFor && (
+                      <p className="mt-4 rounded-lg bg-(--ssc-uk-surface-color) px-3 py-2 text-sm text-foreground">
+                        <strong>Best for:</strong> {bestFor}
+                      </p>
+                    )}
+                    <ul className="mt-4 space-y-2 border-t border-(--ssc-uk-border-color) pt-4 text-sm md:text-base text-(--ssc-uk-muted-color)">
+                      {features.map((feature) => (
+                        <li className="flex items-start gap-2" key={feature}>
+                          <CheckCircle2
+                            aria-hidden="true"
+                            className="mt-0.5 h-4 w-4 shrink-0 text-(--ssc-uk-main-highlight-color)"
+                            strokeWidth={2.4}
+                          />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                    <CtaServiceButton
+                      label={ctaLabel || "Get a Quote for This Boiler"}
+                      showArrow={false}
+                      className="w-full mt-6"
+                      href="#contact"
+                    />
+                  </div>
+                </article>
+              </SwiperSlide>
+            ),
+          )}
         </Swiper>
       </div>
     </section>

@@ -1,16 +1,24 @@
 import { ContactHeroSection } from "@/components/sections/contact/contact-hero.section";
 import { ConsultationSection } from "@/components/sections/homepage/consultation.section";
-import { CONTACT_PAGE_DATA } from "@/content/pageContent/pageData/contact.data";
+import { getContactHero, getContactPage } from "@/lib/payload/contact";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { ...CONTACT_PAGE_DATA.metadata, alternates: { canonical: "/contact" } };
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getContactPage();
+  return page ? {
+    title: page.seo.title,
+    description: page.seo.description,
+    alternates: { canonical: page.seo.canonicalPath || "/contact" },
+    robots: page.seo.noIndex ? { index: false, follow: false } : undefined,
+  } : { alternates: { canonical: "/contact" } };
+}
 
-export default function ContactPage() {
-  const sections = CONTACT_PAGE_DATA.sections ?? [];
+export default async function ContactPage() {
+  const hero = await getContactHero();
 
   return (
     <>
-      {sections.includes("hero") && CONTACT_PAGE_DATA.hero && <ContactHeroSection data={CONTACT_PAGE_DATA.hero} />}
+      {hero && <ContactHeroSection data={hero} />}
       <ConsultationSection />
     </>
   );

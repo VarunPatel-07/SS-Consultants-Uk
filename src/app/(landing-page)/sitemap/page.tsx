@@ -1,6 +1,6 @@
 import { ConsultationSection } from "@/components/sections/homepage/consultation.section";
+import { getPayloadServiceLinks } from "@/lib/payload/service-pages";
 import { COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
-import { SERVICE_PAGE_DATA } from "@/content/pageContent/pageData/service";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 
@@ -16,7 +16,7 @@ function SitemapLinks({ links }: { links: Array<{ label: string; href: string }>
     <div className="flex flex-wrap gap-3">
       {links.map(({ label, href }) => (
         <Link
-          className="group inline-flex min-h-12 items-center justify-between gap-8 rounded-full border border-(--ssc-uk-border-color) px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:border-(--ssc-uk-main-highlight-color) hover:bg-(--ssc-uk-service-card-hover-background-color)"
+          className="group inline-flex min-h-12 items-center justify-between gap-8 rounded-full border border-(--ssc-uk-border-color) px-6 py-3 text-sm font-semibold text-(--ssc-uk-main-black-color) transition-colors hover:border-(--ssc-uk-main-highlight-color) hover:bg-(--ssc-uk-main-highlight-color) bg-(--ssc-uk-main-white-color)"
           href={href}
           key={href}>
           <span>{label}</span>
@@ -29,7 +29,8 @@ function SitemapLinks({ links }: { links: Array<{ label: string; href: string }>
   );
 }
 
-export default function SitemapPage() {
+export default async function SitemapPage() {
+  const serviceLinks = await getPayloadServiceLinks();
   return (
     <>
       <section className={twMerge("bg-background font-jakarta", COMMON_SECTION_PADDING_TOP_BOTTOM)}>
@@ -66,9 +67,7 @@ export default function SitemapPage() {
                   Services Pages
                 </h2>
                 <div className="mt-7">
-                  <SitemapLinks
-                    links={SERVICE_PAGE_DATA.flatMap(({ serviceHeroSection }) => serviceHeroSection ? [{ label: serviceHeroSection.label, slug: serviceHeroSection.slug }] : []).map(({ label, slug }) => ({ label, href: `/services/${slug}` }))}
-                  />
+                  <SitemapLinks links={serviceLinks} />
                 </div>
               </div>
             </div>

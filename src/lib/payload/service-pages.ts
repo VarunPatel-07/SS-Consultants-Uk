@@ -66,6 +66,16 @@ export const getPayloadServiceSlugs = cache(async (): Promise<string[]> => {
   }
 });
 
+export const getPayloadServiceLinks = cache(async (): Promise<Array<{ label: string; href: string }>> => {
+  try {
+    const payload = await getPayload({ config });
+    const result = await payload.find({ collection: "services", draft: false, depth: 0, limit: 100, select: { slug: true, label: true } });
+    return result.docs.map(({ slug, label }) => ({ label, href: `/services/${slug}` }));
+  } catch {
+    return [];
+  }
+});
+
 export const getPayloadServicePageData = cache(async (slug: string): Promise<CommonPageDataInterface | null> => {
   const service = await getPayloadService(slug);
   if (!service) return null;

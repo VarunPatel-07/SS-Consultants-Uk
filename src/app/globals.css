@@ -29,6 +29,65 @@ body {
   font-family: var(--font-lora), Georgia, serif;
 }
 
+.legal-rich-text > * + * {
+  margin-top: 1.25rem;
+}
+
+.legal-rich-text h1,
+.legal-rich-text h2,
+.legal-rich-text h3,
+.legal-rich-text h4,
+.legal-rich-text h5,
+.legal-rich-text h6 {
+  color: var(--foreground);
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+  margin-top: 2rem;
+}
+
+.legal-rich-text h1 { font-size: 2.25rem; }
+.legal-rich-text h2 { font-size: 1.875rem; }
+.legal-rich-text h3 { font-size: 1.5rem; }
+.legal-rich-text h4 { font-size: 1.25rem; }
+.legal-rich-text h5,
+.legal-rich-text h6 { font-size: 1.125rem; }
+
+.legal-rich-text strong {
+  color: var(--foreground);
+  font-weight: 700;
+}
+
+.legal-rich-text em { font-style: italic; }
+.legal-rich-text u { text-decoration: underline; text-underline-offset: 0.2em; }
+.legal-rich-text s { text-decoration: line-through; }
+
+.legal-rich-text ul,
+.legal-rich-text ol {
+  margin: 1rem 0;
+  padding-left: 1.75rem;
+}
+
+.legal-rich-text ul { list-style: disc; }
+.legal-rich-text ol { list-style: decimal; }
+.legal-rich-text li { margin-top: 0.35rem; padding-left: 0.25rem; }
+.legal-rich-text li::marker { color: var(--ssc-uk-main-highlight-color); }
+
+.legal-rich-text a {
+  color: var(--ssc-uk-main-highlight-color);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.legal-rich-text blockquote {
+  border-left: 4px solid var(--ssc-uk-main-highlight-color);
+  margin: 1.5rem 0;
+  padding: 0.75rem 1rem;
+}
+
 .ssc-section-title,
 .ssc-sction-title {
   color: var(--foreground);

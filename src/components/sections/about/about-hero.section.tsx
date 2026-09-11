@@ -50,10 +50,10 @@ export function AboutHeroSection({ data }: { data: AboutSectionDataInterface }) 
           <div className={twMerge("overflow-hidden bg-(--ssc-uk-surface-color)", COMMON_BORDER_RADIUS)}>
             <Image
               className="why-choose-us-reveal aspect-square h-full w-full object-cover object-center reveal-animation"
-              src={aboutImage}
+              src={data.image?.src || aboutImage}
               width={900}
               height={900}
-              alt="Heating engineer working on a boiler system"
+              alt={data.image?.alt || ""}
             />
           </div>
           {data.badge && (

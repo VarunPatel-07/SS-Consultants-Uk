@@ -192,7 +192,23 @@ export const getHomepageContent = cache(async (): Promise<HomepageContent | null
       header: toSectionHeader(homepage.boilerOptions.header),
       brands: (homepage.boilerOptions.items ?? []).flatMap((item, index) => {
         const visual = BOILER_OPTIONS[index];
-        return visual ? [{ ...visual, name: item.title, description: item.description }] : [];
+        if (!visual) return [];
+
+        const image = item.image;
+        return [
+          {
+            ...visual,
+            name: item.title,
+            description: item.description,
+            tagline: item.highlight || visual.tagline,
+            bestFor: item.note || visual.bestFor,
+            features: item.bulletPoints?.length ? item.bulletPoints.map((point) => point.text) : visual.features,
+            image: isMedia(image) && image.url ? normalizeMediaURL(image.url) : visual.image,
+            imageAlt: isMedia(image) ? image.alt : undefined,
+            ctaLabel: item.ctaLabel || "Get a Quote for This Boiler",
+            popularChoice: item.popularChoice === true,
+          },
+        ];
       }),
     },
     callToActionSection: {

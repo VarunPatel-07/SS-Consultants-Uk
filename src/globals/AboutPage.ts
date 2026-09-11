@@ -15,13 +15,22 @@ export const AboutPage: GlobalConfig = {
     {
       name: "hero",
       type: "group",
-      fields: [sectionHeader(), simpleCardsField("features", "Trust features"), ctasField()],
+      fields: [
+        sectionHeader(),
+        { name: "image", type: "upload", relationTo: "media", label: "About hero image" },
+        simpleCardsField("features", "Trust features"),
+        { name: "badgeTitle", type: "text" },
+        { name: "badgeDescription", type: "text" },
+        { name: "reassurance", type: "text" },
+        ctasField(),
+      ],
     },
     {
       name: "principles",
       type: "group",
       fields: [
         sectionHeader(),
+        { name: "image", type: "upload", relationTo: "media", label: "Principles image" },
         { name: "badgeTitle", type: "text" },
         { name: "badgeDescription", type: "text" },
         {
@@ -33,6 +42,8 @@ export const AboutPage: GlobalConfig = {
             { name: "description", type: "textarea", required: true },
           ],
         },
+        { name: "calloutTitle", type: "text", admin: { description: "Heading for the boiler-brand callout." } },
+        { name: "calloutDescription", type: "textarea", admin: { description: "Description for the boiler-brand callout." } },
       ],
     },
     {

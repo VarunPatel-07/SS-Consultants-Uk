@@ -3,7 +3,7 @@ import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { s3Storage } from "@payloadcms/storage-s3";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { buildConfig } from "payload";
+import { buildConfig, type GlobalConfig } from "payload";
 import sharp from "sharp";
 
 import { Users } from "@/collections/Users";
@@ -17,6 +17,12 @@ import { GalleryPage } from "@/globals/GalleryPage";
 import { Homepage } from "@/globals/Homepage";
 import { CookiePolicy, PrivacyPolicy, TermsAndConditions } from "@/globals/LegalPages";
 import { SiteSettings } from "@/globals/SiteSettings";
+import {
+  revalidateDeletedService,
+  revalidateGlobalPath,
+  revalidateService,
+  revalidateSiteLayout,
+} from "@/payload/hooks/revalidate";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -31,11 +37,36 @@ const r2IsConfigured = Boolean(
     process.env.R2_BUCKET_ENDPOINT,
 );
 
+const withPathRevalidation = (global: GlobalConfig, publicPath: string): GlobalConfig => ({
+  ...global,
+  hooks: {
+    ...global.hooks,
+    afterChange: [...(global.hooks?.afterChange ?? []), revalidateGlobalPath(publicPath)],
+  },
+});
+
+const ServicesWithRevalidation = {
+  ...Services,
+  hooks: {
+    ...Services.hooks,
+    afterChange: [...(Services.hooks?.afterChange ?? []), revalidateService],
+    afterDelete: [...(Services.hooks?.afterDelete ?? []), revalidateDeletedService],
+  },
+};
+
+const SiteSettingsWithRevalidation: GlobalConfig = {
+  ...SiteSettings,
+  hooks: {
+    ...SiteSettings.hooks,
+    afterChange: [...(SiteSettings.hooks?.afterChange ?? []), revalidateSiteLayout],
+  },
+};
+
 export default buildConfig({
   admin: {
     user: Users.slug,
   },
-  collections: [Users, Services, Testimonials, FAQs, Media],
+  collections: [Users, ServicesWithRevalidation, Testimonials, FAQs, Media],
   db: postgresAdapter({
     pool: {
       connectionString: databaseURL,
@@ -43,14 +74,14 @@ export default buildConfig({
   }),
   editor: lexicalEditor(),
   globals: [
-    Homepage,
-    AboutPage,
-    ContactPage,
-    GalleryPage,
-    PrivacyPolicy,
-    TermsAndConditions,
-    CookiePolicy,
-    SiteSettings,
+    withPathRevalidation(Homepage, "/"),
+    withPathRevalidation(AboutPage, "/about"),
+    withPathRevalidation(ContactPage, "/contact"),
+    withPathRevalidation(GalleryPage, "/gallery"),
+    withPathRevalidation(PrivacyPolicy, "/privacy-policy"),
+    withPathRevalidation(TermsAndConditions, "/terms-and-conditions"),
+    withPathRevalidation(CookiePolicy, "/cookie-policy"),
+    SiteSettingsWithRevalidation,
   ],
   plugins: [
     s3Storage({

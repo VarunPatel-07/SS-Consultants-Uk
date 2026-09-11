@@ -36,10 +36,11 @@ function CallToActionSection({ data }: { data: callToActionSectionInterface }) {
             ref={animationContainer}
             className="w-ful h-full relative z-20 flex flex-col items-center lg:max-w-4xl mx-auto justify-center">
             <div className="mx-auto max-w-4xl text-center">
-              <h2 id="heating-support-title" className="ssc-section-title font-jakarta">
+              <h2 id="heating-support-title" className="ssc-section-title font-jakarta max-w-[60%] mx-auto">
                 <RichText
                   content={data?.header?.title}
-                  parentWrapper="items-center!"
+                  parentWrapper="inline!"
+                  className="inline! pl-2"
                   commonChunkClassNames="reveal-text-animation"
                 />
               </h2>

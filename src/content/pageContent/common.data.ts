@@ -1,6 +1,5 @@
 import { HeatingSupportCard } from "@/utils/interface/common.interface";
 
-export { SERVICE_PAGE_DATA as SERVICE_CONTENT } from "@/content/pageContent/pageData/service";
 export { ABOUT_FEATURES } from "@/utils/constants/about.constants";
 export { BOILER_OPTIONS } from "@/utils/constants/boiler.constants";
 export { CONSULTATION_FEATURES, CONSULTATION_POINTS } from "@/utils/constants/consultation.constants";
