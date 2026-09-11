@@ -9,6 +9,7 @@ import sharp from "sharp";
 import { Users } from "@/collections/Users";
 import { FAQs } from "@/collections/FAQs";
 import { Media } from "@/collections/Media";
+import { QuoteRequests } from "@/collections/QuoteRequests";
 import { Services } from "@/collections/Services";
 import { Testimonials } from "@/collections/Testimonials";
 import { AboutPage } from "@/globals/AboutPage";
@@ -66,7 +67,7 @@ export default buildConfig({
   admin: {
     user: Users.slug,
   },
-  collections: [Users, ServicesWithRevalidation, Testimonials, FAQs, Media],
+  collections: [Users, ServicesWithRevalidation, Testimonials, FAQs, Media, QuoteRequests],
   db: postgresAdapter({
     pool: {
       connectionString: databaseURL,
