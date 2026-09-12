@@ -102,11 +102,11 @@ export function NavbarSection({ navigation }: { navigation: NavigationLink[] }) 
         ref={navBarContainer}
         className="fixed left-1/2 top-0 z-50 w-full max-w-full -translate-x-1/2 border-b border-(--ssc-uk-border-color)/80 bg-background/90 font-jakarta backdrop-blur">
         <div className="ss-construction-uk-container min-[1200px]:px-0! relative z-10">
-          <div className="navbar-inner-wrapper flex items-center justify-between gap-4 px-0 py-3 min-[1400px]:gap-8 min-[1025px]:py-2!">
+          <div className="navbar-inner-wrapper flex items-center justify-between gap-4 px-0 py-3 min-[1400px]:gap-8 min-[1025px]:py-6.5">
             <Link className="shrink-0" href="/" aria-label="SS Consultants home">
               <Image
-                className="h-auto w-45 min-[1024px]:w-47 min-[1200px]:w-56 min-[1400px]:w-70 object-fill"
-                width={300}
+                className="h-auto w-45 min-[400px]:w-58 min-[1024px]:w-47 min-[1200px]:w-56 min-[1400px]:w-70"
+                width={280}
                 height={60}
                 src={logo}
                 alt="SS Consultants UK Limited"
