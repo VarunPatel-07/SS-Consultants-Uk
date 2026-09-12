@@ -1,10 +1,10 @@
-import type { CommonPageDataInterface } from "@/app/utils/interface/page.interface";
 import boilerInstallationImage from "@/assets/images/webp/service/boiler-installation.webp";
 import centralHeatingImage from "@/assets/images/webp/service/central-heating.webp";
 import powerflushingHero from "@/assets/images/webp/service/hero-images/powerflushing.webp";
 import powerflushingImage from "@/assets/images/webp/service/powerflushing.webp";
 import { POWERFLUSHING_FAQ_DATA } from "@/content/pageContent/faq.data";
 import { TESTIMONIALS } from "@/utils/constants/testimonial.constants";
+import type { CommonPageDataInterface } from "@/utils/interface/data.interface";
 
 export const POWERFLUSHING_PAGE_DATA: CommonPageDataInterface = {
   metadata: {
@@ -31,7 +31,7 @@ export const POWERFLUSHING_PAGE_DATA: CommonPageDataInterface = {
     },
     slug: "powerflushing",
     label: "Powerflushing",
-    cta: "Request a Free Quote",
+    cta: "Book a Powerflush Assessment",
     heroImage: powerflushingHero,
     eyebrow: "Powerflushing across Hatfield, Hertfordshire & London",
     options: [{ name: "Powerflush", price: "From £XXX + VAT" }],
@@ -102,23 +102,19 @@ export const POWERFLUSHING_PAGE_DATA: CommonPageDataInterface = {
     specifications: [
       {
         title: "Cold radiators or cold spots",
-        description:
-          "Radiators that stay cold at the bottom or in patches, even with the heating on full, are a classic sign of sludge and debris building up inside your system over several years.",
+        description: "Cold patches on radiators can indicate sludge or debris restricting circulation.",
       },
       {
         title: "Noisy boiler or banging pipes",
-        description:
-          "Kettling, banging or gurgling noises from your boiler or pipework often mean sludge and limescale are restricting flow and causing your system to work harder than it should.",
+        description: "Banging or gurgling may point to restricted flow that needs investigation.",
       },
       {
         title: "Slow to heat up",
-        description:
-          "If your radiators take noticeably longer than they used to reach full heat, built-up debris in the system could be reducing efficiency across your whole home and increasing bills.",
+        description: "Debris can slow radiator warm-up and reduce system efficiency.",
       },
       {
         title: "Frequent breakdowns",
-        description:
-          "A central heating system clogged with sludge puts extra strain on your boiler and pump, increasing the risk of faults, breakdowns and costly repairs further down the line.",
+        description: "Sludge can strain your boiler and pump, increasing the risk of faults.",
       },
     ],
   },
@@ -183,6 +179,26 @@ export const POWERFLUSHING_PAGE_DATA: CommonPageDataInterface = {
       ],
     },
     items: TESTIMONIALS,
+  },
+  callToActionSection: {
+    header: {
+      title: [
+        [{ text: "Radiators not warming up properly?" }],
+        [{ text: "Let’s restore your heating performance.", variant: "brand" }],
+      ],
+      description: [
+        [
+          {
+            text: "Tell us about cold spots, noisy pipes or slow heating. We’ll assess whether your system needs a powerflush.",
+          },
+        ],
+      ],
+    },
+    ctas: [
+      { label: "Book a Powerflush Assessment", href: "#contact", variant: "CTA_PRIMARY" },
+      { label: "Call 07590 514937", href: "tel:07590514937", variant: "CTA_SECONDARY" },
+    ],
+    reassurance: "System assessment • Clear pricing • Practical advice",
   },
   faq: {
     header: {

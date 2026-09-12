@@ -10,9 +10,9 @@ const variantClasses: Record<ButtonVariant, string> = {
   primary:
     "bg-slate-950 text-(--ssc-uk-main-white-color) shadow-sm hover:bg-slate-800 focus-visible:ring-slate-950",
   secondary:
-    "border border-slate-200 bg-(--ssc-uk-main-white-color) text-slate-900 shadow-sm hover:border-slate-300 hover:bg-slate-50 focus-visible:ring-slate-400",
+    "border border-(--ssc-uk-border-color) bg-background text-foreground shadow-sm hover:border-(--ssc-uk-border-color) hover:bg-(--ssc-uk-surface-color) focus-visible:ring-slate-400",
   ghost:
-    "text-slate-700 hover:bg-slate-100 focus-visible:ring-slate-400",
+    "text-(--ssc-uk-muted-color) hover:bg-(--ssc-uk-surface-color) focus-visible:ring-slate-400",
 };
 
 export function Button({

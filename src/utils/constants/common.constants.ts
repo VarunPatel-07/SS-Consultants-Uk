@@ -28,3 +28,5 @@ export const GET_BUTTON_STYLE = (btnStyle: "CTA_PRIMARY" | "CTA_SECONDARY", them
 
 export const COMMON_SECTION_PADDING_TOP_BOTTOM = "py-8.75! sm:py-10! md:py-12.5! lg:py-15! xl:py-25!";
 export const COMMON_BORDER_RADIUS = "rounded-lg md:rounded-xl lg:rounded-2xl xl:rounded-3xl";
+
+export const SERVICE_SECTION_PADDING_TOP_BOTTOM = "py-7.5! sm:py-8.75! md:py-11! lg:py-13! xl:py-22!";

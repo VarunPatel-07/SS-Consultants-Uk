@@ -8,6 +8,7 @@ export const BOILER_OPTIONS: BoilerOption[] = [
     name: "Vaillant ecoFIT Pure",
     image: boilerImageOne,
     tagline: "Compact and dependable",
+    bestFor: "Homes where cupboard space matters",
     description: "An efficient, space-conscious option for everyday heating and hot water.",
     features: [
       "25–35kW output range",
@@ -20,6 +21,7 @@ export const BOILER_OPTIONS: BoilerOption[] = [
     name: "Vaillant ecoTEC Plus",
     image: boilerImageTwo,
     tagline: "Smart comfort and control",
+    bestFor: "Homes wanting flexible heating controls",
     description: "A versatile combi range designed for efficient performance and precise control.",
     features: [
       "Smart-home ready",
@@ -33,6 +35,7 @@ export const BOILER_OPTIONS: BoilerOption[] = [
     name: "Vaillant ecoTEC Exclusive",
     image: boilerImageThree,
     tagline: "Premium connected performance",
+    bestFor: "Homes prioritising premium connected comfort",
     description: "A high-performance boiler with intelligent controls and connected-home capability.",
     features: [
       "Advanced efficiency and control",

@@ -1,5 +1,5 @@
-import { Headphones, House, ShieldCheck, Wrench } from "lucide-react";
 import type { ConsultationFeature } from "@/utils/interface/consultation.interface";
+import { Headphones, House, ShieldCheck, Wrench } from "lucide-react";
 
 export const CONSULTATION_POINTS = [
   "No pushy sales tactics",

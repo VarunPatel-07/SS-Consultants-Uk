@@ -1,10 +1,12 @@
-import type { CommonPageDataInterface } from "@/app/utils/interface/page.interface";
-import boilerInstallationImage from "@/assets/images/webp/service/boiler-installation.webp";
-import centralHeatingImage from "@/assets/images/webp/service/central-heating.webp";
-import boilerServicingHero from "@/assets/images/webp/service/hero-images/boiler-servicing.webp";
-import underfloorHeatingImage from "@/assets/images/webp/service/underfloor-heating.webp";
+import boilerRepairImage from "@/assets/images/webp/service/boiler-breakdown-repairs.webp";
+import boilerDiagnosisImage from "@/assets/images/webp/service/boiler-servicing.webp";
+import {
+  default as boilerComponentImage,
+  default as boilerServicingHero,
+} from "@/assets/images/webp/service/hero-images/boiler-servicing.webp";
 import { BOILER_SERVICE_FAQ_DATA } from "@/content/pageContent/faq.data";
 import { TESTIMONIALS } from "@/utils/constants/testimonial.constants";
+import type { CommonPageDataInterface } from "@/utils/interface/data.interface";
 
 export const BOILER_SERVICING_PAGE_DATA: CommonPageDataInterface = {
   metadata: {
@@ -68,21 +70,21 @@ export const BOILER_SERVICING_PAGE_DATA: CommonPageDataInterface = {
         title: "Essential Inspection",
         description: "A thorough visual and safety check that confirms your boiler is running safely and efficiently",
         tags: "SAFETY · COMBUSTION · EFFICIENCY",
-        image: boilerInstallationImage,
+        image: boilerDiagnosisImage,
       },
       {
         number: "02",
         title: "Full Maintenance Service",
         description: "A deeper clean and inspection that keeps your boiler performing reliably for longer.",
         tags: "CLEANING · PARTS · PERFORMANCE",
-        image: centralHeatingImage,
+        image: boilerComponentImage,
       },
       {
         number: "03",
         title: "Landlord Gas Safety Check",
         description: "A certified inspection for rental properties, with your CP12 certificate provided on completion.",
         tags: "COMPLIANCE · CERTIFICATE · TENANTS",
-        image: underfloorHeatingImage,
+        image: boilerRepairImage,
       },
     ],
   },
@@ -108,23 +110,21 @@ export const BOILER_SERVICING_PAGE_DATA: CommonPageDataInterface = {
     specifications: [
       {
         title: "Boiler brand & age",
-        description:
-          "We service all major boiler brands, including Vaillant, Worcester Bosch, Baxi, Ideal, Main and more, adjusting our approach to the specific model and following the manufacturer's own guidelines throughout. An older boiler or a less common model often needs a slightly different process than a newer, mainstream unit, and our engineers know the differences well enough to service each one correctly, safely and without unnecessary guesswork.",
+        description: "We tailor the service to your boiler’s make, model and age, following manufacturer guidance.",
       },
       {
         title: "Usage and condition",
         description:
-          "Heavier-use households, larger families and older boilers often benefit from a fuller maintenance visit rather than just a basic check, since more use and more years in service tend to bring more wear, more sediment and a higher chance of small issues developing. We look at how your boiler is actually used day to day, not just its make and model, before recommending whether an essential inspection or a full maintenance service is the better fit.",
+          "We assess usage and wear before recommending an essential inspection or full maintenance service.",
       },
       {
         title: "Safety and compliance",
-        description:
-          "Every service we carry out includes the checks needed to confirm your boiler is operating safely, from flue and ventilation checks to combustion analysis and gas rate testing, all carried out by fully qualified, Gas Safe registered engineers. Where a landlord gas safety certificate is required, we complete the inspection to the correct standard and provide the paperwork you need, so your property stays compliant without any extra chasing on your part.",
+        description: "Our Gas Safe engineers complete safety checks and provide landlord certification where required.",
       },
       {
         title: "Ongoing reliability",
         description:
-          "Regular servicing catches small issues, like a failing seal, a dirty filter or a slightly inefficient burner, before they turn into a full breakdown that leaves you without heating or hot water. Staying on top of annual servicing also helps your boiler run more efficiently, keeps energy bills lower over time, and protects any manufacturer warranty that depends on proof of regular, professional maintenance being carried out.",
+          "Regular servicing helps catch faults early and supports your manufacturer’s warranty requirements.",
       },
     ],
   },
@@ -190,27 +190,18 @@ export const BOILER_SERVICING_PAGE_DATA: CommonPageDataInterface = {
   callToActionSection: {
     header: {
       title: [
-        [{ text: "Not sure which" }],
-        [
-          { text: "boiler suits " },
-          {
-            text: "your home?",
-            variant: "brand",
-          },
-        ],
+        [{ text: "Time for your annual boiler service?" }],
+        [{ text: "Keep your heating running reliably.", variant: "brand" }],
       ],
       description: [
-        [
-          {
-            text: `We'll take a look at your property and recommend the right boiler for your home, hot-water needs and budget, backed by clear, honest advice and absolutely no pressure to buy anything, ever.`,
-          },
-        ],
+        [{ text: "Book a professional boiler inspection and service with a local Gas Safe registered engineer." }],
       ],
     },
     ctas: [
-      { label: "Request a Free Assessment", href: "#contact", variant: "CTA_PRIMARY", classNames: "min-w-[300px]" },
+      { label: "Book a Boiler Service", href: "#contact", variant: "CTA_PRIMARY" },
       { label: "Call 07590 514937", href: "tel:07590514937", variant: "CTA_SECONDARY" },
     ],
+    reassurance: "All major brands • Clear pricing • Local Gas Safe engineers",
   },
   faq: {
     header: {

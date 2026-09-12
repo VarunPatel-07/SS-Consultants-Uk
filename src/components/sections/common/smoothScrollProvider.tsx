@@ -21,6 +21,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
   }, []);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
     const lenis = lenisRef.current?.lenis;
     if (!lenis) return;
 

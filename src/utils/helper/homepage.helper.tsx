@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 export function CheckItem({ children }: { children: string }) {
   return (
-    <span className="inline-flex items-center gap-2 whitespace-nowrap text-sm font-medium text-slate-900 sm:text-base">
+    <span className="inline-flex items-center gap-2 whitespace-nowrap text-sm font-medium text-foreground sm:text-base">
       <span className="inline-flex h-6 w-6 items-center justify-center rounded-full border-2 border-(--ssc-uk-main-highlight-color) text-(--ssc-uk-main-highlight-color)">
         <Check aria-hidden="true" className="h-3.5 w-3.5" strokeWidth={2.5} />
       </span>
@@ -48,7 +48,7 @@ export function BrandSet({ hidden = false }: { hidden?: boolean }) {
 
 export function getServiceBorderClass(index: number) {
   if (index === 0) return "";
-  if (index === 1) return "border-t border-slate-200 min-[500px]:border-t-0 min-[500px]:border-l lg:border-t-0";
-  if (index === 3) return "border-t border-slate-200 min-[500px]:border-l lg:border-t-0";
-  return "border-t border-slate-200 lg:border-l lg:border-t-0";
+  if (index === 1) return "border-t border-(--ssc-uk-border-color) min-[500px]:border-t-0 min-[500px]:border-l lg:border-t-0";
+  if (index === 3) return "border-t border-(--ssc-uk-border-color) min-[500px]:border-l lg:border-t-0";
+  return "border-t border-(--ssc-uk-border-color) lg:border-l lg:border-t-0";
 }

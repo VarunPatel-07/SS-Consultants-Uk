@@ -1,10 +1,10 @@
-import type { CommonPageDataInterface } from "@/app/utils/interface/page.interface";
 import boilerInstallationImage from "@/assets/images/webp/service/boiler-installation.webp";
 import centralHeatingImage from "@/assets/images/webp/service/central-heating.webp";
 import underfloorHeatingHero from "@/assets/images/webp/service/hero-images/underfloor-heating.webp";
 import underfloorHeatingImage from "@/assets/images/webp/service/underfloor-heating.webp";
 import { UNDERFLOOR_HEATING_FAQ_DATA } from "@/content/pageContent/faq.data";
 import { TESTIMONIALS } from "@/utils/constants/testimonial.constants";
+import type { CommonPageDataInterface } from "@/utils/interface/data.interface";
 
 export const UNDERFLOOR_HEATING_PAGE_DATA: CommonPageDataInterface = {
   metadata: {
@@ -31,7 +31,7 @@ export const UNDERFLOOR_HEATING_PAGE_DATA: CommonPageDataInterface = {
     },
     slug: "underfloor-heating",
     label: "Underfloor Heating",
-    cta: "Request a Free Quote",
+    cta: "Book Underfloor Heating Repairs",
     heroImage: underfloorHeatingHero,
     eyebrow: "Underfloor heating repairs across Hatfield, Hertfordshire & London",
     options: [
@@ -105,23 +105,20 @@ export const UNDERFLOOR_HEATING_PAGE_DATA: CommonPageDataInterface = {
     specifications: [
       {
         title: "Heatmiser specialists",
-        description:
-          "We're experts in Heatmiser thermostats, a widely used underfloor heating control system, handling both installation and fault-finding for homes where other engineers have struggled to find the cause.",
+        description: "Specialist installation and fault-finding for Heatmiser thermostats and controls.",
       },
       {
         title: "Thermal imaging technology",
-        description:
-          "Our thermal camera technology lets us identify problem areas in the floor and check which zones are actually active, giving us an accurate diagnosis without needing to lift your flooring at all.",
+        description: "Thermal imaging helps locate cold areas and check active heating zones.",
       },
       {
         title: "Proven track record",
         description:
-          "We've helped hundreds of customers resolve underfloor heating issues, including cases where other engineers had already tried and failed to find the fault or fix the system properly beforehand.",
+          "Experienced fault-finding for underfloor heating problems, including previously unresolved issues.",
       },
       {
         title: "Fully insured and guaranteed",
-        description:
-          "All our work is covered by a 24-month warranty, and we carry £5 million public liability insurance, so you have real peace of mind whatever repair your underfloor heating system actually needs.",
+        description: "Our work has a 24-month warranty, backed by £5 million public liability insurance.",
       },
     ],
   },
@@ -186,6 +183,19 @@ export const UNDERFLOOR_HEATING_PAGE_DATA: CommonPageDataInterface = {
       ],
     },
     items: TESTIMONIALS,
+  },
+  callToActionSection: {
+    header: {
+      title: [[{ text: "Underfloor heating not working?" }], [{ text: "Let’s find the fault.", variant: "brand" }]],
+      description: [
+        [{ text: "Get specialist help with underfloor heating controls, cold spots and uneven temperatures." }],
+      ],
+    },
+    ctas: [
+      { label: "Book Underfloor Heating Repairs", href: "#contact", variant: "CTA_PRIMARY" },
+      { label: "Call 07590 514937", href: "tel:07590514937", variant: "CTA_SECONDARY" },
+    ],
+    reassurance: "Fault diagnosis • Clear pricing • Heatmiser expertise",
   },
   faq: {
     header: {

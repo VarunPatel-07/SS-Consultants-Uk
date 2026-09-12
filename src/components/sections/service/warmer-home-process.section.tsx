@@ -1,9 +1,9 @@
 "use client";
-import { ProcessSection } from "@/app/utils/interface/data.interface";
 import CommonSectionHeader from "@/components/sections/common/common-section-header";
 import { gsap } from "@/lib/gsap";
 import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
-import { COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
+import { COMMON_BORDER_RADIUS, SERVICE_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
+import { ProcessSection } from "@/utils/interface/data.interface";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import { twMerge } from "tailwind-merge";
@@ -38,7 +38,7 @@ export function WarmerHomeProcessSection({ data }: { data: ProcessSection }) {
   return (
     <section
       ref={containerRef}
-      className={twMerge("bg-(--ssc-uk-gray-background-color) font-jakarta ", COMMON_SECTION_PADDING_TOP_BOTTOM)}
+      className={twMerge("bg-(--ssc-uk-gray-background-color) font-jakarta ", SERVICE_SECTION_PADDING_TOP_BOTTOM)}
       aria-labelledby="warmer-home-process-title">
       <div className="ss-construction-uk-container flex flex-col">
         <CommonSectionHeader data={data?.header} />
@@ -48,24 +48,27 @@ export function WarmerHomeProcessSection({ data }: { data: ProcessSection }) {
 
             return (
               <article
-                className={`reveal-animation flex flex-col gap-6 rounded-lg border p-6 sm:p-7 md:rounded-xl lg:rounded-2xl ${
-                  isFinalStep
-                    ? "border-(--ssc-uk-main-highlight-color) text-slate-950"
-                    : "border-slate-200 bg-(--ssc-uk-main-white-color)"
-                }`}
+                className={twMerge(
+                  `reveal-animation flex flex-col gap-6 border p-6 sm:p-7  ${
+                    isFinalStep
+                      ? "border-(--ssc-uk-main-highlight-color) text-foreground"
+                      : "border-(--ssc-uk-border-color) bg-background"
+                  }`,
+                  COMMON_BORDER_RADIUS,
+                )}
                 style={
                   isFinalStep
                     ? { backgroundColor: "color-mix(in srgb, var(--ssc-uk-main-highlight-color) 15%, transparent)" }
                     : undefined
                 }
                 key={number}>
-                <span className="font-lora text-2xl md:text-4xl leading-none text-(--ssc-uk-main-highlight-color)">
+                <span className="font-lora text-3xl md:text-5xl leading-none text-(--ssc-uk-main-highlight-color)">
                   {number}
                 </span>
                 <div className="flex flex-col gap-4">
-                  <h3 className="text-lg lg:text-xl font-bold leading-tight text-slate-950">{title}</h3>
+                  <h3 className="text-lg lg:text-xl font-bold leading-tight text-foreground">{title}</h3>
                   <p
-                    className={`text-sm lg:text-base leading-6.5 ${isFinalStep ? "text-slate-900" : "text-slate-600"}`}>
+                    className={`text-sm lg:text-base leading-6.5 ${isFinalStep ? "text-foreground" : "text-foreground/85"}`}>
                     {description}
                   </p>
                 </div>

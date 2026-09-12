@@ -1,9 +1,9 @@
 "use client";
-import { heatingSolutionDesignForYouDataInterface } from "@/app/utils/interface/data.interface";
 import CommonSectionHeader from "@/components/sections/common/common-section-header";
 import { gsap } from "@/lib/gsap";
 import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
-import { COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
+import { COMMON_BORDER_RADIUS, SERVICE_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
+import { heatingSolutionDesignForYouDataInterface } from "@/utils/interface/data.interface";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import { twMerge } from "tailwind-merge";
@@ -38,7 +38,7 @@ export function HeatingDesignedSection({ data }: { data: heatingSolutionDesignFo
   return (
     <section
       ref={containerRef}
-      className={twMerge("bg-(--ssc-uk-main-white-color) font-jakarta ", COMMON_SECTION_PADDING_TOP_BOTTOM)}
+      className={twMerge("bg-background font-jakarta ", SERVICE_SECTION_PADDING_TOP_BOTTOM)}
       aria-labelledby="heating-designed-title">
       <div className="ss-construction-uk-container flex flex-col">
         <CommonSectionHeader data={data?.header} />
@@ -46,10 +46,13 @@ export function HeatingDesignedSection({ data }: { data: heatingSolutionDesignFo
         <div className="grid gap-7 md:grid-cols-2">
           {data?.specifications?.map(({ title, description }) => (
             <article
-              className="reveal-animation flex h-full flex-col rounded-lg border border-slate-200 bg-(--ssc-uk-main-white-color) p-6 shadow-sm sm:p-7 gap-3 md:rounded-xl lg:rounded-2xl"
+              className={twMerge(
+                "reveal-animation flex h-full flex-col border border-(--ssc-uk-main-highlight-color)/40 bg-background p-6 shadow-sm sm:p-7 gap-5",
+                COMMON_BORDER_RADIUS,
+              )}
               key={title}>
-              <h3 className="text-lg md:text-xl xl:text-2xl font-semibold leading-tight text-slate-950">{title}</h3>
-              <p className="text-sm md:text-base leading-6 text-slate-600 text-pretty">{description}</p>
+              <h3 className="text-lg md:text-xl xl:text-2xl font-semibold leading-tight text-foreground">{title}</h3>
+              <p className="text-sm md:text-base leading-6 text-(--ssc-uk-muted-color) text-pretty">{description}</p>
             </article>
           ))}
         </div>

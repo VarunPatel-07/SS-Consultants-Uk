@@ -1,10 +1,10 @@
-import type { CommonPageDataInterface } from "@/app/utils/interface/page.interface";
-import boilerInstallationImage from "@/assets/images/webp/service/boiler-installation.webp";
-import centralHeatingImage from "@/assets/images/webp/service/central-heating.webp";
+import boilerRepairImage from "@/assets/images/webp/service/boiler-breakdown-repairs.webp";
+import boilerDiagnosisImage from "@/assets/images/webp/service/boiler-servicing.webp";
 import boilerBreakdownRepairsHero from "@/assets/images/webp/service/hero-images/boiler-breakdown-repairs.webp";
-import underfloorHeatingImage from "@/assets/images/webp/service/underfloor-heating.webp";
+import boilerComponentImage from "@/assets/images/webp/service/hero-images/boiler-servicing.webp";
 import { BOILER_BREAKDOWN_REPAIRS_FAQ_DATA } from "@/content/pageContent/faq.data";
 import { TESTIMONIALS } from "@/utils/constants/testimonial.constants";
+import type { CommonPageDataInterface } from "@/utils/interface/data.interface";
 
 export const BOILER_BREAKDOWN_REPAIRS_PAGE_DATA: CommonPageDataInterface = {
   metadata: {
@@ -34,7 +34,7 @@ export const BOILER_BREAKDOWN_REPAIRS_PAGE_DATA: CommonPageDataInterface = {
     },
     slug: "boiler-breakdown-repairs",
     label: "Boiler Breakdown Repairs",
-    cta: "Book a Repair",
+    cta: "Book a Boiler Repair",
     heroImage: boilerBreakdownRepairsHero,
     eyebrow: "Boiler breakdown repairs across Hatfield, Hertfordshire & London",
     options: [{ name: "Diagnostic callout", price: "£80  + VAT" }],
@@ -67,21 +67,21 @@ export const BOILER_BREAKDOWN_REPAIRS_PAGE_DATA: CommonPageDataInterface = {
         title: "Fault Diagnosis",
         description: "A thorough on-site inspection to identify exactly what's causing your boiler to break down.",
         tags: "DIAGNOSIS · TESTING · REPORTING",
-        image: boilerInstallationImage,
+        image: boilerDiagnosisImage,
       },
       {
         number: "02",
         title: "Same-Day Repairs",
         description: "Fast, dependable repairs completed on the day wherever parts and access allow.",
         tags: "SPEED · PARTS · WORKMANSHIP",
-        image: centralHeatingImage,
+        image: boilerComponentImage,
       },
       {
         number: "03",
         title: "Emergency Callout",
         description: "Priority response when you're left without heating or hot water.",
         tags: "URGENCY · AVAILABILITY · SAFETY",
-        image: underfloorHeatingImage,
+        image: boilerRepairImage,
       },
     ],
   },
@@ -107,29 +107,25 @@ export const BOILER_BREAKDOWN_REPAIRS_PAGE_DATA: CommonPageDataInterface = {
     specifications: [
       {
         title: "Boiler brand & fault",
-        description:
-          "We repair all major boiler brands, including Vaillant, Worcester Bosch, Baxi, Ideal and Main, matching the right parts and approach to the specific fault rather than a one-size-fits-all fix applied to every callout.",
+        description: "We repair all major boiler brands, matching the parts and repair to the fault.",
       },
       {
         title: "Speed of response",
-        description:
-          "When your heating or hot water is out, we prioritise getting an engineer to you as quickly as possible, aiming for same-day callouts wherever we can, so you're not left without heating for long.",
+        description: "We aim for same-day callouts where availability allows when heating or hot water fails.",
       },
       {
         title: "Safety first",
-        description:
-          "Every repair includes the checks needed to confirm your boiler is safe to keep running once we're done, carried out by fully qualified, Gas Safe registered engineers you can trust in your home.",
+        description: "Gas Safe registered engineers check your boiler is safe to run after the repair.",
       },
       {
         title: "Long-term reliability",
-        description:
-          "We aim to fix the underlying fault, not just the symptom, to help prevent the same breakdown happening again, saving you the cost and hassle of repeat callouts for the same recurring problem.",
+        description: "We address the underlying fault to help prevent repeat breakdowns.",
       },
     ],
   },
   process: {
     header: {
-     title: [
+      title: [
         [
           { text: "Our" },
           { text: "simple" },
@@ -188,6 +184,17 @@ export const BOILER_BREAKDOWN_REPAIRS_PAGE_DATA: CommonPageDataInterface = {
       ],
     },
     items: TESTIMONIALS,
+  },
+  callToActionSection: {
+    header: {
+      title: [[{ text: "Boiler stopped working?" }], [{ text: "Let’s get your heating back on.", variant: "brand" }]],
+      description: [[{ text: "Fast, professional diagnosis and repair from a local Gas Safe registered engineer." }]],
+    },
+    ctas: [
+      { label: "Book a Boiler Repair", href: "#contact", variant: "CTA_PRIMARY" },
+      { label: "Call 07590 514937", href: "tel:07590514937", variant: "CTA_SECONDARY" },
+    ],
+    reassurance: "Fast response • Clear pricing • No unnecessary replacements",
   },
   faq: {
     header: {

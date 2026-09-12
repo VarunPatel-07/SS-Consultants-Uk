@@ -23,7 +23,7 @@ function CtaServiceButton({
       className={twMerge(
         "w-fit h-fit min-w-57.5 min-h-11.25 max-h-11.25 rounded-full font-semibold overflow-hidden flex items-start justify-start text-sm lg:text-base hover:scale-x-105 group transition-all duration-300 ring-1 relative font-jakarta",
         isBlackTheme
-          ? "bg-(--ssc-uk-main-black-color) text-(--ssc-uk-main-white-color) ring-white  hover:text-(--ssc-uk-main-black-color)"
+          ? "bg-(--ssc-uk-main-highlight-color) text-(--ssc-uk-main-white-color) ring-white  hover:text-(--ssc-uk-main-black-color)"
           : "bg-(--ssc-uk-main-white-color) text-(--ssc-uk-main-black-color) ring-black  hover:text-(--ssc-uk-main-white-color)",
         className,
       )}>
@@ -42,7 +42,7 @@ function CtaServiceButton({
       <span
         className={twMerge(
           "absolute top-1/2 right-0 -translate-y-1/2 w-0 h-[200%] min-w-0 min-h-0 block rounded-full group-hover:min-w-full group-hover:min-h-full group-hover:right-0 transition-all duration-300 z-0",
-          isBlackTheme ? "bg-(--ssc-uk-main-white-color)" : "bg-(--ssc-uk-main-black-color)",
+          isBlackTheme ? "bg-(--ssc-uk-main-white-color)" : "bg-(--ssc-uk-main-highlight-color)",
         )}></span>
     </a>
   );
