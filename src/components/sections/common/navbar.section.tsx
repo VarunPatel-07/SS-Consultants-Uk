@@ -1,6 +1,6 @@
 "use client";
 
-import logo from "@/assets/images/logo/ss-consultants-logo-iteration-1.png";
+import logo from "@/assets/images/logo/ss-consultants-logo-iteration-2.png";
 import { getPhoneHref, useSiteSettings } from "@/components/providers/site-settings-provider";
 import CTAButton from "@/components/ui/ctaButton";
 import { gsap } from "@/lib/gsap";
