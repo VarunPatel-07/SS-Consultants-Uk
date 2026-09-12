@@ -1,6 +1,6 @@
 "use client";
 
-import logo from "@/assets/images/logo/ss-consultants-logo-black-trasperent.png";
+import logo from "@/assets/images/logo/ss-consultants-logo-iteration-2.png";
 import { getPhoneHref, useSiteSettings } from "@/components/providers/site-settings-provider";
 import type { NavigationLink } from "@/lib/payload/site-settings";
 import { ChevronDown, Mail, MapPin, Phone } from "lucide-react";
@@ -19,7 +19,7 @@ export function FooterBarSection() {
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           <div>
             <Link className="inline-block" href="/" aria-label="SS Consultants home">
-              <Image className="h-auto w-68 max-w-full brightness-0 invert sm:w-76" src={logo} alt="SS Consultants UK Limited" />
+              <Image className="h-auto w-68 max-w-full sm:w-76" src={logo} alt="SS Consultants UK Limited" />
             </Link>
             <p className="mt-5 max-w-md text-[17px] leading-7">
               Professional boiler installation, servicing and heating solutions delivered with clear advice, careful

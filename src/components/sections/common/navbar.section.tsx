@@ -1,8 +1,8 @@
 "use client";
 
-import logo from "@/assets/images/logo/ss-consultants-logo-black-trasperent.png";
-import CTAButton from "@/components/ui/ctaButton";
+import logo from "@/assets/images/logo/ss-consultants-logo-iteration-1.png";
 import { getPhoneHref, useSiteSettings } from "@/components/providers/site-settings-provider";
+import CTAButton from "@/components/ui/ctaButton";
 import { gsap } from "@/lib/gsap";
 import type { NavigationLink } from "@/lib/payload/site-settings";
 import { useGSAP } from "@gsap/react";
@@ -31,7 +31,10 @@ export function NavbarSection({ navigation }: { navigation: NavigationLink[] }) 
     if (item.href === "/") return pathname === "/";
     if (item.href && item.href !== "#" && pathname.startsWith(item.href)) return true;
 
-    const labelPath = `/${item.label.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-")}`;
+    const labelPath = `/${item.label
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, "-")}`;
     return pathname === labelPath || pathname.startsWith(`${labelPath}/`);
   };
 
@@ -67,7 +70,7 @@ export function NavbarSection({ navigation }: { navigation: NavigationLink[] }) 
         },
       });
       gsap.to(navbarInnerWrapper, {
-        padding: "20px 0px",
+        padding: "16px 0px",
         duration: 0.6,
         ease: "power4.inOut",
         scrollTrigger: {
@@ -99,12 +102,12 @@ export function NavbarSection({ navigation }: { navigation: NavigationLink[] }) 
         ref={navBarContainer}
         className="fixed left-1/2 top-0 z-50 w-full max-w-full -translate-x-1/2 border-b border-(--ssc-uk-border-color)/80 bg-background/90 font-jakarta backdrop-blur">
         <div className="ss-construction-uk-container min-[1200px]:px-0! relative z-10">
-          <div className="navbar-inner-wrapper flex items-center justify-between gap-4 px-0 py-3 min-[1400px]:gap-8 min-[1025px]:py-7">
+          <div className="navbar-inner-wrapper flex items-center justify-between gap-4 px-0 py-3 min-[1400px]:gap-8 min-[1025px]:py-2!">
             <Link className="shrink-0" href="/" aria-label="SS Consultants home">
               <Image
-                className="h-auto w-36 min-[1024px]:w-47 min-[1200px]:w-56 min-[1400px]:w-72 brightness-0 invert"
-                width={260}
-                height={50}
+                className="h-auto w-45 min-[1024px]:w-47 min-[1200px]:w-56 min-[1400px]:w-70 object-fill"
+                width={300}
+                height={60}
                 src={logo}
                 alt="SS Consultants UK Limited"
                 priority
@@ -159,9 +162,12 @@ export function NavbarSection({ navigation }: { navigation: NavigationLink[] }) 
                     </button>
                     <div
                       className={`absolute left-1/2 top-full z-50 w-72 -translate-x-1/2 pt-4 transition-all duration-200 ${isOpen ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"}`}>
-                      <div className="rounded-lg border border-(--ssc-uk-border-color) bg-background p-3 shadow-xl md:rounded-xl lg:rounded-2xl" role="menu">
+                      <div
+                        className="rounded-lg border border-(--ssc-uk-border-color) bg-background p-3 shadow-xl md:rounded-xl lg:rounded-2xl"
+                        role="menu">
                         {item.children?.map((child, childIndex) => {
-                          const childActive = pathname === child.href || (child.href !== "/" && pathname.startsWith(child.href));
+                          const childActive =
+                            pathname === child.href || (child.href !== "/" && pathname.startsWith(child.href));
                           const hasNestedChildren = Boolean(child.children?.length);
 
                           return (
@@ -178,7 +184,9 @@ export function NavbarSection({ navigation }: { navigation: NavigationLink[] }) 
                               </Link>
                               {hasNestedChildren && (
                                 <div className="invisible absolute left-full top-0 z-60 w-72 -translate-x-2 pl-2 opacity-0 transition-all duration-200 group-hover/nested:visible group-hover/nested:translate-x-0 group-hover/nested:opacity-100 group-focus-within/nested:visible group-focus-within/nested:translate-x-0 group-focus-within/nested:opacity-100">
-                                  <div className="rounded-lg border border-(--ssc-uk-border-color) bg-background p-3 shadow-xl md:rounded-xl lg:rounded-2xl" role="menu">
+                                  <div
+                                    className="rounded-lg border border-(--ssc-uk-border-color) bg-background p-3 shadow-xl md:rounded-xl lg:rounded-2xl"
+                                    role="menu">
                                     {child.children?.map((nestedChild, nestedIndex) => {
                                       const nestedActive = pathname === nestedChild.href;
 
@@ -214,11 +222,7 @@ export function NavbarSection({ navigation }: { navigation: NavigationLink[] }) 
                 aria-label="Call SS Consultants">
                 <Phone aria-hidden="true" className="h-[17px] w-[17px]" strokeWidth={1.8} />
               </Link>
-              <CTAButton
-                btnStyle="CTA_SECONDARY"
-                theme="LIGHT"
-                href={phoneHref}
-                className="hidden min-[1200px]:flex">
+              <CTAButton btnStyle="CTA_SECONDARY" theme="LIGHT" href={phoneHref} className="hidden min-[1200px]:flex">
                 <span className="flex items-center gap-3">
                   <Phone aria-hidden="true" className="h-4 w-4" strokeWidth={2.4} />
                   <span>{phone}</span>
@@ -326,7 +330,8 @@ export function NavbarSection({ navigation }: { navigation: NavigationLink[] }) 
                 <div
                   className={`overflow-hidden transition-[max-height,opacity] duration-300 ${isOpen ? "max-h-96 pb-3 opacity-100" : "max-h-0 opacity-0"}`}>
                   {item.children?.map((child, childIndex) => {
-                    const childActive = pathname === child.href || (child.href !== "/" && pathname.startsWith(child.href));
+                    const childActive =
+                      pathname === child.href || (child.href !== "/" && pathname.startsWith(child.href));
                     const childKey = `${itemKey}-${child.label}-${child.href}-${childIndex}`;
                     const hasNestedChildren = Boolean(child.children?.length);
                     const isNestedOpen = openNestedDropdown === childKey;
@@ -340,7 +345,9 @@ export function NavbarSection({ navigation }: { navigation: NavigationLink[] }) 
                             aria-expanded={isNestedOpen}
                             onClick={() => setOpenNestedDropdown(isNestedOpen ? null : childKey)}>
                             {child.label}
-                            <ChevronDown className={`h-4 w-4 transition-transform ${isNestedOpen ? "rotate-180" : ""}`} />
+                            <ChevronDown
+                              className={`h-4 w-4 transition-transform ${isNestedOpen ? "rotate-180" : ""}`}
+                            />
                           </button>
                         ) : (
                           <Link
@@ -353,7 +360,8 @@ export function NavbarSection({ navigation }: { navigation: NavigationLink[] }) 
                           </Link>
                         )}
                         {hasNestedChildren && (
-                          <div className={`overflow-hidden pl-4 transition-[max-height,opacity] duration-300 ${isNestedOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
+                          <div
+                            className={`overflow-hidden pl-4 transition-[max-height,opacity] duration-300 ${isNestedOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
                             {child.children?.map((nestedChild, nestedIndex) => (
                               <Link
                                 className={`block py-2 pl-3 text-sm transition-colors hover:text-(--ssc-uk-main-highlight-color) ${pathname === nestedChild.href ? "text-(--ssc-uk-main-highlight-color)" : "text-(--ssc-uk-muted-color)"}`}
