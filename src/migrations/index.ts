@@ -5,6 +5,7 @@ import * as migration_20260911_071529_boiler_option_images from './20260911_0715
 import * as migration_20260911_081103_boiler_option_content_fields from './20260911_081103_boiler_option_content_fields';
 import * as migration_20260911_081956_boiler_option_popular_choice from './20260911_081956_boiler_option_popular_choice';
 import * as migration_20260911_084711_about_page_payload_fields from './20260911_084711_about_page_payload_fields';
+import * as migration_20260911_113310_quote_requests from './20260911_113310_quote_requests';
 
 export const migrations = [
   {
@@ -41,5 +42,10 @@ export const migrations = [
     up: migration_20260911_084711_about_page_payload_fields.up,
     down: migration_20260911_084711_about_page_payload_fields.down,
     name: '20260911_084711_about_page_payload_fields',
+  },
+  {
+    up: migration_20260911_113310_quote_requests.up,
+    down: migration_20260911_113310_quote_requests.down,
+    name: '20260911_113310_quote_requests'
   },
 ];

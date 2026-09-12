@@ -72,6 +72,7 @@ export interface Config {
     testimonials: Testimonial;
     faqs: Faq;
     media: Media;
+    'quote-requests': QuoteRequest;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,6 +85,7 @@ export interface Config {
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     faqs: FaqsSelect<false> | FaqsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    'quote-requests': QuoteRequestsSelect<false> | QuoteRequestsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -433,6 +435,32 @@ export interface Testimonial {
   createdAt: string;
 }
 /**
+ * Boiler and heating quotation requests submitted through the website.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "quote-requests".
+ */
+export interface QuoteRequest {
+  id: number;
+  status: 'new' | 'contacted' | 'quote-prepared' | 'closed';
+  firstName: string;
+  lastName: string;
+  email: string;
+  mobile: string;
+  postcode: string;
+  address: string;
+  answers: {
+    questionId: string;
+    question: string;
+    optionId: string;
+    answer: string;
+    id?: string | null;
+  }[];
+  mobileVerification: 'development-code-entered';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -475,6 +503,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'quote-requests';
+        value: number | QuoteRequest;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -752,6 +784,31 @@ export interface MediaSelect<T extends boolean = true> {
               filename?: T;
             };
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "quote-requests_select".
+ */
+export interface QuoteRequestsSelect<T extends boolean = true> {
+  status?: T;
+  firstName?: T;
+  lastName?: T;
+  email?: T;
+  mobile?: T;
+  postcode?: T;
+  address?: T;
+  answers?:
+    | T
+    | {
+        questionId?: T;
+        question?: T;
+        optionId?: T;
+        answer?: T;
+        id?: T;
+      };
+  mobileVerification?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
