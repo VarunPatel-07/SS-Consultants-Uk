@@ -28,6 +28,28 @@ export function ConsultationSection({ serviceName }: { serviceName?: string }) {
   const email = siteSettings.email;
   const phone = siteSettings.phone;
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const firstName = formData.get("firstName")?.toString().trim() ?? "";
+    const lastName = formData.get("lastName")?.toString().trim() ?? "";
+    const enquirerEmail = formData.get("email")?.toString().trim() ?? "";
+    const phoneNumber = formData.get("phone")?.toString().trim() ?? "";
+    const service = formData.get("service")?.toString().trim() ?? "";
+    const message = formData.get("message")?.toString().trim() ?? "";
+
+    const bodyLines = [
+      `Name: ${firstName} ${lastName}`.trim(),
+      `Email: ${enquirerEmail}`,
+      phoneNumber && `Phone: ${phoneNumber}`,
+      `Service: ${service}`,
+      message && `Message: ${message}`,
+    ].filter(Boolean);
+
+    const mailSubject = subject || (service ? `Enquiry about ${service}` : "Enquiry from website");
+    window.location.href = `mailto:${email}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+  };
+
   useGSAP(
     () => {
       if (!containerRef.current) return;
@@ -116,15 +138,13 @@ export function ConsultationSection({ serviceName }: { serviceName?: string }) {
 
           <form
             className="contact-reveal rounded-lg border border-(--ssc-uk-border-color) px-7 py-9 sm:px-9 sm:py-10 bg-background md:rounded-xl lg:rounded-2xl reveal-animation"
-            action={`mailto:${email}`}
-            method="post"
-            encType="text/plain">
+            onSubmit={handleSubmit}>
             <div className="grid gap-x-10 gap-y-8 md:grid-cols-2">
               <label className="block text-base font-medium text-(--ssc-uk-muted-color)">
                 <input
                   className="block w-full rounded-none border-0 border-b border-(--ssc-uk-border-color) bg-transparent px-0 py-3 text-foreground outline-none transition-colors placeholder:text-(--ssc-uk-muted-color) focus:border-(--ssc-uk-main-highlight-color) focus:shadow-[0_1px_0_var(--ssc-uk-main-highlight-color)]"
                   type="text"
-                  name="name"
+                  name="firstName"
                   placeholder="First Name"
                   aria-label="First Name"
                   required
@@ -134,7 +154,7 @@ export function ConsultationSection({ serviceName }: { serviceName?: string }) {
                 <input
                   className="block w-full rounded-none border-0 border-b border-(--ssc-uk-border-color) bg-transparent px-0 py-3 text-foreground outline-none transition-colors placeholder:text-(--ssc-uk-muted-color) focus:border-(--ssc-uk-main-highlight-color) focus:shadow-[0_1px_0_var(--ssc-uk-main-highlight-color)]"
                   type="text"
-                  name="name"
+                  name="lastName"
                   placeholder="Last Name"
                   aria-label="Last Name"
                   required
@@ -192,7 +212,6 @@ export function ConsultationSection({ serviceName }: { serviceName?: string }) {
                 />
               </label>
             </div>
-            <input type="hidden" name="subject" value={subject} />
 
             <div className="pt-8 text-center">
               <button
