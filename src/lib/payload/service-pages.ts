@@ -5,6 +5,7 @@ import { cache } from "react";
 import type { Faq, Media, Service } from "@/payload-types";
 import type { CTA, SectionHeader, TextChunk } from "@/utils/interface/common.interface";
 import type { CommonPageDataInterface } from "@/utils/interface/data.interface";
+import { seoMetadata } from "./seo";
 
 const isMedia = (value: number | Media | null | undefined): value is Media =>
   typeof value === "object" && value !== null;
@@ -84,12 +85,7 @@ export const getPayloadServicePageData = cache(async (slug: string): Promise<Com
   const faqs = (service.faqs ?? []).filter(isFaq).filter((faq) => faq.published !== false);
 
   return {
-    metadata: {
-      title: service.seo.title,
-      description: service.seo.description,
-      alternates: { canonical: service.seo.canonicalPath || `/services/${service.slug}` },
-      robots: service.seo.noIndex ? { index: false, follow: false } : undefined,
-    },
+    metadata: seoMetadata(service.seo, `/services/${service.slug}`),
     serviceHeroSection: {
       header: {
         title: [...text(service.headline), ...text(service.highlight, "brand"), ...text(service.ending)],

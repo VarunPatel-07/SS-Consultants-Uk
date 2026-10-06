@@ -1,7 +1,7 @@
 import { getPayloadServiceSlugs } from "@/lib/payload/service-pages";
 import type { MetadataRoute } from "next";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ssc-uk.netlify.app";
+import { SITE_URL } from "@/utils/constants/seo.constants";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages: MetadataRoute.Sitemap = [

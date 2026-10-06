@@ -3,12 +3,11 @@ import { NavbarSection } from "@/components/sections/common/navbar.section";
 import SmoothScrollProvider from "@/components/sections/common/smoothScrollProvider";
 import { SiteSettingsProvider } from "@/components/providers/site-settings-provider";
 import { getWebsiteSettings } from "@/lib/payload/site-settings";
+import { DEFAULT_META_IMAGE, SITE_NAME, SITE_URL } from "@/utils/constants/seo.constants";
 import type { Metadata } from "next";
 import { Lora, Plus_Jakarta_Sans } from "next/font/google";
 import "../globals.css";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ssc-uk.netlify.app";
-const META_IMAGE = "/images/meta-image.png";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -18,12 +17,12 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: SITE_URL,
-    siteName: "SS Consultants UK Ltd",
+    siteName: SITE_NAME,
     title: "SS Consultants UK Limited | Gas Engineering",
     description: "Reliable boiler installation, servicing and heating repairs across Hatfield, Hertfordshire and London.",
-    images: [{ url: META_IMAGE, width: 1200, height: 630, alt: "SS Consultants UK boiler and heating engineers" }],
+    images: [DEFAULT_META_IMAGE],
   },
-  twitter: { card: "summary_large_image", images: [META_IMAGE] },
+  twitter: { card: "summary_large_image", images: [DEFAULT_META_IMAGE.url] },
   icons: {
     icon: "/images/favicon/favicon.ico",
     shortcut: "/images/favicon/favicon.ico",

@@ -2,6 +2,7 @@ import config from "@payload-config";
 import { getPayload } from "payload";
 import { cache } from "react";
 
+import { seoMetadata } from "./seo";
 import type { Config } from "@/payload-types";
 
 export type LegalPageSlug = "privacy-policy" | "terms-and-conditions" | "cookie-policy";
@@ -18,10 +19,5 @@ export const getLegalPage = cache(async (slug: LegalPageSlug): Promise<LegalPage
 
 export const legalMetadata = async (slug: LegalPageSlug, canonical: string) => {
   const page = await getLegalPage(slug);
-  return page ? {
-    title: page.seo.title,
-    description: page.seo.description,
-    alternates: { canonical: page.seo.canonicalPath || canonical },
-    robots: page.seo.noIndex ? { index: false, follow: false } : undefined,
-  } : { alternates: { canonical } };
+  return page ? seoMetadata(page.seo, canonical) : { alternates: { canonical } };
 };
