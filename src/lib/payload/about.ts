@@ -5,6 +5,7 @@ import { cache } from "react";
 import type { AboutPage, Faq, Media, Service } from "@/payload-types";
 import type { CTA, SectionHeader, TextChunk } from "@/utils/interface/common.interface";
 import type { CommonPageDataInterface } from "@/utils/interface/data.interface";
+import { seoMetadata } from "./seo";
 
 const isMedia = (value: number | Media | null | undefined): value is Media => typeof value === "object" && value !== null;
 const isService = (value: number | Service): value is Service => typeof value === "object" && value !== null;
@@ -54,12 +55,7 @@ export const getAboutPageContent = cache(async (): Promise<CommonPageDataInterfa
   const principleImage = media(page.principles.image);
 
   return {
-    metadata: {
-      title: page.seo.title,
-      description: page.seo.description,
-      alternates: { canonical: page.seo.canonicalPath || "/about" },
-      robots: page.seo.noIndex ? { index: false, follow: false } : undefined,
-    },
+    metadata: seoMetadata(page.seo, "/about"),
     about: {
       eyebrow: text(page.hero.header.eyebrow),
       header: header(page.hero.header),

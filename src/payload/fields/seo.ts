@@ -22,6 +22,16 @@ export const createSeoFields = (canonicalPlaceholder = "/"): Field[] => [
         maxLength: 500,
         admin: { components: { Description: "@/payload/components/CharacterCount#CharacterCount" } },
       },
+      {
+        name: "image",
+        type: "upload",
+        relationTo: "media",
+        label: "Meta image",
+        admin: {
+          description:
+            "Optional. Shown when this page is shared on social media or messaging apps (1200 × 630 works best). Leave empty to use the default image.",
+        },
+      },
       { name: "canonicalPath", type: "text", label: "Canonical URL", admin: { placeholder: canonicalPlaceholder } },
       { name: "noIndex", type: "checkbox", label: "Hide from search engines", defaultValue: false },
     ],

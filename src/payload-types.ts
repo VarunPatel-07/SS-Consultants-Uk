@@ -339,6 +339,10 @@ export interface Service {
   seo: {
     title: string;
     description: string;
+    /**
+     * Optional. Shown when this page is shared on social media or messaging apps (1200 × 630 works best). Leave empty to use the default image.
+     */
+    image?: (number | null) | Media;
     canonicalPath?: string | null;
     noIndex?: boolean | null;
   };
@@ -750,6 +754,7 @@ export interface ServicesSelect<T extends boolean = true> {
     | {
         title?: T;
         description?: T;
+        image?: T;
         canonicalPath?: T;
         noIndex?: T;
       };
@@ -934,6 +939,10 @@ export interface Homepage {
   seo: {
     title: string;
     description: string;
+    /**
+     * Optional. Shown when this page is shared on social media or messaging apps (1200 × 630 works best). Leave empty to use the default image.
+     */
+    image?: (number | null) | Media;
     canonicalPath?: string | null;
     noIndex?: boolean | null;
   };
@@ -1218,6 +1227,10 @@ export interface AboutPage {
   seo: {
     title: string;
     description: string;
+    /**
+     * Optional. Shown when this page is shared on social media or messaging apps (1200 × 630 works best). Leave empty to use the default image.
+     */
+    image?: (number | null) | Media;
     canonicalPath?: string | null;
     noIndex?: boolean | null;
   };
@@ -1345,6 +1358,10 @@ export interface ContactPage {
   seo: {
     title: string;
     description: string;
+    /**
+     * Optional. Shown when this page is shared on social media or messaging apps (1200 × 630 works best). Leave empty to use the default image.
+     */
+    image?: (number | null) | Media;
     canonicalPath?: string | null;
     noIndex?: boolean | null;
   };
@@ -1405,6 +1422,10 @@ export interface GalleryPage {
   seo: {
     title: string;
     description: string;
+    /**
+     * Optional. Shown when this page is shared on social media or messaging apps (1200 × 630 works best). Leave empty to use the default image.
+     */
+    image?: (number | null) | Media;
     canonicalPath?: string | null;
     noIndex?: boolean | null;
   };
@@ -1446,6 +1467,10 @@ export interface PrivacyPolicy {
   seo: {
     title: string;
     description: string;
+    /**
+     * Optional. Shown when this page is shared on social media or messaging apps (1200 × 630 works best). Leave empty to use the default image.
+     */
+    image?: (number | null) | Media;
     canonicalPath?: string | null;
     noIndex?: boolean | null;
   };
@@ -1482,6 +1507,10 @@ export interface TermsAndCondition {
   seo: {
     title: string;
     description: string;
+    /**
+     * Optional. Shown when this page is shared on social media or messaging apps (1200 × 630 works best). Leave empty to use the default image.
+     */
+    image?: (number | null) | Media;
     canonicalPath?: string | null;
     noIndex?: boolean | null;
   };
@@ -1518,6 +1547,10 @@ export interface CookiePolicy {
   seo: {
     title: string;
     description: string;
+    /**
+     * Optional. Shown when this page is shared on social media or messaging apps (1200 × 630 works best). Leave empty to use the default image.
+     */
+    image?: (number | null) | Media;
     canonicalPath?: string | null;
     noIndex?: boolean | null;
   };
@@ -1617,6 +1650,7 @@ export interface HomepageSelect<T extends boolean = true> {
     | {
         title?: T;
         description?: T;
+        image?: T;
         canonicalPath?: T;
         noIndex?: T;
       };
@@ -1840,6 +1874,7 @@ export interface AboutPageSelect<T extends boolean = true> {
     | {
         title?: T;
         description?: T;
+        image?: T;
         canonicalPath?: T;
         noIndex?: T;
       };
@@ -1956,6 +1991,7 @@ export interface ContactPageSelect<T extends boolean = true> {
     | {
         title?: T;
         description?: T;
+        image?: T;
         canonicalPath?: T;
         noIndex?: T;
       };
@@ -2011,6 +2047,7 @@ export interface GalleryPageSelect<T extends boolean = true> {
     | {
         title?: T;
         description?: T;
+        image?: T;
         canonicalPath?: T;
         noIndex?: T;
       };
@@ -2046,6 +2083,7 @@ export interface PrivacyPolicySelect<T extends boolean = true> {
     | {
         title?: T;
         description?: T;
+        image?: T;
         canonicalPath?: T;
         noIndex?: T;
       };
@@ -2067,6 +2105,7 @@ export interface TermsAndConditionsSelect<T extends boolean = true> {
     | {
         title?: T;
         description?: T;
+        image?: T;
         canonicalPath?: T;
         noIndex?: T;
       };
@@ -2088,6 +2127,7 @@ export interface CookiePolicySelect<T extends boolean = true> {
     | {
         title?: T;
         description?: T;
+        image?: T;
         canonicalPath?: T;
         noIndex?: T;
       };

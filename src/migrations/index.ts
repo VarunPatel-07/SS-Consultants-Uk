@@ -8,6 +8,7 @@ import * as migration_20260911_084711_about_page_payload_fields from './20260911
 import * as migration_20260911_113310_quote_requests from './20260911_113310_quote_requests';
 import * as migration_20261006_101312_quote_questions from './20261006_101312_quote_questions';
 import * as migration_20261006_122808_quote_question_admin_title from './20261006_122808_quote_question_admin_title';
+import * as migration_20261006_134215_seo_meta_image from './20261006_134215_seo_meta_image';
 
 export const migrations = [
   {
@@ -58,6 +59,11 @@ export const migrations = [
   {
     up: migration_20261006_122808_quote_question_admin_title.up,
     down: migration_20261006_122808_quote_question_admin_title.down,
-    name: '20261006_122808_quote_question_admin_title'
+    name: '20261006_122808_quote_question_admin_title',
+  },
+  {
+    up: migration_20261006_134215_seo_meta_image.up,
+    down: migration_20261006_134215_seo_meta_image.down,
+    name: '20261006_134215_seo_meta_image'
   },
 ];

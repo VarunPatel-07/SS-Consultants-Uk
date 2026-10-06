@@ -2,6 +2,7 @@ import { GalleryHeroSection } from "@/components/sections/gallery/gallery-hero.s
 import { ConsultationSection } from "@/components/sections/homepage/consultation.section";
 import { TestimonialSection } from "@/components/sections/homepage/testimonial.section";
 import { getGalleryPage, isPopulatedMedia, normalizePayloadMediaURL } from "@/lib/payload/gallery";
+import { seoMetadata } from "@/lib/payload/seo";
 import { getTestimonialSection } from "@/lib/payload/testimonials";
 import type { GalleryImage } from "@/utils/interface/gallery.interface";
 import type { Metadata } from "next";
@@ -11,12 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   if (!cmsPage) return { alternates: { canonical: "/gallery" } };
 
-  return {
-    title: cmsPage.seo.title,
-    description: cmsPage.seo.description,
-    alternates: { canonical: cmsPage.seo.canonicalPath || "/gallery" },
-    robots: cmsPage.seo.noIndex ? { index: false, follow: false } : undefined,
-  };
+  return seoMetadata(cmsPage.seo, "/gallery");
 }
 
 export default async function GalleryPage() {

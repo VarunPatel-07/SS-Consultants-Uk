@@ -10,6 +10,7 @@ import { TestimonialSection } from "@/components/sections/homepage/testimonial.s
 import { WhyChooseUsSection } from "@/components/sections/homepage/why-choose-us.section";
 import { getHomepage, getHomepageContent } from "@/lib/payload/homepage";
 import { getTestimonialSection } from "@/lib/payload/testimonials";
+import { seoMetadata } from "@/lib/payload/seo";
 import type { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -17,12 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   if (!homepage) return { alternates: { canonical: "/" } };
 
-  return {
-    title: homepage.seo.title,
-    description: homepage.seo.description,
-    alternates: { canonical: homepage.seo.canonicalPath || "/" },
-    robots: homepage.seo.noIndex ? { index: false, follow: false } : undefined,
-  };
+  return seoMetadata(homepage.seo, "/");
 }
 
 export default async function Home() {
