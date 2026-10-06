@@ -27,6 +27,12 @@ export const revalidateSiteLayout: GlobalAfterChangeHook = ({ doc, req }) => {
   return doc;
 };
 
+export const revalidateBoilerQuote: CollectionAfterChangeHook & CollectionAfterDeleteHook = ({ doc, req }) => {
+  req.payload.logger.info("Revalidating /boiler-quote");
+  revalidatePath("/boiler-quote");
+  return doc;
+};
+
 const homepageCardChanged = (doc: Record<string, unknown>, previousDoc: Record<string, unknown>) =>
   doc.slug !== previousDoc.slug ||
   doc.title !== previousDoc.title ||

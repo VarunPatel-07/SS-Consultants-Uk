@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 
-export function QuoteProgressHeader({ stage }: { stage: "job" | "address" | "details" }) {
+export function QuoteProgressHeader({ stage, percent }: { stage: "job" | "address" | "details"; percent: number }) {
   return (
     <header className="border-b border-(--ssc-uk-border-color) px-5 py-4 sm:px-7">
       <div className="flex flex-wrap items-center justify-end gap-4">
@@ -31,7 +31,8 @@ export function QuoteProgressHeader({ stage }: { stage: "job" | "address" | "det
       </div>
       <div className="mt-4 h-1 overflow-hidden rounded-full bg-(--ssc-uk-border-color)">
         <div
-          className={`h-full rounded-full bg-(--ssc-uk-main-highlight-color) transition-all duration-500 ${stage === "details" ? "w-full" : stage === "address" ? "w-2/3" : "w-1/3"}`}
+          className="h-full rounded-full bg-(--ssc-uk-main-highlight-color) transition-all duration-500"
+          style={{ width: `${percent}%` }}
         />
       </div>
     </header>

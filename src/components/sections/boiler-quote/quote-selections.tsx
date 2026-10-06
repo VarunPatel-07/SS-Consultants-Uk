@@ -26,7 +26,7 @@ export function QuoteSelections({ selections, address, onEdit, onEditAddress }: 
       <h2 className="font-jakarta text-sm font-bold text-foreground">Your selections</h2>
       <div className="mt-4 divide-y divide-(--ssc-uk-border-color)">
         {selections.map((selection, index) => (
-          <div className="flex items-end justify-between gap-4 py-3 first:pt-0" data-selection-row key={selection.questionId}>
+          <div className="flex items-end justify-between gap-4 py-3 first:pt-0" data-selection-row key={`${index}-${selection.questionId}`}>
             <div><span className="block font-jakarta text-xs text-(--ssc-uk-muted-color)">{selection.questionLabel}</span><span className="mt-1 block font-jakarta text-sm text-foreground">{selection.optionLabel}</span></div>
             <button className="font-jakarta text-xs text-(--ssc-uk-main-highlight-color) underline underline-offset-2 hover:text-white" onClick={() => onEdit(index)} type="button">Edit</button>
           </div>

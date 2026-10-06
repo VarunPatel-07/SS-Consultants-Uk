@@ -13,7 +13,8 @@ export interface BoilerQuoteOption {
   label: string;
   icon?: BoilerQuoteIcon;
   description?: string;
-  suboptions: BoilerQuoteQuestion[];
+  /** Key of the question that follows this option; absent when the questions are finished. */
+  nextQuestionId?: string;
 }
 
 export interface BoilerQuoteQuestion {
@@ -21,7 +22,13 @@ export interface BoilerQuoteQuestion {
   label: string;
   eyebrow: string;
   description?: string;
+  summaryLabel: string;
   options: BoilerQuoteOption[];
+}
+
+export interface BoilerQuoteQuestionSet {
+  startQuestionId: string;
+  questions: Record<string, BoilerQuoteQuestion>;
 }
 
 export interface BoilerQuoteSelection {

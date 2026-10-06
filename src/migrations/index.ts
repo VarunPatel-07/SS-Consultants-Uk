@@ -6,6 +6,8 @@ import * as migration_20260911_081103_boiler_option_content_fields from './20260
 import * as migration_20260911_081956_boiler_option_popular_choice from './20260911_081956_boiler_option_popular_choice';
 import * as migration_20260911_084711_about_page_payload_fields from './20260911_084711_about_page_payload_fields';
 import * as migration_20260911_113310_quote_requests from './20260911_113310_quote_requests';
+import * as migration_20261006_101312_quote_questions from './20261006_101312_quote_questions';
+import * as migration_20261006_122808_quote_question_admin_title from './20261006_122808_quote_question_admin_title';
 
 export const migrations = [
   {
@@ -46,6 +48,16 @@ export const migrations = [
   {
     up: migration_20260911_113310_quote_requests.up,
     down: migration_20260911_113310_quote_requests.down,
-    name: '20260911_113310_quote_requests'
+    name: '20260911_113310_quote_requests',
+  },
+  {
+    up: migration_20261006_101312_quote_questions.up,
+    down: migration_20261006_101312_quote_questions.down,
+    name: '20261006_101312_quote_questions',
+  },
+  {
+    up: migration_20261006_122808_quote_question_admin_title.up,
+    down: migration_20261006_122808_quote_question_admin_title.down,
+    name: '20261006_122808_quote_question_admin_title'
   },
 ];

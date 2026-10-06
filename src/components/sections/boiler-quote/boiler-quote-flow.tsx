@@ -1,10 +1,12 @@
 "use client";
 
-import { BOILER_QUOTE_QUESTIONS, BOILER_QUOTE_STORAGE_KEY } from "@/utils/constants/boiler-quote.constants";
+import { BOILER_QUOTE_STORAGE_KEY } from "@/utils/constants/boiler-quote.constants";
 import { COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
 import type {
+  BoilerQuoteOption,
   BoilerQuoteProgress,
   BoilerQuoteQuestion,
+  BoilerQuoteQuestionSet,
   BoilerQuoteSelection,
 } from "@/utils/interface/boiler-quote.interface";
 import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
@@ -18,16 +20,41 @@ import { QuoteProgressHeader } from "./quote-progress-header";
 import { QuoteSelections } from "./quote-selections";
 import { QuoteStageTransition } from "./quote-stage-transition";
 
-const resolveQuestion = (selections: BoilerQuoteSelection[]): BoilerQuoteQuestion | null => {
-  let questions = BOILER_QUOTE_QUESTIONS;
-  for (const selection of selections) {
-    const question = questions.find((item) => item.id === selection.questionId);
-    const option = question?.options.find((item) => item.id === selection.optionId);
-    if (!question || !option) return BOILER_QUOTE_QUESTIONS[0] ?? null;
-    questions = option.suboptions;
+// Walks the saved answers through the question map. Stops at the first answer that no longer
+// matches the CMS content, so progress saved before an edit is trimmed instead of breaking the flow.
+const walkSelections = ({ questions, startQuestionId }: BoilerQuoteQuestionSet, selections: BoilerQuoteSelection[]) => {
+  let question: BoilerQuoteQuestion | null = questions[startQuestionId] ?? null;
+  for (const [index, selection] of selections.entries()) {
+    const option: BoilerQuoteOption | undefined =
+      question?.id === selection.questionId ? question.options.find((item) => item.id === selection.optionId) : undefined;
+    if (!option) return { question: questions[startQuestionId] ?? null, validCount: index };
+    question = option.nextQuestionId ? (questions[option.nextQuestionId] ?? null) : null;
   }
-  return questions[0] ?? null;
+  return { question, validCount: selections.length };
 };
+
+// Longest chain of questions still ahead of (and including) this one. The visited set guards
+// against loops an editor could create between questions in the CMS.
+const remainingQuestionCount = (
+  questions: BoilerQuoteQuestionSet["questions"],
+  question: BoilerQuoteQuestion | null,
+  visited: Set<string> = new Set(),
+): number => {
+  if (!question || visited.has(question.id)) return 0;
+  const nextVisited = new Set(visited).add(question.id);
+  return (
+    1 +
+    Math.max(
+      0,
+      ...question.options.map((option) =>
+        remainingQuestionCount(questions, option.nextQuestionId ? (questions[option.nextQuestionId] ?? null) : null, nextVisited),
+      ),
+    )
+  );
+};
+
+// The address and contact details steps that follow the questions.
+const FINAL_STEP_COUNT = 2;
 
 const EMPTY_CONTACT = { firstName: "", lastName: "", email: "", mobile: "" };
 const EMPTY_PROGRESS: BoilerQuoteProgress = {
@@ -39,7 +66,7 @@ const EMPTY_PROGRESS: BoilerQuoteProgress = {
 };
 const subscribeToHydration = () => () => undefined;
 
-export function BoilerQuoteFlow() {
+export function BoilerQuoteFlow({ questionSet }: { questionSet: BoilerQuoteQuestionSet }) {
   const [modal, setModal] = useState<"otp" | "success" | null>(null);
   const [otpDeliveryFailed, setOtpDeliveryFailed] = useState(false);
   const mounted = useSyncExternalStore(
@@ -51,13 +78,21 @@ export function BoilerQuoteFlow() {
     if (typeof window === "undefined") return EMPTY_PROGRESS;
     try {
       const saved = window.localStorage.getItem(BOILER_QUOTE_STORAGE_KEY);
-      return saved ? (JSON.parse(saved) as BoilerQuoteProgress) : EMPTY_PROGRESS;
+      if (!saved) return EMPTY_PROGRESS;
+      const parsed = JSON.parse(saved) as BoilerQuoteProgress;
+      const { validCount } = walkSelections(questionSet, parsed.selections ?? []);
+      return validCount === parsed.selections?.length
+        ? parsed
+        : { ...EMPTY_PROGRESS, selections: parsed.selections.slice(0, validCount) };
     } catch {
       window.localStorage.removeItem(BOILER_QUOTE_STORAGE_KEY);
       return EMPTY_PROGRESS;
     }
   });
-  const question = useMemo(() => resolveQuestion(progress.selections), [progress.selections]);
+  const question = useMemo(
+    () => walkSelections(questionSet, progress.selections).question,
+    [questionSet, progress.selections],
+  );
 
   useEffect(() => {
     if (mounted) window.localStorage.setItem(BOILER_QUOTE_STORAGE_KEY, JSON.stringify(progress));
@@ -73,7 +108,7 @@ export function BoilerQuoteFlow() {
         ...current.selections,
         {
           questionId: question.id,
-          questionLabel: question.id === "boiler-type" ? "Boiler" : question.label.replace(/[?]$/, ""),
+          questionLabel: question.summaryLabel,
           optionId: option.id,
           optionLabel: option.label,
         },
@@ -107,6 +142,9 @@ export function BoilerQuoteFlow() {
   if (!mounted) return <div className="min-h-screen animate-pulse bg-(--ssc-uk-surface-color)" />;
 
   const stage = question ? "job" : progress.address ? "details" : "address";
+  const completedSteps = progress.selections.length + (stage === "details" ? 1 : 0);
+  const totalSteps =
+    progress.selections.length + remainingQuestionCount(questionSet.questions, question) + FINAL_STEP_COUNT;
   return (
     <main
       className={twMerge(
@@ -127,7 +165,7 @@ export function BoilerQuoteFlow() {
             </p>
           </div>
           <div className="rounded-xl border border-(--ssc-uk-border-color) bg-[linear-gradient(135deg,#17201c,#111714)] shadow-2xl shadow-black/30">
-            <QuoteProgressHeader stage={stage} />
+            <QuoteProgressHeader stage={stage} percent={(completedSteps / totalSteps) * 100} />
             <div className="grid lg:grid-cols-[minmax(0,1fr)_260px]">
               <QuoteStageTransition key={question?.id ?? (progress.address ? "details" : "address")}>
                 {question ? (

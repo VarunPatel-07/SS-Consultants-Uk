@@ -72,6 +72,7 @@ export interface Config {
     testimonials: Testimonial;
     faqs: Faq;
     media: Media;
+    'quote-questions': QuoteQuestion;
     'quote-requests': QuoteRequest;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -85,6 +86,7 @@ export interface Config {
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     faqs: FaqsSelect<false> | FaqsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    'quote-questions': QuoteQuestionsSelect<false> | QuoteQuestionsSelect<true>;
     'quote-requests': QuoteRequestsSelect<false> | QuoteRequestsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -435,6 +437,50 @@ export interface Testimonial {
   createdAt: string;
 }
 /**
+ * Questions shown in the Get a quote flow. Link each option to the question that should follow it.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "quote-questions".
+ */
+export interface QuoteQuestion {
+  id: number;
+  adminTitle?: string | null;
+  /**
+   * Stable ID saved with each quote request, for example “fuel”. Avoid changing it once live.
+   */
+  key: string;
+  /**
+   * The flow starts with this question. Only one question should be ticked.
+   */
+  isFirstQuestion?: boolean | null;
+  /**
+   * Small heading above the question.
+   */
+  eyebrow: string;
+  label: string;
+  description?: string | null;
+  /**
+   * Short label for the “Your selections” sidebar. Defaults to the question.
+   */
+  summaryLabel?: string | null;
+  options: {
+    /**
+     * Stable ID saved with each quote request, for example “mains-gas”.
+     */
+    value: string;
+    label: string;
+    description?: string | null;
+    icon?: ('boiler' | 'flame' | 'home' | 'radiator' | 'settings' | 'shield' | 'sparkles' | 'wrench') | null;
+    /**
+     * Leave empty to finish the questions and move on to the address step.
+     */
+    nextQuestion?: (number | null) | QuoteQuestion;
+    id?: string | null;
+  }[];
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * Boiler and heating quotation requests submitted through the website.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -503,6 +549,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'quote-questions';
+        value: number | QuoteQuestion;
       } | null)
     | ({
         relationTo: 'quote-requests';
@@ -784,6 +834,31 @@ export interface MediaSelect<T extends boolean = true> {
               filename?: T;
             };
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "quote-questions_select".
+ */
+export interface QuoteQuestionsSelect<T extends boolean = true> {
+  adminTitle?: T;
+  key?: T;
+  isFirstQuestion?: T;
+  eyebrow?: T;
+  label?: T;
+  description?: T;
+  summaryLabel?: T;
+  options?:
+    | T
+    | {
+        value?: T;
+        label?: T;
+        description?: T;
+        icon?: T;
+        nextQuestion?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -9,6 +9,7 @@ import sharp from "sharp";
 import { Users } from "@/collections/Users";
 import { FAQs } from "@/collections/FAQs";
 import { Media } from "@/collections/Media";
+import { QuoteQuestions } from "@/collections/QuoteQuestions";
 import { QuoteRequests } from "@/collections/QuoteRequests";
 import { Services } from "@/collections/Services";
 import { Testimonials } from "@/collections/Testimonials";
@@ -19,6 +20,7 @@ import { Homepage } from "@/globals/Homepage";
 import { CookiePolicy, PrivacyPolicy, TermsAndConditions } from "@/globals/LegalPages";
 import { SiteSettings } from "@/globals/SiteSettings";
 import {
+  revalidateBoilerQuote,
   revalidateDeletedService,
   revalidateGlobalPath,
   revalidateService,
@@ -55,6 +57,15 @@ const ServicesWithRevalidation = {
   },
 };
 
+const QuoteQuestionsWithRevalidation = {
+  ...QuoteQuestions,
+  hooks: {
+    ...QuoteQuestions.hooks,
+    afterChange: [...(QuoteQuestions.hooks?.afterChange ?? []), revalidateBoilerQuote],
+    afterDelete: [...(QuoteQuestions.hooks?.afterDelete ?? []), revalidateBoilerQuote],
+  },
+};
+
 const SiteSettingsWithRevalidation: GlobalConfig = {
   ...SiteSettings,
   hooks: {
@@ -67,7 +78,15 @@ export default buildConfig({
   admin: {
     user: Users.slug,
   },
-  collections: [Users, ServicesWithRevalidation, Testimonials, FAQs, Media, QuoteRequests],
+  collections: [
+    Users,
+    ServicesWithRevalidation,
+    Testimonials,
+    FAQs,
+    Media,
+    QuoteQuestionsWithRevalidation,
+    QuoteRequests,
+  ],
   db: postgresAdapter({
     pool: {
       connectionString: databaseURL,
