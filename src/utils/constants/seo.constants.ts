@@ -1,4 +1,5 @@
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ssc-uk.netlify.app";
+// Same variable Payload uses for its server URL: localhost in development, the live domain in production.
+export const SITE_URL = (process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:3000").replace(/\/$/, "");
 export const SITE_NAME = "SS Consultants UK Ltd";
 
 // Used whenever a page has no meta image uploaded in the CMS.
