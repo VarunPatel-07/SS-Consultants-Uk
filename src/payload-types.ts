@@ -74,6 +74,7 @@ export interface Config {
     media: Media;
     'quote-questions': QuoteQuestion;
     'quote-requests': QuoteRequest;
+    'contact-enquiries': ContactEnquiry;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -88,6 +89,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     'quote-questions': QuoteQuestionsSelect<false> | QuoteQuestionsSelect<true>;
     'quote-requests': QuoteRequestsSelect<false> | QuoteRequestsSelect<true>;
+    'contact-enquiries': ContactEnquiriesSelect<false> | ContactEnquiriesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -506,7 +508,30 @@ export interface QuoteRequest {
     answer: string;
     id?: string | null;
   }[];
-  mobileVerification: 'development-code-entered';
+  mobileVerification: 'sms-verified' | 'development-code-entered';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * General enquiries sent through the “Let’s talk about your heating” contact form.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-enquiries".
+ */
+export interface ContactEnquiry {
+  id: number;
+  status: 'new' | 'contacted' | 'closed';
+  /**
+   * The website page the form was sent from, e.g. /contact.
+   */
+  submittedFrom: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone?: string | null;
+  service: string;
+  subject?: string | null;
+  message?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -561,6 +586,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'quote-requests';
         value: number | QuoteRequest;
+      } | null)
+    | ({
+        relationTo: 'contact-enquiries';
+        value: number | ContactEnquiry;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -887,6 +916,23 @@ export interface QuoteRequestsSelect<T extends boolean = true> {
         id?: T;
       };
   mobileVerification?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-enquiries_select".
+ */
+export interface ContactEnquiriesSelect<T extends boolean = true> {
+  status?: T;
+  submittedFrom?: T;
+  firstName?: T;
+  lastName?: T;
+  email?: T;
+  phone?: T;
+  service?: T;
+  subject?: T;
+  message?: T;
   updatedAt?: T;
   createdAt?: T;
 }
