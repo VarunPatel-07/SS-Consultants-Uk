@@ -24,7 +24,6 @@ export function NavbarSection({ navigation }: { navigation: NavigationLink[] }) 
   const isHomeActive = pathname === "/";
   const normalizedPath = pathname.replace(/\/$/, "") || "/";
   const showContactBar = !["/privacy-policy", "/terms-and-conditions", "/cookie-policy"].includes(normalizedPath);
-  const contactBarHref = normalizedPath === "/sitemap" ? "/contact#contact" : "#contact";
 
   const isLinkActive = (item: NavigationLink): boolean => {
     if (item.children?.some(isLinkActive)) return true;
@@ -268,9 +267,9 @@ export function NavbarSection({ navigation }: { navigation: NavigationLink[] }) 
             Call Now
           </a>
           <a
-            href={contactBarHref}
+            href={"/boiler-quote"}
             className="flex min-h-10 items-center justify-center rounded-full bg-(--ssc-uk-cta-button-background) px-2 text-sm font-bold text-white">
-            Get a Free Quote
+            Get a Free Quote in 60s
           </a>
         </nav>
       )}
