@@ -1,16 +1,16 @@
 import { isDevelopmentEnvironment } from "@/utils/app-env";
 
-// UK mobiles: 07…, +44 7… / 0044 7…, or 7… with the leading 0 left off.
-const UK_MOBILE_PATTERN = /^(?:0|\+44|0044)?7\d{9}$/;
+// UK mobiles: 07…, +44 7… / 0044 7… / 44 7…, or 7… with the leading 0 left off.
+const UK_MOBILE_PATTERN = /^(?:0|\+44|0044|44)?7\d{9}$/;
 // Development only: any international number with its country code (+ or 00, then 8-15 digits).
 const INTERNATIONAL_TEST_PATTERN = /^(?:\+|00)[1-9]\d{7,14}$/;
 
 export const MOBILE_NUMBER_HINT = isDevelopmentEnvironment
   ? "Development: any mobile number. Include the country code, for example +91 98765 43210."
-  : "UK mobile numbers only (07 or +44 7).";
+  : "UK mobile numbers only (07 or +44 7). New Version";
 export const MOBILE_NUMBER_ERROR = isDevelopmentEnvironment
   ? "Enter a valid mobile number with its country code, for example +91 98765 43210."
-  : "Enter a valid UK mobile number, for example 07123 456789.";
+  : "Enter a valid UK mobile number, for example 07123 456789. New Version";
 
 const compactPhoneNumber = (value: string) => value.trim().replace(/[\s()-]/g, "");
 
@@ -28,6 +28,7 @@ export const toMobileE164 = (value: string) => {
   const compact = compactPhoneNumber(value);
   if (compact.startsWith("07")) return `+44${compact.slice(1)}`;
   if (compact.startsWith("7")) return `+44${compact}`;
+  if (compact.startsWith("44")) return `+${compact}`;
   if (compact.startsWith("00")) return `+${compact.slice(2)}`;
   return compact;
 };
@@ -43,6 +44,6 @@ export const toUKPhoneE164 = (value: string) => {
   if (!/^[\d\s()+-]+$/.test(value)) return null;
 
   const compact = compactPhoneNumber(value);
-  const national = compact.startsWith("+44") ? `0${compact.slice(3)}` : compact.startsWith("0044") ? `0${compact.slice(4)}` : compact;
+  const national = compact.replace(/^(?:\+|00)?44/, "0");
   return UK_PHONE_NATIONAL_PATTERN.test(national) ? `+44${national.replace(/^0/, "")}` : null;
 };
