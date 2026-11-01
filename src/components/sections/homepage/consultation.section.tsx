@@ -5,6 +5,7 @@ import { BOILER_SERVICES } from "@/content/pageContent/common.data";
 import { gsap } from "@/lib/gsap";
 import { COMMON_SCROLL_TRIGGER_ANIMATION } from "@/utils/constants/animation.constant";
 import { COMMON_SECTION_PADDING_TOP_BOTTOM } from "@/utils/constants/common.constants";
+import { toUKPhoneE164, UK_PHONE_ERROR } from "@/utils/mobile-number";
 import { useGSAP } from "@gsap/react";
 import { useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
@@ -28,26 +29,53 @@ export function ConsultationSection({ serviceName }: { serviceName?: string }) {
   const email = siteSettings.email;
   const phone = siteSettings.phone;
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const [submitState, setSubmitState] = useState<"idle" | "sending" | "sent">("idle");
+  const [submitError, setSubmitError] = useState("");
+  const [contactPhone, setContactPhone] = useState("");
+  const [phoneTouched, setPhoneTouched] = useState(false);
+  // The contact number is optional, but when given it must be a UK number.
+  const phoneIsValid = !contactPhone.trim() || toUKPhoneE164(contactPhone) !== null;
+  const showPhoneError = phoneTouched && !phoneIsValid;
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const firstName = formData.get("firstName")?.toString().trim() ?? "";
-    const lastName = formData.get("lastName")?.toString().trim() ?? "";
-    const enquirerEmail = formData.get("email")?.toString().trim() ?? "";
-    const phoneNumber = formData.get("phone")?.toString().trim() ?? "";
+    const form = event.currentTarget;
+    const formData = new FormData(form);
     const service = formData.get("service")?.toString().trim() ?? "";
-    const message = formData.get("message")?.toString().trim() ?? "";
-
-    const bodyLines = [
-      `Name: ${firstName} ${lastName}`.trim(),
-      `Email: ${enquirerEmail}`,
-      phoneNumber && `Phone: ${phoneNumber}`,
-      `Service: ${service}`,
-      message && `Message: ${message}`,
-    ].filter(Boolean);
-
-    const mailSubject = subject || (service ? `Enquiry about ${service}` : "Enquiry from website");
-    window.location.href = `mailto:${email}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+    if (!phoneIsValid) {
+      setPhoneTouched(true);
+      return;
+    }
+    setSubmitState("sending");
+    setSubmitError("");
+    try {
+      const response = await fetch("/api/submit-contact-enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: formData.get("firstName"),
+          lastName: formData.get("lastName"),
+          email: formData.get("email"),
+          phone: contactPhone,
+          service,
+          subject: subject || (service ? `Enquiry about ${service}` : "Enquiry from website"),
+          message: formData.get("message"),
+          submittedFrom: window.location.pathname,
+          website: formData.get("website"),
+        }),
+      });
+      const result = (await response.json()) as { error?: string };
+      if (!response.ok) throw new Error(result.error || "We couldn’t send your enquiry. Please try again or call us.");
+      form.reset();
+      setContactPhone("");
+      setPhoneTouched(false);
+      setSelectedService(serviceName ?? "");
+      setSubject("");
+      setSubmitState("sent");
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : "We couldn’t send your enquiry. Please try again or call us.");
+      setSubmitState("idle");
+    }
   };
 
   useGSAP(
@@ -138,7 +166,8 @@ export function ConsultationSection({ serviceName }: { serviceName?: string }) {
 
           <form
             className="contact-reveal rounded-lg border border-(--ssc-uk-border-color) px-7 py-9 sm:px-9 sm:py-10 bg-background md:rounded-xl lg:rounded-2xl reveal-animation"
-            onSubmit={handleSubmit}>
+            onSubmit={(event) => void handleSubmit(event)}>
+            <input aria-hidden="true" autoComplete="off" className="hidden" name="website" tabIndex={-1} type="text" />
             <div className="grid gap-x-10 gap-y-8 md:grid-cols-2">
               <label className="block text-base font-medium text-(--ssc-uk-muted-color)">
                 <input
@@ -172,12 +201,30 @@ export function ConsultationSection({ serviceName }: { serviceName?: string }) {
               </label>
               <label className="block text-base font-medium text-(--ssc-uk-muted-color) md:col-span-2">
                 <input
-                  className="block w-full rounded-none border-0 border-b border-(--ssc-uk-border-color) bg-transparent px-0 py-3 text-foreground outline-none transition-colors placeholder:text-(--ssc-uk-muted-color) focus:border-(--ssc-uk-main-highlight-color) focus:shadow-[0_1px_0_var(--ssc-uk-main-highlight-color)]"
+                  className={twMerge(
+                    "block w-full rounded-none border-0 border-b border-(--ssc-uk-border-color) bg-transparent px-0 py-3 text-foreground outline-none transition-colors placeholder:text-(--ssc-uk-muted-color) focus:border-(--ssc-uk-main-highlight-color) focus:shadow-[0_1px_0_var(--ssc-uk-main-highlight-color)]",
+                    showPhoneError && "border-red-500 focus:border-red-500 focus:shadow-[0_1px_0_#ef4444]",
+                  )}
                   type="tel"
                   name="phone"
-                  placeholder="Contact Number"
+                  inputMode="tel"
+                  autoComplete="tel-national"
+                  maxLength={20}
+                  placeholder="Contact Number (UK)"
                   aria-label="Contact Number"
+                  aria-invalid={showPhoneError}
+                  aria-describedby={showPhoneError ? "contact-phone-error" : undefined}
+                  value={contactPhone}
+                  onBlur={() => setPhoneTouched(true)}
+                  onChange={(event) => {
+                    if (/^[\d\s()+-]*$/.test(event.target.value)) setContactPhone(event.target.value);
+                  }}
                 />
+                {showPhoneError && (
+                  <span className="mt-2 block text-sm font-normal text-red-400" id="contact-phone-error" role="alert">
+                    {UK_PHONE_ERROR}
+                  </span>
+                )}
               </label>
 
               <label className="block text-base font-medium text-(--ssc-uk-muted-color) md:col-span-2">
@@ -215,13 +262,24 @@ export function ConsultationSection({ serviceName }: { serviceName?: string }) {
 
             <div className="pt-8 text-center">
               <button
-                className="w-full rounded-full bg-(--ssc-uk-main-white-color) px-6 py-4 text-base font-bold text-(--ssc-uk-main-black-color) transition-colors cursor-pointer"
+                className="w-full rounded-full bg-(--ssc-uk-main-white-color) px-6 py-4 text-base font-bold text-(--ssc-uk-main-black-color) transition-colors cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
+                disabled={submitState === "sending"}
                 type="submit">
-                Send Enquiry
+                {submitState === "sending" ? "Sending…" : "Send Enquiry"}
               </button>
-              <p className="mt-6 text-sm text-(--ssc-uk-muted-color)">
-                Your details are only used to respond to your enquiry.
-              </p>
+              {submitError ? (
+                <p className="mt-6 text-sm text-red-400" role="alert">
+                  {submitError}
+                </p>
+              ) : submitState === "sent" ? (
+                <p className="mt-6 text-sm text-(--ssc-uk-main-highlight-color)" role="status">
+                  Thank you — your enquiry has been sent. We’ll be in touch shortly.
+                </p>
+              ) : (
+                <p className="mt-6 text-sm text-(--ssc-uk-muted-color)">
+                  Your details are only used to respond to your enquiry.
+                </p>
+              )}
             </div>
           </form>
         </div>

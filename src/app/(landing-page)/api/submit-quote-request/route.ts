@@ -1,7 +1,8 @@
 import config from "@payload-config";
 import { NextResponse } from "next/server";
 import { getPayload } from "payload";
-import { toUKMobileE164 } from "@/utils/uk-mobile";
+import { checkVerificationCode, isDevelopmentFallback } from "@/lib/twilio-verify";
+import { toMobileE164 } from "@/utils/mobile-number";
 
 type Submission = {
   selections?: Array<{
@@ -13,6 +14,7 @@ type Submission = {
   postcode?: string;
   address?: string;
   contact?: { firstName?: string; lastName?: string; email?: string; mobile?: string };
+  code?: string;
 };
 
 const text = (value: unknown, maxLength: number) =>
@@ -23,7 +25,7 @@ export async function POST(request: Request) {
   const firstName = text(submission.contact?.firstName, 100);
   const lastName = text(submission.contact?.lastName, 100);
   const email = text(submission.contact?.email, 320);
-  const mobile = toUKMobileE164(text(submission.contact?.mobile, 30));
+  const mobile = toMobileE164(text(submission.contact?.mobile, 30));
   const postcode = text(submission.postcode, 12).toUpperCase();
   const address = text(submission.address, 500);
   const answers = (submission.selections ?? []).slice(0, 20).map((selection) => ({
@@ -35,6 +37,16 @@ export async function POST(request: Request) {
 
   if (!firstName || !lastName || !/^\S+@\S+\.\S+$/.test(email) || !mobile || !postcode || !address || !answers.length) {
     return NextResponse.json({ error: "The quote request is incomplete." }, { status: 400 });
+  }
+
+  const developmentFallback = isDevelopmentFallback();
+  try {
+    if (!(await checkVerificationCode(mobile, text(submission.code, 10)))) {
+      return NextResponse.json({ error: "That code is incorrect or has expired." }, { status: 400 });
+    }
+  } catch (error) {
+    console.error("Unable to check the quote verification code.", error);
+    return NextResponse.json({ error: "We couldn’t check your code. Please try again." }, { status: 502 });
   }
 
   try {
@@ -50,7 +62,7 @@ export async function POST(request: Request) {
         postcode,
         address,
         answers,
-        mobileVerification: "development-code-entered",
+        mobileVerification: developmentFallback ? "development-code-entered" : "sms-verified",
       },
     });
 

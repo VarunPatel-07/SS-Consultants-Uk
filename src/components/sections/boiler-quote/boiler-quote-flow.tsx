@@ -11,7 +11,7 @@ import type {
 } from "@/utils/interface/boiler-quote.interface";
 import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import { twMerge } from "tailwind-merge";
-import { ContactDetailsStep } from "./contact-details-step";
+import { ContactDetailsStep, requestVerificationCode } from "./contact-details-step";
 import { OtpModal } from "./otp-modal";
 import { QuoteSuccessModal } from "./quote-success-modal";
 import { PostcodeStep } from "./postcode-step";
@@ -126,11 +126,11 @@ export function BoilerQuoteFlow({ questionSet }: { questionSet: BoilerQuoteQuest
       contact: EMPTY_CONTACT,
     }));
   const goBack = () => setProgress((current) => ({ ...current, selections: current.selections.slice(0, -1) }));
-  const submitQuoteRequest = async () => {
+  const submitQuoteRequest = async (code: string) => {
     const response = await fetch("/api/submit-quote-request", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(progress),
+      body: JSON.stringify({ ...progress, code }),
     });
     const result = (await response.json()) as { error?: string };
     if (!response.ok) throw new Error(result.error || "Your quote request could not be saved.");
@@ -216,6 +216,7 @@ export function BoilerQuoteFlow({ questionSet }: { questionSet: BoilerQuoteQuest
           mobile={progress.contact?.mobile ?? ""}
           onClose={() => setModal(null)}
           onComplete={submitQuoteRequest}
+          onResend={() => requestVerificationCode(progress.contact?.mobile ?? "")}
         />
       )}
       {modal === "success" && <QuoteSuccessModal />}
