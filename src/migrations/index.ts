@@ -9,6 +9,8 @@ import * as migration_20260911_113310_quote_requests from './20260911_113310_quo
 import * as migration_20261006_101312_quote_questions from './20261006_101312_quote_questions';
 import * as migration_20261006_122808_quote_question_admin_title from './20261006_122808_quote_question_admin_title';
 import * as migration_20261006_134215_seo_meta_image from './20261006_134215_seo_meta_image';
+import * as migration_20261026_132610_quote_sms_verified from './20261026_132610_quote_sms_verified';
+import * as migration_20261026_145343_contact_enquiries from './20261026_145343_contact_enquiries';
 
 export const migrations = [
   {
@@ -64,6 +66,16 @@ export const migrations = [
   {
     up: migration_20261006_134215_seo_meta_image.up,
     down: migration_20261006_134215_seo_meta_image.down,
-    name: '20261006_134215_seo_meta_image'
+    name: '20261006_134215_seo_meta_image',
+  },
+  {
+    up: migration_20261026_132610_quote_sms_verified.up,
+    down: migration_20261026_132610_quote_sms_verified.down,
+    name: '20261026_132610_quote_sms_verified',
+  },
+  {
+    up: migration_20261026_145343_contact_enquiries.up,
+    down: migration_20261026_145343_contact_enquiries.down,
+    name: '20261026_145343_contact_enquiries'
   },
 ];

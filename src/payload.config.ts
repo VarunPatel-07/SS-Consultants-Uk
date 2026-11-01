@@ -1,4 +1,5 @@
 import { postgresAdapter } from "@payloadcms/db-postgres";
+import { resendAdapter } from "@payloadcms/email-resend";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { s3Storage } from "@payloadcms/storage-s3";
 import path from "node:path";
@@ -7,6 +8,7 @@ import { buildConfig, type GlobalConfig } from "payload";
 import sharp from "sharp";
 
 import { Users } from "@/collections/Users";
+import { ContactEnquiries } from "@/collections/ContactEnquiries";
 import { FAQs } from "@/collections/FAQs";
 import { Media } from "@/collections/Media";
 import { QuoteQuestions } from "@/collections/QuoteQuestions";
@@ -39,6 +41,7 @@ const r2IsConfigured = Boolean(
     process.env.R2_BUCKET_SECRET_ACCESS_KEY &&
     process.env.R2_BUCKET_ENDPOINT,
 );
+const r2PublicURL = process.env.R2_PUBLIC_URL?.replace(/\/+$/, "");
 
 const withPathRevalidation = (global: GlobalConfig, publicPath: string): GlobalConfig => ({
   ...global,
@@ -86,6 +89,7 @@ export default buildConfig({
     Media,
     QuoteQuestionsWithRevalidation,
     QuoteRequests,
+    ContactEnquiries,
   ],
   db: postgresAdapter({
     pool: {
@@ -93,6 +97,14 @@ export default buildConfig({
     },
   }),
   editor: lexicalEditor(),
+  // Without a Resend API key Payload only logs outgoing emails to the console.
+  email: process.env.RESEND_API_KEY
+    ? resendAdapter({
+        apiKey: process.env.RESEND_API_KEY,
+        defaultFromAddress: process.env.EMAIL_FROM_ADDRESS || "onboarding@resend.dev",
+        defaultFromName: process.env.EMAIL_FROM_NAME || "SS Consultants Website",
+      })
+    : undefined,
   globals: [
     withPathRevalidation(Homepage, "/"),
     withPathRevalidation(AboutPage, "/about"),
@@ -106,7 +118,17 @@ export default buildConfig({
   plugins: [
     s3Storage({
       bucket: process.env.R2_BUCKET_NAME ?? "",
-      collections: { media: true },
+      // With a public bucket URL, media is served straight from Cloudflare's CDN instead of being
+      // streamed through Payload's /api/media/file route on every request.
+      collections: {
+        media: r2PublicURL
+          ? {
+              disablePayloadAccessControl: true,
+              generateFileURL: ({ filename, prefix }) =>
+                `${r2PublicURL}/${prefix ? `${prefix}/` : ""}${encodeURIComponent(filename)}`,
+            }
+          : true,
+      },
       config: {
         credentials: {
           accessKeyId: process.env.R2_BUCKET_ACCESS_KEY_ID ?? "",

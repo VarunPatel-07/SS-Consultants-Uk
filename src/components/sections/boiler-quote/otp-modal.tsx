@@ -3,10 +3,11 @@
 import { ArrowRight, Smartphone, X } from "lucide-react";
 import { useRef, useState } from "react";
 
-export function OtpModal({ deliveryFailed, mobile, onClose, onComplete }: { deliveryFailed: boolean; mobile: string; onClose: () => void; onComplete: () => Promise<void> }) {
+export function OtpModal({ deliveryFailed, mobile, onClose, onComplete, onResend }: { deliveryFailed: boolean; mobile: string; onClose: () => void; onComplete: (code: string) => Promise<void>; onResend: () => Promise<boolean> }) {
   const [digits, setDigits] = useState(["", "", "", "", "", ""]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [resendState, setResendState] = useState<"idle" | "sending" | "sent">("idle");
   const inputs = useRef<Array<HTMLInputElement | null>>([]);
   const updateDigit = (index: number, value: string) => {
     const digit = value.replace(/\D/g, "").slice(-1);
@@ -18,10 +19,23 @@ export function OtpModal({ deliveryFailed, mobile, onClose, onComplete }: { deli
     setIsSubmitting(true);
     setError("");
     try {
-      await onComplete();
+      await onComplete(digits.join(""));
     } catch (submitError) {
       setError(submitError instanceof Error ? submitError.message : "Your request could not be submitted.");
       setIsSubmitting(false);
+    }
+  };
+  const resend = async () => {
+    setResendState("sending");
+    setError("");
+    try {
+      await onResend();
+      setDigits(["", "", "", "", "", ""]);
+      inputs.current[0]?.focus();
+      setResendState("sent");
+    } catch (resendError) {
+      setError(resendError instanceof Error ? resendError.message : "The verification code could not be sent.");
+      setResendState("idle");
     }
   };
   return (
@@ -34,9 +48,13 @@ export function OtpModal({ deliveryFailed, mobile, onClose, onComplete }: { deli
           {deliveryFailed ? "SMS delivery is unavailable in this development flow. Enter any six-digit code to continue." : <>Enter the six-digit code sent to<br /><strong className="text-foreground">{mobile}</strong></>}
         </p>
         <div className="mt-6 flex justify-center gap-2">
-          {digits.map((digit, index) => <input aria-label={`OTP digit ${index + 1}`} className="size-11 rounded-lg border border-(--ssc-uk-border-color) bg-[#202825] text-center font-jakarta text-lg outline-none focus:border-(--ssc-uk-main-highlight-color)" inputMode="numeric" key={index} maxLength={1} onChange={(event) => updateDigit(index, event.target.value)} onKeyDown={(event) => { if (event.key === "Backspace" && !digit && index > 0) inputs.current[index - 1]?.focus(); }} ref={(element) => { inputs.current[index] = element; }} value={digit} />)}
+          {digits.map((digit, index) => <input aria-label={`OTP digit ${index + 1}`} className="size-11 rounded-lg border border-(--ssc-uk-border-color) bg-[#202825] text-center font-jakarta text-lg outline-none focus:border-(--ssc-uk-main-highlight-color)" autoComplete={index === 0 ? "one-time-code" : "off"} autoFocus={index === 0} inputMode="numeric" key={index} maxLength={1} onChange={(event) => updateDigit(index, event.target.value)} onKeyDown={(event) => { if (event.key === "Backspace" && !digit && index > 0) inputs.current[index - 1]?.focus(); }} ref={(element) => { inputs.current[index] = element; }} value={digit} />)}
         </div>
-        {!deliveryFailed && <p className="mt-4 font-jakarta text-xs text-(--ssc-uk-muted-color)">Development flow: the entered code is not checked with Twilio.</p>}
+        {!deliveryFailed && (
+          <button className="mt-4 font-jakarta text-xs font-semibold text-(--ssc-uk-main-highlight-color) hover:underline disabled:cursor-not-allowed disabled:opacity-60" disabled={resendState === "sending"} onClick={() => void resend()} type="button">
+            {resendState === "sending" ? "Sending a new code…" : resendState === "sent" ? "New code sent — resend again" : "Didn’t get a code? Resend"}
+          </button>
+        )}
         {error && <p className="mt-4 font-jakarta text-xs text-red-300" role="alert">{error}</p>}
         <button className="mt-6 flex w-full items-center justify-center gap-3 rounded-full border border-[#087f70] bg-(--ssc-uk-cta-button-background) px-6 py-3 font-jakarta text-sm font-bold disabled:cursor-not-allowed disabled:opacity-50" disabled={!complete || isSubmitting} onClick={() => void submit()} type="button">{isSubmitting ? "Saving request…" : "Submit request"}<ArrowRight className="rounded-full bg-white p-1 text-black" size={25} /></button>
       </div>

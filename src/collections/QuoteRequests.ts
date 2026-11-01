@@ -1,6 +1,9 @@
 import type { CollectionConfig } from "payload";
 
 import { authenticated } from "@/payload/access";
+import { notifyAdminOfEnquiry } from "@/payload/hooks/notify-admin";
+
+type QuoteAnswer = { question?: string; answer?: string };
 
 export const QuoteRequests: CollectionConfig = {
   slug: "quote-requests",
@@ -16,6 +19,38 @@ export const QuoteRequests: CollectionConfig = {
     delete: authenticated,
     read: authenticated,
     update: authenticated,
+  },
+  hooks: {
+    afterChange: [
+      notifyAdminOfEnquiry((doc) => ({
+        kind: "Quote request",
+        topic: `Boiler quote · ${doc.postcode}`,
+        customer: { name: `${doc.firstName} ${doc.lastName}`, email: String(doc.email), phone: String(doc.mobile) },
+        submittedFrom: "/boiler-quote",
+        sections: [
+          {
+            title: "Customer details",
+            rows: [
+              ["Name", `${doc.firstName} ${doc.lastName}`],
+              ["Email", doc.email],
+              ["Phone", doc.mobile],
+              ["Mobile verified", doc.mobileVerification === "sms-verified" ? "Yes — SMS code confirmed" : "No — development flow"],
+            ],
+          },
+          {
+            title: "Property",
+            rows: [
+              ["Postcode", doc.postcode],
+              ["Address", doc.address],
+            ],
+          },
+          {
+            title: "Their answers",
+            rows: ((doc.answers as QuoteAnswer[] | undefined) ?? []).map(({ question, answer }) => [question ?? "Question", answer]),
+          },
+        ],
+      })),
+    ],
   },
   fields: [
     {
@@ -53,7 +88,10 @@ export const QuoteRequests: CollectionConfig = {
       type: "select",
       defaultValue: "development-code-entered",
       required: true,
-      options: [{ label: "Code entered — development flow", value: "development-code-entered" }],
+      options: [
+        { label: "Verified by SMS code", value: "sms-verified" },
+        { label: "Code entered — development flow", value: "development-code-entered" },
+      ],
       admin: { position: "sidebar", readOnly: true },
     },
   ],

@@ -3,15 +3,27 @@
 import { ArrowLeft, ArrowRight, UserRound } from "lucide-react";
 import { useState, type FormEvent } from "react";
 import type { BoilerQuoteProgress } from "@/utils/interface/boiler-quote.interface";
-import { isUKMobileNumber } from "@/utils/uk-mobile";
+import { isAllowedMobileNumber, MOBILE_NUMBER_ERROR, MOBILE_NUMBER_HINT } from "@/utils/mobile-number";
 
 type Contact = BoilerQuoteProgress["contact"];
+
+// Resolves to true when Twilio isn't configured locally and any six-digit code will be accepted.
+export const requestVerificationCode = async (mobile: string) => {
+  const response = await fetch("/api/send-quote-otp", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ mobile }),
+  });
+  const result = (await response.json()) as { error?: string; developmentFallback?: boolean };
+  if (!response.ok) throw new Error(result.error || "The verification code could not be sent.");
+  return result.developmentFallback === true;
+};
 
 export function ContactDetailsStep({ contact, onBack, onChange, onCodeSent }: { contact: Contact; onBack: () => void; onChange: (contact: Contact) => void; onCodeSent: (deliveryFailed: boolean) => void }) {
   const [isSending, setIsSending] = useState(false);
   const [error, setError] = useState("");
   const [mobileTouched, setMobileTouched] = useState(false);
-  const mobileIsValid = isUKMobileNumber(contact.mobile);
+  const mobileIsValid = isAllowedMobileNumber(contact.mobile);
   const showMobileError = mobileTouched && !mobileIsValid;
   const field = (key: keyof Contact, label: string, type = "text", autoComplete?: string) => (
     <label className="font-jakarta text-sm font-semibold text-foreground">{label}<input autoComplete={autoComplete} className="mt-2 h-13 w-full rounded-lg border border-(--ssc-uk-border-color) bg-[#202825] px-4 font-jakarta text-sm font-normal text-foreground outline-none focus:border-(--ssc-uk-main-highlight-color) focus:ring-2 focus:ring-[#5dbbae33]" onChange={(event) => onChange({ ...contact, [key]: event.target.value })} type={type} value={contact[key]} /></label>
@@ -20,20 +32,13 @@ export function ContactDetailsStep({ contact, onBack, onChange, onCodeSent }: { 
     event.preventDefault();
     if (!mobileIsValid) {
       setMobileTouched(true);
-      setError("Enter a valid UK mobile number, for example 07123 456789.");
+      setError(MOBILE_NUMBER_ERROR);
       return;
     }
     setIsSending(true);
     setError("");
     try {
-      const response = await fetch("/api/send-quote-otp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ mobile: contact.mobile }),
-      });
-      const result = (await response.json()) as { error?: string; sent?: boolean; developmentFallback?: boolean };
-      if (!response.ok) throw new Error(result.error || "The verification code could not be sent.");
-      onCodeSent(result.developmentFallback === true || result.sent === false);
+      onCodeSent(await requestVerificationCode(contact.mobile));
     } catch (sendError) {
       setError(sendError instanceof Error ? sendError.message : "The verification code could not be sent.");
     } finally {
@@ -64,7 +69,7 @@ export function ContactDetailsStep({ contact, onBack, onChange, onCodeSent }: { 
               const value = event.target.value;
               if (/^[\d\s()+-]*$/.test(value)) {
                 onChange({ ...contact, mobile: value });
-                if (isUKMobileNumber(value)) setError("");
+                if (isAllowedMobileNumber(value)) setError("");
               }
             }}
             placeholder="07123 456789"
@@ -74,11 +79,11 @@ export function ContactDetailsStep({ contact, onBack, onChange, onCodeSent }: { 
           />
           {showMobileError ? (
             <span className="mt-2 block font-jakarta text-xs font-normal text-red-400" id="mobile-number-error" role="alert">
-              Enter a valid UK mobile number, for example 07123 456789.
+              {MOBILE_NUMBER_ERROR}
             </span>
           ) : (
             <span className="mt-2 block font-jakarta text-xs font-normal text-(--ssc-uk-muted-color)" id="mobile-number-hint">
-              UK mobile numbers only (07 or +44 7).
+              {MOBILE_NUMBER_HINT}
             </span>
           )}
         </label>
