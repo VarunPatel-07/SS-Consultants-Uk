@@ -40,7 +40,8 @@ export function RichText({
                 commonChunkClassNames,
               )}
               key={`chunk-${lineIndex}-${chunkIndex}`}>
-              {chunk.text?.trim()}
+              {/* Flex layouts ignore this space and use gap; inline! layouts have no gap and need it. */}
+              {chunk.text?.trim()}{" "}
             </span>
           ))}
         </span>
