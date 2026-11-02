@@ -40,7 +40,7 @@ function CallToActionSection({ data }: { data: callToActionSectionInterface }) {
                 <RichText
                   content={data?.header?.title}
                   parentWrapper="inline!"
-                  className="inline! pl-2"
+                  className="inline!"
                   commonChunkClassNames="reveal-text-animation"
                 />
               </h2>
